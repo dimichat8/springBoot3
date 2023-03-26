@@ -22,6 +22,11 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
+    @GetMapping("/layout")
+    public String layout() {
+        return "/Customer/layout";
+    }
+
     @GetMapping("/index")
     public String indexCustomer(){
         return "/Customer/index";
@@ -81,4 +86,32 @@ public class CustomerController {
         return "redirect:/customertable";
     }
 
+        @GetMapping("/showTheCustomer/{customer_id}")
+
+    public String showTheCustomer(@PathVariable(value ="customer_id") Long customer_id, Model model) {
+
+        //Get customer from the service
+        Customer customer = customerService.getCustomerById(customer_id);
+
+        //Set customer as a model attribute to pre-populate the form
+        model.addAttribute("customer", customer);
+                return  "/Customer/showTheCustomer";
+    }
+
+    @GetMapping("/setFoodToTheCustomer/{customer_id}")
+
+    public String setFoodToTheCustomer(@PathVariable(value ="customer_id") Long customer_id, Model model) {
+
+        //Get customer from the service
+        Customer customer = customerService.getCustomerById(customer_id);
+
+        //Set customer as a model attribute to pre-populate the form
+        model.addAttribute("customer", customer);
+        return  "/Customer/setFoodToTheCustomer";
+    }
+
+    /*@GetMapping("/setFoodToTheCustomer")
+    public String indexCustom(){
+        return "/Customer/setFoodToTheCustomer";
+    }*/
 }

@@ -13,6 +13,8 @@ public interface CustomerService {
 
     /*Customer updateCustomer(Customer customer);*/
 
+    Customer updateCustomer(Customer customer);
+
     void deleteCustomerById(Long customer_id);
 
 

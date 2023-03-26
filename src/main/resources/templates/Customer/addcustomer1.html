@@ -186,73 +186,126 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Add Customer</h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
                 </div>
             </div>
-            <!-- End of Main Content -->
+            <div class="container">
 
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <!--<div class="col-lg-5 d-none d-lg-block bg-register-image"></div>-->
+                            <div class="col-lg-7">
+                                <div class="p-5">
+                                    <form action="#" th:action="@{/saveCustomer}" th:object="${customer}" class="user"  method="POST">
+                                        <div class="form-group row">
+                                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                                <input type="text" class="form-control form-control-user" id="exampleFirstName"
+                                                       th:field="*{firstName}" placeholder="First Name">
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control form-control-user" id="exampleLastName"
+                                                       th:field="*{lastName}" placeholder="Last Name">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="email" class="form-control form-control-user" id="exampleInputEmail"
+                                                   th:field="*{email}" placeholder="Email Address">
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                                <input type="text" class="form-control form-control-user" id="exampleCity"
+                                                       th:field="*{city}"placeholder="City">
+                                            </div>
+                                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                                <input type="text" class="form-control form-control-user" id="exampleEmailAddress"
+                                                       th:field="*{address}"placeholder="Address">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                                <input type="text" class="form-control form-control-user" id="examplePhone"
+                                                       th:field="*{phone}"placeholder="Phone Number">
+                                            </div>
+                                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                                <input type="date" class="form-control form-control-user" id="exampleInputBirth"
+                                                       th:field="*{birthday}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <legend class="col-form-label col-sm-2 pt-0">Gender</legend>
+                                            <fieldset class="row mb-3">
+
+                                                <div class="col-sm-10">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="Male"
+                                                               th:field="*{gender}" checked>
+                                                        <label class="form-check-label" for="gridRadios1">
+                                                            Male
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="Female"
+                                                               th:field="*{gender}">
+                                                        <label class="form-check-label" for="gridRadios2">
+                                                            Female
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check disabled">
+                                                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="Something other"
+                                                               th:field="*{gender}">
+                                                        <label class="form-check-label" for="gridRadios3">
+                                                            Something other
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                        <!--
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control form-control-user" id="examplePhone"
+                                                       th:field="*{phoneNumber}"placeholder="Phone Number">
+                                            </div>
+                                        </div>
+
+                                            <div class="col-sm-3">
+                                                <input type="text" class="form-control form-control-user" id="examplePostal"
+                                                       th:field="*{postalCode}"placeholder="Postal code">
+                                            </div>
+                                        </div>
+
+                                        -->
+                                        <button type="submit" class="btn-primary btn-user btn-block">Submit</button>
+                                        <hr>
+                                    </form>
+                                    <form action="#" th:action="@{/customertable}" th:object="${customer}" class="user"  method="GET">
+                                        <button type="submit" class="btn-danger btn-user btn-block">Back</button>
+                                    </form>
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </footer>
-            <!-- End of Footer -->
 
-        </div>
-        <!-- End of Content Wrapper -->
-
-    </div>
-    <!-- End of Page Wrapper -->
-
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
             </div>
+
+            <!-- Bootstrap core JavaScript-->
+            <script src="vendor/jquery/jquery.min.js"></script>
+            <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+            <!-- Core plugin JavaScript-->
+            <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+            <!-- Custom scripts for all pages-->
+            <script src="js/sb-admin-2.min.js"></script>
+
         </div>
-    </div>
-
 </section>
-<!-- Bootstrap core JavaScript-->
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-<!-- Core plugin JavaScript-->
-<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-<!-- Custom scripts for all pages-->
-<script src="js/sb-admin-2.min.js"></script>
-
-<!-- Page level plugins -->
-<script src="vendor/chart.js/Chart.min.js"></script>
-
-<!-- Page level custom scripts -->
-<script src="js/demo/chart-area-demo.js"></script>
-<script src="js/demo/chart-pie-demo.js"></script>
-
 </body>
 
 </html>

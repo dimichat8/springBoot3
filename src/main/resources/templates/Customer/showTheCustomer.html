@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 
 <head>
 
@@ -14,8 +14,8 @@
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
@@ -25,9 +25,9 @@
 <body class="bg-gradient-primary">
 
 <section id="container" class="">
-    <section layout:fragment="content">
+ <!--   <section layout:fragment="content">
 
-    </section>
+    </section>-->
 
     <div class="container">
 
@@ -41,11 +41,11 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Add Customer!</h1>
                             </div>
-                            <form action="#" th:action="@{/saveCustomer}" th:object="${customer}" class="user"  method="POST">
+                            <form action="#" th:action="@{//showTheCustomer/{customer_id}}" th:object="${customer}" class="user"  method="POST">
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="text" class="form-control form-control-user" id="exampleFirstName"
-                                            th:field="*{firstName}" placeholder="First Name">
+                                               th:field="*{firstName}" placeholder="First Name">
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="text" class="form-control form-control-user" id="exampleLastName"
@@ -78,32 +78,10 @@
                                 </div>
                                 <div class="form-group row">
                                     <legend class="col-form-label col-sm-2 pt-0">Gender</legend>
-                                <fieldset class="row mb-3">
-
-                                        <div class="col-sm-10">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="Male"
-                                                       th:field="*{gender}" checked>
-                                                <label class="form-check-label" for="gridRadios1">
-                                                    Male
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="Female"
-                                                       th:field="*{gender}">
-                                                <label class="form-check-label" for="gridRadios2">
-                                                    Female
-                                                </label>
-                                            </div>
-                                            <div class="form-check disabled">
-                                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="Something other"
-                                                       th:field="*{gender}">
-                                                <label class="form-check-label" for="gridRadios3">
-                                                    Something other
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </fieldset>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control form-control-user" id="exampleGender"
+                                               th:field="*{gender}">
+                                    </div>
                                 </div>
                                 <!--
                                     <div class="col-sm-6">
@@ -119,12 +97,17 @@
                                 </div>
 
                                 -->
-                                 <button type="submit" class="btn-primary btn-user btn-block">Submit</button>
+                                <button type="submit" class="btn-primary btn-user btn-block">Submit</button>
                                 <hr>
                             </form>
                             <form action="#" th:action="@{/customertable}" th:object="${customer}" class="user"  method="GET">
                                 <button type="submit" class="btn-danger btn-user btn-block">Back</button>
                             </form>
+                            <!--<form action="#" th:action="@{/setFoodToTheCustomer}" th:object="${customer}" class="user"  method="GET">
+                                <button type="submit" class="btn-danger btn-user btn-block">Set</button>
+                            </form>-->
+                            <a th:href="@{/setFoodToTheCustomer/{id}(id=${customer.customer_id})}"
+                               class="btn btn-info">Set</a>
                             <hr>
                         </div>
                     </div>

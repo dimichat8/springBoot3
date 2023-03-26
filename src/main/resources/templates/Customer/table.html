@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <!--Customer Table-->
 
@@ -27,9 +26,9 @@
 
 <body id="page-top">
 <section id="container" class="">
-    <section layout:fragment="content">
+    <!--<section layout:fragment="content">
 
-    </section>
+    </section>-->
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -66,7 +65,7 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
+                    <i class="fas fa-light fa-users"></i>
                     <span>Customers</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -83,7 +82,7 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
+                    <i class="fas fa-solid fa-utensils"></i>
                     <span>Foods</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
@@ -406,11 +405,16 @@
                                         <td th:text="${customer.birthday}"></td>
                                         <td th:text="${customer.gender}"></td>
                                         <td>
-                                            <a th:href="@{/updateCustomerForm/{id}(id=${customer.customer_id})}"
-                                               class="btn btn-primary">Update</a>
+                                            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                                                <a th:href="@{/updateCustomerForm/{id}(id=${customer.customer_id})}"
+                                                   class="btn btn-primary">Update</a>
 
-                                            <a th:href="@{/deleteCustomer/{id}(id=${customer.customer_id})}"
-                                               class="btn btn-danger">Delete</a>
+                                                <a th:href="@{/deleteCustomer/{id}(id=${customer.customer_id})}"
+                                                   class="btn btn-danger">Delete</a>
+
+                                                <a th:href="@{/showTheCustomer/{id}(id=${customer.customer_id})}"
+                                                   class="btn btn-info">Insert</a>
+                                            </div>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -481,7 +485,7 @@
     <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="js/demo/datatables-demo.js"></script>
+
 
 </body>
 
