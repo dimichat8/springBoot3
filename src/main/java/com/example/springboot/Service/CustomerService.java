@@ -11,7 +11,6 @@ public interface CustomerService {
 
     Customer getCustomerById(Long customer_id);
 
-    /*Customer updateCustomer(Customer customer);*/
 
     Customer updateCustomer(Customer customer);
 

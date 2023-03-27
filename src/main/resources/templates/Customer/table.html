@@ -406,6 +406,7 @@
                                         <td th:text="${customer.gender}"></td>
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+
                                                 <a th:href="@{/updateCustomerForm/{id}(id=${customer.customer_id})}"
                                                    class="btn btn-primary">Update</a>
 
@@ -413,7 +414,7 @@
                                                    class="btn btn-danger">Delete</a>
 
                                                 <a th:href="@{/showTheCustomer/{id}(id=${customer.customer_id})}"
-                                                   class="btn btn-info">Insert</a>
+                                                   class="btn btn-info">Show</a>
                                             </div>
                                         </td>
                                     </tr>

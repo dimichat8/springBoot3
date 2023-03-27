@@ -9,16 +9,11 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Register</title>
-
-    <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-
-    <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <title>SB Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" rel="stylesheet">
+    <link href="css/test.css" rel="stylesheet">
 
 </head>
 
@@ -73,7 +68,7 @@
                                     </div>
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="date" class="form-control form-control-user" id="exampleInputBirth"
-                                               th:field="*{birthday}">
+                                               th:field="*{birthday}"placeholder="Birthday">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -105,20 +100,6 @@
                                         </div>
                                     </fieldset>
                                 </div>
-                                <!--
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user" id="examplePhone"
-                                               th:field="*{phoneNumber}"placeholder="Phone Number">
-                                    </div>
-                                </div>
-
-                                    <div class="col-sm-3">
-                                        <input type="text" class="form-control form-control-user" id="examplePostal"
-                                               th:field="*{postalCode}"placeholder="Postal code">
-                                    </div>
-                                </div>
-
-                                -->
                                  <button type="submit" class="btn-primary btn-user btn-block">Submit</button>
                                 <hr>
                             </form>

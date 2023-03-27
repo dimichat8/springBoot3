@@ -10,10 +10,9 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @Controller
@@ -68,15 +67,21 @@ public class CustomerController {
         return "Customer/updatecustomer";
     }
 
-    /*@PostMapping("/customertable/{customer_id}")
-    public String updateCustomer(@PathVariable Long customer_id,
+    @PostMapping("/updateCustomer/{customer_id}")
+    public String updateCustomer(@PathVariable(value = "customer_id") Long customer_id,
                                  @ModelAttribute("customer") Customer customer) {
         Customer existingCustomer = customerService.getCustomerById(customer_id);
         existingCustomer.setFirstName(customer.getFirstName());
         existingCustomer.setLastName(customer.getLastName());
+        existingCustomer.setEmail(customer.getEmail());
+        existingCustomer.setCity(customer.getCity());
+        existingCustomer.setAddress(customer.getAddress());
+        existingCustomer.setPhone(customer.getPhone());
+        existingCustomer.setBirthday(customer.getBirthday());
+        existingCustomer.setGender(customer.getGender());
         customerService.updateCustomer(existingCustomer);
-        return "redirect:/table";
-    }*/
+        return "redirect:/customertable";
+    }
 
     @GetMapping("/deleteCustomer/{customer_id}")
     public String deleteCustomerById(@PathVariable(value = "customer_id") Long customer_id) {
@@ -109,9 +114,4 @@ public class CustomerController {
         model.addAttribute("customer", customer);
         return  "/Customer/setFoodToTheCustomer";
     }
-
-    /*@GetMapping("/setFoodToTheCustomer")
-    public String indexCustom(){
-        return "/Customer/setFoodToTheCustomer";
-    }*/
 }

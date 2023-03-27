@@ -131,7 +131,7 @@ public class Customer {
 
 
 
-    @Override
+    /*@Override
     public String toString() {
         return "Customer{" +
                 "customer_id=" + customer_id +
@@ -144,6 +144,6 @@ public class Customer {
                 ", birthday='" + birthday + '\'' +
                 ", gender='" + gender + '\'' +
                 '}';
-    }
+    }*/
 }
 
