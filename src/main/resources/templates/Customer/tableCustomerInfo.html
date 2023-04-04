@@ -73,7 +73,7 @@
                         <h6 class="collapse-header">About Customers:</h6>
                         <a class="collapse-item" th:href="@{/customertable}">Customers</a>
                         <a class="collapse-item" th:href="@{/addcustomer}">Add Customer</a>
-                        <a class="collapse-item" th:href="@{/static}">Create new Customer</a>
+                        <a class="collapse-item" th:href="@{/static}">Outcome</a>
                     </div>
                 </div>
             </li>
@@ -314,6 +314,11 @@
                                              alt="...">
                                         <div class="status-indicator bg-success"></div>
                                     </div>
+                                    <div>
+                                        <div class="text-truncate">Am I a good boy? The reason I ask is because someone
+                                            told me that people say this to all dogs, even if they aren't good...</div>
+                                        <div class="small text-gray-500">Chicken the Dog · 2w</div>
+                                    </div>
                                 </a>
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
                             </div>
@@ -372,34 +377,13 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Grams</th>
-                                        <th>Sodium</th>
-                                        <th>Potassium</th>
-                                        <th>Calcium</th>
-                                        <th>Magnesium</th>
-                                        <th>Phosphorus</th>
-                                        <th>Iron</th>
-                                        <th>Zinc</th>
-                                        <th>Retinol</th>
-                                        <th>Carotene</th>
-                                        <th>Thiamine</th>
-                                        <th>Riboflavin</th>
-                                        <th>Vitamin B6</th>
-                                        <th>Vitamin E</th>
-                                        <th>Vitamin C</th>
-                                        <th>Calories</th>
-                                        <th>Total Fat</th>
-                                        <th>Saturate Fat</th>
-                                        <th>Cholesterol</th>
-                                        <th>Total Carbs</th>
-                                        <th>Fiber</th>
-                                        <th>Sugar</th>
-                                        <th>Protein</th>
+                                        <th>Height</th>
+                                        <th>Age</th>
+                                        <th>Weight</th>
+                                        <th>Muscle Mass</th>
+                                        <th>Body Fat Mass</th>
+                                        <th>Fat</th>
                                         <th>Action</th>
-
-
-
 
                                     </tr>
                                     </thead>
@@ -409,38 +393,24 @@
                                     </tr>
                                     </tfoot>
                                     <tbody>
-                                    <tr th:each="food: ${foods}">
-                                        <td th:text="${food.name}"></td>
-                                        <td th:text="${food.grams}"></td>
-                                        <td th:text="${food.sodium}"></td>
-                                        <td th:text="${food.potassium}"></td>
-                                        <td th:text="${food.calcium}"></td>
-                                        <td th:text="${food.magnesium}"></td>
-                                        <td th:text="${food.phosphorus}"></td>
-                                        <td th:text="${food.iron}"></td>
-                                        <td th:text="${food.zinc}"></td>
-                                        <td th:text="${food.retinol}"></td>
-                                        <td th:text="${food.carotene}"></td>
-                                        <td th:text="${food.thiamine}"></td>
-                                        <td th:text="${food.riboflavin}"></td>
-                                        <td th:text="${food.vitaminB6}"></td>
-                                        <td th:text="${food.vitaminE}"></td>
-                                        <td th:text="${food.vitaminC}"></td>
-                                        <td th:text="${food.calories}"></td>
-                                        <td th:text="${food.totalFat}"></td>
-                                        <td th:text="${food.saturateFat}"></td>
-                                        <td th:text="${food.cholesterol}"></td>
-                                        <td th:text="${food.totalCarbs}"></td>
-                                        <td th:text="${food.fiber}"></td>
-                                        <td th:text="${food.sugar}"></td>
-                                        <td th:text="${food.protein}"></td>
+                                    <tr th:each="customerinfo: ${customerinfos}">
+                                        <td th:text="${customerinfo.height}"></td>
+                                        <td th:text="${customerinfo.age}"></td>
+                                        <td th:text="${customerinfo.weight}"></td>
+                                        <td th:text="${customerinfo.muscleMass}"></td>
+                                        <td th:text="${customerinfo.bodyFatMass}"></td>
+                                        <td th:text="${customerinfo.fat}"></td>
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                                <a th:href="@{/updateFoodForm/{id}(id=${food.food_id})}"
+
+                                                <a th:href="@{/updateCustomerInfoForm/{id}(id=${customerinfo.customerinfo_id})}"
                                                    class="btn btn-primary">Update</a>
 
-                                                <a th:href="@{/deleteFood/{id}(id=${food.food_id})}"
-                                                   class="btn btn-danger">Delete</a>
+                                                <!--<a th:href="@{/deleteCustomerInfo/{id}(id=${customerinfo.customerinfo_id})}"
+                                                   class="btn btn-danger">Delete</a>-->
+
+                                                <!--<a th:href="@{/addcustomerinfo/{customerinfo_id}(id=${customer.customerinfo_id})}"
+                                                   class="btn btn-info">More Info</a>-->
                                             </div>
                                         </td>
                                     </tr>
@@ -512,7 +482,7 @@
 <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
 <!-- Page level custom scripts -->
-<script src="js/demo/datatables-demo.js"></script>
+
 
 </body>
 

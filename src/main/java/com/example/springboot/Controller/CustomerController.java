@@ -1,12 +1,10 @@
 package com.example.springboot.Controller;
 
-
+import com.example.springboot.Entity.CustomerInfo;
+import com.example.springboot.Service.CustomerInfoService;
 import com.example.springboot.Service.CustomerService;
 import com.example.springboot.Entity.Customer;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +18,8 @@ public class CustomerController {
 
     @Autowired
     private CustomerService customerService;
+    @Autowired
+    private CustomerInfoService customerInfoService;
 
     @GetMapping("/layout")
     public String layout() {
@@ -27,7 +27,7 @@ public class CustomerController {
     }
 
     @GetMapping("/index")
-    public String indexCustomer(){
+    public String indexCustomer() {
         return "/Customer/index";
     }
 
@@ -39,12 +39,15 @@ public class CustomerController {
         return "Customer/table";
     }
 
+    ////////
     @GetMapping("/addcustomer")
-    public String createCustomerForm(Model model){
+    public String createCustomerForm(Model model) {
 
         //Crate model attribute to bind from data
         Customer customer = new Customer();
+        List<CustomerInfo> customerInfoList = customerInfoService.getAllCustomerInfo();
         model.addAttribute("customer", customer);
+        /*model.addAttribute("customerinfo", customerInfoList);*/
         return "Customer/addcustomer";
     }
 
@@ -91,27 +94,4 @@ public class CustomerController {
         return "redirect:/customertable";
     }
 
-        @GetMapping("/showTheCustomer/{customer_id}")
-
-    public String showTheCustomer(@PathVariable(value ="customer_id") Long customer_id, Model model) {
-
-        //Get customer from the service
-        Customer customer = customerService.getCustomerById(customer_id);
-
-        //Set customer as a model attribute to pre-populate the form
-        model.addAttribute("customer", customer);
-                return  "/Customer/showTheCustomer";
-    }
-
-    @GetMapping("/setFoodToTheCustomer/{customer_id}")
-
-    public String setFoodToTheCustomer(@PathVariable(value ="customer_id") Long customer_id, Model model) {
-
-        //Get customer from the service
-        Customer customer = customerService.getCustomerById(customer_id);
-
-        //Set customer as a model attribute to pre-populate the form
-        model.addAttribute("customer", customer);
-        return  "/Customer/setFoodToTheCustomer";
-    }
 }

@@ -1,11 +1,11 @@
 package com.example.springboot.Entity;
 
-
 import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.ArrayList;
 import java.util.Date;
-
+import java.util.List;
 
 @Entity
 @Table(name = "Customer")
@@ -42,9 +42,10 @@ public class Customer {
     private String gender;
 
 
+    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL,  orphanRemoval = true)
+    private List<CustomerInfo> customerInfos;
 
-
-    public Customer(Long customer_id, String firstName, String lastName, String email, String address, String city, String phone, Date birthday, String gender) {
+    public Customer(Long customer_id, String firstName, String lastName, String email, String address, String city, String phone, Date birthday, String gender, List<CustomerInfo> customerInfos) {
         this.customer_id = customer_id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -54,6 +55,8 @@ public class Customer {
         this.phone = phone;
         this.birthday = birthday;
         this.gender = gender;
+        this.customerInfos = customerInfos;
+
     }
 
     public Customer() {
@@ -84,7 +87,8 @@ public class Customer {
         this.lastName = lastName;
     }
 
-    public String getEmail() {
+    public String
+    getEmail() {
         return email;
     }
 
@@ -129,9 +133,15 @@ public class Customer {
         this.gender = gender;
     }
 
+    public List<CustomerInfo> getCustomerInfos() {
+        return customerInfos;
+    }
 
+    public void setCustomerInfos(List<CustomerInfo> customerInfos) {
+        this.customerInfos = customerInfos;
+    }
 
-    /*@Override
+/*@Override
     public String toString() {
         return "Customer{" +
                 "customer_id=" + customer_id +

@@ -1,6 +1,8 @@
 package com.example.springboot.Service;
 
 import com.example.springboot.Entity.Customer;
+
+
 import java.util.List;
 
 public interface CustomerService {
@@ -15,7 +17,5 @@ public interface CustomerService {
     Customer updateCustomer(Customer customer);
 
     void deleteCustomerById(Long customer_id);
-
-
 
 }

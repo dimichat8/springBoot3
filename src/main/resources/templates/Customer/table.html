@@ -73,7 +73,7 @@
                         <h6 class="collapse-header">About Customers:</h6>
                         <a class="collapse-item" th:href="@{/customertable}">Customers</a>
                         <a class="collapse-item" th:href="@{/addcustomer}">Add Customer</a>
-                        <a class="collapse-item" th:href="@{/static}">Create new Customer</a>
+                        <a class="collapse-item" th:href="@{/static}">Outcome</a>
                     </div>
                 </div>
             </li>
@@ -376,7 +376,7 @@
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
-                                        <tr>
+                                    <tr>
                                             <th>First Name</th>
                                             <th>Last Name</th>
                                             <th>Email</th>
@@ -387,12 +387,12 @@
                                             <th>Gender</th>
                                             <th>Action</th>
 
-                                        </tr>
+                                    </tr>
                                     </thead>
                                     <tfoot>
-                                        <tr>
+                                    <tr>
 
-                                        </tr>
+                                    </tr>
                                     </tfoot>
                                     <tbody>
                                     <tr th:each="customer: ${customers}">
@@ -413,8 +413,8 @@
                                                 <a th:href="@{/deleteCustomer/{id}(id=${customer.customer_id})}"
                                                    class="btn btn-danger">Delete</a>
 
-                                                <a th:href="@{/showTheCustomer/{id}(id=${customer.customer_id})}"
-                                                   class="btn btn-info">Show</a>
+                                                <a th:href="@{/addcustomerinfo/{customerinfo_id}(id=${customer.customer_id})}"
+                                                   class="btn btn-info">More Info</a>
                                             </div>
                                         </td>
                                     </tr>

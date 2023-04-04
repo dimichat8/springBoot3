@@ -16,6 +16,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired
     public CustomerRepository customerRepository;
 
+
     public CustomerServiceImpl(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
     }
@@ -41,13 +42,6 @@ public class CustomerServiceImpl implements CustomerService {
         }
         return customer;
     }
-
-    /*@Override
-    public Customer getCustomerById(Long customer_id) {
-        return customerRepository.findById(customer_id).get();
-    }*/
-
-
 
     @Override
     public Customer updateCustomer(Customer customer) {
