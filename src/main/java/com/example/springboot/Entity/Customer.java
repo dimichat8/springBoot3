@@ -63,6 +63,11 @@ public class Customer {
 
     }
 
+    public Customer(CustomerInfo customerInfos) {
+        this.customerInfos = (List<CustomerInfo>) customerInfos;
+    }
+
+
     public Long getCustomer_id() {
         return customer_id;
     }

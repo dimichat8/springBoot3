@@ -6,13 +6,12 @@ import com.example.springboot.Repository.CustomerInfoRepository;
 import com.example.springboot.Repository.CustomerRepository;
 import com.example.springboot.Service.CustomerInfoService;
 import com.example.springboot.Service.CustomerService;
+import org.hibernate.annotations.Parameter;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,24 +34,23 @@ public class CustomerInfoController {
         return "/Customer/tableCustomerInfo";
     }
 
-    @GetMapping("/addcustomerinfo/{customerinfo_id}")
-    public String createCustomerInfoForm(Model model) {
+    @GetMapping("{customer_id}/addcustomerinfo/{customerinfo_id}")
+    public String createCustomerInfoForm(@PathVariable(value = "customer_id") Customer customer_id, Model model) {
 
+      /*  Customer customer = customerRepository.findById(customer_id.getCustomer_id()).get();*/
         //Crate model attribute to bind from data
         CustomerInfo customerInfo = new CustomerInfo();
+        customerInfo.setCustomer(customer_id);
         model.addAttribute("customerinfo", customerInfo);
         return "Customer/addcustomerinfo";
     }
 
-    @PostMapping("/saveCustomerInfo")
-    public String saveCustomerInfo(@ModelAttribute("customerinfo") CustomerInfo customerInfo) {
+    @PostMapping("/{customer_id}/saveCustomerInfo/{customerinfo_id}")
+    public String saveCustomerInfo(@ModelAttribute("customerinfo") @NotNull CustomerInfo customerInfos) {
+        /*Customer customer = customerRepository.findById(customer_id).get();*/
 
-        //Save customer to database
-        customerInfoService.saveCustomerInfo(customerInfo);
-        /*Customer customer = customerService.getCustomerById(customerInfo.getCustomerInfo_id());
-        customer.setCustomer_id(customer.getCustomer_id());
-        customer.getCustomerInfos().add(customerInfo);
-        customerRepository.save(customer);*/
+        //Save customerInfo to the database
+        customerInfoService.saveCustomerInfo(customerInfos);
         return "redirect:/customertableinfo";
     }
 
@@ -91,9 +89,9 @@ public class CustomerInfoController {
         return "redirect:/customertableinfo";
     }
 
-    /*@GetMapping("/deleteCustomerInfo/customerinfo_id}")
+    @GetMapping("/deleteCustomerInfo/{customerinfo_id}")
     public String deleteCustomerInfo(@PathVariable(value = "customerinfo_id") Long customerinfo_id){
         customerInfoService.deleteCustomerInfoById(customerinfo_id);
         return "redirect:/customertableinfo";
-    }*/
+    }
 }

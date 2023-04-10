@@ -95,8 +95,8 @@ public class CustomerInfo {
         this.fat = fat;
     }
 
-    public Customer getCustomer() {
-    return customer;
+    public Customer getCustomer(Customer customer) {
+    return this.customer;
     }
 
     public void setCustomer(Customer customer) {
