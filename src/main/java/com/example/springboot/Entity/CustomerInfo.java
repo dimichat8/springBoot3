@@ -2,6 +2,8 @@ package com.example.springboot.Entity;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "CustomerInfo")
 public class CustomerInfo {
@@ -10,10 +12,12 @@ public class CustomerInfo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "customerinfo_id")
     public Long customerinfo_id;
+    @Column(name = "createDate")
+    private LocalDateTime createDate = LocalDateTime.now();
     @Column(name = "height")
     private Float height;
-    @Column(name = "age")
-    private int age;
+    @Column(name = "water")
+    private Float water;
     @Column(name = "weight")
     private Float weight;
     @Column(name = "muscleMass")
@@ -27,7 +31,7 @@ public class CustomerInfo {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    public CustomerInfo(Long customerinfo_id, Float height, int age, Float weight, Float muscleMass, Float bodyFatMass, Float fat, Customer customer) {
+    /*public CustomerInfo(Long customerinfo_id, Float height, int age, Float weight, Float muscleMass, Float bodyFatMass, Float fat, Customer customer) {
         this.customerinfo_id = customerinfo_id;
         this.height = height;
         this.age = age;
@@ -36,7 +40,7 @@ public class CustomerInfo {
         this.bodyFatMass = bodyFatMass;
         this.fat = fat;
         this.customer = customer;
-    }
+    }*/
 
     public CustomerInfo() {
 
@@ -55,12 +59,12 @@ public class CustomerInfo {
         this.height = height;
     }
 
-    public int getAge() {
-        return age;
+    public Float getWater() {
+        return water;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setWater(Float water) {
+        this.water = water;
     }
 
     public Float getWeight() {
@@ -95,7 +99,7 @@ public class CustomerInfo {
         this.fat = fat;
     }
 
-    public Customer getCustomer(Customer customer) {
+    public Customer getCustomer() {
     return this.customer;
     }
 
@@ -103,4 +107,11 @@ public class CustomerInfo {
         this.customer = customer;
     }
 
+    public LocalDateTime getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(LocalDateTime createDate) {
+        this.createDate = createDate;
+    }
 }

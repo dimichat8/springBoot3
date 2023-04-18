@@ -43,7 +43,7 @@
           <div class="d-flex justify-content-between align-items-center mb-3">
             <h4 class="text-right">Profile Settings</h4>
           </div>
-          <form th:action="@{/{id}/saveCustomerInfo/{id}}" th:object="${customerinfo}" class="user"  method="POST">
+          <form th:action="@{/{customer_id}/saveCustomerInfo (customer_id=${customerinfo.customer.customer_id})}" th:object="${customerinfo}" class="user"  method="POST">
 
             <div class="row mt-2">
               <div class="col-md-6">
@@ -52,9 +52,9 @@
                        th:field="*{height}" placeholder="Height">
               </div>
               <div class="col-md-6">
-                <label class="labels">Age</label>
+                <label class="labels">Water</label>
                 <input type="text" class="form-control form-control-user" id="exampleAge"
-                       th:field="*{age}" placeholder="Age">
+                       th:field="*{water}" placeholder="Water">
               </div>
             </div>
             <div class="row mt-2">
@@ -86,9 +86,9 @@
                 <button th:type="submit" class="btn btn-primary profile-button" type="button">Save Profile</button>
               </div>
           </form>
-              <form th:action="@{/customertableinfo}" th:object="${customerinfo}" class="user"  method="GET">
+              <form th:action="@{/customertable}" th:object="${customerinfo}" class="user"  method="GET">
                 <div class="mt-5 text-center">
-                  <button th:type="submit" class="btn btn-danger profile-button" type="button">Back</button>
+                  <button th:type="submit" class="btn btn-danger profile-button" type="button">Back To Customer</button>
                 </div>
           </form>
         </div>
@@ -98,7 +98,6 @@
   </div>
 </div>
 </div>
-
 <!-- Bootstrap core JavaScript-->
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -108,6 +107,13 @@
 
 <!-- Custom scripts for all pages-->
 <script src="js/sb-admin-2.min.js"></script>
+
+<!-- Page level plugins -->
+<script src="vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="js/demo/datatables-demo.js"></script>
 
 </body>
 </html>

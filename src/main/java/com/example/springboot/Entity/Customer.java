@@ -12,7 +12,7 @@ import java.util.List;
 public class Customer {
     @Id
     @SequenceGenerator(name = "customer_id_sequence", sequenceName = "customer_id_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_id_sequence")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "customer_id_sequence")
     @Column(name = "customer_id")
     private Long customer_id;
 
@@ -43,7 +43,7 @@ public class Customer {
 
 
     @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL,  orphanRemoval = true)
-    private List<CustomerInfo> customerInfos;
+    private List<CustomerInfo> customerInfos = new ArrayList<>();
 
     public Customer(Long customer_id, String firstName, String lastName, String email, String address, String city, String phone, Date birthday, String gender, List<CustomerInfo> customerInfos) {
         this.customer_id = customer_id;

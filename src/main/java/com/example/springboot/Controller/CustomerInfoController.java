@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -45,12 +46,14 @@ public class CustomerInfoController {
         return "Customer/addcustomerinfo";
     }
 
-    @PostMapping("/{customer_id}/saveCustomerInfo/{customerinfo_id}")
-    public String saveCustomerInfo(@ModelAttribute("customerinfo") @NotNull CustomerInfo customerInfos) {
-        /*Customer customer = customerRepository.findById(customer_id).get();*/
-
+    @PostMapping("/{customer_id}/saveCustomerInfo")
+    public String saveCustomerInfo(@PathVariable(value = "customer_id")Long customerId,@ModelAttribute("customerinfo") @NotNull CustomerInfo customerInfos) {
+        Customer customer = customerRepository.findById(customerId).get();
+        customerInfos.setCustomer(customer);
+        customer.getCustomerInfos().add(customerInfos);
         //Save customerInfo to the database
-        customerInfoService.saveCustomerInfo(customerInfos);
+        customerService.saveCustomer(customer);
+        /*customerInfoService.saveCustomerInfo(customerInfos);*/
         return "redirect:/customertableinfo";
     }
 
@@ -80,7 +83,7 @@ public class CustomerInfoController {
                                      @ModelAttribute("customerinfo") CustomerInfo customerInfo) {
         CustomerInfo existingCustomerInfo = (CustomerInfo) customerInfoService.getCustomerInfoById(customerinfo_id);
         existingCustomerInfo.setHeight(customerInfo.getHeight());
-        existingCustomerInfo.setAge(customerInfo.getAge());
+        existingCustomerInfo.setWater(customerInfo.getWater());
         existingCustomerInfo.setWeight(customerInfo.getWeight());
         existingCustomerInfo.setMuscleMass(customerInfo.getMuscleMass());
         existingCustomerInfo.setBodyFatMass(customerInfo.getBodyFatMass());
