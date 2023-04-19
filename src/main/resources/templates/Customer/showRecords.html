@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Clients Management System</title>
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+        crossorigin="anonymous">
+</head>
+<body>
+
+    <h1>Records</h1>
+  </div>
+  <table class="table">
+    <thead class="table-dark">
+    <tr>
+      <th>Name</th>
+      <th>Creation Date</th>
+      <th>Height</th>
+      <th>Water</th>
+      <th>Weight</th>
+      <th>Muscle Mass</th>
+      <th>Body Fat Mass</th>
+      <th>Fat</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="customerinfo, iterate : ${customerInfos}">
+      <td th:text="${customer.firstName + customer.lastName}"></td>
+      <td th:text="${customerinfo.createDate}"></td>
+      <td th:text="${customerinfo.height}"></td>
+      <td th:text="${customerinfo.water}"></td>
+      <td th:text="${customerinfo.weight}"></td>
+      <td th:text="${customerinfo.muscleMass}"></td>
+      <td th:text="${customerinfo.bodyFatMass}"></td>
+      <td th:text="${customerinfo.fat}"></td>
+      <td>
+        <!--<a th:href="@{/client/edit/{id}(id=${client.id})}"
+           class="btn btn-primary">Update</a>
+
+        <a th:href="@{/client/{id} (id=${client.id})}"
+           class="btn btn-danger">Delete</a>-->
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

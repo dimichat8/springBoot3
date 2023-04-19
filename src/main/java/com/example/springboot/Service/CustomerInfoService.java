@@ -8,8 +8,6 @@ public interface CustomerInfoService {
 
     List<CustomerInfo> getAllCustomerInfo();
 
-
-
     CustomerInfo saveCustomerInfo(CustomerInfo customerInfo);
 
     CustomerInfoService getCustomerInfoById (Long customerdietary_id);

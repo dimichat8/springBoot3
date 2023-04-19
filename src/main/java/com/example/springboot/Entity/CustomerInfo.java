@@ -31,16 +31,16 @@ public class CustomerInfo {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    /*public CustomerInfo(Long customerinfo_id, Float height, int age, Float weight, Float muscleMass, Float bodyFatMass, Float fat, Customer customer) {
+    public CustomerInfo(Long customerinfo_id, Float height, Float water, Float weight, Float muscleMass, Float bodyFatMass, Float fat, Customer customer) {
         this.customerinfo_id = customerinfo_id;
         this.height = height;
-        this.age = age;
+        this.water = water;
         this.weight = weight;
         this.muscleMass = muscleMass;
         this.bodyFatMass = bodyFatMass;
         this.fat = fat;
         this.customer = customer;
-    }*/
+    }
 
     public CustomerInfo() {
 

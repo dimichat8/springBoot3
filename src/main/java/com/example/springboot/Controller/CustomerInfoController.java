@@ -6,14 +6,11 @@ import com.example.springboot.Repository.CustomerInfoRepository;
 import com.example.springboot.Repository.CustomerRepository;
 import com.example.springboot.Service.CustomerInfoService;
 import com.example.springboot.Service.CustomerService;
-import org.hibernate.annotations.Parameter;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -38,7 +35,6 @@ public class CustomerInfoController {
     @GetMapping("{customer_id}/addcustomerinfo/{customerinfo_id}")
     public String createCustomerInfoForm(@PathVariable(value = "customer_id") Customer customer_id, Model model) {
 
-      /*  Customer customer = customerRepository.findById(customer_id.getCustomer_id()).get();*/
         //Crate model attribute to bind from data
         CustomerInfo customerInfo = new CustomerInfo();
         customerInfo.setCustomer(customer_id);
@@ -58,22 +54,21 @@ public class CustomerInfoController {
     }
 
 
-    @GetMapping("/showTheCustomer/{customerinfo_id}")
-    public String showTheCustomer(@PathVariable(value = "customerinfo_id") Long customerinfo_id, Model model) {
+    @GetMapping("{customer_id}/showRecords")
+    public String showRecords(@PathVariable(value = "customer_id") Customer customerId, Model model) {
 
-        //Get customer from the service
-        CustomerInfo customerInfo = (CustomerInfo) customerInfoService.getCustomerInfoById(customerinfo_id);
 
-        //Set customer as a model attribute to pre-populate the form
-        model.addAttribute("customerinfo", customerInfo);
-        return "/Customer/showTheCustomer";
+        //Crate model attribute to bind from data
+        customerId.getCustomerInfos();
+        model.addAttribute("customer", customerId);
+        model.addAttribute("customerInfos", customerInfoRepository.findAll());
+        return "/Customer/showRecords";
     }
 
     @GetMapping("/updateCustomerInfoForm/{customerinfo_id}")
     public String updateCustomerInfoForm(@PathVariable(value = "customerinfo_id") Long customerinfo_id, Model model) {
 
         CustomerInfo customerInfo = (CustomerInfo) customerInfoService.getCustomerInfoById(customerinfo_id);
-
         model.addAttribute("customerinfo", customerInfo);
         return "/Customer/updatecustomerinfo";
     }
