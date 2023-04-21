@@ -33,12 +33,13 @@ public class CustomerInfoController {
     }
 
     @GetMapping("{customer_id}/addcustomerinfo/{customerinfo_id}")
-    public String createCustomerInfoForm(@PathVariable(value = "customer_id") Customer customer_id, Model model) {
+    public String createCustomerInfoForm(@PathVariable(value = "customer_id") Customer customerId, Model model) {
 
         //Crate model attribute to bind from data
         CustomerInfo customerInfo = new CustomerInfo();
-        customerInfo.setCustomer(customer_id);
+        customerInfo.setCustomer(customerId);
         model.addAttribute("customerinfo", customerInfo);
+        model.addAttribute("customer", customerId);
         return "Customer/addcustomerinfo";
     }
 
@@ -59,9 +60,9 @@ public class CustomerInfoController {
 
 
         //Crate model attribute to bind from data
-        customerId.getCustomerInfos();
+
         model.addAttribute("customer", customerId);
-        model.addAttribute("customerInfos", customerInfoRepository.findAll());
+        model.addAttribute("customerInfos", customerId.getCustomerInfos());
         return "/Customer/showRecords";
     }
 

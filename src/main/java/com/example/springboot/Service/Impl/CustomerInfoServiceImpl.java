@@ -23,11 +23,11 @@ public class CustomerInfoServiceImpl implements CustomerInfoService {
         return customerInfoRepository.findAll();
     }
 
-/*@Override
-    public CustomerDietaryInfo saveCustomerDietaryInfo(CustomerDietaryInfo customerDietaryInfo) {
-        return null;
-    }*/
-
+    /*@Override
+        public String  saveCustomerDietaryInfo(CustomerDietaryInfo customerDietaryInfo) {
+            return null;
+        }
+*/
 
     @Override
     public CustomerInfo saveCustomerInfo(CustomerInfo customerInfo) {

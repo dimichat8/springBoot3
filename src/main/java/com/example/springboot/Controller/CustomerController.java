@@ -5,9 +5,11 @@ import com.example.springboot.Service.CustomerInfoService;
 import com.example.springboot.Service.CustomerService;
 import com.example.springboot.Entity.Customer;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -52,8 +54,13 @@ public class CustomerController {
     }
 
     @PostMapping("/saveCustomer")
-    public String saveCustomer(@ModelAttribute("customer") Customer customer) {
+    public String saveCustomer(@Valid @ModelAttribute("customer") Customer customer, BindingResult bindingResult, Model model) {
 
+        boolean thereAreErrors = bindingResult.hasErrors();
+        if(thereAreErrors) {
+            model.addAttribute("customer", customer);
+            return "Customer/addcustomer";
+        }
         //Save customer to database
         customerService.saveCustomer(customer);
         return "redirect:/customertable";

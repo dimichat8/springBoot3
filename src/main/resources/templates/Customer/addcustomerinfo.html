@@ -35,8 +35,15 @@
   <div class="container rounded bg-white mt-5 mb-5">
     <div class="row">
       <div class="col-md-3 border-right">
-      <form th:action="@{{id}/saveCustomer}" th:object="${customer}" class="user"  method="GET"></form>
-        <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><a class="font-weight-bold" ></a><span class="text-black-50">edogaru@mail.com.my</span><span> </span></div>
+      <form th:action="@{{customer_id}/saveCustomer  (customer_id=${customerinfo.customer.customer_id})}" th:object="${customerinfo}" class="user"  method="GET"></form>
+        <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+          <img class="rounded-circle mt-5" width="150px" th:if="${customer.gender == 'Male'}" src="https://cdn.pixabay.com/photo/2016/04/01/10/56/boy-1300112_960_720.png">
+         <!-- <img class="rounded-circle mt-5" width="150px" th:if="${customer.gender == 'Male' && customer.age >= 50}" src="https://cdn.pixabay.com/photo/2013/07/13/01/13/garcia-marquez-155320_960_720.png">
+          --><img class="rounded-circle mt-5" width="150px" th:if="${customer.gender == 'Female'}" src="https://cdn.pixabay.com/photo/2017/03/01/22/18/avatar-2109804_960_720.png">
+
+          <a class="font-weight-bold" ></a>
+          <span th:each="customer, iterate : ${customer}"></span>
+          <span th:text="${customer.firstName + customer.lastName}"></span></div>
       </div>
       <div class="col-md-5 border-right">
         <div class="p-3 py-5">
@@ -50,6 +57,7 @@
                 <label class="labels">Height</label>
                 <input type="text" class="form-control form-control-user" id="exampleHeight"
                        th:field="*{height}" placeholder="Height">
+                <!--<div class="alert alert-warning" th:if="${#customerinfo.hasErrors('height')}" th:errors="*{height}"></div>-->
               </div>
               <div class="col-md-6">
                 <label class="labels">Water</label>

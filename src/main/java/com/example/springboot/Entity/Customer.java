@@ -1,10 +1,14 @@
 package com.example.springboot.Entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -16,9 +20,11 @@ public class Customer {
     @Column(name = "customer_id")
     private Long customer_id;
 
+    @NotBlank(message = "First Name can not be empty")
     @Column(name = "firstName")
     private String firstName;
 
+    @NotBlank(message = "Last Name can not be empty")
     @Column(name = "lastName")
     private String lastName;
 
@@ -36,16 +42,18 @@ public class Customer {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "birthday")
-    private Date birthday;
+    private LocalDate birthday;
 
     @Column(name = "gender")
     private String gender;
+
+    private Integer age;
 
 
     @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL,  orphanRemoval = true)
     private List<CustomerInfo> customerInfos = new ArrayList<>();
 
-    public Customer(Long customer_id, String firstName, String lastName, String email, String address, String city, String phone, Date birthday, String gender, List<CustomerInfo> customerInfos) {
+    public Customer(Long customer_id, String firstName, String lastName, String email, String address, String city, String phone, LocalDate birthday, String gender, List<CustomerInfo> customerInfos) {
         this.customer_id = customer_id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -123,11 +131,17 @@ public class Customer {
         this.phone = phone;
     }
 
-    public Date getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
+    public int getAge() {
+        LocalDate now = LocalDate.now();
+        Period period = Period.between(birthday, now);
 
-    public void setBirthday(Date birthday) {
+        return period.getYears();
+    }
+
+    public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
     public String getGender() {
