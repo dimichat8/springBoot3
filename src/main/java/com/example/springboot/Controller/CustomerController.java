@@ -101,4 +101,11 @@ public class CustomerController {
         return "redirect:/customertable";
     }
 
+    @PostMapping("/{customerId}/setFoodToCustomer/{foodId}")
+    public String setFoodToCustomer(@PathVariable("customerId") Long customerId,
+                                    @PathVariable("foodId") Long foodId) {
+        customerService.setFoodToCustomer(customerId, foodId);
+        return "";
+    }
+
 }

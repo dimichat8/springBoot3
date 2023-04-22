@@ -58,6 +58,26 @@ public class FoodController {
         return "/Food/updatefood";
     }
 
+    @GetMapping("/updateFood")
+    public String updateFood(@PathVariable(value = "food_id") Long foodId,
+                             @ModelAttribute("food") Food food) {
+        Food existfood = foodService.getFoodById(foodId);
+        existfood.setName(food.getName());
+        existfood.setGrams(food.getGrams());
+        existfood.setSodium(food.getSodium());
+        existfood.setPotassium(food.getPotassium());
+        existfood.setCalcium(food.getCalcium());
+        existfood.setMagnesium(food.getMagnesium());
+        existfood.setPhosphorus(food.getPhosphorus());
+        existfood.setCalories(food.getCalories());
+        existfood.setMeal(food.getMeal());
+        foodService.updateFood(existfood);
+
+        return "redirect:/foodtable";
+    }
+
+
+
     @GetMapping("/deleteFood/{food_id}")
     public String deleteFood(@PathVariable(value = "food_id")Long food_id){
 

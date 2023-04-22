@@ -41,6 +41,11 @@ public class FoodServiceImpl implements FoodService {
     }
 
     @Override
+    public Food updateFood(Food food) {
+        return foodRepository.save(food);
+    }
+
+    @Override
     public void deleteFoodById(Long food_id) {
          foodRepository.deleteById(food_id);
 

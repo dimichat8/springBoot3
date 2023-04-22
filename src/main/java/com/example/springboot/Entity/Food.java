@@ -2,6 +2,9 @@ package com.example.springboot.Entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "food")
 public class Food {
@@ -26,7 +29,7 @@ public class Food {
     private Float magnesium;
     @Column(name = "phosphorus")
     private Float phosphorus;
-    @Column(name = "iron")
+    /*@Column(name = "iron")
     private Float iron;
     @Column(name = "zinc")
     private Float zinc;
@@ -37,18 +40,28 @@ public class Food {
     @Column(name = "thiamine")
     private Float thiamine;
     @Column(name = "riboflavin")
-    private Float riboflavin;
+    private Float riboflavin;*/
 
-    @Column(name = "vitaminB6")
+    @ManyToOne
+    @JoinColumn(name = "meal_id")
+    private Meal meal;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "customer_food",
+            joinColumns = @JoinColumn(name = "customer_id"),
+            inverseJoinColumns = @JoinColumn(name = "food_id"))
+    private List<Food> foods = new ArrayList<>();
+
+    /*@Column(name = "vitaminB6")
     private Float vitaminB6;
     @Column(name = "vitaminE")
     private Float vitaminE;
     @Column(name = "vitaminC")
-    private Float vitaminC;
+    private Float vitaminC;*/
     @Column(name = "calories")
     private Float calories;
 
-    @Column(name = "totalFat")
+    /*@Column(name = "totalFat")
     private Float totalFat;
     @Column(name = "saturateFat")
     private Float saturateFat;
@@ -61,10 +74,10 @@ public class Food {
     @Column(name = "sugar")
     private Float sugar;
     @Column(name = "protein")
-    private Float protein;
+    private Float protein;*/
 
 
-    public Food(Long food_id, Float grams, String name, Integer sodium, Float potassium, Float calcium, Float magnesium, Float phosphorus, Float iron, Float zinc, Float retinol, Float carotene, Float thiamine, Float riboflavin, Float vitaminB6, Float vitaminE, Float vitaminC, Float calories, Float totalFat, Float saturateFat, Float cholesterol, Float totalCarbs, Float fiber, Float sugar, Float protein) {
+    public Food(Long food_id, Float grams, String name, Integer sodium, Float potassium, Float calcium, Float magnesium, Float phosphorus, Float iron, Float zinc, Float retinol, Float carotene, Float thiamine, Float riboflavin/*, Float vitaminB6, Float vitaminE, Float vitaminC, Float calories, Float totalFat, Float saturateFat, Float cholesterol, Float totalCarbs, Float fiber, Float sugar, Float protein*/) {
         this.food_id = food_id;
         this.name = name;
         this.grams= grams;
@@ -73,23 +86,24 @@ public class Food {
         this.calcium = calcium;
         this.magnesium = magnesium;
         this.phosphorus = phosphorus;
-        this.iron = iron;
+        this.calories = calories;
+        /*this.iron = iron;
         this.zinc = zinc;
         this.retinol = retinol;
         this.carotene = carotene;
         this.thiamine = thiamine;
-        this.riboflavin = riboflavin;
-        this.vitaminB6 = vitaminB6;
+        this.riboflavin = riboflavin;*/
+
+        /*this.vitaminB6 = vitaminB6;
         this.vitaminE = vitaminE;
         this.vitaminC = vitaminC;
-        this.calories = calories;
         this.totalFat = totalFat;
         this.saturateFat = saturateFat;
         this.cholesterol = cholesterol;
         this.totalCarbs = totalCarbs;
         this.fiber = fiber;
         this.sugar = sugar;
-        this.protein = protein;
+        this.protein = protein;*/
     }
 
     public Food() {
@@ -160,7 +174,7 @@ public class Food {
         this.phosphorus = phosphorus;
     }
 
-    public Float getIron() {
+    /*public Float getIron() {
         return iron;
     }
 
@@ -207,8 +221,24 @@ public class Food {
     public void setRiboflavin(Float riboflavin) {
         this.riboflavin = riboflavin;
     }
+*/
+    public Meal getMeal() {
+        return meal;
+    }
 
-    public Float getVitaminB6() {
+    public void setMeal(Meal meal) {
+        this.meal = meal;
+    }
+
+    public List<Food> getFoods() {
+        return foods;
+    }
+
+    public void setFoods(List<Food> foods) {
+        this.foods = foods;
+    }
+
+    /*public Float getVitaminB6() {
         return vitaminB6;
     }
 
@@ -230,7 +260,7 @@ public class Food {
 
     public void setVitaminC(Float vitaminC) {
         this.vitaminC = vitaminC;
-    }
+    }*/
 
     public Float getCalories() {
         return calories;
@@ -240,7 +270,7 @@ public class Food {
         this.calories = calories;
     }
 
-    public Float getTotalFat() {
+   /* public Float getTotalFat() {
         return totalFat;
     }
 
@@ -294,7 +324,7 @@ public class Food {
 
     public void setProtein(Float protein) {
         this.protein = protein;
-    }
+    }*/
 }
 
 

@@ -32,7 +32,7 @@ public class CustomerInfoController {
         return "/Customer/tableCustomerInfo";
     }
 
-    @GetMapping("{customer_id}/addcustomerinfo/{customerinfo_id}")
+    @GetMapping("{customer_id}/addcustomerinfo")
     public String createCustomerInfoForm(@PathVariable(value = "customer_id") Customer customerId, Model model) {
 
         //Crate model attribute to bind from data
@@ -60,7 +60,6 @@ public class CustomerInfoController {
 
 
         //Crate model attribute to bind from data
-
         model.addAttribute("customer", customerId);
         model.addAttribute("customerInfos", customerId.getCustomerInfos());
         return "/Customer/showRecords";

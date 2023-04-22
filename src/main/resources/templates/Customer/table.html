@@ -383,7 +383,7 @@
                                             <th>City</th>
                                             <th>Address</th>
                                             <th>Phone</th>
-                                            <th>Day of Birth</th>
+                                            <th>Age</th>
                                             <th>Gender</th>
                                             <th>Action</th>
 
@@ -402,23 +402,28 @@
                                         <td th:text="${customer.city}"></td>
                                         <td th:text="${customer.address}"></td>
                                         <td th:text="${customer.phone}"></td>
-                                        <td th:text="${customer.birthday}"></td>
+                                        <td th:text="${customer.age}"></td>
                                         <td th:text="${customer.gender}"></td>
                                         <td>
+                                            <center>
                                             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
 
-                                                <a th:href="@{/updateCustomerForm/{id}(id=${customer.customer_id})}"
+                                                <a th:href="@{/updateCustomerForm/{customer_id}(customer_id=${customer.customer_id})}"
                                                    class="btn btn-primary">Update</a>
 
-                                                <a th:href="@{/deleteCustomer/{id}(id=${customer.customer_id})}"
+                                                <a th:href="@{/deleteCustomer/{customer_id}(customer_id=${customer.customer_id})}"
                                                    class="btn btn-danger">Delete</a>
 
-                                                <a th:href="@{/{id}/addcustomerinfo/{id}(id=${customer.customer_id})}"
+                                                <a th:href="@{/{customer_id}/addcustomerinfo (customer_id=${customer.customer_id})}"
                                                    class="btn btn-info">Measures</a>
 
                                                 <a th:href="@{/{customer_id}/showRecords (customer_id=${customer.customer_id})}"
                                                    class="btn btn-secondary">Records</a>
+
+                                                <a th:href="@{/{customer_id}/showRecords (customer_id=${customer.customer_id})}"
+                                                   class="btn btn-warning">Set Food</a>
                                             </div>
+                                            </center>
                                         </td>
                                     </tr>
                                     </tbody>

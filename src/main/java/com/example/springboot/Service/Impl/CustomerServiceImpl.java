@@ -1,7 +1,9 @@
 package com.example.springboot.Service.Impl;
 
 import com.example.springboot.Entity.Customer;
+import com.example.springboot.Entity.Food;
 import com.example.springboot.Repository.CustomerRepository;
+import com.example.springboot.Repository.FoodRepository;
 import com.example.springboot.Service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +16,9 @@ import java.util.Optional;
 public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
-    public CustomerRepository customerRepository;
+    CustomerRepository customerRepository;
+    @Autowired
+    FoodRepository foodRepository;
 
 
     public CustomerServiceImpl(CustomerRepository customerRepository) {
@@ -38,7 +42,7 @@ public class CustomerServiceImpl implements CustomerService {
         if (optional.isPresent()) {
             customer = optional.get();
         } else {
-            throw new RuntimeException("Customer not Found with id : " + customer_id );
+            throw new RuntimeException("Customer not Found with id : " + customer_id);
         }
         return customer;
     }
@@ -47,8 +51,23 @@ public class CustomerServiceImpl implements CustomerService {
     public Customer updateCustomer(Customer customer) {
         return customerRepository.save(customer);
     }
+
     @Override
     public void deleteCustomerById(Long customer_id) {
         customerRepository.deleteById(customer_id);
+    }
+
+    @Override
+    public void setFoodToCustomer(Long customerId, Long foodId) {
+        Optional<Customer> customerOptional = customerRepository.findById(customerId);
+        Optional<Food> foodOptional = foodRepository.findById(foodId);
+
+        if(customerOptional.isPresent() && foodOptional.isPresent()) {
+            Customer customer = customerOptional.get();
+            Food food = foodOptional.get();
+
+            customer.getFoods().add(food);
+            customerRepository.save(customer);
+        }
     }
 }

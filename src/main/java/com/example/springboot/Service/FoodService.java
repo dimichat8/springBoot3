@@ -12,6 +12,8 @@ public interface FoodService {
 
     Food getFoodById(Long food_id);
 
+    Food updateFood(Food food);
+
     void deleteFoodById(Long food_id);
 
 

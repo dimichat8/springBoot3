@@ -1,11 +1,9 @@
-/*
 package com.example.springboot.Repository;
 
-import com.example.springboot.Entity.Recipe;
+import com.example.springboot.Entity.Meal;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RecipeRepository extends JpaRepository<Recipe, Long> {
+public interface MealRepository extends JpaRepository<Meal, Long> {
 }
-*/

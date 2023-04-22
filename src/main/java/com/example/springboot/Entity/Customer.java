@@ -40,6 +40,7 @@ public class Customer {
     @Column(name = "phone")
     private String phone;
 
+    @NotNull(message = "Birthday can not be empty")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "birthday")
     private LocalDate birthday;
@@ -52,6 +53,9 @@ public class Customer {
 
     @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL,  orphanRemoval = true)
     private List<CustomerInfo> customerInfos = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Food> foods = new ArrayList<>();
 
     public Customer(Long customer_id, String firstName, String lastName, String email, String address, String city, String phone, LocalDate birthday, String gender, List<CustomerInfo> customerInfos) {
         this.customer_id = customer_id;
@@ -160,7 +164,19 @@ public class Customer {
         this.customerInfos = customerInfos;
     }
 
-/*@Override
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public List<Food> getFoods() {
+        return foods;
+    }
+
+    public void setFoods(List<Food> foods) {
+        this.foods = foods;
+    }
+
+    /*@Override
     public String toString() {
         return "Customer{" +
                 "customer_id=" + customer_id +

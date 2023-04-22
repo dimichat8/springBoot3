@@ -18,4 +18,5 @@ public interface CustomerService {
 
     void deleteCustomerById(Long customer_id);
 
+    void setFoodToCustomer(Long customerId, Long foodId);
 }

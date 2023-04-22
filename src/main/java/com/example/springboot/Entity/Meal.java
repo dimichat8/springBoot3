@@ -1,25 +1,24 @@
-/*
 package com.example.springboot.Entity;
 
 import jakarta.persistence.*;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "recipes")
-public class Recipe {
+@Table(name = "foods")
+public class Meal {
 
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "recipe_id")
-    private Long recipe_id;
+    @Column(name = "meal_id")
+    private Long meal_id;
 
-    @Column(name ="userName")
-    private String userName;
-    @Column(name ="name")
-    private String name;
+    @Column(name ="customerName")
+    private String customerName;
+    @Column(name ="mealname")
+    private String mealName;
     @Column(name ="calories")
     private float calories;
     @Column(name ="totalFat")
@@ -28,14 +27,13 @@ public class Recipe {
     private Float cholesterol;
     @Column(name ="protein")
     private Float protein;
-    @OneToMany(mappedBy = "recipe", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
-    @Column(name = "foods")
-    private Set<Recipe> foods = new HashSet<Recipe>();
+    @OneToMany(mappedBy = "meal", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+    private List<Food> foods = new ArrayList<>();
 
-    public Recipe(Long recipe_id, String userName, String name, float calories, Float totalFat, Float cholesterol, Float protein, Set<Recipe> foods) {
-        this.recipe_id = recipe_id;
-        this.userName = userName;
-        this.name = name;
+    public Meal(Long meal_id, String customerName, String name, float calories, Float totalFat, Float cholesterol, Float protein, List<Food> foods) {
+        this.meal_id = meal_id;
+        this.customerName = customerName;
+        this.mealName = name;
         this.calories = calories;
         this.totalFat = totalFat;
         this.cholesterol = cholesterol;
@@ -43,28 +41,32 @@ public class Recipe {
         this.foods = foods;
     }
 
-    public void setRecipe_id(Long recipeId) {
-        this.recipe_id = recipe_id;
+    public Meal() {
+
     }
 
-    public Long getRecipe_id() {
-        return recipe_id;
+    public void setMeal_id(Long mealId) {
+        this.meal_id = meal_id;
     }
 
-    public String getUserName() {
-        return userName;
+    public Long getMeal_id() {
+        return meal_id;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public String getCustomerName() {
+        return customerName;
     }
 
-    public String getName() {
-        return name;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getMealName() {
+        return mealName;
+    }
+
+    public void setMealName(String name) {
+        this.mealName = name;
     }
 
     public float getCalories() {
@@ -99,12 +101,11 @@ public class Recipe {
         this.protein = protein;
     }
 
-    public Set<Recipe> getFoods() {
+    public List<Food> getFoods() {
         return foods;
     }
 
-    public void setFoods(Set<Recipe> foods) {
+    public void setFoods(List<Food> foods) {
         this.foods = foods;
     }
 }
-*/
