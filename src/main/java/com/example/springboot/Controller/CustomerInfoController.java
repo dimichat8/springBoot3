@@ -26,8 +26,9 @@ public class CustomerInfoController {
     private CustomerRepository customerRepository;
 
     @GetMapping("/customertableinfo")
-    public String listOfTheCustomerInfo(Model model) {
+    public String listOfTheCustomerInfo(/*@PathVariable(value = "customer_id") Customer customerId,*/ Model model) {
         List<CustomerInfo> listOfTheCustomerInfo = customerInfoRepository.findAll();
+        /*model.addAttribute("customer", customerId);*/
         model.addAttribute("customerinfos", customerInfoService.getAllCustomerInfo());
         return "/Customer/tableCustomerInfo";
     }
@@ -66,17 +67,24 @@ public class CustomerInfoController {
     }
 
     @GetMapping("/updateCustomerInfoForm/{customerinfo_id}")
-    public String updateCustomerInfoForm(@PathVariable(value = "customerinfo_id") Long customerinfo_id, Model model) {
+    public String updateCustomerInfoForm(/*@PathVariable(value = "customer_id") Long customerId,*/
+                                         @PathVariable(value = "customerinfo_id") Long customerinfoId, Model model) {
 
-        CustomerInfo customerInfo = (CustomerInfo) customerInfoService.getCustomerInfoById(customerinfo_id);
+        CustomerInfo customerInfo = (CustomerInfo) customerInfoService.getCustomerInfoById(customerinfoId);
+        /*model.addAttribute("customer", customerId);*/
         model.addAttribute("customerinfo", customerInfo);
         return "/Customer/updatecustomerinfo";
     }
 
     @PostMapping("/updateCustomerInfo/{customerinfo_id}")
-    public String updateCustomerInfo(@PathVariable(value = "customerinfo_id") Long customerinfo_id,
+    public String updateCustomerInfo(/*@PathVariable(value = "customer_id") Long customerId,*/
+                                     @PathVariable(value = "customerinfo_id") Long customerinfoId,
+                                     @ModelAttribute("customer") Customer customer,
                                      @ModelAttribute("customerinfo") CustomerInfo customerInfo) {
-        CustomerInfo existingCustomerInfo = (CustomerInfo) customerInfoService.getCustomerInfoById(customerinfo_id);
+        /*Customer existingcustomer = customerService.getCustomerById(customerId);*/
+        CustomerInfo existingCustomerInfo = (CustomerInfo) customerInfoService.getCustomerInfoById(customerinfoId);
+        /*existingcustomer.setFirstName(customer.getFirstName());
+        existingcustomer.setLastName(customer.getLastName());*/
         existingCustomerInfo.setHeight(customerInfo.getHeight());
         existingCustomerInfo.setWater(customerInfo.getWater());
         existingCustomerInfo.setWeight(customerInfo.getWeight());
@@ -88,8 +96,17 @@ public class CustomerInfoController {
     }
 
     @GetMapping("/deleteCustomerInfo/{customerinfo_id}")
-    public String deleteCustomerInfo(@PathVariable(value = "customerinfo_id") Long customerinfo_id){
-        customerInfoService.deleteCustomerInfoById(customerinfo_id);
+    public String deleteCustomerInfo(@PathVariable(value = "customerinfo_id") Long customerinfoId){
+        customerInfoService.deleteCustomerInfoById(customerinfoId);
         return "redirect:/customertableinfo";
     }
+
+    /*@GetMapping("/{customer_id}/deleteCustomerInfos/{customerinfo_id}")
+    public String deleteCustomerInfos(@PathVariable(value = "customerinfo_id") Long customerinfoId,
+                                      @PathVariable(value = "customerinfo_id") Long customerId, Model model){
+        model.addAttribute("customerinfo_id", customerinfoId);
+        model.addAttribute("customer_id", customerId);
+        customerInfoService.deleteCustomerInfoById(customerinfoId);
+        return "redirect:{customer_id}/showRecords";
+    }*/
 }
