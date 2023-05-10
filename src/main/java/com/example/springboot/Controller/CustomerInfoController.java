@@ -30,10 +30,11 @@ public class CustomerInfoController {
         List<CustomerInfo> listOfTheCustomerInfo = customerInfoRepository.findAll();
         /*model.addAttribute("customer", customerId);*/
         model.addAttribute("customerinfos", customerInfoService.getAllCustomerInfo());
+        /*model.addAttribute("customer", customerId);*/
         return "/Customer/tableCustomerInfo";
     }
 
-    @GetMapping("{customer_id}/addcustomerinfo")
+    @GetMapping("/{customer_id}/addcustomerinfo")
     public String createCustomerInfoForm(@PathVariable(value = "customer_id") Customer customerId, Model model) {
 
         //Crate model attribute to bind from data
@@ -45,7 +46,8 @@ public class CustomerInfoController {
     }
 
     @PostMapping("/{customer_id}/saveCustomerInfo")
-    public String saveCustomerInfo(@PathVariable(value = "customer_id")Long customerId,@ModelAttribute("customerinfo") @NotNull CustomerInfo customerInfos) {
+    public String saveCustomerInfo(@PathVariable(value = "customer_id")Long customerId,
+                                   @ModelAttribute("customerinfo") @NotNull CustomerInfo customerInfos) {
         Customer customer = customerRepository.findById(customerId).get();
         customerInfos.setCustomer(customer);
         customer.getCustomerInfos().add(customerInfos);
@@ -56,7 +58,7 @@ public class CustomerInfoController {
     }
 
 
-    @GetMapping("{customer_id}/showRecords")
+    @GetMapping("/{customer_id}/showRecords")
     public String showRecords(@PathVariable(value = "customer_id") Customer customerId, Model model) {
 
 

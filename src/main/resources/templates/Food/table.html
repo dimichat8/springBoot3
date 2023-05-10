@@ -92,8 +92,8 @@
                         <h6 class="collapse-header">About Customers:</h6>
                         <a class="collapse-item" th:href="@{/foodtable}">Food</a>
                         <a class="collapse-item" th:href="@{/addfood}">Add Food</a>
-                        <a class="collapse-item" th:href="@{/recipetable}">Recipes</a>
-                        <a class="collapse-item" th:href="@{/addrecipe}">Add Recipes</a>
+                        <a class="collapse-item" th:href="@{/mealtable}">Meals</a>
+                        <a class="collapse-item" th:href="@{/addmeal}">Add Meals</a>
                     </div>
                 </div>
             </li>
@@ -168,8 +168,10 @@
                 </button>
 
                 <!-- Topbar Search -->
-                <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                <form>
+                    <a
+                       class="btn btn-primary">Check</a>
+                     <!--   class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                     <div class="input-group">
                         <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
                                aria-label="Search" aria-describedby="basic-addon2">
@@ -178,7 +180,7 @@
                                 <i class="fas fa-search fa-sm"></i>
                             </button>
                         </div>
-                    </div>
+                    </div>-->
                 </form>
 
                 <!-- Topbar Navbar -->
@@ -378,6 +380,7 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
+                                            <th>Check</th>
                                             <th>Name</th>
                                             <th>Grams</th>
                                             <th>Sodium</th>
@@ -416,6 +419,7 @@
                                     </tfoot>
                                     <tbody>
                                     <tr th:each="food: ${foods}">
+                                        <td><input type="checkbox" name="selectedUsers" value="${food.id}" /></td>
                                         <td th:text="${food.name}"></td>
                                         <td th:text="${food.grams}"></td>
                                         <td th:text="${food.sodium}"></td>
