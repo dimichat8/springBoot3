@@ -1,20 +1,27 @@
 package com.example.springboot.Controller;
 
 import com.example.springboot.Entity.Food;
+import com.example.springboot.Entity.Meal;
+import com.example.springboot.Repository.FoodRepository;
+import com.example.springboot.Repository.MealRepository;
 import com.example.springboot.Service.FoodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class FoodController {
 
     @Autowired
     public FoodService foodService;
+    @Autowired
+    private FoodRepository foodRepository;
+    @Autowired
+    private MealRepository mealRepository;
 
     /*@GetMapping("/index")
     public String indexFood(){
@@ -84,5 +91,20 @@ public class FoodController {
         //Call delete food method
         foodService.deleteFoodById(food_id);
         return "redirect:/foodtable";
+    }
+
+    @PostMapping("/mealtable")
+    public String selectedFoodsForMeal(@RequestBody List<Long> foodIds) {
+    List<Food> selectedFoodsForMeal = foodRepository.findAllById(foodIds);
+
+    List<Meal> mealRecords =new ArrayList<>();
+    for(Food foods : selectedFoodsForMeal) {
+        Meal meal = new Meal();
+        meal.setMealName(meal.getMealName());
+        meal.setFoods(foods.getFoods());
+        mealRecords.add(meal);
+    }
+    mealRepository.saveAll(mealRecords);
+        return "/Meal/table";
     }
 }
