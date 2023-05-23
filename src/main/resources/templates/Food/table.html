@@ -522,6 +522,33 @@
 
     <!-- Page level custom scripts -->
     <script src="js/demo/datatables-demo.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#select-button').click(function() {
+            var selectedRecords = [];
+            $('.record-checkbox:checked').each(function() {
+                selectedRecords.push(parseInt($(this).val()));
+            });
+
+            // Send the selected record IDs to the server
+            $.ajax({
+                type: 'POST',
+                url: '/records/select',
+                contentType: 'application/json',
+                data: JSON.stringify(selectedRecords),
+                success: function(response) {
+                    // Handle success response
+                    console.log('Selected records added to destination table.');
+                },
+                error: function(xhr, status, error) {
+                    // Handle error response
+                    console.error('Error occurred:', error);
+                }
+            });
+        });
+    });
+</script>
 
 </body>
 
