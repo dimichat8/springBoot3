@@ -136,12 +136,12 @@
                             </legend>
                         </div>
                         <div class="mt-5 text-center">
-                            <button th:type="submit" class="btn-primary btn-user btn-block" type="button">Save Profile</button>
+                            <button th:type="submit" class="btn btn-primary profile-button" type="button">Save Profile</button>
                         </div>
                     </form>
                     <form th:action="@{/customertable}" th:object="${customerinfo}" class="user"  method="GET">
                         <div class="mt-5 text-center">
-                            <button th:type="submit" class="btn-danger btn-user btn-block" type="button">Back To Customer</button>
+                            <button th:type="submit" class="btn btn-danger profile-button" type="button">Back To Table</button>
                         </div>
                     </form>
                 </div>

@@ -43,36 +43,43 @@
                             <form action="#" th:action="@{/saveFood}" th:object="${food}" class="user"  method="POST">
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label class="labels">Name</label>
                                         <input type="text" class="form-control form-control-user" id="exampleName"
                                             th:field="*{name}" placeholder="Name">
                                     </div>
                                     <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label class="labels">Grams</label>
                                         <input type="text" class="form-control form-control-user" id="exampleGrams"
                                                th:field="*{grams}" placeholder="Grams">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label class="labels">Sodium</label>
                                     <input type="text" class="form-control form-control-user" id="exampleSodium"
                                            th:field="*{sodium}" placeholder="Sodium">
                                     </div>
                                     <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label class="labels">Potassium</label>
                                         <input type="text" class="form-control form-control-user" id="examplePotassium"
                                                th:field="*{potassium}"placeholder="Potassium">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label class="labels">Calcium</label>
                                         <input type="text" class="form-control form-control-user" id="exampleCalcium"
                                                th:field="*{calcium}"placeholder="Calcium">
                                     </div>
                                     <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label class="labels">Magnesium</label>
                                         <input type="text" class="form-control form-control-user" id="exampleMagnesium"
                                                th:field="*{magnesium}"placeholder="Magnesium">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label class="labels">Phosphorus</label>
                                         <input type="text" class="form-control form-control-user" id="examplePhosphorus"
                                            th:field="*{phosphorus}"placeholder="Phosphorus">
                                     </div>
@@ -120,12 +127,14 @@
                                         <input type="text" class="form-control form-control-user" id="exampleVitamin C"
                                                th:field="*{vitaminC}"placeholder="Vitamin C">
                                     </div>
-                                </div>
-                                <div class="form-group row">
+                                </div>-->
+                                <!--<div class="form-group row">-->
                                     <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label class="labels">Calories</label>
                                         <input type="text" class="form-control form-control-user" id="exampleCalories"
                                                th:field="*{calories}"placeholder="Calories">
-                                    </div>-->
+                                    </div>
+                                </div>
                                     <!--<div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="text" class="form-control form-control-user" id="exampleTotal Fat"
                                                th:field="*{totalFat}"placeholder="Total Fat">
@@ -162,14 +171,14 @@
                                     </div>
                                 </div>-->
 
-                        </div>
+
                         <div class="mt-5 text-center">
-                            <button type="submit" class="btn-primary btn-user btn-block">Submit</button>
+                            <button type="submit" class="btn btn-primary profile-button">Submit</button>
                         </div>
                     </form>
                     <form action="#" th:action="@{/foodtable}" th:object="${food}" class="user"  method="GET">
                         <div class="mt-5 text-center">
-                            <button type="submit" class="btn-danger btn-user btn-block">Back</button>
+                            <button type="submit" class="btn btn-danger profile-button">Back To Table</button>
                         </div>
                     </form>
                 </div>

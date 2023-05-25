@@ -26,49 +26,61 @@
 
 <div class="container">
 
-  <div class="card o-hidden border-0 shadow-lg my-5">
-    <div class="card-body p-0">
-      <!-- Nested Row within Card Body -->
+  <div class="container">
+
+    <div class="container rounded bg-white mt-5 mb-5">
       <div class="row">
-        <!--<div class="col-lg-5 d-none d-lg-block bg-register-image"></div>-->
-        <div class="col-lg-7">
-          <div class="p-5">
-            <div class="text-center">
-              <h1 class="h4 text-gray-900 mb-4">Add Customer!</h1>
+        <div class="col-md-3 border-right">
+
+          <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+            <img class="rounded-circle mt-5" width="150px" src="https://thumbs.dreamstime.com/z/healthy-food-table-cartoons-vector-illustration-graphic-design-healthy-food-cartoon-121622483.jpg">
+          </div>
+        </div>
+        <div class="col-md-5 border-right">
+          <div class="p-3 py-5">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h1 class="h4 text-gray-900 mb-4">Update Food</h1>
             </div>
             <form action="#" th:action="@{/saveFood}" th:object="${food}" class="user"  method="POST">
               <div class="form-group row">
                 <div class="col-sm-6 mb-3 mb-sm-0">
+                  <label class="labels">Name</label>
                   <input type="text" class="form-control form-control-user" id="exampleName"
                          th:field="*{name}">
                 </div>
                 <div class="col-sm-6 mb-3 mb-sm-0">
+                  <label class="labels">Grams</label>
                   <input type="text" class="form-control form-control-user" id="exampleGrams"
                          th:field="*{grams}">
                 </div>
               </div>
               <div class="form-group row">
                 <div class="col-sm-6 mb-3 mb-sm-0">
+                  <label class="labels">Sodium</label>
                   <input type="text" class="form-control form-control-user" id="exampleSodium"
                          th:field="*{sodium}">
                 </div>
                 <div class="col-sm-6 mb-3 mb-sm-0">
+                  <label class="labels">Potassium</label>
                   <input type="text" class="form-control form-control-user" id="examplePotassium"
                          th:field="*{potassium}">
                 </div>
               </div>
               <div class="form-group row">
                 <div class="col-sm-6 mb-3 mb-sm-0">
+                  <label class="labels">Calcium</label>
                   <input type="text" class="form-control form-control-user" id="exampleCalcium"
                          th:field="*{calcium}">
                 </div>
                 <div class="col-sm-6 mb-3 mb-sm-0">
+                  <label class="labels">Magnesium</label>
                   <input type="text" class="form-control form-control-user" id="exampleMagnesium"
                          th:field="*{magnesium}">
                 </div>
               </div>
               <div class="form-group row">
                 <div class="col-sm-6 mb-3 mb-sm-0">
+                  <label class="labels">Phosphorus</label>
                   <input type="text" class="form-control form-control-user" id="examplePhosphorus"
                          th:field="*{phosphorus}">
                 </div>
@@ -116,12 +128,14 @@
                   <input type="text" class="form-control form-control-user" id="exampleVitamin C"
                          th:field="*{vitaminC}">
                 </div>-->
-              </div>
-              <div class="form-group row">
+
+              <!--<div class="form-group row">-->
                 <div class="col-sm-6 mb-3 mb-sm-0">
+                  <label class="labels">Calories</label>
                   <input type="text" class="form-control form-control-user" id="exampleCalories"
                          th:field="*{calories}">
                 </div>
+              </div>
                <!-- <div class="col-sm-6 mb-3 mb-sm-0">
                   <input type="text" class="form-control form-control-user" id="exampleTotal Fat"
                          th:field="*{totalFat}">
@@ -158,20 +172,21 @@
                 </div>
               </div>-->
 
-              <button type="submit" class="btn-primary btn-user btn-block">Submit</button>
-              <hr>
+              <div class="mt-5 text-center">
+                <button type="submit" class="btn btn-primary profile-button">Submit</button>
               </div>
             </form>
             <form action="#" th:action="@{/foodtable}" th:object="${food}" class="user"  method="GET">
-              <button type="submit" class="btn-danger btn-user btn-block">Back</button>
+              <div class="mt-5 text-center">
+                <button type="submit" class="btn btn-danger profile-button">Back</button>
+              </div>
             </form>
-            <hr>
           </div>
         </div>
       </div>
     </div>
   </div>
-
+</div>
 </div>
 
 <!-- Bootstrap core JavaScript-->
