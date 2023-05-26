@@ -72,8 +72,7 @@
             <h6 class="collapse-header">About Customers:</h6>
             <a class="collapse-item" th:href="@{/customertable}">Customers</a>
             <a class="collapse-item" th:href="@{/addcustomer}">Add Customer</a>
-            <a class="collapse-item" th:href="@{/{customer_id}/customertableinfo (customer_id=${customer.customer_id})}">Customer Info</a>
-          </div>
+            <a class="collapse-item" th:href="@{/customertableinfo}">Customer Info</a>
         </div>
       </li>
 
@@ -389,7 +388,7 @@
                   </thead>
                   <tbody>
                   <tr th:each="customerinfo, iterate : ${customerInfos}">
-                    <td th:text="${customer.firstName + customer.lastName}"></td>
+                    <td th:text="${customer.firstName + ' ' +  customer.lastName}"></td>
                     <td th:text="${customerinfo.createDate}"></td>
                     <td th:text="${customerinfo.height}"></td>
                     <td th:text="${customerinfo.water}"></td>

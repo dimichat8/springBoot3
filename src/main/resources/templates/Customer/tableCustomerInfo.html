@@ -377,7 +377,7 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                     <tr>
-                                        <!--<th>Name</th>-->
+                                        <th>Name</th>
                                         <th>Creation Date</th>
                                         <th>Height</th>
                                         <th>Water</th>
@@ -395,8 +395,9 @@
                                     </tr>
                                     </tfoot>
                                     <tbody>
-                                    <tr th:each="customerinfo, iterate : ${customerinfos}">
+                                    <tr th:each="customerinfo, iterate : ${customerInfoList}">
                                         <!--<td th:text="${customer.firstName + customer.lastName}"></td>-->
+                                        <td th:text="${customerinfo.customer.firstName + ' ' + customerinfo.customer.lastName}"></td>
                                         <td th:text="${customerinfo.createDate}"></td>
                                         <td th:text="${customerinfo.height}"></td>
                                         <td th:text="${customerinfo.water}"></td>

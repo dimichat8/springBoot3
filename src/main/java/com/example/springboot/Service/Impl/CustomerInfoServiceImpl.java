@@ -34,6 +34,11 @@ public class CustomerInfoServiceImpl implements CustomerInfoService {
         return customerInfoRepository.save(customerInfo);
     }
 
+    @Override
+    public List<CustomerInfo> readCustomerInfoByCustomer() {
+        return customerInfoRepository.readCustomerInfoByCustomer();
+    }
+
 
     @Override
     public CustomerInfoService getCustomerInfoById(Long customerdietary_id) {

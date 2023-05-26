@@ -10,6 +10,8 @@ public interface CustomerInfoService {
 
     CustomerInfo saveCustomerInfo(CustomerInfo customerInfo);
 
+    List<CustomerInfo> readCustomerInfoByCustomer();
+
     CustomerInfoService getCustomerInfoById (Long customerdietary_id);
 
     CustomerInfo updateCustomerInfo(CustomerInfo customerInfo);

@@ -26,11 +26,11 @@ public class CustomerInfoController {
     private CustomerRepository customerRepository;
 
     @GetMapping("/customertableinfo")
-    public String listOfTheCustomerInfo(/*@PathVariable(value = "customer_id") Customer customerId,*/ Model model) {
-        List<CustomerInfo> listOfTheCustomerInfo = customerInfoRepository.findAll();
-        /*model.addAttribute("customer", customerId);*/
-        model.addAttribute("customerinfos", customerInfoService.getAllCustomerInfo());
-        /*model.addAttribute("customer", customerId);*/
+    public String listOfTheCustomerInfo( Model model) {
+        /*List<CustomerInfo> listOfTheCustomerInfo = customerInfoRepository.findAll();
+        *//*model.addAttribute("customer", customerId);*//*
+        model.addAttribute("customerinfos", listOfTheCustomerInfo);*/
+        model.addAttribute("customerInfoList", customerInfoService.readCustomerInfoByCustomer());
         return "/Customer/tableCustomerInfo";
     }
 
