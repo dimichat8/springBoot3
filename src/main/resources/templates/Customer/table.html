@@ -21,7 +21,29 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <style>
+        .hidden {
+            display: none;
+        }
+        .button-container {
+            display: inline-block;
+            vertical-align: middle;
+        }
+    </style>
+    <script>
+        var previousButtonsContainer = null;
 
+        function showButtons(customerId) {
+            var buttonsContainer = document.getElementById('buttons-' + customerId);
+
+            if (previousButtonsContainer !== null) {
+                previousButtonsContainer.classList.add('hidden');
+            }
+
+            buttonsContainer.classList.remove('hidden');
+            previousButtonsContainer = buttonsContainer;
+        }
+    </script>
 </head>
 
 <body id="page-top">
@@ -406,26 +428,29 @@
                                         <td th:text="${customer.gender}"></td>
                                         <td>
                                             <center>
-                                            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                                                <button th:attr="data-customer-id=${customer.customer_id}"
+                                                        onclick="showButtons(this.getAttribute('data-customer-id'))"
 
-                                                <a th:href="@{/updateCustomerForm/{customer_id}(customer_id=${customer.customer_id})}"
-                                                   class="btn btn-primary">Update</a>
+                                                        class="btn btn-outline-primary">Display Options</button>
+                                                <div th:id="'buttons-' + ${customer.customer_id}" class="hidden">
+                                                    <a th:href="@{/updateCustomerForm/{customer_id}(customer_id=${customer.customer_id})}"
+                                                       class="btn btn-primary">Update</a>
 
-                                                <a th:href="@{/deleteCustomer/{customer_id}(customer_id=${customer.customer_id})}"
-                                                   class="btn btn-danger">Delete</a>
+                                                    <a th:href="@{/deleteCustomer/{customer_id}(customer_id=${customer.customer_id})}"
+                                                       class="btn btn-danger">Delete</a>
 
-                                                <a th:href="@{/{customer_id}/addcustomerinfo (customer_id=${customer.customer_id})}"
-                                                   class="btn btn-info">Measures</a>
+                                                    <a th:href="@{/{customer_id}/addcustomerinfo (customer_id=${customer.customer_id})}"
+                                                       class="btn btn-info">Measures</a>
 
-                                                <a th:href="@{/{customer_id}/showRecords (customer_id=${customer.customer_id})}"
-                                                   class="btn btn-secondary">Records</a>
+                                                    <a th:href="@{/{customer_id}/showRecords (customer_id=${customer.customer_id})}"
+                                                       class="btn btn-secondary">Records</a>
 
-                                                <a th:href="@{/{customer_id}/showRecords (customer_id=${customer.customer_id})}"
-                                                   class="btn btn-warning">Set Food</a>
-                                            </div>
+                                                    <a th:href="@{/{customer_id}/showRecords (customer_id=${customer.customer_id})}"
+                                                       class="btn btn-warning">Set Food</a>
+                                                </div>
                                             </center>
                                         </td>
-                                    </tr>
+                            </tr>
                                     </tbody>
                                 </table>
                             </div>
