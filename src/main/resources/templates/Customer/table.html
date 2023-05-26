@@ -33,14 +33,14 @@
     <script>
         var previousButtonsContainer = null;
 
-        function showButtons(customerId) {
+        function toggleButtons(customerId) {
             var buttonsContainer = document.getElementById('buttons-' + customerId);
 
-            if (previousButtonsContainer !== null) {
+            if (previousButtonsContainer !== null && previousButtonsContainer !== buttonsContainer) {
                 previousButtonsContainer.classList.add('hidden');
             }
 
-            buttonsContainer.classList.remove('hidden');
+            buttonsContainer.classList.toggle('hidden');
             previousButtonsContainer = buttonsContainer;
         }
     </script>
@@ -429,8 +429,7 @@
                                         <td>
                                             <center>
                                                 <button th:attr="data-customer-id=${customer.customer_id}"
-                                                        onclick="showButtons(this.getAttribute('data-customer-id'))"
-
+                                                        onclick="toggleButtons(this.getAttribute('data-customer-id'))"
                                                         class="btn btn-outline-primary">Display Options</button>
                                                 <div th:id="'buttons-' + ${customer.customer_id}" class="hidden">
                                                     <a th:href="@{/updateCustomerForm/{customer_id}(customer_id=${customer.customer_id})}"

@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-
-<!--Customer Table-->
-
 <head>
 
     <meta charset="utf-8">
@@ -23,6 +20,29 @@
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
+    <style>
+        .hidden {
+            display: none;
+        }
+        .button-container {
+            display: inline-block;
+            vertical-align: middle;
+        }
+    </style>
+    <script>
+        var previousButtonsContainer = null;
+
+        function toggleButtons(foodId) {
+            var buttonsContainer = document.getElementById('buttons-' + foodId);
+
+            if (previousButtonsContainer !== null && previousButtonsContainer !== buttonsContainer) {
+                previousButtonsContainer.classList.add('hidden');
+            }
+
+            buttonsContainer.classList.toggle('hidden');
+            previousButtonsContainer = buttonsContainer;
+        }
+    </script>
 </head>
 
 <body id="page-top">
@@ -444,13 +464,18 @@
                                         <td th:text="${food.sugar}"></td>
                                         <td th:text="${food.protein}"></td>-->
                                         <td>
-                                            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                                            <center>
+                                            <button th:attr="data-food-id=${food.food_id}"
+                                                    onclick="toggleButtons(this.getAttribute('data-food-id'))"
+                                                    class="btn btn-outline-primary">Display Options</button>
+                                            <div th:id="'buttons-' + ${food.food_id}" class="hidden">
                                                 <a th:href="@{/updateFoodForm/{id}(id=${food.food_id})}"
                                                    class="btn btn-primary">Update</a>
 
                                                 <a th:href="@{/deleteFood/{id}(id=${food.food_id})}"
                                                    class="btn btn-danger">Delete</a>
                                             </div>
+                                            </center>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -523,33 +548,6 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/datatables-demo.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!--<script>
-    $(document).ready(function() {
-        $('#select-button').click(function() {
-            var selectedRecords = [];
-            $('.record-checkbox:checked').each(function() {
-                selectedRecords.push(parseInt($(this).val()));
-            });
-
-            // Send the selected record IDs to the server
-            $.ajax({
-                type: 'POST',
-                url: '/records/select',
-                contentType: 'application/json',
-                data: JSON.stringify(selectedRecords),
-                success: function(response) {
-                    // Handle success response
-                    console.log('Selected records added to destination table.');
-                },
-                error: function(xhr, status, error) {
-                    // Handle error response
-                    console.error('Error occurred:', error);
-                }
-            });
-        });
-    });
-</script>-->
 
 </body>
-
 </html>

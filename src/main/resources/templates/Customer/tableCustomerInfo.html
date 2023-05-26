@@ -22,6 +22,30 @@
     <!-- Custom styles for this template-->
     <link href="/css/sb-admin-2.min.css" rel="stylesheet">
 
+    <style>
+        .hidden {
+            display: none;
+        }
+        .button-container {
+            display: inline-block;
+            vertical-align: middle;
+        }
+    </style>
+    <script>
+        var previousButtonsContainer = null;
+
+        function toggleButtons(customerInfoId) {
+            var buttonsContainer = document.getElementById('buttons-' + customerInfoId);
+
+            if (previousButtonsContainer !== null && previousButtonsContainer !== buttonsContainer) {
+                previousButtonsContainer.classList.add('hidden');
+            }
+
+            buttonsContainer.classList.toggle('hidden');
+            previousButtonsContainer = buttonsContainer;
+        }
+    </script>
+
 </head>
 
 <body id="page-top">
@@ -406,17 +430,19 @@
                                         <td th:text="${customerinfo.bodyFatMass}"></td>
                                         <td th:text="${customerinfo.fat}"></td>
                                         <td>
-                                            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                                            <center>
+                                            <button th:attr="data-customerinfo-id=${customerinfo.customerInfo_id}"
+                                                    onclick="toggleButtons(this.getAttribute('data-customerinfo-id'))"
+                                                    class="btn btn-outline-primary">Display Options</button>
+                                            <div th:id="'buttons-' + ${customerinfo.customerInfo_id}" class="hidden">
 
                                                 <a th:href="@{/updateCustomerInfoForm/{id}(id=${customerinfo.customerInfo_id})}"
                                                    class="btn btn-primary">Update</a>
 
                                                 <a th:href="@{/deleteCustomerInfo/{id}(id=${customerinfo.customerInfo_id})}"
                                                    class="btn btn-danger">Delete</a>
-
-                                                <!--<a th:href="@{/addcustomerinfo/{customerinfo_id}(id=${customer.customerinfo_id})}"
-                                                   class="btn btn-info">More Info</a>-->
                                             </div>
+                                            </center>
                                         </td>
                                     </tr>
                                     </tbody>
