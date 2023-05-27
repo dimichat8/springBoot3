@@ -202,11 +202,9 @@
             <button id="openButtonForBreakfast" class="btn btn-primary">Breakfast</button>
             <br/>
             <div id="panel" class="panel">
-              <h3>Panel Content</h3>
               <div class="container-fluid">
-
                 <!-- Page Heading -->
-                <h1 class="h3 mb-2 text-gray-800">Food Table</h1>
+                <h1 class="h3 mb-2 text-gray-800">Food Table For <b>Breakfast</b></h1>
 
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
@@ -218,18 +216,30 @@
                   </div>
                   <div class="card-body">
                     <div class="table-responsive">
-                      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                      <table class="table table-bordered" id="dataTableBreakfast" width="100%" cellspacing="0">
                         <thead>
                         <tr>
                       <th>Check</th>
                       <th>Name</th>
                       <th>Grams</th>
+                      <th>Sodium</th>
+                      <th>Potassium</th>
+                      <th>Calcium</th>
+                      <th>Magnesium</th>
+                      <th>Phosphorus</th>
+                      <th>Calories</th>
                     </tr>
                     </thead>
                     <tr th:each="food: ${foods}">
                       <td><input type="checkbox" name="selectedUsers" value="${food.id}" /></td>
                       <td th:text="${food.name}"></td>
                       <td th:text="${food.grams}"></td>
+                      <td th:text="${food.sodium}"></td>
+                      <td th:text="${food.potassium}"></td>
+                      <td th:text="${food.calcium}"></td>
+                      <td th:text="${food.magnesium}"></td>
+                      <td th:text="${food.phosphorus}"></td>
+                      <td th:text="${food.calories}"></td>
                   </table>
                     </div>
                   </div>
@@ -242,8 +252,50 @@
           <img class="img" src="https://cdn-icons-png.flaticon.com/128/10423/10423007.png">
             <button id="openButtonForDessert" class="btn btn-primary">Dessert</button>
             <div id="panel2" class="panel">
-              <h3>Panel Content</h3>
-              <p>This is the content of the panel.</p>
+              <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <h1 class="h3 mb-2 text-gray-800">Food Table For <b>Dessert</b></h1>
+
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                  <div class="card-header py-3">
+                    <form>
+                      <a
+                              class="btn btn-primary">Check</a>
+                    </form>
+                  </div>
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table table-bordered" id="dataTableForDessert" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                          <th>Check</th>
+                          <th>Name</th>
+                          <th>Grams</th>
+                          <th>Sodium</th>
+                          <th>Potassium</th>
+                          <th>Calcium</th>
+                          <th>Magnesium</th>
+                          <th>Phosphorus</th>
+                          <th>Calories</th>
+                        </tr>
+                        </thead>
+                        <tr th:each="food: ${foods}">
+                          <td><input type="checkbox" name="selectedUsers" value="${food.id}" /></td>
+                          <td th:text="${food.name}"></td>
+                          <td th:text="${food.grams}"></td>
+                          <td th:text="${food.sodium}"></td>
+                          <td th:text="${food.potassium}"></td>
+                          <td th:text="${food.calcium}"></td>
+                          <td th:text="${food.magnesium}"></td>
+                          <td th:text="${food.phosphorus}"></td>
+                          <td th:text="${food.calories}"></td>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <br/>
@@ -251,8 +303,50 @@
           <img class="img" src="https://cdn-icons-png.flaticon.com/128/3119/3119770.png">
             <button id="openButtonForLunch" class="btn btn-primary">Lunch</button>
             <div id="panel3" class="panel">
-              <h3>Panel Content</h3>
-              <p>Hello!!</p>
+              <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <h1 class="h3 mb-2 text-gray-800">Food Table For <b>Lunch</b></h1>
+
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                  <div class="card-header py-3">
+                    <form>
+                      <a
+                              class="btn btn-primary">Check</a>
+                    </form>
+                  </div>
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table table-bordered" id="dataTableForLunch" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                          <th>Check</th>
+                          <th>Name</th>
+                          <th>Grams</th>
+                          <th>Sodium</th>
+                          <th>Potassium</th>
+                          <th>Calcium</th>
+                          <th>Magnesium</th>
+                          <th>Phosphorus</th>
+                          <th>Calories</th>
+                        </tr>
+                        </thead>
+                        <tr th:each="food: ${foods}">
+                          <td><input type="checkbox" name="selectedUsers" value="${food.id}" /></td>
+                          <td th:text="${food.name}"></td>
+                          <td th:text="${food.grams}"></td>
+                          <td th:text="${food.sodium}"></td>
+                          <td th:text="${food.potassium}"></td>
+                          <td th:text="${food.calcium}"></td>
+                          <td th:text="${food.magnesium}"></td>
+                          <td th:text="${food.phosphorus}"></td>
+                          <td th:text="${food.calories}"></td>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <br/>
@@ -260,8 +354,50 @@
             <img class="img" src="https://cdn-icons-png.flaticon.com/128/10546/10546110.png">
             <button id="openButtonForSnack" class="btn btn-primary">Snack</button>
             <div id="panel4" class="panel">
-              <h3>Panel Content</h3>
-              <p>This is the content of the panel.</p>
+              <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <h1 class="h3 mb-2 text-gray-800">Food Table For <b>Snack</b></h1>
+
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                  <div class="card-header py-3">
+                    <form>
+                      <a
+                              class="btn btn-primary">Check</a>
+                    </form>
+                  </div>
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table table-bordered" id="dataTableFor" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                          <th>Check</th>
+                          <th>Name</th>
+                          <th>Grams</th>
+                          <th>Sodium</th>
+                          <th>Potassium</th>
+                          <th>Calcium</th>
+                          <th>Magnesium</th>
+                          <th>Phosphorus</th>
+                          <th>Calories</th>
+                        </tr>
+                        </thead>
+                        <tr th:each="food: ${foods}">
+                          <td><input type="checkbox" name="selectedUsers" value="${food.id}" /></td>
+                          <td th:text="${food.name}"></td>
+                          <td th:text="${food.grams}"></td>
+                          <td th:text="${food.sodium}"></td>
+                          <td th:text="${food.potassium}"></td>
+                          <td th:text="${food.calcium}"></td>
+                          <td th:text="${food.magnesium}"></td>
+                          <td th:text="${food.phosphorus}"></td>
+                          <td th:text="${food.calories}"></td>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <br/>
@@ -269,8 +405,50 @@
           <img class="img" src="https://cdn-icons-png.flaticon.com/128/3480/3480718.png">
               <button id="openButtonForDinner" class="btn btn-primary">Dinner</button>
               <div id="panel5" class="panel">
-                <h3>Panel Content</h3>
-                <p>This is the content of the panel.</p>
+                <div class="container-fluid">
+
+                  <!-- Page Heading -->
+                  <h1 class="h3 mb-2 text-gray-800">Food Table For <b>Dinner</b></h1>
+
+                  <!-- DataTales Example -->
+                  <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                      <form>
+                        <a
+                                class="btn btn-primary">Check</a>
+                      </form>
+                    </div>
+                    <div class="card-body">
+                      <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTableForDinner" width="100%" cellspacing="0">
+                          <thead>
+                          <tr>
+                            <th>Check</th>
+                            <th>Name</th>
+                            <th>Grams</th>
+                            <th>Sodium</th>
+                            <th>Potassium</th>
+                            <th>Calcium</th>
+                            <th>Magnesium</th>
+                            <th>Phosphorus</th>
+                            <th>Calories</th>
+                          </tr>
+                          </thead>
+                          <tr th:each="food: ${foods}">
+                            <td><input type="checkbox" name="selectedUsers" value="${food.id}" /></td>
+                            <td th:text="${food.name}"></td>
+                            <td th:text="${food.grams}"></td>
+                            <td th:text="${food.sodium}"></td>
+                            <td th:text="${food.potassium}"></td>
+                            <td th:text="${food.calcium}"></td>
+                            <td th:text="${food.magnesium}"></td>
+                            <td th:text="${food.phosphorus}"></td>
+                            <td th:text="${food.calories}"></td>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
         </div>
@@ -328,12 +506,11 @@
 <script src="js/sb-admin-2.min.js"></script>
 
 <!-- Page level plugins -->
-<script src="vendor/chart.js/Chart.min.js"></script>
+<script src="vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
 <!-- Page level custom scripts -->
-<script src="js/demo/chart-area-demo.js"></script>
-<script src="js/demo/chart-pie-demo.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="js/demo/datatables-demo.js"></script>
 <script src="js/scriptMealPlan.js"></script>
 <script>
   function handleButtonClick(day) {
