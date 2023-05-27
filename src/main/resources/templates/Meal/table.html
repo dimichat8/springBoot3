@@ -280,11 +280,11 @@
                   </tr>
                   </tfoot>
                   <tbody>
-                  <tr th:each="food: ${foods}">
+                  <tr th:each="meal: ${meals}">
                     <td><input type="checkbox" name="selectedMeals" value="${food.id}" /></td>
-                    <td th:text="${food.name}"></td>
-                    <td th:text="${food.calories}"></td>
-                    <td>
+                    <td th:text="${meal.mealName}"></td>
+                    <td th:text="${meal.calories}"></td>
+                    <!--<td>
                       <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                         <a th:href="@{/updateFoodForm/{id}(id=${food.food_id})}"
                            class="btn btn-primary">Update</a>
@@ -292,7 +292,7 @@
                         <a th:href="@{/deleteFood/{id}(id=${food.food_id})}"
                            class="btn btn-danger">Delete</a>
                       </div>
-                    </td>
+                    </td>-->
                   </tr>
                   </tbody>
                 </table>

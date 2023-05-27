@@ -199,16 +199,48 @@
           <br/>
           <div class="panel-container">
           <img class="img" src="https://cdn-icons-png.flaticon.com/128/2652/2652642.png">
-            <button id="openButtonForBreakfast" class="btn btn-primary">Open Panel For Breakfast</button>
+            <button id="openButtonForBreakfast" class="btn btn-primary">Breakfast</button>
+            <br/>
             <div id="panel" class="panel">
               <h3>Panel Content</h3>
-              <p>This is the content of the panel.</p>
+              <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <h1 class="h3 mb-2 text-gray-800">Food Table</h1>
+
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                  <div class="card-header py-3">
+                    <form>
+                      <a
+                              class="btn btn-primary">Check</a>
+                    </form>
+                  </div>
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                      <th>Check</th>
+                      <th>Name</th>
+                      <th>Grams</th>
+                    </tr>
+                    </thead>
+                    <tr th:each="food: ${foods}">
+                      <td><input type="checkbox" name="selectedUsers" value="${food.id}" /></td>
+                      <td th:text="${food.name}"></td>
+                      <td th:text="${food.grams}"></td>
+                  </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <br/>
           <div class="panel-container">
           <img class="img" src="https://cdn-icons-png.flaticon.com/128/10423/10423007.png">
-            <button id="openButtonForDessert" class="btn btn-primary">Open Panel For Dessert</button>
+            <button id="openButtonForDessert" class="btn btn-primary">Dessert</button>
             <div id="panel2" class="panel">
               <h3>Panel Content</h3>
               <p>This is the content of the panel.</p>
@@ -217,7 +249,7 @@
           <br/>
           <div class="panel-container">
           <img class="img" src="https://cdn-icons-png.flaticon.com/128/3119/3119770.png">
-            <button id="openButtonForLunch" class="btn btn-primary">Open Panel For Lunch</button>
+            <button id="openButtonForLunch" class="btn btn-primary">Lunch</button>
             <div id="panel3" class="panel">
               <h3>Panel Content</h3>
               <p>Hello!!</p>
@@ -226,7 +258,7 @@
           <br/>
           <div class="panel-container">
             <img class="img" src="https://cdn-icons-png.flaticon.com/128/10546/10546110.png">
-            <button id="openButtonForSnack" class="btn btn-primary">Open Panel For Snack</button>
+            <button id="openButtonForSnack" class="btn btn-primary">Snack</button>
             <div id="panel4" class="panel">
               <h3>Panel Content</h3>
               <p>This is the content of the panel.</p>
@@ -235,7 +267,7 @@
           <br/>
           <div class="panel-container">
           <img class="img" src="https://cdn-icons-png.flaticon.com/128/3480/3480718.png">
-              <button id="openButtonForDinner" class="btn btn-primary">Open Panel For Dinner</button>
+              <button id="openButtonForDinner" class="btn btn-primary">Dinner</button>
               <div id="panel5" class="panel">
                 <h3>Panel Content</h3>
                 <p>This is the content of the panel.</p>
@@ -302,7 +334,7 @@
 <script src="js/demo/chart-area-demo.js"></script>
 <script src="js/demo/chart-pie-demo.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="js/myScript.js"></script>
+<script src="js/scriptMealPlan.js"></script>
 <script>
   function handleButtonClick(day) {
     alert("You clicked on " + day);

@@ -64,5 +64,19 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+document.addEventListener('DOMContentLoaded', function toggleButtons (MealId) {
+    var previousButtonsContainer = null;
+
+    var buttonsContainer = document.getElementById('buttons-' + MealId);
+
+    if (previousButtonsContainer !== null && previousButtonsContainer !== buttonsContainer) {
+        previousButtonsContainer.classList.add('hidden');
+    }
+
+    buttonsContainer.classList.toggle('hidden');
+    previousButtonsContainer = buttonsContainer;
+
+});
+
 
 

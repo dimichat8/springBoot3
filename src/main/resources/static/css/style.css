@@ -4,6 +4,7 @@
 }
 .img {
     margin-top:30px;
+    margin-left: 10px;
     width:50px;
     height:50px;
 }
@@ -15,33 +16,71 @@
 .panel {
     display: none;
     background-color: #f0f0f0;
-    padding: 10px;
-    margin-left: 10px;
+    padding-top: 10px;
+    position: absolute;
+    left: 40%;
 }
 
 #openButtonForBreakfast {
-    margin-left:30px;
-    margin-top:30px;
+    margin-top:25px;
+    width:500px;
+    height:50px;
+    position: absolute;
+    left: 30%;
+    font-size: 22px;
+    text-align: center;
+    cursor: pointer;
+    display: inline-block;
 }
 
 #openButtonForDessert {
-    margin-left:30px;
-    margin-top:30px;
+    margin-top:25px;
+    width:500px;
+    height:50px;
+    position: absolute;
+    left: 30%;
+    font-size: 22px;
+    text-align: center;
+    cursor: pointer;
+    display: inline-block;
+
 }
 
 #openButtonForLunch {
-    margin-left:30px;
-    margin-top:30px;
+    margin-top:25px;
+    width:500px;
+    height:50px;
+    position: absolute;
+    left: 30%;
+    font-size: 22px;
+    text-align: center;
+    cursor: pointer;
+    display: inline-block;
+
 }
 
 #openButtonForSnack {
-    margin-left:30px;
-    margin-top:30px;
+    margin-top:25px;
+    width:500px;
+    height:50px;
+    position: absolute;
+    left: 30%;
+    font-size: 22px;
+    text-align: center;
+    cursor: pointer;
+    display: inline-block;
 }
 
 #openButtonForDinner {
-    margin-left:30px;
-    margin-top:30px;
+    margin-top:25px;
+    width:500px;
+    height:50px;
+    position: absolute;
+    left: 30%;
+    font-size: 22px;
+    text-align: center;
+    cursor: pointer;
+    display: inline-block;
 }
 
 

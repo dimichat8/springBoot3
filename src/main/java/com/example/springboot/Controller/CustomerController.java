@@ -1,10 +1,14 @@
 package com.example.springboot.Controller;
 
 import com.example.springboot.Entity.CustomerInfo;
+import com.example.springboot.Entity.Food;
+import com.example.springboot.Entity.Meal;
 import com.example.springboot.Service.CustomerInfoService;
 import com.example.springboot.Service.CustomerService;
 import com.example.springboot.Entity.Customer;
 
+import com.example.springboot.Service.FoodService;
+import com.example.springboot.Service.MealService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +26,8 @@ public class CustomerController {
     private CustomerService customerService;
     @Autowired
     private CustomerInfoService customerInfoService;
+    @Autowired
+    private FoodService foodService;
 
     @GetMapping("/layout")
     public String layout() {
@@ -34,7 +40,9 @@ public class CustomerController {
     }
 
     @GetMapping("/mealPlan")
-    public String mealPlan() {
+    public String mealPlan(Model model) {
+        List<Food> foods = foodService.getAllFoods();
+        model.addAttribute("foods", foods);
         return "/Meal/mealPlan";
     }
 
