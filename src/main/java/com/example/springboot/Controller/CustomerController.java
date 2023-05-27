@@ -33,6 +33,11 @@ public class CustomerController {
         return "/Customer/index";
     }
 
+    @GetMapping("/mealPlan")
+    public String mealPlan() {
+        return "/Meal/mealPlan";
+    }
+
 
     //Display all customer
     @GetMapping("/customertable")
