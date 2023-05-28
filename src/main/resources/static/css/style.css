@@ -3,9 +3,9 @@
     padding: 9px 90px;
 }
 .img {
-    margin-top:30px;
+    margin-top:40px;
     width:50px;
-    height: 45px;
+    height: 35px;
 }
 .panel-container {
     display: flex;
@@ -17,16 +17,16 @@
     background-color: #f0f0f0;
     padding-top: 10px;
     position: absolute;
-    left: 43%;
+    left: 45%;
     top: 25%;
 }
 
 #openButtonForBreakfast {
-    margin-top:25px;
-    width:365px;
-    height: 45px;
+    margin-top:40px;
+    width:300px;
+    height: 30px;
     position: absolute;
-    left: 17%;
+    left: 19%;
     font-size: 18px;
     text-align: center;
     cursor: pointer;
@@ -34,11 +34,11 @@
 }
 
 #openButtonForDessert {
-    margin-top:25px;
-    width:365px;
-    height: 45px;
+    margin-top:40px;
+    width:300px;
+    height: 30px;
     position: absolute;
-    left: 17%;
+    left: 19%;
     font-size: 18px;
     text-align: center;
     cursor: pointer;
@@ -47,11 +47,11 @@
 }
 
 #openButtonForLunch {
-    margin-top:25px;
-    width:365px;
-    height: 45px;
+    margin-top:40px;
+    width:300px;
+    height: 30px;
     position: absolute;
-    left: 17%;
+    left: 19%;
     font-size: 18px;
     text-align: center;
     cursor: pointer;
@@ -60,11 +60,11 @@
 }
 
 #openButtonForSnack {
-    margin-top:25px;
-    width:365px;
-    height: 45px;
+    margin-top:40px;
+    width:300px;
+    height: 30px;
     position: absolute;
-    left: 17%;
+    left: 19%;
     font-size: 18px;
     text-align: center;
     cursor: pointer;
@@ -72,11 +72,11 @@
 }
 
 #openButtonForDinner {
-    margin-top:25px;
-    width:365px;
-    height: 45px;
+    margin-top:40px;
+    width:300px;
+    height: 30px;
     position: absolute;
-    left: 17%;
+    left: 19%;
     font-size: 18px;
     text-align: center;
     cursor: pointer;
