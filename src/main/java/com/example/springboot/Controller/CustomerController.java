@@ -39,12 +39,12 @@ public class CustomerController {
         return "/Customer/index";
     }
 
-    @GetMapping("/mealPlan")
+    /*@GetMapping("/mealPlan")
     public String mealPlan(Model model) {
         List<Food> foods = foodService.getAllFoods();
         model.addAttribute("foods", foods);
         return "/Meal/mealPlan";
-    }
+    }*/
 
 
     //Display all customer
