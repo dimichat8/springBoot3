@@ -25,12 +25,12 @@ public class MealController {
 
     //Display all meal
 
-    @GetMapping("/mealtable")
+    /*@GetMapping("/mealtable")
     public String listOfMeals(Model model){
         List<Meal> listOfMeals = mealService.getAllMeals();
         model.addAttribute("meals", listOfMeals);
         return  "Meal/table";
-    }
+    }*/
 
   @GetMapping("/addmeal")
     public String createMealForm(Model model) {
