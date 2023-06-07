@@ -2,7 +2,9 @@ package com.example.springboot.Controller;
 
 import com.example.springboot.Entity.Food;
 import com.example.springboot.Entity.Meal;
+import com.example.springboot.Entity.MealPlan;
 import com.example.springboot.Repository.FoodRepository;
+import com.example.springboot.Repository.MealPlanRepository;
 import com.example.springboot.Repository.MealRepository;
 import com.example.springboot.Service.FoodService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,17 +19,20 @@ import java.util.List;
 public class FoodController {
 
     @Autowired
-    public FoodService foodService;
+    private FoodService foodService;
     @Autowired
     private FoodRepository foodRepository;
     @Autowired
     private MealRepository mealRepository;
+    @Autowired
+    private MealPlanRepository mealPlanRepository;
 
     //Display all food
 
     @GetMapping("/foodtable")
     public String listOfFoods(Model model){
         model.addAttribute("foods", foodService.getAllFoods());
+        model.addAttribute("mealPlan", new MealPlan());
         return "/Food/table";
     }
 
@@ -65,13 +70,10 @@ public class FoodController {
         Food existfood = foodService.getFoodById(foodId);
         existfood.setName(food.getName());
         existfood.setGrams(food.getGrams());
-        existfood.setSodium(food.getSodium());
-        existfood.setPotassium(food.getPotassium());
         existfood.setCalcium(food.getCalcium());
         existfood.setMagnesium(food.getMagnesium());
         existfood.setPhosphorus(food.getPhosphorus());
         existfood.setCalories(food.getCalories());
-        existfood.setMeal(food.getMeal());
         foodService.updateFood(existfood);
 
         return "redirect:/foodtable";
@@ -87,18 +89,27 @@ public class FoodController {
         return "redirect:/foodtable";
     }
 
-    @PostMapping("/mealtable")
-    public String selectedFoodsForMeal(@RequestBody List<Long> foodIds) {
-    List<Food> selectedFoodsForMeal = foodRepository.findAllById(foodIds);
+    @PostMapping("/foods/add-to-meal")
+    public String addToMeal(@PathVariable("foodIds") List<Long> foodIds ,@ModelAttribute("mealPlan") MealPlan mealPlan) {
+        // Retrieve selected food IDs from the form
+        List<Food> selectedFoodIds = foodRepository.findAllById(foodIds);
 
-    List<Meal> mealRecords =new ArrayList<>();
-    for(Food foods : selectedFoodsForMeal) {
-        Meal meal = new Meal();
-        meal.setMealName(meal.getMealName());
-        meal.setFoods(foods.getFoods());
-        mealRecords.add(meal);
-    }
-    mealRepository.saveAll(mealRecords);
-        return "/Meal/table";
+        // Add the selected foods to the meal table (you can customize this logic)
+        for (Food foodId : selectedFoodIds) {
+            Food food = foodRepository.findById(foodId.getFood_id()).orElse(null);
+            if (food != null) {
+                // Create a new meal and add the selected food to it
+                MealPlan mealPlan1 = new MealPlan();
+                /*mealPlan.setBreakfast(s);
+                mealPlan.setDessert();
+                mealPlan.setLunch();
+                mealPlan.setSnack();
+                mealPlan.setDinner();*/
+                mealPlan1.setFoods(selectedFoodIds);
+                mealPlanRepository.save(mealPlan);
+            }
+        }
+
+        return "redirect:/mealtable";
     }
 }

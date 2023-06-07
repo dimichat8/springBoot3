@@ -65,7 +65,6 @@ public class MealController {
                                  @ModelAttribute("meal") Meal meal) {
         Meal existingMeal = mealService.getMealById(meal_id);
         existingMeal.setMealName(meal.getMealName());
-        existingMeal.setFoods(meal.getFoods());
         mealService.updateMeal(existingMeal);
         return "redirect:/mealtable";
     }

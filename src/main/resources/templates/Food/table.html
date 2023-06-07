@@ -381,18 +381,9 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <form>
-                                <a
+                                <a th:action="@{/foods/add-to-meal}"
                                         class="btn btn-primary">Check</a>
-                                <!--   class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                               <div class="input-group">
-                                   <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                          aria-label="Search" aria-describedby="basic-addon2">
-                                   <div class="input-group-append">
-                                       <button class="btn btn-primary" type="button">
-                                           <i class="fas fa-search fa-sm"></i>
-                                       </button>
-                                   </div>
-                               </div>-->
+
                             </form>
                         </div>
                         <div class="card-body">
@@ -403,58 +394,22 @@
                                             <th>Check</th>
                                             <th>Name</th>
                                             <th>Grams</th>
-                                            <th>Sodium</th>
-                                            <th>Potassium</th>
                                             <th>Calcium</th>
                                             <th>Magnesium</th>
                                             <th>Phosphorus</th>
-                                           <!-- <th>Iron</th>
-                                            <th>Zinc</th>
-                                            <th>Retinol</th>
-                                            <th>Carotene</th>
-                                            <th>Thiamine</th>
-                                            <th>Riboflavin</th>-->
-                                           <!-- <th>Vitamin B6</th>
-                                            <th>Vitamin E</th>
-                                            <th>Vitamin C</th>-->
                                             <th>Calories</th>
-                                            <!--<th>Total Fat</th>
-                                            <th>Saturate Fat</th>
-                                            <th>Cholesterol</th>
-                                            <th>Total Carbs</th>
-                                            <th>Fiber</th>
-                                            <th>Sugar</th>
-                                            <th>Protein</th>-->
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     <tr th:each="food: ${foods}">
-                                        <td><input type="checkbox" name="selectedUsers" value="${food.id}" /></td>
+                                        <td><input type="checkbox" name="selectedFoods" value="${food.id}" /></td>
                                         <td th:text="${food.name}"></td>
                                         <td th:text="${food.grams}"></td>
-                                        <td th:text="${food.sodium}"></td>
-                                        <td th:text="${food.potassium}"></td>
                                         <td th:text="${food.calcium}"></td>
                                         <td th:text="${food.magnesium}"></td>
                                         <td th:text="${food.phosphorus}"></td>
-                                       <!-- <td th:text="${food.iron}"></td>
-                                        <td th:text="${food.zinc}"></td>
-                                        <td th:text="${food.retinol}"></td>
-                                        <td th:text="${food.carotene}"></td>
-                                        <td th:text="${food.thiamine}"></td>
-                                        <td th:text="${food.riboflavin}"></td>-->
-                                        <!--<td th:text="${food.vitaminB6}"></td>
-                                        <td th:text="${food.vitaminE}"></td>
-                                        <td th:text="${food.vitaminC}"></td>-->
                                         <td th:text="${food.calories}"></td>
-                                        <!--<td th:text="${food.totalFat}"></td>
-                                        <td th:text="${food.saturateFat}"></td>
-                                        <td th:text="${food.cholesterol}"></td>
-                                        <td th:text="${food.totalCarbs}"></td>
-                                        <td th:text="${food.fiber}"></td>
-                                        <td th:text="${food.sugar}"></td>
-                                        <td th:text="${food.protein}"></td>-->
                                         <td>
                                             <center>
                                             <button th:attr="data-food-id=${food.food_id}"

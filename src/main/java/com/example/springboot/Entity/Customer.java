@@ -57,6 +57,10 @@ public class Customer {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Food> foods = new ArrayList<>();
 
+    @ManyToOne
+    @JoinColumn(name = "meal_id")
+    private Meal meal;
+
     public Customer(Long customer_id, String firstName, String lastName, String email, String address, String city, String phone, LocalDate birthday, String gender, List<CustomerInfo> customerInfos) {
         this.customer_id = customer_id;
         this.firstName = firstName;
@@ -176,5 +180,12 @@ public class Customer {
         this.foods = foods;
     }
 
+    public Meal getMeal() {
+        return meal;
+    }
+
+    public void setMeal(Meal meal) {
+        this.meal = meal;
+    }
 }
 

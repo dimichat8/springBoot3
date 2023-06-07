@@ -19,10 +19,6 @@ public class Food {
     private String name;
     @Column(name = "grams")
     private Float grams;
-    @Column(name = "sodium")
-    private Integer sodium;
-    @Column(name = "potassium")
-    private Float potassium;
     @Column(name = "calcium")
     private Float calcium;
     @Column(name = "magnesium")
@@ -31,25 +27,18 @@ public class Food {
     private Float phosphorus;
 
     @ManyToOne
-    @JoinColumn(name = "meal_id")
-    private Meal meal;
+    @JoinColumn(name = "mealPlan_id")
+    private MealPlan mealPlan;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "customer_food",
-            joinColumns = @JoinColumn(name = "customer_id"),
-            inverseJoinColumns = @JoinColumn(name = "food_id"))
-    private List<Food> foods = new ArrayList<>();
 
     @Column(name = "calories")
     private Float calories;
 
 
-    public Food(Long food_id, Float grams, String name, Integer sodium, Float potassium, Float calcium, Float magnesium, Float phosphorus, Float iron, Float zinc, Float retinol, Float carotene, Float thiamine, Float riboflavin/*, Float vitaminB6, Float vitaminE, Float vitaminC, Float calories, Float totalFat, Float saturateFat, Float cholesterol, Float totalCarbs, Float fiber, Float sugar, Float protein*/) {
+    public Food(Long food_id, Float grams, String name, Float calcium, Float magnesium, Float phosphorus, Float iron, Float zinc, Float retinol, Float carotene, Float thiamine, Float riboflavin/*, Float vitaminB6, Float vitaminE, Float vitaminC, Float calories, Float totalFat, Float saturateFat, Float cholesterol, Float totalCarbs, Float fiber, Float sugar, Float protein*/) {
         this.food_id = food_id;
         this.name = name;
         this.grams = grams;
-        this.sodium = sodium;
-        this.potassium = potassium;
         this.calcium = calcium;
         this.magnesium = magnesium;
         this.phosphorus = phosphorus;
@@ -79,25 +68,8 @@ public class Food {
     public Float getGrams() {
         return grams;
     }
-
     public void setGrams(Float grams) {
         this.grams = grams;
-    }
-
-    public Integer getSodium() {
-        return sodium;
-    }
-
-    public void setSodium(Integer sodium) {
-        this.sodium = sodium;
-    }
-
-    public Float getPotassium() {
-        return potassium;
-    }
-
-    public void setPotassium(Float potassium) {
-        this.potassium = potassium;
     }
 
     public Float getCalcium() {
@@ -124,23 +96,13 @@ public class Food {
         this.phosphorus = phosphorus;
     }
 
-
-    public Meal getMeal() {
-        return meal;
+    public MealPlan getMealPlan() {
+        return mealPlan;
     }
 
-    public void setMeal(Meal meal) {
-        this.meal = meal;
+    public void setMealPlan(MealPlan mealPlan) {
+        this.mealPlan = mealPlan;
     }
-
-    public List<Food> getFoods() {
-        return foods;
-    }
-
-    public void setFoods(List<Food> foods) {
-        this.foods = foods;
-    }
-
 
     public Float getCalories() {
         return calories;
@@ -149,6 +111,8 @@ public class Food {
     public void setCalories(Float calories) {
         this.calories = calories;
     }
+
+
 
 }
 

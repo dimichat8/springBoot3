@@ -12,6 +12,7 @@ import java.util.List;
 @Table(name = "MealPlan")
 public class MealPlan {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "mealPlanId")
@@ -43,9 +44,13 @@ public class MealPlan {
     @CollectionTable(name = "Dinner", joinColumns = @JoinColumn(name = "mealPlanId"))
     @Column(name = "dinner")
     private List<String> dinner;
+
+    @OneToMany(mappedBy = "mealPlan")
+    private List<Food> foods = new ArrayList<>();
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "mealId")
     private Meal meal = new Meal();
+
 
     public MealPlan() {
     }
@@ -116,4 +121,19 @@ public class MealPlan {
         this.dinner = dinner;
     }
 
+    public List<Food> getFoods() {
+        return foods;
+    }
+
+    public void setFoods(List<Food> foods) {
+        this.foods = foods;
+    }
+
+    public Meal getMeal() {
+        return meal;
+    }
+
+    public void setMeal(Meal meal) {
+        this.meal = meal;
+    }
 }

@@ -15,16 +15,19 @@ public class Meal {
     @Column(name = "meal_id")
     private Long meal_id;
 
-    @Column(name ="mealname")
+    @Column(name ="mealName")
     private String mealName;
 
-    @OneToMany(mappedBy = "meal", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
-    private List<Food> foods = new ArrayList<>();
+    @OneToMany(mappedBy = "meal", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<MealPlan> mealPlans = new ArrayList<>();
 
-    public Meal(Long meal_id, String name, List<Food> foods) {
+    @OneToMany(mappedBy = "meal", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Customer> customers = new ArrayList<>();
+
+    public Meal(Long meal_id, String name, List<MealPlan> mealPlans) {
         this.meal_id = meal_id;
         this.mealName = name;
-        this.foods = foods;
+        this.mealPlans = mealPlans;
     }
 
     public Meal() {
@@ -46,11 +49,11 @@ public class Meal {
         this.mealName = name;
     }
 
-    public List<Food> getFoods() {
-        return foods;
+    public List<MealPlan> getMealPlans() {
+        return mealPlans;
     }
 
-    public void setFoods(List<Food> foods) {
-        this.foods = foods;
+    public void setMealPlans(List<MealPlan> mealPlans) {
+        this.mealPlans = mealPlans;
     }
 }
