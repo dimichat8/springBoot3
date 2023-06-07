@@ -64,12 +64,7 @@ public class MealController {
     public String updateMeal(@PathVariable(value = "meal_id") Long meal_id,
                                  @ModelAttribute("meal") Meal meal) {
         Meal existingMeal = mealService.getMealById(meal_id);
-        existingMeal.setCustomerName(meal.getCustomerName());
         existingMeal.setMealName(meal.getMealName());
-        existingMeal.setCalories(meal.getCalories());
-        existingMeal.setTotalFat(meal.getTotalFat());
-        existingMeal.setCholesterol(meal.getCholesterol());
-        existingMeal.setProtein(meal.getProtein());
         existingMeal.setFoods(meal.getFoods());
         mealService.updateMeal(existingMeal);
         return "redirect:/mealtable";

@@ -110,7 +110,6 @@ public class CustomerInfo {
     public LocalDateTime getCreateDate() {
         return createDate;
     }
-
     public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }

@@ -23,12 +23,6 @@ public class FoodController {
     @Autowired
     private MealRepository mealRepository;
 
-    /*@GetMapping("/index")
-    public String indexFood(){
-        return "/Food/index";
-    }*/
-
-
     //Display all food
 
     @GetMapping("/foodtable")

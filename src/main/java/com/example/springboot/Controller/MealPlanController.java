@@ -32,7 +32,7 @@ public class MealPlanController {
         Meal meal = new Meal();
         List<MealPlan> mealPlans = mealPlanService.getAllMealPlans();
         List<Food> foods = foodService.getAllFoods();
-        /*meal.setMealPlans(mealPlans);*/
+
         model.addAttribute("foods", foods);
         model.addAttribute("mealPlans", mealPlans);
         return "/Meal/mealPlan";
@@ -43,13 +43,6 @@ public class MealPlanController {
         model.addAttribute("meals", listOfMeals);
         return  "Meal/table";
     }
-
-  /*  @GetMapping("/createMealPlan")
-    public String createMealPlan(Model model) {
-        MealPlan mealPlan = new MealPlan();
-        mealPlanService.save(mealPlan);
-        return "/Meal/table";
-    }*/
 
     @PostMapping
     public String createMealPlan(@RequestParam String dayOfWeek,

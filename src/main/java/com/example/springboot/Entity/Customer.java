@@ -176,19 +176,5 @@ public class Customer {
         this.foods = foods;
     }
 
-    /*@Override
-    public String toString() {
-        return "Customer{" +
-                "customer_id=" + customer_id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", city='" + city + '\'' +
-                ", address='" + address + '\'' +
-                ", phone='" + phone + '\'' +
-                ", birthday='" + birthday + '\'' +
-                ", gender='" + gender + '\'' +
-                '}';
-    }*/
 }
 

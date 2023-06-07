@@ -253,8 +253,6 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                   <tr>
-
-                    <th></th>
                     <th> Monday</th>
                     <th>Tuesday</th>
                     <th>Wednesday</th>
@@ -262,21 +260,6 @@
                     <th>Friday</th>
                     <th>Saturday</th>
                     <th>Sunday</th>
-                  </tr>
-                    <tr>
-                     <th>Breakfast</th>
-                    </tr>
-                    <tr>
-                      <th>Desert</th>
-                    </tr>
-                  <tr>
-                    <th>Lunch</th>
-                  </tr>
-                  <tr>
-                    <th>Snack</th>
-                  </tr>
-                  <tr>
-                    <th>Dinner</th>
                   </tr>
                   </thead>
                   <tfoot>
@@ -288,16 +271,6 @@
                   <tr th:each="meal: ${meals}">
                     <td><input type="checkbox" name="selectedMeals" value="${food.id}" /></td>
                     <td th:text="${meal.mealName}"></td>
-                    <td th:text="${meal.calories}"></td>
-                    <!--<td>
-                      <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                        <a th:href="@{/updateFoodForm/{id}(id=${food.food_id})}"
-                           class="btn btn-primary">Update</a>
-
-                        <a th:href="@{/deleteFood/{id}(id=${food.food_id})}"
-                           class="btn btn-danger">Delete</a>
-                      </div>
-                    </td>-->
                   </tr>
                   </tbody>
                 </table>
@@ -360,16 +333,6 @@
 
 <!-- Custom scripts for all pages-->
 <script src="js/sb-admin-2.min.js"></script>
-
-<!-- Page level plugins -->
-<!--
-<script src="vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-&lt;!&ndash; Page level custom scripts &ndash;&gt;
-<script src="js/demo/datatables-demo.js"></script>
--->
-
 </body>
 
 </html>

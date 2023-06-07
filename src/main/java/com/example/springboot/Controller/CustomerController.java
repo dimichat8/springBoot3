@@ -38,31 +38,18 @@ public class CustomerController {
     public String indexCustomer() {
         return "/Customer/index";
     }
-
-    /*@GetMapping("/mealPlan")
-    public String mealPlan(Model model) {
-        List<Food> foods = foodService.getAllFoods();
-        model.addAttribute("foods", foods);
-        return "/Meal/mealPlan";
-    }*/
-
-
-    //Display all customer
     @GetMapping("/customertable")
     public String listOfCustomers(Model model) {
         model.addAttribute("customers", customerService.getAllCustomers());
         return "Customer/table";
     }
 
-    ////////
     @GetMapping("/addcustomer")
     public String createCustomerForm(Model model) {
 
-        //Crate model attribute to bind from data
         Customer customer = new Customer();
         List<CustomerInfo> customerInfoList = customerInfoService.getAllCustomerInfo();
         model.addAttribute("customer", customer);
-        /*model.addAttribute("customerinfo", customerInfoList);*/
         return "Customer/addcustomer";
     }
 
@@ -81,11 +68,7 @@ public class CustomerController {
 
     @GetMapping("/updateCustomerForm/{customer_id}")
     public String updateCustomerForm(@PathVariable(value = "customer_id") Long customer_id, Model model) {
-
-        //Get customer from the service
         Customer customer = customerService.getCustomerById(customer_id);
-
-        //Set customer as a model attribute to pre-populate the form
         model.addAttribute("customer", customer);
         return "Customer/updatecustomer";
     }
@@ -112,13 +95,6 @@ public class CustomerController {
         //Call delete customer method
         customerService.deleteCustomerById(customer_id);
         return "redirect:/customertable";
-    }
-
-    @PostMapping("/{customerId}/setFoodToCustomer/{foodId}")
-    public String setFoodToCustomer(@PathVariable("customerId") Long customerId,
-                                    @PathVariable("foodId") Long foodId) {
-        customerService.setFoodToCustomer(customerId, foodId);
-        return "";
     }
 
 }
