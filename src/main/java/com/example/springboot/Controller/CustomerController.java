@@ -88,7 +88,7 @@ public class CustomerController {
         return "redirect:/customertable";
     }
 
-    @GetMapping("/deleteCustomer/{customer_id}")
+    @PostMapping("/deleteCustomer/{customer_id}")
     public String deleteCustomerById(@PathVariable(value = "customer_id") Long customer_id) {
 
         //Call delete customer method

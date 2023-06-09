@@ -412,11 +412,15 @@
                                         <td th:text="${food.calories}"></td>
                                         <td>
                                             <center>
-                                                <button th:attr="data-food-id=${food.food_id}" onclick="toggleButtons(this.getAttribute('data-food-id'))" class="btn btn-outline-primary">Display Options</button>
+                                                <button th:attr="data-food-id=${food.food_id}"
+                                                        onclick="toggleButtons(this.getAttribute('data-food-id'))"
+                                                        class="btn btn-outline-primary">Display Options
+                                                </button>
                                                 <div th:id="'buttons-' + ${food.food_id}" class="hidden">
                                                     <a th:href="@{/updateFoodForm/{id}(id=${food.food_id})}" class="btn btn-primary">Update</a>
 
-                                                    <a th:href="@{/deleteFood/{id}(id=${food.food_id})}" class="btn btn-danger" data-toggle="modal" th:data-target="'#deleteFoodModal-' + ${food.food_id}">Delete</a>
+                                                    <a th:href="@{/deleteFood/{id}(id=${food.food_id})}" class="btn btn-danger"
+                                                       data-toggle="modal" th:data-target="'#deleteFoodModal-' + ${food.food_id}">Delete</a>
                                                 </div>
 
                                                 <!-- Modal -->
