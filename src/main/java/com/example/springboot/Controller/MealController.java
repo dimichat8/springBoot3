@@ -1,6 +1,8 @@
 package com.example.springboot.Controller;
 
+import com.example.springboot.Entity.Customer;
 import com.example.springboot.Entity.Meal;
+import com.example.springboot.Repository.CustomerRepository;
 import com.example.springboot.Repository.MealRepository;
 import com.example.springboot.Service.MealService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,9 @@ public class MealController {
     MealRepository mealRepository;
     @Autowired
     MealService mealService;
+    @Autowired
+    private CustomerRepository customerRepository;
+
 
 
     //Display all meal
@@ -32,18 +37,23 @@ public class MealController {
         return  "Meal/table";
     }*/
 
-  @GetMapping("/addmeal")
-    public String createMealForm(Model model) {
+  @GetMapping("/{customer_id}/addmeal")
+    public String createMealForm(@PathVariable(value = "customer_id") Customer customerId, Model model) {
 
         //Crate model attribute to bind from data
         Meal meal = new Meal();
+        meal.setCustomer(customerId);
         model.addAttribute("meal", meal);
+        model.addAttribute("customerId", customerId);
         return "/Meal/addmeal";
     }
 
-    @PostMapping("/saveMeal")
-    public String saveMeal(@ModelAttribute("meal")Meal meal) {
-
+    @PostMapping("/{customer_id}/saveMeal")
+    public String saveMeal(@PathVariable(value = "customer_id") Long customerId,
+                           @ModelAttribute("meal") Meal meal) {
+        Customer customer = customerRepository.findById(customerId).get();
+        meal.setCustomer(customer);
+        customer.getMeal().add(meal);
         //Save meal to database
         mealService.saveMeal(meal);
         return "redirect:/mealtable";

@@ -2,7 +2,6 @@ package com.example.springboot.Entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -57,9 +56,8 @@ public class Customer {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Food> foods = new ArrayList<>();
 
-    @ManyToOne
-    @JoinColumn(name = "meal_id")
-    private Meal meal;
+    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL,  orphanRemoval = true)
+    private List<Meal> meals = new ArrayList<>();
 
     public Customer(Long customer_id, String firstName, String lastName, String email, String address, String city, String phone, LocalDate birthday, String gender, List<CustomerInfo> customerInfos) {
         this.customer_id = customer_id;
@@ -180,12 +178,13 @@ public class Customer {
         this.foods = foods;
     }
 
-    public Meal getMeal() {
-        return meal;
+    public List<Meal> getMeal() {
+        return meals;
     }
 
-    public void setMeal(Meal meal) {
-        this.meal = meal;
+    public void setMeal(List<Meal> meal) {
+        this.meals = meal;
     }
+
 }
 

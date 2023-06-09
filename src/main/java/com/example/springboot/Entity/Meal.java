@@ -21,8 +21,9 @@ public class Meal {
     @OneToMany(mappedBy = "meal", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<MealPlan> mealPlans = new ArrayList<>();
 
-    @OneToMany(mappedBy = "meal", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Customer> customers = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 
     public Meal(Long meal_id, String name, List<MealPlan> mealPlans) {
         this.meal_id = meal_id;
@@ -55,5 +56,13 @@ public class Meal {
 
     public void setMealPlans(List<MealPlan> mealPlans) {
         this.mealPlans = mealPlans;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }

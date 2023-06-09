@@ -48,7 +48,6 @@ public class CustomerController {
     public String createCustomerForm(Model model) {
 
         Customer customer = new Customer();
-        List<CustomerInfo> customerInfoList = customerInfoService.getAllCustomerInfo();
         model.addAttribute("customer", customer);
         return "Customer/addcustomer";
     }
