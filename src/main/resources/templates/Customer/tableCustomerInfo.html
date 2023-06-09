@@ -441,7 +441,7 @@
                                                    class="btn btn-primary">Update</a>
 
                                                 <a th:href="@{/deleteCustomerInfo/{id}(id=${customerinfo.customerInfo_id})}"
-                                                   class="btn btn-danger">Delete</a>
+                                                   class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?')">Delete</a>
                                             </div>
                                             </center>
                                         </td>

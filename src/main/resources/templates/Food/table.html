@@ -412,16 +412,36 @@
                                         <td th:text="${food.calories}"></td>
                                         <td>
                                             <center>
-                                            <button th:attr="data-food-id=${food.food_id}"
-                                                    onclick="toggleButtons(this.getAttribute('data-food-id'))"
-                                                    class="btn btn-outline-primary">Display Options</button>
-                                            <div th:id="'buttons-' + ${food.food_id}" class="hidden">
-                                                <a th:href="@{/updateFoodForm/{id}(id=${food.food_id})}"
-                                                   class="btn btn-primary">Update</a>
+                                                <button th:attr="data-food-id=${food.food_id}" onclick="toggleButtons(this.getAttribute('data-food-id'))" class="btn btn-outline-primary">Display Options</button>
+                                                <div th:id="'buttons-' + ${food.food_id}" class="hidden">
+                                                    <a th:href="@{/updateFoodForm/{id}(id=${food.food_id})}" class="btn btn-primary">Update</a>
 
-                                                <a th:href="@{/deleteFood/{id}(id=${food.food_id})}"
-                                                   class="btn btn-danger">Delete</a>
-                                            </div>
+                                                    <a th:href="@{/deleteFood/{id}(id=${food.food_id})}" class="btn btn-danger" data-toggle="modal" th:data-target="'#deleteFoodModal-' + ${food.food_id}">Delete</a>
+                                                </div>
+
+                                                <!-- Modal -->
+                                                <div th:id="'deleteFoodModal-' + ${food.food_id}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="'deleteFoodModalLabel-' + ${food.food_id}" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" th:id="'deleteFoodModalLabel-' + ${food.food_id}">Delete Food Confirmation</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <p>Are you sure you want to delete the food item?</p>
+                                                                <!-- Display additional information about the food item if needed -->
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <form th:action="@{/deleteFood/{id}(id=${food.food_id})}" method="POST">
+                                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </center>
                                         </td>
                                     </tr>

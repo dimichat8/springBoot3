@@ -79,37 +79,12 @@ public class FoodController {
         return "redirect:/foodtable";
     }
 
-
-
-    @GetMapping("/deleteFood/{food_id}")
-    public String deleteFood(@PathVariable(value = "food_id")Long food_id){
+    @PostMapping("/deleteFood/{food_id}")
+    public String deleteFoods(@PathVariable(value = "food_id")Long food_id){
 
         //Call delete food method
         foodService.deleteFoodById(food_id);
         return "redirect:/foodtable";
     }
 
-    @PostMapping("/foods/add-to-meal")
-    public String addToMeal(@PathVariable("foodIds") List<Long> foodIds ,@ModelAttribute("mealPlan") MealPlan mealPlan) {
-        // Retrieve selected food IDs from the form
-        List<Food> selectedFoodIds = foodRepository.findAllById(foodIds);
-
-        // Add the selected foods to the meal table (you can customize this logic)
-        for (Food foodId : selectedFoodIds) {
-            Food food = foodRepository.findById(foodId.getFood_id()).orElse(null);
-            if (food != null) {
-                // Create a new meal and add the selected food to it
-                MealPlan mealPlan1 = new MealPlan();
-                /*mealPlan.setBreakfast(s);
-                mealPlan.setDessert();
-                mealPlan.setLunch();
-                mealPlan.setSnack();
-                mealPlan.setDinner();*/
-                mealPlan1.setFoods(selectedFoodIds);
-                mealPlanRepository.save(mealPlan);
-            }
-        }
-
-        return "redirect:/mealtable";
-    }
 }
