@@ -18,17 +18,51 @@ public class Meal {
     @Column(name ="mealName")
     private String mealName;
 
+    @Column(name = "dayOfWeek")
+    private String dayOfWeek;
+
+    @ElementCollection
+    @CollectionTable(name = "Breakfast", joinColumns = @JoinColumn(name = "mealPlanId"))
+    @Column(name = "breakfast")
+    private List<String> breakfast;
+
+    @ElementCollection
+    @CollectionTable(name = "Desert", joinColumns = @JoinColumn(name = "mealPlanId"))
+    @Column(name = "desert")
+    private List<String> desert;
+
+    @ElementCollection
+    @CollectionTable(name = "Lunch", joinColumns = @JoinColumn(name = "mealPlanId"))
+    @Column(name = "lunch")
+    private List<String> lunch;
+
+    @ElementCollection
+    @CollectionTable(name = "Snack", joinColumns = @JoinColumn(name = "mealPlanId"))
+    @Column(name = "snack")
+    private List<String> snack;
+    @ElementCollection
+    @CollectionTable(name = "Dinner", joinColumns = @JoinColumn(name = "mealPlanId"))
+    @Column(name = "dinner")
+    private List<String> dinner;
+
     @OneToMany(mappedBy = "meal", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<MealPlan> mealPlans = new ArrayList<>();
+    private List<Food> foods = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    public Meal(Long meal_id, String name, List<MealPlan> mealPlans) {
+    public Meal(Long meal_id, String mealName, String dayOfWeek, List<String> breakfast, List<String> desert, List<String> lunch, List<String> snack, List<String> dinner, List<Food> foods, Customer customer) {
         this.meal_id = meal_id;
-        this.mealName = name;
-        this.mealPlans = mealPlans;
+        this.mealName = mealName;
+        this.dayOfWeek = dayOfWeek;
+        this.breakfast = breakfast;
+        this.desert = desert;
+        this.lunch = lunch;
+        this.snack = snack;
+        this.dinner = dinner;
+        this.foods = foods;
+        this.customer = customer;
     }
 
     public Meal() {
@@ -50,12 +84,12 @@ public class Meal {
         this.mealName = name;
     }
 
-    public List<MealPlan> getMealPlans() {
-        return mealPlans;
+    public List<Food> getFoods() {
+        return foods;
     }
 
-    public void setMealPlans(List<MealPlan> mealPlans) {
-        this.mealPlans = mealPlans;
+    public void setFoods(List<Food> foods) {
+        this.foods = foods;
     }
 
     public Customer getCustomer() {
@@ -64,5 +98,53 @@ public class Meal {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public String getDayOfWeek() {
+        return dayOfWeek;
+    }
+
+    public void setDayOfWeek(String dayOfWeek) {
+        this.dayOfWeek = dayOfWeek;
+    }
+
+    public List<String> getBreakfast() {
+        return breakfast;
+    }
+
+    public void setBreakfast(List<String> breakfast) {
+        this.breakfast = breakfast;
+    }
+
+    public List<String> getDesert() {
+        return desert;
+    }
+
+    public void setDesert(List<String> desert) {
+        this.desert = desert;
+    }
+
+    public List<String> getLunch() {
+        return lunch;
+    }
+
+    public void setLunch(List<String> lunch) {
+        this.lunch = lunch;
+    }
+
+    public List<String> getSnack() {
+        return snack;
+    }
+
+    public void setSnack(List<String> snack) {
+        this.snack = snack;
+    }
+
+    public List<String> getDinner() {
+        return dinner;
+    }
+
+    public void setDinner(List<String> dinner) {
+        this.dinner = dinner;
     }
 }

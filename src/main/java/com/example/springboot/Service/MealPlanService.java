@@ -1,3 +1,4 @@
+/*
 package com.example.springboot.Service;
 
 import com.example.springboot.Entity.MealPlan;
@@ -15,3 +16,4 @@ public interface MealPlanService {
 
     void deleteMealPlan(Long mealPlanId);
 }
+*/

@@ -27,15 +27,15 @@ public class Food {
     private Float phosphorus;
 
     @ManyToOne
-    @JoinColumn(name = "mealPlan_id")
-    private MealPlan mealPlan;
+    @JoinColumn(name = "meal_id")
+    private Meal meal;
 
 
     @Column(name = "calories")
     private Float calories;
 
 
-    public Food(Long food_id, Float grams, String name, Float calcium, Float magnesium, Float phosphorus, Float iron, Float zinc, Float retinol, Float carotene, Float thiamine, Float riboflavin/*, Float vitaminB6, Float vitaminE, Float vitaminC, Float calories, Float totalFat, Float saturateFat, Float cholesterol, Float totalCarbs, Float fiber, Float sugar, Float protein*/) {
+    public Food(Long food_id, Float grams, String name, Float calcium, Float magnesium, Float phosphorus, Float calories) {
         this.food_id = food_id;
         this.name = name;
         this.grams = grams;
@@ -96,12 +96,12 @@ public class Food {
         this.phosphorus = phosphorus;
     }
 
-    public MealPlan getMealPlan() {
-        return mealPlan;
+    public Meal getMealPlan() {
+        return meal;
     }
 
-    public void setMealPlan(MealPlan mealPlan) {
-        this.mealPlan = mealPlan;
+    public void setMealPlan(Meal meal) {
+        this.meal = meal;
     }
 
     public Float getCalories() {

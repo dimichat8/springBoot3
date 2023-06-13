@@ -30,12 +30,12 @@ public class MealController {
 
     //Display all meal
 
-    /*@GetMapping("/mealtable")
+    @GetMapping("/mealtable")
     public String listOfMeals(Model model){
         List<Meal> listOfMeals = mealService.getAllMeals();
         model.addAttribute("meals", listOfMeals);
         return  "Meal/table";
-    }*/
+    }
 
   @GetMapping("/{customer_id}/addmeal")
     public String createMealForm(@PathVariable(value = "customer_id") Customer customerId, Model model) {

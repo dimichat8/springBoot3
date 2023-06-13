@@ -1,3 +1,4 @@
+/*
 package com.example.springboot.Controller;
 
 import com.example.springboot.Entity.Food;
@@ -58,3 +59,4 @@ public class MealPlanController {
         return "redirect:/mealtable";
     }
 }
+*/

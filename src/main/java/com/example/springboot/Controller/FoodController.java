@@ -2,9 +2,7 @@ package com.example.springboot.Controller;
 
 import com.example.springboot.Entity.Food;
 import com.example.springboot.Entity.Meal;
-import com.example.springboot.Entity.MealPlan;
 import com.example.springboot.Repository.FoodRepository;
-import com.example.springboot.Repository.MealPlanRepository;
 import com.example.springboot.Repository.MealRepository;
 import com.example.springboot.Service.FoodService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,15 +22,14 @@ public class FoodController {
     private FoodRepository foodRepository;
     @Autowired
     private MealRepository mealRepository;
-    @Autowired
-    private MealPlanRepository mealPlanRepository;
+
 
     //Display all food
 
     @GetMapping("/foodtable")
     public String listOfFoods(Model model){
         model.addAttribute("foods", foodService.getAllFoods());
-        model.addAttribute("mealPlan", new MealPlan());
+        model.addAttribute("meal", new Meal());
         return "/Food/table";
     }
 
