@@ -16,9 +16,15 @@
   <link
           href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
           rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
 
   <!-- Custom styles for this template-->
   <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+  <style>
+    .select2-container .select2-selection--multiple {
+      min-width: 400px; /* Increase the height as desired */
+    }
+  </style>
 
 </head>
 
@@ -40,9 +46,17 @@
           <div class="d-flex justify-content-between align-items-center mb-3">
             <h1 class="h4 text-gray-900 mb-4">Add Food</h1>
           </div>
-          <form action="#" th:action="@{/{customer_id}/saveMeal (customer_id=${meal.customer.customer_id})}" th:object="${meal}" class="user"  method="POST">
+          <form action="#" th:action="@{/{customer_id}/addmeal}" th:object="${foods}" class="user"  method="GET">
+            <label for="foodIds">Food Options:</label><br>
+            <select id="foodIds" name="foodIds" multiple>
+              <!-- Use Thymeleaf to dynamically populate the options -->
+              <option th:each="food : ${foods}" th:value="${food.food_id}" th:text="${food.name}  + ' Grams:' + ${food.grams} + ' Calories' + ${food.calories}"></option>
+            </select>
+          </form>
+          <form action="#" th:action="@{/{customer_id}/saveMeal/foodIds (customer_id=${meal.customer.customer_id})}" th:object="${meal}" class="user"  method="POST">
             <div class="form-group row">
               <div class="col-sm-6 mb-3 mb-sm-0">
+                <input type="hidden" th:each="foodId : ${param.foodIds}" th:name="foodIds" th:value="${foodId}">
                 <label class="labels">Name</label>
                 <input type="text" class="form-control form-control-user" id="exampleName"
                        th:field="*{mealName}" placeholder="Name">
@@ -62,8 +76,6 @@
     </div>
   </div>
 </div>
-</div>
-
 
 <!-- Bootstrap core JavaScript-->
 <script src="/vendor/jquery/jquery.min.js"></script>
@@ -81,7 +93,16 @@
 
 <!-- Page level custom scripts -->
 <script src="/js/demo/datatables-demo.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('#foodIds').select2({
+      placeholder: 'Select food options', // Add a placeholder text
+      dropdownParent: $('#foodIds').parent() // Position the dropdown relative to the parent element
+    });
+  });
+</script>
 </body>
 
 </html>

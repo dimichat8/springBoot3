@@ -1,17 +1,16 @@
 package com.example.springboot.Controller;
 
 import com.example.springboot.Entity.Customer;
+import com.example.springboot.Entity.Food;
 import com.example.springboot.Entity.Meal;
 import com.example.springboot.Repository.CustomerRepository;
+import com.example.springboot.Repository.FoodRepository;
 import com.example.springboot.Repository.MealRepository;
 import com.example.springboot.Service.MealService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,6 +24,8 @@ public class MealController {
     MealService mealService;
     @Autowired
     private CustomerRepository customerRepository;
+    @Autowired
+    private FoodRepository foodRepository;
 
 
 
@@ -38,23 +39,28 @@ public class MealController {
     }
 
   @GetMapping("/{customer_id}/addmeal")
-    public String createMealForm(@PathVariable(value = "customer_id") Customer customerId, Model model) {
-
+    public String createMealForm(@PathVariable(value = "customer_id") Customer customerId,
+                                 Model model) {
         //Crate model attribute to bind from data
         Meal meal = new Meal();
+        List<Food> foods = foodRepository.findAll();
         meal.setCustomer(customerId);
+        model.addAttribute("foods", foods);
         model.addAttribute("meal", meal);
         model.addAttribute("customerId", customerId);
         return "/Meal/addmeal";
     }
 
-    @PostMapping("/{customer_id}/saveMeal")
+    @PostMapping("/{customer_id}/saveMeal/foodIds")
     public String saveMeal(@PathVariable(value = "customer_id") Long customerId,
+                           //@RequestParam("foodIds")  List<Long> foodIds,
                            @ModelAttribute("meal") Meal meal) {
         Customer customer = customerRepository.findById(customerId).get();
+        //List<Food> foods = foodRepository.findAllById(foodIds);
         meal.setCustomer(customer);
         customer.getMeal().add(meal);
         //Save meal to database
+        //meal.getFoods().add((Food) foods);
         mealService.saveMeal(meal);
         return "redirect:/mealtable";
     }
