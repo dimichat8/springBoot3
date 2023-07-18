@@ -46,20 +46,88 @@
           <div class="d-flex justify-content-between align-items-center mb-3">
             <h1 class="h4 text-gray-900 mb-4">Add Food</h1>
           </div>
-          <form action="#" th:action="@{/{customer_id}/addmeal}" th:object="${foods}" class="user"  method="GET">
-            <label for="foodIds">Food Options:</label><br>
-            <select id="foodIds" name="foodIds" multiple>
-              <!-- Use Thymeleaf to dynamically populate the options -->
-              <option th:each="food : ${foods}" th:value="${food.food_id}" th:text="${food.name}  + ' Grams:' + ${food.grams} + ' Calories' + ${food.calories}"></option>
+          <form action="#" th:action="@{/{customer_id}/addmeal}" th:object="${meal}" class="user" method="GET">
+            <b><h4>Day of Week</h4></b>
+            <fieldset class="row mb-3">
+              <div class="col-sm-10">
+                <div class="form-check">
+                  <input class="form-check-input" name="gridCheck1" id="gridCheck1" type="checkbox" value="Monday" th:field="*{dayOfWeek}">
+                  <label class="form-check-label" for="gridCheck1">
+                    Monday
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" name="gridCheck2" id="gridCheck2" type="checkbox" value="Tuesday" th:field="*{dayOfWeek}">
+                  <label class="form-check-label" for="gridCheck2">
+                    Tuesday
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" name="gridCheck3" id="gridCheck3" type="checkbox" value="Wednesday" th:field="*{dayOfWeek}">
+                  <label class="form-check-label" for="gridCheck3">
+                    Wednesday
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" name="gridCheck4" id="gridCheck4" type="checkbox" value="Wednesday" th:field="*{dayOfWeek}">
+                  <label class="form-check-label" for="gridCheck4">
+                    Thursday
+                  </label>
+                <div class="form-check">
+                  <input class="form-check-input" name="gridCheck5" id="gridCheck5" type="checkbox" value="Wednesday" th:field="*{dayOfWeek}">
+                  <label class="form-check-label" for="gridCheck5">
+                    Friday
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" name="gridCheck6" id="gridCheck6" type="checkbox" value="Wednesday" th:field="*{dayOfWeek}">
+                  <label class="form-check-label" for="gridCheck6">
+                    Saturday
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" name="gridCheck7" id="gridCheck7" type="checkbox" value="Wednesday" th:field="*{dayOfWeek}">
+                  <label class="form-check-label" for="gridCheck7">
+                    Sunday
+                  </label>
+                </div>
+              </div>
+            </div>
+            </fieldset>
+            </legend>
+            <label for="foodIdsForBreakFast">Breakfast Options:</label><br>
+            <select id="foodIdsForBreakFast" name="foodIdsForBreakFast" multiple>
+              <option th:each="food : ${foods}" th:value="${food.food_id}" th:text="${food.name}  + '->' + ' Grams:' + ${food.grams} + ' Calories' + ${food.calories}"></option>
+            </select>
+            <br>
+            <label for="foodIdsForDesert">Desert Options:</label><br>
+            <select id="foodIdsForDesert" name="foodIdsForDesert" multiple>
+              <option th:each="food : ${foods}" th:value="${food.food_id}" th:text="${food.name}  + '->' + ' Grams:' + ${food.grams} + ' Calories' + ${food.calories}"></option>
+            </select>
+            <br>
+            <label for="foodIdsForLunch">Launch Options:</label><br>
+            <select id="foodIdsForLunch" name="foodIdsForLunch" multiple>
+              <option th:each="food : ${foods}" th:value="${food.food_id}" th:text="${food.name}  + '->' + ' Grams:' + ${food.grams} + ' Calories' + ${food.calories}"></option>
+            </select>
+            <br>
+            <label for="foodIdsForSnack">Snack Options:</label><br>
+            <select id="foodIdsForSnack" name="foodIdsFoSnack" multiple>
+              <option th:each="food : ${foods}" th:value="${food.food_id}" th:text="${food.name}  + '->' + ' Grams:' + ${food.grams} + ' Calories' + ${food.calories}"></option>
+            </select>
+            <br>
+            <label for="foodIdsForDinner">Dinner Options:</label><br>
+            <select id="foodIdsForDinner" name="foodIdsForDinner" multiple>
+              <option th:each="food : ${foods}" th:value="${food.food_id}" th:text="${food.name}  + '->' + ' Grams:' + ${food.grams} + ' Calories' + ${food.calories}"></option>
             </select>
           </form>
           <form action="#" th:action="@{/{customer_id}/saveMeal/foodIds (customer_id=${meal.customer.customer_id})}" th:object="${meal}" class="user"  method="POST">
             <div class="form-group row">
               <div class="col-sm-6 mb-3 mb-sm-0">
-                <input type="hidden" th:each="foodId : ${param.foodIds}" th:name="foodIds" th:value="${foodId}">
-                <label class="labels">Name</label>
+                <input type="hidden" th:each="food : ${param.foodIds}" th:name="foodIds" th:value="${food}">
+                <!--<label class="labels">Name</label>
                 <input type="text" class="form-control form-control-user" id="exampleName"
-                       th:field="*{mealName}" placeholder="Name">
+                       th:each="food : ${foods}"
+                       th:field="*{lunch}" placeholder="Lunch">-->
               </div>
             </div>
             <div class="mt-5 text-center">
@@ -97,9 +165,33 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <script>
   $(document).ready(function() {
-    $('#foodIds').select2({
-      placeholder: 'Select food options', // Add a placeholder text
-      dropdownParent: $('#foodIds').parent() // Position the dropdown relative to the parent element
+    $('#foodIdsForBreakFast').select2({
+      placeholder: 'Select Breakfast options', // Add a placeholder text
+      dropdownParent: $('#foodIdsForBreakFast').parent() // Position the dropdown relative to the parent element
+    });
+  });
+  $(document).ready(function() {
+    $('#foodIdsForDesert').select2({
+      placeholder: 'Select Breakfast options', // Add a placeholder text
+      dropdownParent: $('#foodIdsForDesert').parent() // Position the dropdown relative to the parent element
+    });
+  });
+  $(document).ready(function() {
+    $('#foodIdsForLunch').select2({
+      placeholder: 'Select Launch options', // Add a placeholder text
+      dropdownParent: $('#foodIdsForLunch').parent() // Position the dropdown relative to the parent element
+    });
+  });
+  $(document).ready(function() {
+    $('#foodIdsForSnack').select2({
+      placeholder: 'Select Breakfast options', // Add a placeholder text
+      dropdownParent: $('#foodIdsForSnack').parent() // Position the dropdown relative to the parent element
+    });
+  });
+  $(document).ready(function() {
+    $('#foodIdsForDinner').select2({
+      placeholder: 'Select Launch options', // Add a placeholder text
+      dropdownParent: $('#foodIdsForDinner').parent() // Position the dropdown relative to the parent element
     });
   });
 </script>

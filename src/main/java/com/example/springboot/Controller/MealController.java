@@ -53,12 +53,17 @@ public class MealController {
 
     @PostMapping("/{customer_id}/saveMeal/foodIds")
     public String saveMeal(@PathVariable(value = "customer_id") Long customerId,
-                           //@RequestParam("foodIds")  List<Long> foodIds,
+                           @ModelAttribute("dayOfWeek")  Meal mealDay,
                            @ModelAttribute("meal") Meal meal) {
         Customer customer = customerRepository.findById(customerId).get();
+        mealDay.setDayOfWeek(String.valueOf(mealDay));
+        //List<Food> foods = foodRepository.findAllById(foodIds);
         //List<Food> foods = foodRepository.findAllById(foodIds);
         meal.setCustomer(customer);
         customer.getMeal().add(meal);
+
+
+
         //Save meal to database
         //meal.getFoods().add((Food) foods);
         mealService.saveMeal(meal);

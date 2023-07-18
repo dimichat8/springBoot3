@@ -96,11 +96,11 @@ public class Food {
         this.phosphorus = phosphorus;
     }
 
-    public Meal getMealPlan() {
+    public Meal getMeal() {
         return meal;
     }
 
-    public void setMealPlan(Meal meal) {
+    public void setMeal(Meal meal) {
         this.meal = meal;
     }
 

@@ -269,7 +269,13 @@
                   </tfoot>
                   <tbody>
                   <tr th:each="meal: ${meals}">
-                    <td th:text="${meal.mealName}"></td>
+                    <td th:text="${meal.dayOfWeek == 'Monday' ? meal.breakfast : ''}"></td>
+                    <td th:text="${meal.dayOfWeek == 'Tuesday' ? meal.breakfast : ''}"></td>
+                    <td th:text="${meal.dayOfWeek == 'Wednesday' ? meal.breakfast : ''}"></td>
+                    <td th:text="${meal.dayOfWeek == 'Thursday' ? meal.breakfast : ''}"></td>
+                    <td th:text="${meal.dayOfWeek == 'Friday' ? meal.breakfast : ''}"></td>
+                    <td th:text="${meal.breakfast}"></td>
+                    <td th:text="${meal.breakfast}"></td>
                   </tr>
                   </tbody>
                 </table>
