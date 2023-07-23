@@ -95,6 +95,14 @@
                 </div>
               </div>
             </fieldset>
+            //
+            <input class="form-check-input" name="mealName" id="mealName" type="text" value="mealName" th:field="*{mealName}"><br><br>
+            <input class="form-check-input" name="breakfast" id="breakfast" type="text" value="breakfast" th:field="*{breakfast}" placeholder="breakfast"><br><br>
+            <input class="form-check-input" name="breakfast" id="desert" type="text" value="desert" th:field="*{desert}" placeholder="desert"><br><br>
+            <input class="form-check-input" name="breakfast" id="lunch" type="text" value="lunch" th:field="*{lunch}" placeholder="lunch"><br><br>
+            <input class="form-check-input" name="breakfast" id="snack" type="text" value="snack" th:field="*{snack}" placeholder="snack"><br><br>
+            <input class="form-check-input" name="breakfast" id="dinner" type="text" value="dinner" th:field="*{dinner}" placeholder="dinner"><br><br>
+            //
             <label for="foodIdsForBreakFast">Breakfast Options:</label><br>
             <select id="foodIdsForBreakFast" name="foodIdsForBreakFast" multiple>
               <option th:each="food : ${foods}" th:value="${food.food_id}" th:text="${food.name}  + '->' + ' Grams:' + ${food.grams} + ' Calories' + ${food.calories}"></option>

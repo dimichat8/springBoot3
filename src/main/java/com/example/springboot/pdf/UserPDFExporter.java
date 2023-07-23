@@ -53,8 +53,11 @@ public class UserPDFExporter {
     private void writeTableData(PdfPTable table) {
         for (Meal meal : mealList) {
             table.addCell(String.valueOf(meal.getBreakfast()));
-            table.addCell(String.valueOf(meal.getDinner()));
+            table.addCell(String.valueOf(meal.getDesert()));
             table.addCell(String.valueOf(meal.getLunch()));
+            table.addCell(String.valueOf(meal.getSnack()));
+            table.addCell(String.valueOf(meal.getDinner()));
+
 
 
         }

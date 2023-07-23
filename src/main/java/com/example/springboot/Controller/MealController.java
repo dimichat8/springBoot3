@@ -67,20 +67,54 @@ public class MealController {
 
     @PostMapping("/{customer_id}/saveMeal/foodIds")
     public String saveMeal(@PathVariable(value = "customer_id") Long customerId,
-                           @ModelAttribute("dayOfWeek")  String dayOfWeek ,
-                            @ModelAttribute("breakfast")  List<String> breakfast)
+                           @ModelAttribute("dayOfWeek") String dayOfWeek,
+                           @ModelAttribute("mealName") String mealName,
+                           @ModelAttribute("breakfastId") String breakfastId,
+                           @ModelAttribute("breakfast") String breakfast,
+                           @ModelAttribute("desertId") String desertId,
+                           @ModelAttribute("desert") String desert,
+                           @ModelAttribute("lunchId") String lunchId,
+                           @ModelAttribute("lunch") String lunch,
+                           @ModelAttribute("snackId") String snackId,
+                           @ModelAttribute("snack") String snack,
+                           @ModelAttribute("dinnerId") String dinnerId,
+                           @ModelAttribute("dinner") String dinner)
                            {
         Customer customer = customerRepository.findById(customerId).get();
-
-
         Meal meal = new Meal();
 
-        meal.setCustomer(customer);
-        meal.setDayOfWeek(dayOfWeek);
-        meal.setBreakfast(breakfast);
+           meal.setCustomer(customer);
+           meal.setDayOfWeek(dayOfWeek);
+           meal.setMealName(mealName);
+
+           switch (mealName) {
+               case "Breakfast":
+                   meal.setBreakfast(Collections.singletonList(breakfastId));
+                   meal.setBreakfast(Collections.singletonList(breakfast));
+                   break;
+               case "Desert":
+                   meal.setDesert(Collections.singletonList(desertId));
+                   meal.setDesert(Collections.singletonList(desert));
+                   break;
+               case "Lunch":
+                   meal.setLunch(Collections.singletonList(lunchId));
+                   meal.setLunch(Collections.singletonList(lunch));
+                   break;
+               case "Snack":
+                   meal.setSnack(Collections.singletonList(snackId));
+                   meal.setSnack(Collections.singletonList(snack));
+                   break;
+               case "Dinner":
+                   meal.setDinner(Collections.singletonList(dinnerId));
+                   meal.setDinner(Collections.singletonList(dinner));
+                   break;
+               default:
+                   // Handle the case when the mealName doesn't match any of the above cases
+                   // For example, you could throw an exception or log a warning.
+                   break;
+           }
+
         customer.getMeal().add(meal);
-        //Save meal to database
-        //meal.getFoods().add((Food) foods);
         mealService.saveMeal(meal);
         return "redirect:/mealtable";
     }

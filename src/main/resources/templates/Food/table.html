@@ -380,18 +380,12 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <form>
-                                <a th:action="@{/foods/add-to-meal}"
-                                        class="btn btn-primary">Check</a>
-
-                            </form>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Check</th>
                                             <th>Name</th>
                                             <th>Grams</th>
                                             <th>Calcium</th>
@@ -403,7 +397,6 @@
                                     </thead>
                                     <tbody>
                                     <tr th:each="food: ${foods}">
-                                        <td><input type="checkbox" name="selectedFoods" value="${food.id}" /></td>
                                         <td th:text="${food.name}"></td>
                                         <td th:text="${food.grams}"></td>
                                         <td th:text="${food.calcium}"></td>
