@@ -23,6 +23,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class MealController {
@@ -48,7 +49,6 @@ public class MealController {
         List<Meal> listOfMeals = mealService.getAllMeals();
         /*List<Meal> breakfast = mealRepository.findBreakfast();*/
         model.addAttribute("meals", listOfMeals);
-        /*model.addAttribute("breakfast", breakfast);*/
         return  "Meal/table";
     }
 
@@ -67,26 +67,17 @@ public class MealController {
 
     @PostMapping("/{customer_id}/saveMeal/foodIds")
     public String saveMeal(@PathVariable(value = "customer_id") Long customerId,
-                           @ModelAttribute("dayOfWeek")  String dayOfWeek,
-                           @ModelAttribute("breakfast") String breakfast,
-                           @ModelAttribute("desert") String desert,
-                           @ModelAttribute("lunch") String lunch,
-                           @ModelAttribute("snack") String snack,
-                           @ModelAttribute("dinner") String dinner,
-                           @ModelAttribute("meal") Meal meal) {
+                           @ModelAttribute("dayOfWeek")  String dayOfWeek ,
+                            @ModelAttribute("breakfast")  List<String> breakfast)
+                           {
         Customer customer = customerRepository.findById(customerId).get();
 
-        meal = new Meal();
-        meal.getBreakfast();
 
-        /*meal.setDesert(desert);*/
-
-        //List<Food> foods = foodRepository.findAllById(foodIds);
-        //List<Food> foods = foodRepository.findAllById(foodIds);
+        Meal meal = new Meal();
 
         meal.setCustomer(customer);
         meal.setDayOfWeek(dayOfWeek);
-
+        meal.setBreakfast(breakfast);
         customer.getMeal().add(meal);
         //Save meal to database
         //meal.getFoods().add((Food) foods);

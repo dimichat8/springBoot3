@@ -21,7 +21,6 @@ public class UserPDFExporter {
 
     private void writeTableHeader(PdfPTable table) {
         PdfPCell cell = new PdfPCell();
-        PdfPCell cell1 = new PdfPCell();
         /*cell.setBackgroundColor(Color.BLUE);*/
         cell.setPadding(7);
 
@@ -32,8 +31,8 @@ public class UserPDFExporter {
 
         table.addCell(cell);
 
-        cell1.setPhrase(new Phrase("Tuesday", font));
-        table.addCell(cell1);
+        cell.setPhrase(new Phrase("Tuesday", font));
+        table.addCell(cell);
 
         cell.setPhrase(new Phrase("Wednesday", font));
         table.addCell(cell);
@@ -56,7 +55,7 @@ public class UserPDFExporter {
             table.addCell(String.valueOf(meal.getBreakfast()));
             table.addCell(String.valueOf(meal.getDinner()));
             table.addCell(String.valueOf(meal.getLunch()));
-            table.addCell(meal.getDayOfWeek());
+
 
         }
     }
