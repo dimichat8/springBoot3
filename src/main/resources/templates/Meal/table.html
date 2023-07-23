@@ -244,8 +244,13 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Plan</h1>
-
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-2 text-gray-800">Plan</h1>
+            <!--<a  th:href="@{/{customer_id}/dietProgram/export/pdf}" > Generate Report</a>-->
+            <form action="#" th:action="@{/dietProgram/export/pdf}" class="user" method="GET">
+              <button th:type="submit" class="btn btn-primary profile-button" type="button">Generate Report</button>
+            </form>
+          </div>
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-body">
