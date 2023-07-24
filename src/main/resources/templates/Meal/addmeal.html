@@ -47,10 +47,12 @@
             <h1 class="h4 text-gray-900 mb-4">Add Food</h1>
           </div>
           <form action="#" th:action="@{/{customer_id}/saveMeal/foodIds (customer_id=${meal.customer.customer_id})}" th:object="${meal}" class="user" method="POST">
-
-            <h4><b>Day of Week</b></h4>
+          <div class="container">
+            <div class="row">
             <fieldset class="row mb-3">
               <div class="col-sm-10">
+                <h4><b>¨Day¨</b></h4>
+                <br>
                 <div class="form-check">
                   <input class="form-check-input" name="gridCheck1" id="gridCheck1" type="checkbox" value="Monday" th:field="*{dayOfWeek}">
                   <label class="form-check-label" for="gridCheck1">
@@ -96,16 +98,62 @@
               </div>
             </fieldset>
             //
-            <input class="form-check-input" name="mealName" id="mealName" type="text" value="mealName" th:field="*{mealName}"><br><br>
+            <legend class="col-form-label col-sm-2 pt-0">
+              <fieldset class="row mb-3">
+                <div class="col-sm-10">
+                  <h4><b>¨Type¨</b></h4>
+                  <br>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="Breakfast"
+                           th:field="*{mealName}" checked>
+                    <label class="form-check-label" for="gridRadios1">
+                      Breakfast
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="Desert"
+                           th:field="*{mealName}">
+                    <label class="form-check-label" for="gridRadios2">
+                      Desert
+                    </label>
+                  </div>
+                  <div class="form-check disabled">
+                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="Lunch"
+                           th:field="*{mealName}">
+                    <label class="form-check-label" for="gridRadios3">
+                      Lunch
+                    </label>
+                  </div>
+                  <div class="form-check disabled">
+                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios4" value="Snack"
+                           th:field="*{mealName}">
+                    <label class="form-check-label" for="gridRadios4">
+                      Snack
+                    </label>
+                  </div>
+                  <div class="form-check disabled">
+                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios5" value="Dinner"
+                           th:field="*{mealName}">
+                    <label class="form-check-label" for="gridRadios5">
+                      Dinner
+                    </label>
+                  </div>
+                </div>
+              </fieldset>
+            </legend>
+            </div>
+          </div>
             <input class="form-check-input" name="breakfast" id="breakfast" type="text" value="breakfast" th:field="*{breakfast}" placeholder="breakfast"><br><br>
             <input class="form-check-input" name="breakfast" id="desert" type="text" value="desert" th:field="*{desert}" placeholder="desert"><br><br>
             <input class="form-check-input" name="breakfast" id="lunch" type="text" value="lunch" th:field="*{lunch}" placeholder="lunch"><br><br>
             <input class="form-check-input" name="breakfast" id="snack" type="text" value="snack" th:field="*{snack}" placeholder="snack"><br><br>
             <input class="form-check-input" name="breakfast" id="dinner" type="text" value="dinner" th:field="*{dinner}" placeholder="dinner"><br><br>
             //
+
             <label for="foodIdsForBreakFast">Breakfast Options:</label><br>
             <select id="foodIdsForBreakFast" name="foodIdsForBreakFast" multiple>
-              <option th:each="food : ${foods}" th:value="${food.food_id}" th:text="${food.name}  + '->' + ' Grams:' + ${food.grams} + ' Calories' + ${food.calories}"></option>
+              <option th:each="food : ${foods}" th:value="${food.food_id}" th:text="${food.name}  + '->' + ' Grams:' + ${food.grams} + ' Calories' + ${food.calories}"
+              th:field="*{breakfast}"></option>
             </select>
             <br>
             <label for="foodIdsForDesert">Desert Options:</label><br>

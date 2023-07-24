@@ -255,167 +255,93 @@
           <div class="card shadow mb-4">
             <div class="card-body">
               <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
-                  <tr>
-                    <th> Monday</th>
-                    <th>Tuesday</th>
-                    <th>Wednesday</th>
-                    <th>Thursday</th>
-                    <th>Friday</th>
-                    <th>Saturday</th>
-                    <th>Sunday</th>
-                  </tr>
-                  </thead>
-                  <tfoot>
-                  <tr>
-
-                  </tr>
-                  </tfoot>
-                  <tbody>
-
-                  <tr>
-                    <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Monday' and meal.mealName == 'Breakfast'}">
-                      <span th:text="${meal.breakfast}"></span>
-                    </td>
-                    <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Tuesday' and meal.mealName == 'Breakfast'}">
-                      <span th:text="${meal.breakfast}"></span>
-                    </td>
-                    <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Wednesday' and meal.mealName == 'Breakfast'}">
-                      <span th:text="${meal.breakfast}"></span>
-                    </td>
-                    <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Thursday' and meal.mealName == 'Breakfast'}">
-                      <span th:text="${meal.breakfast}"></span>
-                    </td>
-                    <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Friday' and meal.mealName == 'Breakfast'}">
-                      <span th:text="${meal.breakfast}"></span>
-                    </td>
-                    <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Saturday' and meal.mealName == 'Breakfast'}">
-                      <span th:text="${meal.breakfast}"></span>
-                    </td>
-                    <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Sunday' and meal.mealName == 'Breakfast'}">
-                      <span th:text="${meal.breakfast}"></span>
-                    </td>
-                  </tr>
-                  <!--<tr>
-                    <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Monday' and meal.mealName == 'Desert'}">
-                      <span th:text="${meal.dinner}"></span>
-                    </td>
-                    <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Tuesday' and meal.mealName == 'Desert'}">
-                      <span th:text="${meal.breakfast}"></span>
-                    </td>
-                    <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Wednesday' and meal.mealName == 'Desert'}">
-                      <span th:text="${meal.breakfast}"></span>
-                    </td>
-                    <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Thuesday' and meal.mealName == 'Desert'}">
-                      <span th:text="${meal.breakfast}"></span>
-                    </td>
-                    <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Friday' and meal.mealName == 'Desert'}">
-                      <span th:text="${meal.breakfast}"></span>
-                    </td>
-                    <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Saturday' and meal.mealName == 'Desert'}">
-                      <span th:text="${meal.breakfast}"></span>
-                    </td>
-                    <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Sunday' and meal.mealName == 'Desert'}">
-                      <span th:text="${meal.breakfast}"></span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Monday' and meal.mealName == 'Lunch'}">
-                      <span th:text="${meal.lunch}"></span>
-                    </td>
-                    <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Tuesday' and meal.mealName == 'Lunch'}">
-                      <span th:text="${meal.breakfast}"></span>
-                    </td>
-                    <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Wednesday' and meal.mealName == 'Lunch'}">
-                      <span th:text="${meal.breakfast}"></span>
-                    </td>
-                    <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Thuesday' and meal.mealName == 'Lunch'}">
-                      <span th:text="${meal.breakfast}"></span>
-                    </td>
-                    <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Friday' and meal.mealName == 'Lunch'}">
-                      <span th:text="${meal.breakfast}"></span>
-                    </td>
-                    <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Saturday' and meal.mealName == 'Lunch'}">
-                      <span th:text="${meal.breakfast}"></span>
-                    </td>
-                    <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Sunday' and meal.mealName == 'Lunch'}">
-                      <span th:text="${meal.breakfast}"></span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Monday' and meal.mealName == 'Snack'}">
-                      <span th:text="${meal.snack}"></span>
-                    </td>
-                  </tr>
-                  <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Tuesday' and meal.mealName == 'Snack'}">
-                    <span th:text="${meal.breakfast}"></span>
-                  </td>
-                  <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Wednesday' and meal.mealName == 'Snack'}">
-                    <span th:text="${meal.breakfast}"></span>
-                  </td>
-                  <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Thuesday' and meal.mealName == 'Snack'}">
-                    <span th:text="${meal.breakfast}"></span>
-                  </td>
-                  <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Friday' and meal.mealName == 'Snack'}">
-                    <span th:text="${meal.breakfast}"></span>
-                  </td>
-                  <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Saturday' and meal.mealName == 'Snack'}">
-                    <span th:text="${meal.breakfast}"></span>
-                  </td>
-                  <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Sunday' and meal.mealName == 'Snack'}">
-                    <span th:text="${meal.breakfast}"></span>
-                  </td>
-                  <tr>
-                    <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Monday' and meal.mealName == 'Dinner'}">
-                      <span th:text="${meal.dinner}"></span>
-                    </td>
-                    <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Tuesday' and meal.mealName == 'Dinner'}">
-                      <span th:text="${meal.breakfast}"></span>
-                    </td>
-                    <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Wednesday' and meal.mealName == 'Dinner'}">
-                      <span th:text="${meal.breakfast}"></span>
-                    </td>
-                    <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Thuesday' and meal.mealName == 'Dinner'}">
-                      <span th:text="${meal.breakfast}"></span>
-                    </td>
-                    <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Friday' and meal.mealName == 'Dinner'}">
-                      <span th:text="${meal.breakfast}"></span>
-                    </td>
-                    <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Saturday' and meal.mealName == 'Dinner'}">
-                      <span th:text="${meal.breakfast}"></span>
-                    </td>
-                    <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Sunday' and meal.mealName == 'Dinner'}">
-                      <span th:text="${meal.breakfast}"></span>
-                    </td>
-                  </tr>-->
-
-
-
-
-
-
-                  <!-- th:if="${meal.dayOfWeek == 'Monday'}
-                  <tr th:each="meal: ${meals}">
-                    <td> <span th:text="${meal.breakfast}"></span>
-                    </td>
-                    <td> <span th:text="${meal.dinner}"></span>
-                    </td>
-                    <td> <span th:text="${meal.desert}"></span>
-                    </td>
-                    <td> <span th:text="${meal.snack}"></span>
-                    </td>
-                    <td> <span th:text="${meal.lunch}"></span>
-                    </td>
-                    <td> <span th:text="${meal.breakfast}"></span>
-                      <span th:text="${meal.desert}"></span>
-                    </td>
-                    <td> <span th:text="${meal.breakfast}"></span>
-                      <span th:text="${meal.desert}"></span>
-                    </td>
-                  </tr>-->
-                  </tbody>
-                </table>
+                <!--<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>-->
+                  <table class="table">
+                    <thead>
+                    <tr>
+                      <th></th><!-- Empty cell at the top-left corner -->
+                      <th scope="col">Monday</th>
+                      <th scope="col">Tuesday</th>
+                      <th scope="col">Wednesday</th>
+                      <th scope="col">Thursday</th>
+                      <th scope="col">Friday</th>
+                      <th scope="col">Saturday</th>
+                      <th scope="col">Sunday</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <th scope="row">Breakfast</th>
+                      <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Monday' and meal.mealName == 'Breakfast'}">
+                          <span th:text="${meal.breakfast}"></span>
+                      </td>
+                      <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Tuesday' and meal.mealName == 'Breakfast'}">
+                          <span th:text="${meal.breakfast}"></span>
+                      </td>
+                      <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Wednesday' and meal.mealName == 'Breakfast'}">
+                          <span th:text="${meal.breakfast}"></span>
+                      </td>
+                      <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Thursday' and meal.mealName == 'Breakfast'}">
+                        <span th:text="${meal.breakfast}"></span>
+                      </td>
+                      <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Friday' and meal.mealName == 'Breakfast'}">
+                        <span th:text="${meal.breakfast}"></span>
+                      </td>
+                      <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Saturday' and meal.mealName == 'Breakfast'}">
+                        <span th:text="${meal.breakfast}"></span>
+                      </td>
+                      <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Sunday' and meal.mealName == 'Breakfast'}">
+                        <span th:text="${meal.breakfast}"></span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Desert</th>
+                      <td><!-- Lunch content for Monday --></td>
+                      <td><!-- Lunch content for Tuesday --></td>
+                      <td><!-- Lunch content for Wednesday --></td>
+                      <td><!-- Lunch content for Thursday --></td>
+                      <td><!-- Lunch content for Friday --></td>
+                      <td><!-- Lunch content for Saturday --></td>
+                      <td><!-- Lunch content for Sunday --></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Lunch</th>
+                      <td><!-- Lunch content for Monday --></td>
+                      <td><!-- Lunch content for Tuesday --></td>
+                      <td><!-- Lunch content for Wednesday --></td>
+                      <td><!-- Lunch content for Thursday --></td>
+                      <td><!-- Lunch content for Friday --></td>
+                      <td><!-- Lunch content for Saturday --></td>
+                      <td><!-- Lunch content for Sunday --></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Snack</th>
+                      <td><!-- Lunch content for Monday --></td>
+                      <td><!-- Lunch content for Tuesday --></td>
+                      <td><!-- Lunch content for Wednesday --></td>
+                      <td><!-- Lunch content for Thursday --></td>
+                      <td><!-- Lunch content for Friday --></td>
+                      <td><!-- Lunch content for Saturday --></td>
+                      <td><!-- Lunch content for Sunday --></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Dinner</th>
+                      <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Monday' and meal.mealName == 'Dinner'}">
+                        <span th:text="${meal.dinner}"></span>
+                      </td>
+                      <td><!-- Lunch content for Tuesday --></td>
+                      <td><!-- Lunch content for Wednesday --></td>
+                      <td><!-- Lunch content for Thursday --></td>
+                      <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Friday' and meal.mealName == 'Dinner'}">
+                        <span th:text="${meal.dinner}"></span>
+                      </td>
+                      <td><!-- Lunch content for Saturday --></td>
+                      <td><!-- Lunch content for Sunday --></td>
+                    </tr>
+                    <!-- Continue for other types of food -->
+                    </tbody>
+                  </table>
               </div>
             </div>
           </div>
