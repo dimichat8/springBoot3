@@ -273,71 +273,53 @@
                     <tbody>
                     <tr>
                       <th scope="row">Breakfast</th>
-                      <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Monday' and meal.mealName == 'Breakfast'}">
-                          <span th:text="${meal.breakfast}"></span>
-                      </td>
-                      <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Tuesday' and meal.mealName == 'Breakfast'}">
-                          <span th:text="${meal.breakfast}"></span>
-                      </td>
-                      <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Wednesday' and meal.mealName == 'Breakfast'}">
-                          <span th:text="${meal.breakfast}"></span>
-                      </td>
-                      <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Thursday' and meal.mealName == 'Breakfast'}">
-                        <span th:text="${meal.breakfast}"></span>
-                      </td>
-                      <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Friday' and meal.mealName == 'Breakfast'}">
-                        <span th:text="${meal.breakfast}"></span>
-                      </td>
-                      <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Saturday' and meal.mealName == 'Breakfast'}">
-                        <span th:text="${meal.breakfast}"></span>
-                      </td>
-                      <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Sunday' and meal.mealName == 'Breakfast'}">
-                        <span th:text="${meal.breakfast}"></span>
-                      </td>
+                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Monday' and mealName == 'Breakfast']?.breakfast, 'null', '')}"></td>
+                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Tuesday' and mealName == 'Breakfast']?.breakfast, 'null', '')}"></td>
+                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Wednesday' and mealName == 'Breakfast']?.breakfast, 'null', '')}"></td>
+                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Thursday' and mealName == 'Breakfast']?.breakfast, 'null', '')}"></td>
+                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Friday' and mealName == 'Breakfast']?.breakfast, 'null', '')}"></td>
+                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Saturday' and mealName == 'Breakfast']?.breakfast, 'null', '')}"></td>
+                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Sunday' and mealName == 'Breakfast']?.breakfast, 'null', '')}"></td>
                     </tr>
                     <tr>
                       <th scope="row">Desert</th>
-                      <td><!-- Lunch content for Monday --></td>
-                      <td><!-- Lunch content for Tuesday --></td>
-                      <td><!-- Lunch content for Wednesday --></td>
-                      <td><!-- Lunch content for Thursday --></td>
-                      <td><!-- Lunch content for Friday --></td>
-                      <td><!-- Lunch content for Saturday --></td>
-                      <td><!-- Lunch content for Sunday --></td>
-                    </tr>
+                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Monday' and mealName == 'Desert']?.desert, 'null', '')}"></td>
+                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Tuesday' and mealName == 'Desert']?.desert, 'null', '')}"></td>
+                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Wednesday' and mealName == 'Desert']?.desert, 'null', '')}"></td>
+                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Thursday' and mealName == 'Desert']?.desert, 'null', '')}"></td>
+                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Friday' and mealName == 'Desert']?.desert, 'null', '')}"></td>
+                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Saturday' and mealName == 'Desert']?.desert, 'null', '')}"></td>
+                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Sunday' and mealName == 'Desert']?.desert, 'null', '')}"></td>
+                    </tr>>
                     <tr>
                       <th scope="row">Lunch</th>
-                      <td><!-- Lunch content for Monday --></td>
-                      <td><!-- Lunch content for Tuesday --></td>
-                      <td><!-- Lunch content for Wednesday --></td>
-                      <td><!-- Lunch content for Thursday --></td>
-                      <td><!-- Lunch content for Friday --></td>
-                      <td><!-- Lunch content for Saturday --></td>
-                      <td><!-- Lunch content for Sunday --></td>
+                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Monday' and mealName == 'Lunch']?.lunch, 'null', '')}"></td>
+                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Tuesday' and mealName == 'Lunch']?.lunch, 'null', '')}"></td>
+                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Wednesday' and mealName == 'Lunch']?.lunch, 'null', '')}"></td>
+                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Thursday' and mealName == 'Lunch']?.lunch, 'null', '')}"></td>
+                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Friday' and mealName == 'Lunch']?.lunch, 'null', '')}"></td>
+                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Saturday' and mealName == 'Lunch']?.lunch, 'null', '')}"></td>
+                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Sunday' and mealName == 'Lunch']?.lunch, 'null', '')}"></td>
                     </tr>
                     <tr>
                       <th scope="row">Snack</th>
-                      <td><!-- Lunch content for Monday --></td>
-                      <td><!-- Lunch content for Tuesday --></td>
-                      <td><!-- Lunch content for Wednesday --></td>
-                      <td><!-- Lunch content for Thursday --></td>
-                      <td><!-- Lunch content for Friday --></td>
-                      <td><!-- Lunch content for Saturday --></td>
-                      <td><!-- Lunch content for Sunday --></td>
+                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Monday' and mealName == 'Snack']?.snack, 'null', '')}"></td>
+                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Tuesday' and mealName == 'Snack']?.snack, 'null', '')}"></td>
+                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Wednesday' and mealName == 'Snack']?.snack, 'null', '')}"></td>
+                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Thursday' and mealName == 'Snack']?.snack, 'null', '')}"></td>
+                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Friday' and mealName == 'Snack']?.snack, 'null', '')}"></td>
+                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Saturday' and mealName == 'Snack']?.snack, 'null', '')}"></td>
+                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Sunday' and mealName == 'Snack']?.snack, 'null', '')}"></td>
                     </tr>
                     <tr>
                       <th scope="row">Dinner</th>
-                      <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Monday' and meal.mealName == 'Dinner'}">
-                        <span th:text="${meal.dinner}"></span>
-                      </td>
-                      <td><!-- Lunch content for Tuesday --></td>
-                      <td><!-- Lunch content for Wednesday --></td>
-                      <td><!-- Lunch content for Thursday --></td>
-                      <td th:each="meal: ${meals}" th:if="${meal.dayOfWeek == 'Friday' and meal.mealName == 'Dinner'}">
-                        <span th:text="${meal.dinner}"></span>
-                      </td>
-                      <td><!-- Lunch content for Saturday --></td>
-                      <td><!-- Lunch content for Sunday --></td>
+                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Monday' and mealName == 'Dinner']?.dinner, 'null', '')}"></td>
+                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Tuesday' and mealName == 'Dinner']?.dinner, 'null', '')}"></td>
+                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Wednesday' and mealName == 'Dinner']?.dinner, 'null', '')}"></td>
+                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Thursday' and mealName == 'Dinner']?.dinner, 'null', '')}"></td>
+                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Friday' and mealName == 'Dinner']?.dinner, 'null', '')}"></td>
+                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Saturday' and mealName == 'Dinner']?.dinner, 'null', '')}"></td>
+                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Sunday' and mealName == 'Dinner']?.dinner, 'null', '')}"></td>
                     </tr>
                     <!-- Continue for other types of food -->
                     </tbody>
