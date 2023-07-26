@@ -246,7 +246,6 @@
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-2 text-gray-800">Plan</h1>
-            <!--<a  th:href="@{/{customer_id}/dietProgram/export/pdf}" > Generate Report</a>-->
             <form action="#" th:action="@{/dietProgram/export/pdf}" class="user" method="GET">
               <button th:type="submit" class="btn btn-primary profile-button" type="button">Generate Report</button>
             </form>
@@ -255,12 +254,10 @@
           <div class="card shadow mb-4">
             <div class="card-body">
               <div class="table-responsive">
-                <!--<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>-->
                   <table class="table">
                     <thead>
                     <tr>
-                      <th></th><!-- Empty cell at the top-left corner -->
+                      <th>Type</th><!-- Empty cell at the top-left corner -->
                       <th scope="col">Monday</th>
                       <th scope="col">Tuesday</th>
                       <th scope="col">Wednesday</th>

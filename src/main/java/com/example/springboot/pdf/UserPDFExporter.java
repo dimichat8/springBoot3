@@ -26,9 +26,10 @@ public class UserPDFExporter {
 
         Font font = FontFactory.getFont(FontFactory.HELVETICA);
         /*font.setColor(Color.WHITE);*/
+        cell.setPhrase(new Phrase("Type", font));
+        table.addCell(cell);
 
         cell.setPhrase(new Phrase("Monday", font));
-
         table.addCell(cell);
 
         cell.setPhrase(new Phrase("Tuesday", font));
@@ -51,16 +52,50 @@ public class UserPDFExporter {
     }
 
     private void writeTableData(PdfPTable table) {
-        for (Meal meal : mealList) {
-            table.addCell(String.valueOf(meal.getBreakfast()));
-            table.addCell(String.valueOf(meal.getDesert()));
-            table.addCell(String.valueOf(meal.getLunch()));
-            table.addCell(String.valueOf(meal.getSnack()));
-            table.addCell(String.valueOf(meal.getDinner()));
+        String[] daysOfWeek = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
+        String[] mealNames = { "Breakfast", "Desert", "Lunch", "Snack", "Dinner" };
 
-
-
+        for (String mealName : mealNames) {
+            table.addCell(mealName);
+            for (String dayOfWeek : daysOfWeek) {
+                Meal meal = findMeal(dayOfWeek, mealName);
+                if (meal != null) {
+                    table.addCell(getValidCellValue(getMealValue(meal, mealName)));
+                } else {
+                    table.addCell("");
+                }
+            }
         }
+    }
+
+    private Meal findMeal(String dayOfWeek, String mealName) {
+        for (Meal meal : mealList) {
+            if (meal.getDayOfWeek().equalsIgnoreCase(dayOfWeek) && meal.getMealName().equalsIgnoreCase(mealName)) {
+                return meal;
+            }
+        }
+        return null;
+    }
+
+    private String getMealValue(Meal meal, String mealName) {
+        switch (mealName) {
+            case "Breakfast":
+                return meal.getBreakfast().toString();
+            case "Desert":
+                return meal.getDesert().toString();
+            case "Lunch":
+                return meal.getLunch().toString();
+            case "Snack":
+                return meal.getSnack().toString();
+            case "Dinner":
+                return meal.getDinner().toString();
+            default:
+                return "";
+        }
+    }
+
+    private String getValidCellValue(String value) {
+        return (value != null) ? value : "-";
     }
 
     public void export(HttpServletResponse response) throws DocumentException, IOException {
@@ -77,9 +112,9 @@ public class UserPDFExporter {
 
         document.add(p);
 
-        PdfPTable table = new PdfPTable(7);
+        PdfPTable table = new PdfPTable(8);
         table.setWidthPercentage(100f);
-        table.setWidths(new float[] {3.0f, 3.0f, 3.5f, 3.0f, 3.0f, 3.0f, 3.0f});
+        table.setWidths(new float[] {3.0f, 3.0f, 3.0f, 3.5f, 3.0f, 3.0f, 3.0f, 3.0f});
         table.setSpacingBefore(10);
 
         writeTableHeader(table);
