@@ -268,56 +268,410 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
+                    <tr >
                       <th scope="row">Breakfast</th>
-                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Monday' and mealName == 'Breakfast']?.breakfast, 'null', '')}"></td>
-                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Tuesday' and mealName == 'Breakfast']?.breakfast, 'null', '')}"></td>
-                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Wednesday' and mealName == 'Breakfast']?.breakfast, 'null', '')}"></td>
-                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Thursday' and mealName == 'Breakfast']?.breakfast, 'null', '')}"></td>
-                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Friday' and mealName == 'Breakfast']?.breakfast, 'null', '')}"></td>
-                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Saturday' and mealName == 'Breakfast']?.breakfast, 'null', '')}"></td>
-                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Sunday' and mealName == 'Breakfast']?.breakfast, 'null', '')}"></td>
+                      <td>
+                        <th:block th:each="meal : ${meals}">
+                          <th:block th:if="${meal.dayOfWeek == 'Monday' and meal.mealName == 'Breakfast'}">
+                            <ul>
+                              <li th:each="item : ${meal.breakfast}">
+                                <span th:text="${item}"></span>
+                              </li>
+                            </ul>
+                          </th:block>
+                        </th:block>
+                      </td>
+                      <td>
+                        <th:block th:each="meal : ${meals}">
+                          <th:block th:if="${meal.dayOfWeek == 'Tuesday' and meal.mealName == 'Breakfast'}">
+                            <ul>
+                              <li th:each="item : ${meal.breakfast}">
+                                <span th:text="${item}"></span>
+                              </li>
+                            </ul>
+                          </th:block>
+                        </th:block>
+                      </td>
+                      <td>
+                        <th:block th:each="meal : ${meals}">
+                          <th:block th:if="${meal.dayOfWeek == 'Wednesday' and meal.mealName == 'Breakfast'}">
+                            <ul>
+                              <li th:each="item : ${meal.breakfast}">
+                                <span th:text="${item}"></span>
+                              </li>
+                            </ul>
+                          </th:block>
+                        </th:block>
+                      </td>
+                      <td>
+                        <th:block th:each="meal : ${meals}">
+                          <th:block th:if="${meal.dayOfWeek == 'Thursday' and meal.mealName == 'Breakfast'}">
+                            <ul>
+                              <li th:each="item : ${meal.breakfast}">
+                                <span th:text="${item}"></span>
+                              </li>
+                            </ul>
+                          </th:block>
+                        </th:block>
+                      </td>
+                      <td>
+                        <th:block th:each="meal : ${meals}">
+                          <th:block th:if="${meal.dayOfWeek == 'Friday' and meal.mealName == 'Breakfast'}">
+                            <ul>
+                              <li th:each="item : ${meal.breakfast}">
+                                <span th:text="${item}"></span>
+                              </li>
+                            </ul>
+                          </th:block>
+                        </th:block>
+                      </td>
+                      <td>
+                        <th:block th:each="meal : ${meals}">
+                          <th:block th:if="${meal.dayOfWeek == 'Saturday' and meal.mealName == 'Breakfast'}">
+                            <ul>
+                              <li th:each="item : ${meal.breakfast}">
+                                <span th:text="${item}"></span>
+                              </li>
+                            </ul>
+                          </th:block>
+                        </th:block>
+                      </td>
+                      <td>
+                        <th:block th:each="meal : ${meals}">
+                          <th:block th:if="${meal.dayOfWeek == 'Sunday' and meal.mealName == 'Breakfast'}">
+                            <ul>
+                              <li th:each="item : ${meal.breakfast}">
+                                <span th:text="${item}"></span>
+                              </li>
+                            </ul>
+                          </th:block>
+                        </th:block>
+                      </td>
                     </tr>
-                    <tr>
+                    <tr >
                       <th scope="row">Desert</th>
-                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Monday' and mealName == 'Desert']?.desert, 'null', '')}"></td>
-                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Tuesday' and mealName == 'Desert']?.desert, 'null', '')}"></td>
-                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Wednesday' and mealName == 'Desert']?.desert, 'null', '')}"></td>
-                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Thursday' and mealName == 'Desert']?.desert, 'null', '')}"></td>
-                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Friday' and mealName == 'Desert']?.desert, 'null', '')}"></td>
-                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Saturday' and mealName == 'Desert']?.desert, 'null', '')}"></td>
-                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Sunday' and mealName == 'Desert']?.desert, 'null', '')}"></td>
-                    </tr>>
+                      <td>
+                        <th:block th:each="meal : ${meals}">
+                          <th:block th:if="${meal.dayOfWeek == 'Monday' and meal.mealName == 'Desert'}">
+                            <ul>
+                              <li th:each="item : ${meal.desert}">
+                                <span th:text="${item}"></span>
+                              </li>
+                            </ul>
+                          </th:block>
+                        </th:block>
+                      </td>
+                      <td>
+                        <th:block th:each="meal : ${meals}">
+                          <th:block th:if="${meal.dayOfWeek == 'Tuesday' and meal.mealName == 'Desert'}">
+                            <ul>
+                              <li th:each="item : ${meal.desert}">
+                                <span th:text="${item}"></span>
+                              </li>
+                            </ul>
+                          </th:block>
+                        </th:block>
+                      </td>
+                      <td>
+                        <th:block th:each="meal : ${meals}">
+                          <th:block th:if="${meal.dayOfWeek == 'Wednesday' and meal.mealName == 'Desert'}">
+                            <ul>
+                              <li th:each="item : ${meal.desert}">
+                                <span th:text="${item}"></span>
+                              </li>
+                            </ul>
+                          </th:block>
+                        </th:block>
+                      </td>
+                      <td>
+                        <th:block th:each="meal : ${meals}">
+                          <th:block th:if="${meal.dayOfWeek == 'Thursday' and meal.mealName == 'Desert'}">
+                            <ul>
+                              <li th:each="item : ${meal.desert}">
+                                <span th:text="${item}"></span>
+                              </li>
+                            </ul>
+                          </th:block>
+                        </th:block>
+                      </td>
+                      <td>
+                        <th:block th:each="meal : ${meals}">
+                          <th:block th:if="${meal.dayOfWeek == 'Friday' and meal.mealName == 'Desert'}">
+                            <ul>
+                              <li th:each="item : ${meal.desert}">
+                                <span th:text="${item}"></span>
+                              </li>
+                            </ul>
+                          </th:block>
+                        </th:block>
+                      </td>
+                      <td>
+                        <th:block th:each="meal : ${meals}">
+                          <th:block th:if="${meal.dayOfWeek == 'Saturday' and meal.mealName == 'Desert'}">
+                            <ul>
+                              <li th:each="item : ${meal.desert}">
+                                <span th:text="${item}"></span>
+                              </li>
+                            </ul>
+                          </th:block>
+                        </th:block>
+                      </td>
+                      <td>
+                        <th:block th:each="meal : ${meals}">
+                          <th:block th:if="${meal.dayOfWeek == 'Sunday' and meal.mealName == 'Desert'}">
+                            <ul>
+                              <li th:each="item : ${meal.desert}">
+                                <span th:text="${item}"></span>
+                              </li>
+                            </ul>
+                          </th:block>
+                        </th:block>
+                      </td>
+                    </tr>
                     <tr>
+                    <tr >
                       <th scope="row">Lunch</th>
-                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Monday' and mealName == 'Lunch']?.lunch, 'null', '')}"></td>
-                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Tuesday' and mealName == 'Lunch']?.lunch, 'null', '')}"></td>
-                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Wednesday' and mealName == 'Lunch']?.lunch, 'null', '')}"></td>
-                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Thursday' and mealName == 'Lunch']?.lunch, 'null', '')}"></td>
-                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Friday' and mealName == 'Lunch']?.lunch, 'null', '')}"></td>
-                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Saturday' and mealName == 'Lunch']?.lunch, 'null', '')}"></td>
-                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Sunday' and mealName == 'Lunch']?.lunch, 'null', '')}"></td>
+                      <td>
+                        <th:block th:each="meal : ${meals}">
+                          <th:block th:if="${meal.dayOfWeek == 'Monday' and meal.mealName == 'Lunch'}">
+                            <ul>
+                              <li th:each="item : ${meal.lunch}">
+                                <span th:text="${item}"></span>
+                              </li>
+                            </ul>
+                          </th:block>
+                        </th:block>
+                      </td>
+                      <td>
+                        <th:block th:each="meal : ${meals}">
+                          <th:block th:if="${meal.dayOfWeek == 'Tuesday' and meal.mealName == 'Lunch'}">
+                            <ul>
+                              <li th:each="item : ${meal.lunch}">
+                                <span th:text="${item}"></span>
+                              </li>
+                            </ul>
+                          </th:block>
+                        </th:block>
+                      </td>
+                      <td>
+                        <th:block th:each="meal : ${meals}">
+                          <th:block th:if="${meal.dayOfWeek == 'Wednesday' and meal.mealName == 'Lunch'}">
+                            <ul>
+                              <li th:each="item : ${meal.lunch}">
+                                <span th:text="${item}"></span>
+                              </li>
+                            </ul>
+                          </th:block>
+                        </th:block>
+                      </td>
+                      <td>
+                        <th:block th:each="meal : ${meals}">
+                          <th:block th:if="${meal.dayOfWeek == 'Thursday' and meal.mealName == 'Lunch'}">
+                            <ul>
+                              <li th:each="item : ${meal.lunch}">
+                                <span th:text="${item}"></span>
+                              </li>
+                            </ul>
+                          </th:block>
+                        </th:block>
+                      </td>
+                      <td>
+                        <th:block th:each="meal : ${meals}">
+                          <th:block th:if="${meal.dayOfWeek == 'Friday' and meal.mealName == 'Lunch'}">
+                            <ul>
+                              <li th:each="item : ${meal.lunch}">
+                                <span th:text="${item}"></span>
+                              </li>
+                            </ul>
+                          </th:block>
+                        </th:block>
+                      </td>
+                      <td>
+                        <th:block th:each="meal : ${meals}">
+                          <th:block th:if="${meal.dayOfWeek == 'Saturday' and meal.mealName == 'Lunch'}">
+                            <ul>
+                              <li th:each="item : ${meal.lunch}">
+                                <span th:text="${item}"></span>
+                              </li>
+                            </ul>
+                          </th:block>
+                        </th:block>
+                      </td>
+                      <td>
+                        <th:block th:each="meal : ${meals}">
+                          <th:block th:if="${meal.dayOfWeek == 'Sunday' and meal.mealName == 'Lunch'}">
+                            <ul>
+                              <li th:each="item : ${meal.lunch}">
+                                <span th:text="${item}"></span>
+                              </li>
+                            </ul>
+                          </th:block>
+                        </th:block>
+                      </td>
                     </tr>
                     <tr>
+                    <tr >
                       <th scope="row">Snack</th>
-                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Monday' and mealName == 'Snack']?.snack, 'null', '')}"></td>
-                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Tuesday' and mealName == 'Snack']?.snack, 'null', '')}"></td>
-                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Wednesday' and mealName == 'Snack']?.snack, 'null', '')}"></td>
-                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Thursday' and mealName == 'Snack']?.snack, 'null', '')}"></td>
-                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Friday' and mealName == 'Snack']?.snack, 'null', '')}"></td>
-                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Saturday' and mealName == 'Snack']?.snack, 'null', '')}"></td>
-                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Sunday' and mealName == 'Snack']?.snack, 'null', '')}"></td>
+                      <td>
+                        <th:block th:each="meal : ${meals}">
+                          <th:block th:if="${meal.dayOfWeek == 'Monday' and meal.mealName == 'Snack'}">
+                            <ul>
+                              <li th:each="item : ${meal.snack}">
+                                <span th:text="${item}"></span>
+                              </li>
+                            </ul>
+                          </th:block>
+                        </th:block>
+                      </td>
+                      <td>
+                        <th:block th:each="meal : ${meals}">
+                          <th:block th:if="${meal.dayOfWeek == 'Tuesday' and meal.mealName == 'Snack'}">
+                            <ul>
+                              <li th:each="item : ${meal.snack}">
+                                <span th:text="${item}"></span>
+                              </li>
+                            </ul>
+                          </th:block>
+                        </th:block>
+                      </td>
+                      <td>
+                        <th:block th:each="meal : ${meals}">
+                          <th:block th:if="${meal.dayOfWeek == 'Wednesday' and meal.mealName == 'Snack'}">
+                            <ul>
+                              <li th:each="item : ${meal.snack}">
+                                <span th:text="${item}"></span>
+                              </li>
+                            </ul>
+                          </th:block>
+                        </th:block>
+                      </td>
+                      <td>
+                        <th:block th:each="meal : ${meals}">
+                          <th:block th:if="${meal.dayOfWeek == 'Thursday' and meal.mealName == 'Snack'}">
+                            <ul>
+                              <li th:each="item : ${meal.snack}">
+                                <span th:text="${item}"></span>
+                              </li>
+                            </ul>
+                          </th:block>
+                        </th:block>
+                      </td>
+                      <td>
+                        <th:block th:each="meal : ${meals}">
+                          <th:block th:if="${meal.dayOfWeek == 'Friday' and meal.mealName == 'Snack'}">
+                            <ul>
+                              <li th:each="item : ${meal.snack}">
+                                <span th:text="${item}"></span>
+                              </li>
+                            </ul>
+                          </th:block>
+                        </th:block>
+                      </td>
+                      <td>
+                        <th:block th:each="meal : ${meals}">
+                          <th:block th:if="${meal.dayOfWeek == 'Saturday' and meal.mealName == 'Snack'}">
+                            <ul>
+                              <li th:each="item : ${meal.snack}">
+                                <span th:text="${item}"></span>
+                              </li>
+                            </ul>
+                          </th:block>
+                        </th:block>
+                      </td>
+                      <td>
+                        <th:block th:each="meal : ${meals}">
+                          <th:block th:if="${meal.dayOfWeek == 'Sunday' and meal.mealName == 'Snack'}">
+                            <ul>
+                              <li th:each="item : ${meal.snack}">
+                                <span th:text="${item}"></span>
+                              </li>
+                            </ul>
+                          </th:block>
+                        </th:block>
+                      </td>
                     </tr>
                     <tr>
+                    <tr >
                       <th scope="row">Dinner</th>
-                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Monday' and mealName == 'Dinner']?.dinner, 'null', '')}"></td>
-                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Tuesday' and mealName == 'Dinner']?.dinner, 'null', '')}"></td>
-                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Wednesday' and mealName == 'Dinner']?.dinner, 'null', '')}"></td>
-                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Thursday' and mealName == 'Dinner']?.dinner, 'null', '')}"></td>
-                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Friday' and mealName == 'Dinner']?.dinner, 'null', '')}"></td>
-                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Saturday' and mealName == 'Dinner']?.dinner, 'null', '')}"></td>
-                      <td th:text="${#strings.replace(meals.^[dayOfWeek == 'Sunday' and mealName == 'Dinner']?.dinner, 'null', '')}"></td>
+                      <td>
+                        <th:block th:each="meal : ${meals}">
+                          <th:block th:if="${meal.dayOfWeek == 'Monday' and meal.mealName == 'Dinner'}">
+                            <ul>
+                              <li th:each="item : ${meal.dinner}">
+                                <span th:text="${item}"></span>
+                              </li>
+                            </ul>
+                          </th:block>
+                        </th:block>
+                      </td>
+                      <td>
+                        <th:block th:each="meal : ${meals}">
+                          <th:block th:if="${meal.dayOfWeek == 'Tuesday' and meal.mealName == 'Dinner'}">
+                            <ul>
+                              <li th:each="item : ${meal.dinner}">
+                                <span th:text="${item}"></span>
+                              </li>
+                            </ul>
+                          </th:block>
+                        </th:block>
+                      </td>
+                      <td>
+                        <th:block th:each="meal : ${meals}">
+                          <th:block th:if="${meal.dayOfWeek == 'Wednesday' and meal.mealName == 'Dinner'}">
+                            <ul>
+                              <li th:each="item : ${meal.dinner}">
+                                <span th:text="${item}"></span>
+                              </li>
+                            </ul>
+                          </th:block>
+                        </th:block>
+                      </td>
+                      <td>
+                        <th:block th:each="meal : ${meals}">
+                          <th:block th:if="${meal.dayOfWeek == 'Thursday' and meal.mealName == 'Dinner'}">
+                            <ul>
+                              <li th:each="item : ${meal.dinner}">
+                                <span th:text="${item}"></span>
+                              </li>
+                            </ul>
+                          </th:block>
+                        </th:block>
+                      </td>
+                      <td>
+                        <th:block th:each="meal : ${meals}">
+                          <th:block th:if="${meal.dayOfWeek == 'Friday' and meal.mealName == 'Dinner'}">
+                            <ul>
+                              <li th:each="item : ${meal.dinner}">
+                                <span th:text="${item}"></span>
+                              </li>
+                            </ul>
+                          </th:block>
+                        </th:block>
+                      </td>
+                      <td>
+                        <th:block th:each="meal : ${meals}">
+                          <th:block th:if="${meal.dayOfWeek == 'Saturday' and meal.mealName == 'Dinner'}">
+                            <ul>
+                              <li th:each="item : ${meal.dinner}">
+                                <span th:text="${item}"></span>
+                              </li>
+                            </ul>
+                          </th:block>
+                        </th:block>
+                      </td>
+                      <td>
+                        <th:block th:each="meal : ${meals}">
+                          <th:block th:if="${meal.dayOfWeek == 'Sunday' and meal.mealName == 'Dinner'}">
+                            <ul>
+                              <li th:each="item : ${meal.dinner}">
+                                <span th:text="${item}"></span>
+                              </li>
+                            </ul>
+                          </th:block>
+                        </th:block>
+                      </td>
                     </tr>
+                    <tr>
                     <!-- Continue for other types of food -->
                     </tbody>
                   </table>

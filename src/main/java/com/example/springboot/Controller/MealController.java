@@ -19,10 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
@@ -47,7 +44,8 @@ public class MealController {
     @GetMapping("/mealtable")
     public String listOfMeals( Model model){
         List<Meal> listOfMeals = mealService.getAllMeals();
-        /*List<Meal> breakfast = mealRepository.findBreakfast();*/
+        /*List<Meal> mealWithCustomerId = mealRepository.findMealDataByCustomerId(customerId);*/
+        /*model.addAttribute("mealWithCustomerId", mealWithCustomerId);*/
         model.addAttribute("meals", listOfMeals);
         return  "Meal/table";
     }
@@ -89,24 +87,29 @@ public class MealController {
 
            switch (mealName) {
                case "Breakfast":
-                   meal.setBreakfast(Collections.singletonList(breakfastId));
-                   meal.setBreakfast(Collections.singletonList(breakfast));
+                   List<String> breakfastList = new ArrayList<>();
+                   breakfastList.add(breakfast);
+                   meal.setBreakfast(breakfastList);
                    break;
                case "Desert":
-                   meal.setDesert(Collections.singletonList(desertId));
-                   meal.setDesert(Collections.singletonList(desert));
+                   List<String> desertList = new ArrayList<>();
+                   desertList.add(desert);
+                   meal.setDesert(desertList);
                    break;
                case "Lunch":
-                   meal.setLunch(Collections.singletonList(lunchId));
-                   meal.setLunch(Collections.singletonList(lunch));
+                   List<String> lunchList = new ArrayList<>();
+                   lunchList.add(lunch);
+                   meal.setLunch(lunchList);
                    break;
                case "Snack":
-                   meal.setSnack(Collections.singletonList(snackId));
-                   meal.setSnack(Collections.singletonList(snack));
+                   List<String> snackList = new ArrayList<>();
+                   snackList.add(snack);
+                   meal.setSnack(snackList);
                    break;
                case "Dinner":
-                   meal.setDinner(Collections.singletonList(dinnerId));
-                   meal.setDinner(Collections.singletonList(dinner));
+                   List<String> dinnerList = new ArrayList<>();
+                   dinnerList.add(dinner);
+                   meal.setDinner(dinnerList);
                    break;
                default:
                    // Handle the case when the mealName doesn't match any of the above cases
@@ -152,9 +155,10 @@ public class MealController {
         response.setContentType("application/pdf");
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
         String currentDateTime = dateFormatter.format(new Date());
-
+        Customer customer = new Customer();
+        String fullname = customer.getFirstName() + customer.getLastName();
         String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=diet_" + currentDateTime + ".pdf";
+        String headerValue = "attachment; filename=diet_for_" + fullname + "_" + currentDateTime +  ".pdf";
         response.setHeader(headerKey, headerValue);
 
         List<Meal> mealList = mealService.getAllMeals();

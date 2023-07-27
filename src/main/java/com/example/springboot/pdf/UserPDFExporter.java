@@ -8,6 +8,7 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.*;
 import java.util.List;
 
 public class UserPDFExporter {
@@ -78,17 +79,26 @@ public class UserPDFExporter {
     }
 
     private String getMealValue(Meal meal, String mealName) {
+        if (meal == null) {
+            return "";
+        }
+
         switch (mealName) {
             case "Breakfast":
-                return meal.getBreakfast().toString();
+                List<String> breakfast = meal.getBreakfast();
+                return (breakfast != null && !breakfast.isEmpty()) ? String.join(", ", breakfast) : "";
             case "Desert":
-                return meal.getDesert().toString();
+                List<String> desert = meal.getDesert();
+                return (desert != null && !desert.isEmpty()) ? String.join(", ", desert) : "";
             case "Lunch":
-                return meal.getLunch().toString();
+                List<String> lunch = meal.getLunch();
+                return (lunch != null && !lunch.isEmpty()) ? String.join(", ", lunch) : "";
             case "Snack":
-                return meal.getSnack().toString();
+                List<String> snack = meal.getSnack();
+                return (snack != null && !snack.isEmpty()) ? String.join(", ", snack) : "";
             case "Dinner":
-                return meal.getDinner().toString();
+                List<String> dinner = meal.getDinner();
+                return (dinner != null && !dinner.isEmpty()) ? String.join(", ", dinner) : "";
             default:
                 return "";
         }
@@ -106,15 +116,16 @@ public class UserPDFExporter {
         Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
         font.setSize(18);
         /*font.setColor(Color.BLUE);*/
-
-        Paragraph p = new Paragraph("Diet Program", font);
+        Customer customer = new Customer();
+        String fullname = customer.getFirstName() + customer.getLastName();
+        Paragraph p = new Paragraph("Diet Program for" + fullname, font);
         p.setAlignment(Paragraph.ALIGN_CENTER);
 
         document.add(p);
 
         PdfPTable table = new PdfPTable(8);
         table.setWidthPercentage(100f);
-        table.setWidths(new float[] {3.0f, 3.0f, 3.0f, 3.5f, 3.0f, 3.0f, 3.0f, 3.0f});
+        table.setWidths(new float[] {3.0f, 3.0f, 3.0f, 4.0f, 3.5f, 3.0f, 3.5f, 3.0f});
         table.setSpacingBefore(10);
 
         writeTableHeader(table);
