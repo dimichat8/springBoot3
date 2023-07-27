@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class UserPDFExporter {
 
@@ -25,7 +26,7 @@ public class UserPDFExporter {
         /*cell.setBackgroundColor(Color.BLUE);*/
         cell.setPadding(7);
 
-        Font font = FontFactory.getFont(FontFactory.HELVETICA);
+        Font font = FontFactory.getFont(FontFactory.HELVETICA, 12, BaseColor.BLACK);
         /*font.setColor(Color.WHITE);*/
         cell.setPhrase(new Phrase("Type", font));
         table.addCell(cell);
@@ -56,51 +57,66 @@ public class UserPDFExporter {
         String[] daysOfWeek = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
         String[] mealNames = { "Breakfast", "Desert", "Lunch", "Snack", "Dinner" };
 
+        // Create a map to store the meal values for each day of the week and meal type
+        Map<String, List<String>> mealMap = new HashMap<>();
+
+        // Initialize the map with empty lists for each combination of day of the week and meal type
+        for (String day : daysOfWeek) {
+            for (String mealName : mealNames) {
+                mealMap.put(day + "-" + mealName, new ArrayList<>());
+            }
+        }
+
+        // Populate the map with the meal values
+        for (Meal meal : mealList) {
+            String dayOfWeek = meal.getDayOfWeek();
+            String mealName = meal.getMealName();
+            List<String> mealValues = getMealValue(meal, mealName);
+
+            // Update the meal values for the specific day and meal type in the map
+            String key = dayOfWeek + "-" + mealName;
+            mealMap.get(key).addAll(mealValues);
+        }
+
+        // Add the map values to the PDF table
         for (String mealName : mealNames) {
             table.addCell(mealName);
-            for (String dayOfWeek : daysOfWeek) {
-                Meal meal = findMeal(dayOfWeek, mealName);
-                if (meal != null) {
-                    table.addCell(getValidCellValue(getMealValue(meal, mealName)));
-                } else {
-                    table.addCell("");
-                }
+            for (String day : daysOfWeek) {
+                String key = day + "-" + mealName;
+                List<String> mealValues = mealMap.get(key);
+                String mealValue = getValidCellValue(String.join(", ", mealValues));
+                table.addCell(mealValue);
             }
         }
+
+        /*for (Map.Entry<String, List<String>> entry : mealMap.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }*/
     }
 
-    private Meal findMeal(String dayOfWeek, String mealName) {
-        for (Meal meal : mealList) {
-            if (meal.getDayOfWeek().equalsIgnoreCase(dayOfWeek) && meal.getMealName().equalsIgnoreCase(mealName)) {
-                return meal;
-            }
-        }
-        return null;
-    }
-
-    private String getMealValue(Meal meal, String mealName) {
+    private List<String> getMealValue(Meal meal, String mealName) {
         if (meal == null) {
-            return "";
+            return Collections.emptyList();
         }
 
         switch (mealName) {
             case "Breakfast":
                 List<String> breakfast = meal.getBreakfast();
-                return (breakfast != null && !breakfast.isEmpty()) ? String.join(", ", breakfast) : "";
+                return (breakfast != null) ? breakfast : Collections.emptyList();
             case "Desert":
                 List<String> desert = meal.getDesert();
-                return (desert != null && !desert.isEmpty()) ? String.join(", ", desert) : "";
+                return (desert != null) ? desert : Collections.emptyList();
             case "Lunch":
                 List<String> lunch = meal.getLunch();
-                return (lunch != null && !lunch.isEmpty()) ? String.join(", ", lunch) : "";
+                return (lunch != null) ? lunch : Collections.emptyList();
             case "Snack":
                 List<String> snack = meal.getSnack();
-                return (snack != null && !snack.isEmpty()) ? String.join(", ", snack) : "";
+                return (snack != null) ? snack : Collections.emptyList();
             case "Dinner":
                 List<String> dinner = meal.getDinner();
-                return (dinner != null && !dinner.isEmpty()) ? String.join(", ", dinner) : "";
+                return (dinner != null) ? dinner : Collections.emptyList();
             default:
-                return "";
+                return Collections.emptyList();
         }
     }
 
@@ -111,16 +127,14 @@ public class UserPDFExporter {
     public void export(HttpServletResponse response) throws DocumentException, IOException {
         Document document = new Document(PageSize.A4);
         PdfWriter.getInstance(document, response.getOutputStream());
-
         document.open();
         Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
         font.setSize(18);
-        /*font.setColor(Color.BLUE);*/
+        font.setColor(BaseColor.BLACK);
         Customer customer = new Customer();
         String fullname = customer.getFirstName() + customer.getLastName();
-        Paragraph p = new Paragraph("Diet Program for" + fullname, font);
+        Paragraph p = new Paragraph(" Diet Program for " + fullname, font);
         p.setAlignment(Paragraph.ALIGN_CENTER);
-
         document.add(p);
 
         PdfPTable table = new PdfPTable(8);
@@ -132,7 +146,6 @@ public class UserPDFExporter {
         writeTableData(table);
 
         document.add(table);
-
         document.close();
 
     }

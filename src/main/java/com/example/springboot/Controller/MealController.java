@@ -160,9 +160,7 @@ public class MealController {
         String headerKey = "Content-Disposition";
         String headerValue = "attachment; filename=diet_for_" + fullname + "_" + currentDateTime +  ".pdf";
         response.setHeader(headerKey, headerValue);
-
         List<Meal> mealList = mealService.getAllMeals();
-
         UserPDFExporter exporter = new UserPDFExporter(mealList);
         exporter.export(response);
 
