@@ -447,7 +447,10 @@
                                                        class="btn btn-secondary">Records</a>
 
                                                     <a th:href="@{/{customer_id}/addmeal (customer_id=${customer.customer_id})}"
-                                                       class="btn btn-warning">Set Food</a>
+                                                       class="btn btn-info">Set Food</a>
+
+                                                    <a th:href="@{/{customer_id}/mealtable  (customer_id=${customer.customer_id})}"
+                                                       class="btn btn-secondary">Program</a>
                                                 </div>
 
                                                 <div th:id="'deleteCustomerModal-' + ${customer.customer_id}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="'deleteCustomerModalLabel-' + ${customer.customer_id}" aria-hidden="true">

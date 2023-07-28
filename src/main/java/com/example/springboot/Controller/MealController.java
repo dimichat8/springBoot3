@@ -3,10 +3,12 @@ package com.example.springboot.Controller;
 import com.example.springboot.Entity.Customer;
 import com.example.springboot.Entity.Food;
 import com.example.springboot.Entity.Meal;
+import com.example.springboot.Entity.MealPlan;
 import com.example.springboot.Repository.CustomerRepository;
 import com.example.springboot.Repository.FoodRepository;
 import com.example.springboot.Repository.MealRepository;
 import com.example.springboot.Service.CustomerService;
+import com.example.springboot.Service.MealPlanService;
 import com.example.springboot.Service.MealService;
 import com.example.springboot.pdf.UserPDFExporter;
 import com.itextpdf.text.DocumentException;
@@ -36,21 +38,30 @@ public class MealController {
     private CustomerRepository customerRepository;
     @Autowired
     private FoodRepository foodRepository;
+    @Autowired
+    private MealPlanService mealPlanService;
 
 
 
     //Display all meal
 
-    @GetMapping("/mealtable")
-    public String listOfMeals( Model model){
-        List<Meal> listOfMeals = mealService.getAllMeals();
-        /*List<Meal> mealWithCustomerId = mealRepository.findMealDataByCustomerId(customerId);*/
-        /*model.addAttribute("mealWithCustomerId", mealWithCustomerId);*/
+    @GetMapping("/{customer_id}/mealtable")
+    public String listOfMeals(@PathVariable("customer_id") Long customerId, Model model) {
+        Customer customer = customerService.getCustomerById(customerId);
+        if (customer == null) {
+            // Handle the case where the customer with the specified ID is not found.
+            // You can return an error page or redirect to another page as needed.
+            return "redirect:/error-page";
+        }
+        Meal meal = new Meal();
+        List<Meal> listOfMeals = customer.getMeals();
         model.addAttribute("meals", listOfMeals);
-        return  "Meal/table";
+        model.addAttribute("meal", meal);
+        model.addAttribute("customer", customer);
+        return "Meal/table";
     }
 
-  @GetMapping("/{customer_id}/addmeal")
+    @GetMapping("/{customer_id}/addmeal")
     public String createMealForm(@PathVariable(value = "customer_id") Customer customerId,
                                  Model model) {
         //Crate model attribute to bind from data
@@ -59,9 +70,10 @@ public class MealController {
         meal.setCustomer(customerId);
         model.addAttribute("foods", foods);
         model.addAttribute("meal", meal);
-        model.addAttribute("customerId", customerId);
+        model.addAttribute("customer", customerId);
         return "/Meal/addmeal";
     }
+
 
     @PostMapping("/{customer_id}/saveMeal/foodIds")
     public String saveMeal(@PathVariable(value = "customer_id") Long customerId,
@@ -77,49 +89,52 @@ public class MealController {
                            @ModelAttribute("snack") String snack,
                            @ModelAttribute("dinnerId") String dinnerId,
                            @ModelAttribute("dinner") String dinner)
-                           {
+    {
         Customer customer = customerRepository.findById(customerId).get();
         Meal meal = new Meal();
+        meal.setCustomer(customer);
+        meal.setDayOfWeek(dayOfWeek);
+        meal.setMealName(mealName);
 
-           meal.setCustomer(customer);
-           meal.setDayOfWeek(dayOfWeek);
-           meal.setMealName(mealName);
-
-           switch (mealName) {
-               case "Breakfast":
-                   List<String> breakfastList = new ArrayList<>();
-                   breakfastList.add(breakfast);
-                   meal.setBreakfast(breakfastList);
-                   break;
-               case "Desert":
-                   List<String> desertList = new ArrayList<>();
-                   desertList.add(desert);
-                   meal.setDesert(desertList);
-                   break;
-               case "Lunch":
-                   List<String> lunchList = new ArrayList<>();
-                   lunchList.add(lunch);
-                   meal.setLunch(lunchList);
-                   break;
-               case "Snack":
-                   List<String> snackList = new ArrayList<>();
-                   snackList.add(snack);
-                   meal.setSnack(snackList);
-                   break;
-               case "Dinner":
-                   List<String> dinnerList = new ArrayList<>();
-                   dinnerList.add(dinner);
-                   meal.setDinner(dinnerList);
-                   break;
-               default:
-                   // Handle the case when the mealName doesn't match any of the above cases
-                   // For example, you could throw an exception or log a warning.
-                   break;
-           }
-
+        switch (mealName) {
+            case "Breakfast":
+                List<String> breakfastList = new ArrayList<>();
+                breakfastList.add(breakfast);
+                meal.setBreakfast(breakfastList);
+                break;
+            case "Desert":
+                List<String> desertList = new ArrayList<>();
+                desertList.add(desert);
+                meal.setDesert(desertList);
+                break;
+            case "Lunch":
+                List<String> lunchList = new ArrayList<>();
+                lunchList.add(lunch);
+                meal.setLunch(lunchList);
+                break;
+            case "Snack":
+                List<String> snackList = new ArrayList<>();
+                snackList.add(snack);
+                meal.setSnack(snackList);
+                break;
+            case "Dinner":
+                List<String> dinnerList = new ArrayList<>();
+                dinnerList.add(dinner);
+                meal.setDinner(dinnerList);
+                break;
+            default:
+                // Handle the case when the mealName doesn't match any of the above cases
+                // For example, you could throw an exception or log a warning.
+                break;
+        }
+        MealPlan mealPlan = new MealPlan();
+        mealPlan.setCustomer(customer);
+        mealPlanService.save(mealPlan);
+        mealPlan.getMeals().add(meal);
+        meal.setMealPlan(mealPlan);
         customer.getMeal().add(meal);
         mealService.saveMeal(meal);
-        return "redirect:/mealtable";
+        return "redirect:/{customer_id}/mealtable";
     }
 
     @GetMapping("/updateMealForm/{meal_id}")

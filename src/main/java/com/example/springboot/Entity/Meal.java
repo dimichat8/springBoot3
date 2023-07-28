@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Embeddable
 @Table(name = "Meal")
 public class Meal {
 
@@ -52,7 +53,11 @@ public class Meal {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    public Meal(Long meal_id, String mealName, String dayOfWeek, List<String> breakfast, List<String> desert, List<String> lunch, List<String> snack, List<String> dinner, List<Food> foods, Customer customer) {
+    @ManyToOne
+    @JoinColumn(name = "mealPlan")
+    private MealPlan mealPlan;
+
+    public Meal(Long meal_id, String mealName, String dayOfWeek, List<String> breakfast, List<String> desert, List<String> lunch, List<String> snack, List<String> dinner, List<Food> foods, Customer customer, MealPlan mealPlan) {
         this.meal_id = meal_id;
         this.mealName = mealName;
         this.dayOfWeek = dayOfWeek;
@@ -63,6 +68,7 @@ public class Meal {
         this.dinner = dinner;
         this.foods = foods;
         this.customer = customer;
+        this.mealPlan = mealPlan;
     }
 
     public Meal() {
@@ -144,7 +150,17 @@ public class Meal {
         return dinner;
     }
 
+    public MealPlan getMealPlan() {
+        return mealPlan;
+    }
+
+    public void setMealPlan(MealPlan mealPlan) {
+        this.mealPlan = mealPlan;
+    }
+
     public void setDinner(List<String> dinner) {
         this.dinner = dinner;
+
+
     }
 }

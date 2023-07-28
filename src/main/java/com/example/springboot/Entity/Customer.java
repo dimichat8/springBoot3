@@ -59,7 +59,11 @@ public class Customer {
     @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL,  orphanRemoval = true)
     private List<Meal> meals = new ArrayList<>();
 
-    public Customer(Long customer_id, String firstName, String lastName, String email, String address, String city, String phone, LocalDate birthday, String gender, List<CustomerInfo> customerInfos) {
+
+    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL,  orphanRemoval = true)
+    private List<MealPlan> mealPlans = new ArrayList<>();
+
+    public Customer(Long customer_id, String firstName, String lastName, String email, String address, String city, String phone, LocalDate birthday, String gender, List<CustomerInfo> customerInfos, List<Food> foods, List<Meal> meals, List<MealPlan> mealPlans) {
         this.customer_id = customer_id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -70,7 +74,9 @@ public class Customer {
         this.birthday = birthday;
         this.gender = gender;
         this.customerInfos = customerInfos;
-
+        this.foods = foods;
+        this.meals = meals;
+        this.mealPlans = mealPlans;
     }
 
     public Customer() {
@@ -186,5 +192,20 @@ public class Customer {
         this.meals = meal;
     }
 
+    public List<Meal> getMeals() {
+        return meals;
+    }
+
+    public void setMeals(List<Meal> meals) {
+        this.meals = meals;
+    }
+
+    public List<MealPlan> getMealPlans() {
+        return mealPlans;
+    }
+
+    public void setMealPlans(List<MealPlan> mealPlans) {
+        this.mealPlans = mealPlans;
+    }
 }
 
