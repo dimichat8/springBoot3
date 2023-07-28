@@ -77,7 +77,7 @@ public class MealController {
 
     @PostMapping("/{customer_id}/saveMeal/foodIds")
     public String saveMeal(@PathVariable(value = "customer_id") Long customerId,
-                           @ModelAttribute("dayOfWeek") String dayOfWeek,
+                           @RequestParam("dayOfWeek") List<String> daysOfWeek,
                            @ModelAttribute("mealName") String mealName,
                            @ModelAttribute("breakfastId") String breakfastId,
                            @ModelAttribute("breakfast") String breakfast,
@@ -88,54 +88,59 @@ public class MealController {
                            @ModelAttribute("snackId") String snackId,
                            @ModelAttribute("snack") String snack,
                            @ModelAttribute("dinnerId") String dinnerId,
-                           @ModelAttribute("dinner") String dinner)
-    {
+                           @ModelAttribute("dinner") String dinner) {
         Customer customer = customerRepository.findById(customerId).get();
-        Meal meal = new Meal();
-        meal.setCustomer(customer);
-        meal.setDayOfWeek(dayOfWeek);
-        meal.setMealName(mealName);
-
-        switch (mealName) {
-            case "Breakfast":
-                List<String> breakfastList = new ArrayList<>();
-                breakfastList.add(breakfast);
-                meal.setBreakfast(breakfastList);
-                break;
-            case "Desert":
-                List<String> desertList = new ArrayList<>();
-                desertList.add(desert);
-                meal.setDesert(desertList);
-                break;
-            case "Lunch":
-                List<String> lunchList = new ArrayList<>();
-                lunchList.add(lunch);
-                meal.setLunch(lunchList);
-                break;
-            case "Snack":
-                List<String> snackList = new ArrayList<>();
-                snackList.add(snack);
-                meal.setSnack(snackList);
-                break;
-            case "Dinner":
-                List<String> dinnerList = new ArrayList<>();
-                dinnerList.add(dinner);
-                meal.setDinner(dinnerList);
-                break;
-            default:
-                // Handle the case when the mealName doesn't match any of the above cases
-                // For example, you could throw an exception or log a warning.
-                break;
+        System.out.println("Selected Days of the Week:");
+        for (String dayOfWeek : daysOfWeek) {
+            System.out.println(dayOfWeek);
         }
-        MealPlan mealPlan = new MealPlan();
-        mealPlan.setCustomer(customer);
-        mealPlanService.save(mealPlan);
-        mealPlan.getMeals().add(meal);
-        meal.setMealPlan(mealPlan);
-        customer.getMeal().add(meal);
-        mealService.saveMeal(meal);
-        return "redirect:/{customer_id}/mealtable";
-    }
+        for (String dayOfWeek : daysOfWeek) {
+            Meal meal = new Meal();
+            meal.setCustomer(customer);
+            meal.setDayOfWeek(dayOfWeek);
+            meal.setMealName(mealName);
+
+            switch (mealName) {
+                case "Breakfast":
+                    List<String> breakfastList = new ArrayList<>();
+                    breakfastList.add(breakfast);
+                    meal.setBreakfast(breakfastList);
+                    break;
+                case "Desert":
+                    List<String> desertList = new ArrayList<>();
+                    desertList.add(desert);
+                    meal.setDesert(desertList);
+                    break;
+                case "Lunch":
+                    List<String> lunchList = new ArrayList<>();
+                    lunchList.add(lunch);
+                    meal.setLunch(lunchList);
+                    break;
+                case "Snack":
+                    List<String> snackList = new ArrayList<>();
+                    snackList.add(snack);
+                    meal.setSnack(snackList);
+                    break;
+                case "Dinner":
+                    List<String> dinnerList = new ArrayList<>();
+                    dinnerList.add(dinner);
+                    meal.setDinner(dinnerList);
+                    break;
+                default:
+                    // Handle the case when the mealName doesn't match any of the above cases
+                    // For example, you could throw an exception or log a warning.
+                    break;
+            }
+            MealPlan mealPlan = new MealPlan();
+            mealPlan.setCustomer(customer);
+            mealPlanService.save(mealPlan);
+            mealPlan.getMeals().add(meal);
+            meal.setMealPlan(mealPlan);
+            customer.getMeal().add(meal);
+            mealService.saveMeal(meal);
+        }
+            return "redirect:/{customer_id}/mealtable";
+        }
 
     @GetMapping("/updateMealForm/{meal_id}")
     public String updateMealForm(@PathVariable(value = "meal_id")Long meal_id, Model model) {

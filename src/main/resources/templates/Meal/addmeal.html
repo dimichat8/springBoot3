@@ -47,53 +47,39 @@
             <h1 class="h4 text-gray-900 mb-4">Add Food</h1>
           </div>
           <form action="#" th:action="@{/{customer_id}/saveMeal/foodIds (customer_id=${meal.customer.customer_id})}" th:object="${meal}" class="user" method="POST">
-          <div class="container">
-            <div class="row">
-            <fieldset class="row mb-3">
-              <div class="col-sm-10">
-                <h4><b>¨Day¨</b></h4>
-                <br>
+            <div class="container">
+              <div class="row">
+                <fieldset class="row mb-3">
+                  <div class="col-sm-10">
+                    <h4><b>Day</b></h4>
+                    <br>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="gridCheck1" value="Monday" th:field="*{dayOfWeek}" />
+                      <label class="form-check-label">Monday</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="gridCheck2" value="Tuesday" th:field="*{dayOfWeek}" />
+                      <label class="form-check-label">Tuesday</label>
+                    </div>
                 <div class="form-check">
-                  <input class="form-check-input" name="gridCheck1" id="gridCheck1" type="checkbox" value="Monday" th:field="*{dayOfWeek}">
-                  <label class="form-check-label" for="gridCheck1">
-                    Monday
-                  </label>
+                  <input class="form-check-input" type="checkbox" id="gridCheck3" value="Wednesday" th:field="*{dayOfWeek}">
+                  <label class="form-check-label">Wednesday</label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" name="gridCheck2" id="gridCheck2" type="checkbox" value="Tuesday" th:field="*{dayOfWeek}">
-                  <label class="form-check-label" for="gridCheck2">
-                    Tuesday
-                  </label>
+                  <input class="form-check-input" type="checkbox" id="gridCheck4" value="Thursday" th:field="*{dayOfWeek}">
+                  <label class="form-check-label">Thursday</label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" name="gridCheck3" id="gridCheck3" type="checkbox" value="Wednesday" th:field="*{dayOfWeek}">
-                  <label class="form-check-label" for="gridCheck3">
-                    Wednesday
-                  </label>
+                  <input class="form-check-input" type="checkbox" id="gridCheck5" value="Friday" th:field="*{dayOfWeek}">
+                  <label class="form-check-label">Friday</label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" name="gridCheck4" id="gridCheck4" type="checkbox" value="Thursday" th:field="*{dayOfWeek}">
-                  <label class="form-check-label" for="gridCheck4">
-                    Thursday
-                  </label>
+                  <input class="form-check-input" type="checkbox" id="gridCheck6" value="Saturday" th:field="*{dayOfWeek}">
+                  <label class="form-check-label">Saturday</label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" name="gridCheck5" id="gridCheck5" type="checkbox" value="Friday" th:field="*{dayOfWeek}">
-                  <label class="form-check-label" for="gridCheck5">
-                    Friday
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" name="gridCheck6" id="gridCheck6" type="checkbox" value="Saturday" th:field="*{dayOfWeek}">
-                  <label class="form-check-label" for="gridCheck6">
-                    Saturday
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" name="gridCheck7" id="gridCheck7" type="checkbox" value="Sunday" th:field="*{dayOfWeek}">
-                  <label class="form-check-label" for="gridCheck7">
-                    Sunday
-                  </label>
+                  <input class="form-check-input" type="checkbox" id="gridCheck7" value="Sunday" th:field="*{dayOfWeek}">
+                  <label class="form-check-label">Sunday</label>
                 </div>
               </div>
             </fieldset>
