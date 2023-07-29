@@ -170,19 +170,19 @@ public class MealController {
         return "redirect:/mealtable";
     }
 
-    @GetMapping("/dietProgram/export/pdf")
-    public void exportToPDF(HttpServletResponse response) throws DocumentException, IOException {
+    @GetMapping("/{customer_id}/dietProgram/export/pdf")
+    public void exportToPDF(@PathVariable(value = "customer_id") Long customerId, HttpServletResponse response) throws DocumentException, IOException {
         response.setContentType("application/pdf");
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
         String currentDateTime = dateFormatter.format(new Date());
-        Customer customer = new Customer();
-        String fullname = customer.getFirstName() + customer.getLastName();
+        Customer customer = customerService.getCustomerById(customerId);
+        String fullname = customer.getFirstName() + " " + customer.getLastName();
         String headerKey = "Content-Disposition";
         String headerValue = "attachment; filename=diet_for_" + fullname + "_" + currentDateTime +  ".pdf";
         response.setHeader(headerKey, headerValue);
-        List<Meal> mealList = mealService.getAllMeals();
-        UserPDFExporter exporter = new UserPDFExporter(mealList);
-        exporter.export(response);
+        List<Meal> mealList = mealService.getMealByCustomerId(customerId);
+        UserPDFExporter exporter = new UserPDFExporter(mealList, customerService);
+        exporter.export(response, customerId);
 
     }
 

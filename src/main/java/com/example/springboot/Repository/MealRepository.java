@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface MealRepository extends JpaRepository<Meal, Long> {
-    @Query("SELECT m.meal_id, m.mealName FROM Meal m JOIN Customer c where c.customer_id = m.customer.customer_id")
-    List<Object[]> findMealDataByCustomerId(@Param("customerId") Long customerId);
+    @Query("SELECT m FROM Meal m WHERE m.customer.customer_id = :customerId")
+    List<Meal> findMealDataByCustomerId(@Param("customerId") Long customerId);
 }

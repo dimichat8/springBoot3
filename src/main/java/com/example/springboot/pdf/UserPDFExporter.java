@@ -2,6 +2,7 @@ package com.example.springboot.pdf;
 
 import com.example.springboot.Entity.Customer;
 import com.example.springboot.Entity.Meal;
+import com.example.springboot.Service.CustomerService;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
@@ -14,11 +15,13 @@ import java.util.stream.Collectors;
 
 public class UserPDFExporter {
 
+    private CustomerService customerService;
     private List<Meal> mealList;
     private Customer customer;
 
-    public UserPDFExporter(List<Meal> mealList) {
+    public UserPDFExporter(List<Meal> mealList, CustomerService customerService) {
         this.mealList = mealList;
+        this.customerService = customerService;
     }
 
     private void writeTableHeader(PdfPTable table) {
@@ -124,14 +127,14 @@ public class UserPDFExporter {
         return (value != null) ? value : "-";
     }
 
-    public void export(HttpServletResponse response) throws DocumentException, IOException {
+    public void export(HttpServletResponse response, Long customerId) throws DocumentException, IOException {
         Document document = new Document(PageSize.A4);
         PdfWriter.getInstance(document, response.getOutputStream());
         document.open();
         Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
         font.setSize(18);
         font.setColor(BaseColor.BLACK);
-        Customer customer = new Customer();
+        Customer customer = customerService.getCustomerById(customerId);
         String fullname = customer.getFirstName() + customer.getLastName();
         Paragraph p = new Paragraph(" Diet Program for " + fullname, font);
         p.setAlignment(Paragraph.ALIGN_CENTER);

@@ -10,6 +10,8 @@ public interface MealService {
 
     List<Meal> getAllMeals();
 
+    List<Meal> getMealByCustomerId(Long customerId);
+
     Meal saveMeal(Meal recipe);
 
     Meal getMealById(Long recipe_id);

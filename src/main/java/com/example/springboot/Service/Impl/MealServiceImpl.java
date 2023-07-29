@@ -27,6 +27,11 @@ public class MealServiceImpl implements MealService {
     }
 
     @Override
+    public List<Meal> getMealByCustomerId(Long customerId) {
+        return mealRepository.findMealDataByCustomerId(customerId);
+    }
+
+    @Override
     public Meal saveMeal(Meal meal) {
         return mealRepository.save(meal);
     }

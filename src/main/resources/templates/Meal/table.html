@@ -246,7 +246,7 @@
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-2 text-gray-800">Plan</h1>
-            <form action="#" th:action="@{/dietProgram/export/pdf}" class="user" method="GET">
+            <form action="#" th:action="@{/{customer_id}/dietProgram/export/pdf (customer_id=${customer.customer_id})}" class="user" method="GET">
               <button th:type="submit" class="btn btn-primary profile-button" type="button">Generate Report</button>
             </form>
           </div>
@@ -254,10 +254,12 @@
           <div class="card shadow mb-4">
             <div class="card-body">
               <div class="table-responsive">
+                <span th:each="customer, iterate : ${customer}"></span>
+                <span >Diet For: <b th:text= "${customer.firstName + ' ' + customer.lastName}"></b></span>
                   <table class="table">
                     <thead>
                     <tr>
-                      <th>Type</th><!-- Empty cell at the top-left corner -->
+                      <th>Type</th>
                       <th scope="col"> Monday </th>
                       <th scope="col"> Tuesday </th>
                       <th scope="col"> Wednesday </th>
