@@ -46,9 +46,11 @@ public class Meal {
     @Column(name = "dinner")
     private List<String> dinner;
 
-    @OneToMany(mappedBy = "meal", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "meal_food",
+            joinColumns = @JoinColumn(name = "meal_id"),
+            inverseJoinColumns = @JoinColumn(name = "food_id"))
     private List<Food> foods = new ArrayList<>();
-
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;

@@ -131,14 +131,13 @@ public class UserPDFExporter {
         Document document = new Document(PageSize.A4);
         PdfWriter.getInstance(document, response.getOutputStream());
         document.open();
-        Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
-        font.setSize(18);
-        font.setColor(BaseColor.BLACK);
         Customer customer = customerService.getCustomerById(customerId);
         String fullname = customer.getFirstName() + customer.getLastName();
-        Paragraph p = new Paragraph(" Diet Program for " + fullname, font);
-        p.setAlignment(Paragraph.ALIGN_CENTER);
-        document.add(p);
+        Font fontForName = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
+        Paragraph fn = new Paragraph( fullname, fontForName);
+        fontForName.setSize(14);
+        fn.setAlignment(Paragraph.ALIGN_CENTER);
+        document.add(fn);
 
         PdfPTable table = new PdfPTable(8);
         table.setWidthPercentage(100f);

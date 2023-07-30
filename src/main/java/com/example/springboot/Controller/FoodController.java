@@ -77,10 +77,23 @@ public class FoodController {
     }
 
     @PostMapping("/deleteFood/{food_id}")
-    public String deleteFoods(@PathVariable(value = "food_id")Long food_id){
+    public String deleteFoods(@PathVariable(value = "food_id") Long food_id) {
+        // Retrieve the Food entity from the database
+        Food food = foodRepository.findById(food_id).orElse(null);
 
-        //Call delete food method
-        foodService.deleteFoodById(food_id);
+        if (food != null) {
+            // Remove the Food entity from all associated meals
+            for (Meal meal : food.getMeals()) {
+                meal.getFoods().remove(food);
+            }
+            // Clear the meals list in the Food entity
+            food.getMeals().clear();
+            // Save the Food entity to remove it from associated meals
+            foodRepository.save(food);
+
+            // Now, you can safely delete the Food entity
+            foodRepository.delete(food);
+        }
         return "redirect:/foodtable";
     }
 

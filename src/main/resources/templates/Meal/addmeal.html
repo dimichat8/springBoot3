@@ -22,7 +22,17 @@
   <link href="/css/sb-admin-2.min.css" rel="stylesheet">
   <style>
     .select2-container .select2-selection--multiple {
-      min-width: 400px; /* Increase the height as desired */
+      min-width: 400px;
+    }
+    #mealOptionsTitle {
+      position: relative;
+      left: 80px;
+    }
+    #mealOptions {
+      height: calc(1.5em * 5);
+      position: relative;
+      top: 90px;
+      right: 60px;
     }
   </style>
 
@@ -83,85 +93,38 @@
                 </div>
               </div>
             </fieldset>
-            //
-            <legend class="col-form-label col-sm-2 pt-0">
-              <fieldset class="row mb-3">
-                <div class="col-sm-10">
-                  <h4><b>¨Type¨</b></h4>
-                  <br>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="Breakfast"
-                           th:field="*{mealName}" checked>
-                    <label class="form-check-label" for="gridRadios1">
-                      Breakfast
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="Desert"
-                           th:field="*{mealName}">
-                    <label class="form-check-label" for="gridRadios2">
-                      Desert
-                    </label>
-                  </div>
-                  <div class="form-check disabled">
-                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="Lunch"
-                           th:field="*{mealName}">
-                    <label class="form-check-label" for="gridRadios3">
-                      Lunch
-                    </label>
-                  </div>
-                  <div class="form-check disabled">
-                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios4" value="Snack"
-                           th:field="*{mealName}">
-                    <label class="form-check-label" for="gridRadios4">
-                      Snack
-                    </label>
-                  </div>
-                  <div class="form-check disabled">
-                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios5" value="Dinner"
-                           th:field="*{mealName}">
-                    <label class="form-check-label" for="gridRadios5">
-                      Dinner
-                    </label>
-                  </div>
-                </div>
-              </fieldset>
-            </legend>
+                <h4><b> <label id="mealOptionsTitle" for="mealOptions">Meal Types:</label></b></h4><br><br>
+                <select id="mealOptions" name="mealName" th:field="*{mealName}" size="5">
+                  <option value="Breakfast">Breakfast</option>
+                  <option value="Desert">Desert</option>
+                  <option value="Lunch">Lunch</option>
+                  <option value="Snack">Snack</option>
+                  <option value="Dinner">Dinner</option>
+                </select>
             </div>
           </div>
-            <input class="form-check-input" name="breakfast" id="breakfast" type="text" value="breakfast" th:field="*{breakfast}" placeholder="breakfast"><br><br>
-            <input class="form-check-input" name="breakfast" id="desert" type="text" value="desert" th:field="*{desert}" placeholder="desert"><br><br>
-            <input class="form-check-input" name="breakfast" id="lunch" type="text" value="lunch" th:field="*{lunch}" placeholder="lunch"><br><br>
-            <input class="form-check-input" name="breakfast" id="snack" type="text" value="snack" th:field="*{snack}" placeholder="snack"><br><br>
-            <input class="form-check-input" name="breakfast" id="dinner" type="text" value="dinner" th:field="*{dinner}" placeholder="dinner"><br><br>
-            //
 
-            <label for="foodIdsForBreakFast">Breakfast Options:</label><br>
-            <select id="foodIdsForBreakFast" name="foodIdsForBreakFast" multiple>
-              <option th:each="food : ${foods}" th:value="${food.food_id}" th:text="${food.name}  + '->' + ' Grams:' + ${food.grams} + ' Calories' + ${food.calories}"
-              th:field="*{breakfast}"></option>
+
+
+            <label for="foodIds">Food Options:</label><br>
+            <select id="foodIds" name="foodIds" multiple>
+              <option th:each="food : ${foods}" th:value="${food.food_id}" th:text="${food.name}"></option>
             </select>
-            <br>
-            <label for="foodIdsForDesert">Desert Options:</label><br>
-            <select id="foodIdsForDesert" name="foodIdsForDesert" multiple>
-              <option th:each="food : ${foods}" th:value="${food.food_id}" th:text="${food.name}  + '->' + ' Grams:' + ${food.grams} + ' Calories' + ${food.calories}"></option>
-            </select>
-            <br>
-            <label for="foodIdsForLunch">Launch Options:</label><br>
-            <select id="foodIdsForLunch" name="foodIdsForLunch" multiple>
-              <option th:each="food : ${foods}" th:value="${food.food_id}" th:text="${food.name}  + '->' + ' Grams:' + ${food.grams} + ' Calories' + ${food.calories}"></option>
-            </select>
-            <br>
-            <label for="foodIdsForSnack">Snack Options:</label><br>
-            <select id="foodIdsForSnack" name="foodIdsFoSnack" multiple>
-              <option th:each="food : ${foods}" th:value="${food.food_id}" th:text="${food.name}  + '->' + ' Grams:' + ${food.grams} + ' Calories' + ${food.calories}"></option>
-            </select>
-            <br>
-            <label for="foodIdsForDinner">Dinner Options:</label><br>
-            <select id="foodIdsForDinner" name="foodIdsForDinner" multiple>
-              <option th:each="food : ${foods}" th:value="${food.food_id}" th:text="${food.name}  + '->' + ' Grams:' + ${food.grams} + ' Calories' + ${food.calories}"></option>
-            </select>
-          <div class="mt-5 text-center">
+
+
+
+            <input type="hidden" id="mealName" name="mealName" th:value="${meal.mealName}">
+            <input type="hidden" id="breakfast" name="breakfast" th:attr="value=*{breakfast}">
+            <input type="hidden" id="desert" name="desert" th:attr="value=*{desert}">
+            <input type="hidden" id="lunch" name="lunch" th:attr="value=*{lunch}">
+            <input type="hidden" id="snack" name="snack" th:attr="value=*{snack}">
+            <input type="hidden" id="dinner" name="dinner" th:attr="value=*{dinner}">
+
+
+
+
+
+            <div class="mt-5 text-center">
             <button type="submit" class="btn btn-primary profile-button">Submit</button>
           </div>
         </form>
@@ -195,37 +158,37 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <script>
-  $(document).ready(function() {
-    $('#foodIdsForBreakFast').select2({
-      placeholder: 'Select Breakfast options', // Add a placeholder text
-      dropdownParent: $('#foodIdsForBreakFast').parent() // Position the dropdown relative to the parent element
+  $(document).ready(function () {
+    // Initialize Select2 for the food options select dropdown
+    $('#foodIds').select2({
+      placeholder: 'Select Food options',
+      dropdownParent: $('#foodIds').parent()
     });
-  });
-  $(document).ready(function() {
-    $('#foodIdsForDesert').select2({
-      placeholder: 'Select Breakfast options', // Add a placeholder text
-      dropdownParent: $('#foodIdsForDesert').parent() // Position the dropdown relative to the parent element
+
+    // Function to update the meal input fields whenever a meal option is selected
+    $('#foodIds').on('change', function () {
+      var selectedMeals = $(this).find(':selected').map(function () {
+        return $(this).text(); // Get the text (food.name) of the selected options
+      }).get();
+
+      // Set the selected meals as the value of each meal input field
+      $('#breakfast').val(selectedMeals.join(', '));
+      $('#desert').val(selectedMeals.join(', '));
+      $('#lunch').val(selectedMeals.join(', '));
+      $('#snack').val(selectedMeals.join(', '));
+      $('#dinner').val(selectedMeals.join(', '));
     });
-  });
-  $(document).ready(function() {
-    $('#foodIdsForLunch').select2({
-      placeholder: 'Select Launch options', // Add a placeholder text
-      dropdownParent: $('#foodIdsForLunch').parent() // Position the dropdown relative to the parent element
-    });
-  });
-  $(document).ready(function() {
-    $('#foodIdsForSnack').select2({
-      placeholder: 'Select Breakfast options', // Add a placeholder text
-      dropdownParent: $('#foodIdsForSnack').parent() // Position the dropdown relative to the parent element
-    });
-  });
-  $(document).ready(function() {
-    $('#foodIdsForDinner').select2({
-      placeholder: 'Select Launch options', // Add a placeholder text
-      dropdownParent: $('#foodIdsForDinner').parent() // Position the dropdown relative to the parent element
-    });
+
+    // Fetch the selected meal options and set them as the initial values of the meal input fields
+    var selectedMeals = $('#foodIds').find(':selected').map(function () {
+      return $(this).text(); // Get the text (food.name) of the selected options
+    }).get();
+    $('#breakfast').val(selectedMeals.join(', '));
+    $('#desert').val(selectedMeals.join(', '));
+    $('#lunch').val(selectedMeals.join(', '));
+    $('#snack').val(selectedMeals.join(', '));
+    $('#dinner').val(selectedMeals.join(', '));
   });
 </script>
 </body>
-
 </html>

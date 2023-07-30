@@ -21,8 +21,9 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Controller
 public class MealController {
@@ -77,28 +78,23 @@ public class MealController {
 
     @PostMapping("/{customer_id}/saveMeal/foodIds")
     public String saveMeal(@PathVariable(value = "customer_id") Long customerId,
+                           @RequestParam("foodIds") List<Long> foodIds,
                            @RequestParam("dayOfWeek") List<String> daysOfWeek,
                            @ModelAttribute("mealName") String mealName,
-                           @ModelAttribute("breakfastId") String breakfastId,
                            @ModelAttribute("breakfast") String breakfast,
-                           @ModelAttribute("desertId") String desertId,
                            @ModelAttribute("desert") String desert,
-                           @ModelAttribute("lunchId") String lunchId,
                            @ModelAttribute("lunch") String lunch,
-                           @ModelAttribute("snackId") String snackId,
                            @ModelAttribute("snack") String snack,
-                           @ModelAttribute("dinnerId") String dinnerId,
                            @ModelAttribute("dinner") String dinner) {
         Customer customer = customerRepository.findById(customerId).get();
-        System.out.println("Selected Days of the Week:");
-        for (String dayOfWeek : daysOfWeek) {
-            System.out.println(dayOfWeek);
-        }
+        List<Food> selectedFoods = foodRepository.findAllById(foodIds);
+
         for (String dayOfWeek : daysOfWeek) {
             Meal meal = new Meal();
             meal.setCustomer(customer);
             meal.setDayOfWeek(dayOfWeek);
             meal.setMealName(mealName);
+            meal.setFoods(selectedFoods);
 
             switch (mealName) {
                 case "Breakfast":
@@ -131,6 +127,7 @@ public class MealController {
                     // For example, you could throw an exception or log a warning.
                     break;
             }
+
             MealPlan mealPlan = new MealPlan();
             mealPlan.setCustomer(customer);
             mealPlanService.save(mealPlan);
@@ -139,8 +136,9 @@ public class MealController {
             customer.getMeal().add(meal);
             mealService.saveMeal(meal);
         }
-            return "redirect:/{customer_id}/mealtable";
-        }
+
+        return "redirect:/{customer_id}/mealtable";
+    }
 
     @GetMapping("/updateMealForm/{meal_id}")
     public String updateMealForm(@PathVariable(value = "meal_id")Long meal_id, Model model) {

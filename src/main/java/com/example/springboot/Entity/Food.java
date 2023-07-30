@@ -18,7 +18,7 @@ public class Food {
     @Column(name = "name")
     private String name;
     @Column(name = "grams")
-    private Float grams;
+    private Float grams = 100F;
     @Column(name = "calcium")
     private Float calcium;
     @Column(name = "magnesium")
@@ -26,16 +26,15 @@ public class Food {
     @Column(name = "phosphorus")
     private Float phosphorus;
 
-    @ManyToOne
-    @JoinColumn(name = "meal_id")
-    private Meal meal;
+    @ManyToMany(mappedBy = "foods")
+    private List<Meal> meals = new ArrayList<>();
 
 
     @Column(name = "calories")
     private Float calories;
 
 
-    public Food(Long food_id, Float grams, String name, Float calcium, Float magnesium, Float phosphorus, Float calories) {
+    public Food(Long food_id, Float grams, String name, Float calcium, Float magnesium, Float phosphorus, Float calories, List<Meal> meals) {
         this.food_id = food_id;
         this.name = name;
         this.grams = grams;
@@ -43,6 +42,7 @@ public class Food {
         this.magnesium = magnesium;
         this.phosphorus = phosphorus;
         this.calories = calories;
+        this.meals = meals;
     }
 
     public Food() {
@@ -96,12 +96,12 @@ public class Food {
         this.phosphorus = phosphorus;
     }
 
-    public Meal getMeal() {
-        return meal;
+    public List<Meal> getMeals() {
+        return meals;
     }
 
-    public void setMeal(Meal meal) {
-        this.meal = meal;
+    public void setMeals(List<Meal> meals) {
+        this.meals = meals;
     }
 
     public Float getCalories() {
