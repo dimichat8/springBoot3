@@ -22,19 +22,46 @@
   <link href="/css/sb-admin-2.min.css" rel="stylesheet">
   <style>
     .select2-container .select2-selection--multiple {
-      min-width: 400px;
+      min-width: 140px;
     }
     #mealOptionsTitle {
       position: relative;
       left: 80px;
+    }
+    select option:checked {
+      background-color: blue;
+      color: white;
     }
     #mealOptions {
       height: calc(1.5em * 5);
       position: relative;
       top: 90px;
       right: 60px;
+      min-width: 120px;
+    }
+    .hidden {
+      display: none;
+    }
+    .button-container {
+      display: inline-block;
+      vertical-align: middle;
     }
   </style>
+
+  <script>
+    var previousButtonsContainer = null;
+
+    function toggleButtons(customerId) {
+      var buttonsContainer = document.getElementById('buttons-' + customerId);
+
+      if (previousButtonsContainer !== null && previousButtonsContainer !== buttonsContainer) {
+        previousButtonsContainer.classList.add('hidden');
+      }
+
+      buttonsContainer.classList.toggle('hidden');
+      previousButtonsContainer = buttonsContainer;
+    }
+  </script>
 
 </head>
 
@@ -128,6 +155,34 @@
             <button type="submit" class="btn btn-primary profile-button">Submit</button>
           </div>
         </form>
+
+
+          <a th:href="@{/{customer_id}/saveMeal/foodIds (customer_id=${meal.customer.customer_id})}" th:object="${meal}" class="btn btn-primary profile-button"
+             data-toggle="modal" th:data-target="'#saveCustomerModal-' + ${customer.customer_id}">Save</a>
+
+          <div th:id="'saveCustomerModal-' + ${customer.customer_id}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="'saveCustomerModalLabel-' + ${customer.customer_id}" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" th:id="'saveCustomerModalLabel-' + ${customer.customer_id}">Save Program Confirmation</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>Do you want to save the program for  <b><span th:text="${customer.firstName + ' ' + customer.lastName}"/></b>?</p>
+                  <!-- Display additional information about the Customer item if needed -->
+                </div>
+                <div class="modal-footer">
+                  <form action="#" th:action="@{/{customer_id}/saveMeal/foodIds (customer_id=${meal.customer.customer_id})}" th:object="${meal}" method="POST">
+                    <button type="submit" class="btn btn-primary profile-button">Save</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Continue</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <form action="#" th:action="@{/{customer_id}/mealtable  (customer_id=${meal.customer.customer_id})}" th:object="${meal}" class="user"  method="GET">
             <div class="mt-5 text-center">
               <button type="submit" class="btn btn-danger profile-button">Back To Table</button>
