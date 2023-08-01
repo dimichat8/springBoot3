@@ -55,11 +55,10 @@ public class Meal {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @ManyToOne
-    @JoinColumn(name = "mealPlan")
-    private MealPlan mealPlan;
+    @OneToMany(mappedBy = "meal",  cascade = CascadeType.ALL,  orphanRemoval = true)
+    List<MealPlan> mealPlans = new ArrayList<>();
 
-    public Meal(Long meal_id, String mealName, String dayOfWeek, List<String> breakfast, List<String> desert, List<String> lunch, List<String> snack, List<String> dinner, List<Food> foods, Customer customer, MealPlan mealPlan) {
+    public Meal(Long meal_id, String mealName, String dayOfWeek, List<String> breakfast, List<String> desert, List<String> lunch, List<String> snack, List<String> dinner, List<Food> foods, Customer customer, List<MealPlan> mealPlans) {
         this.meal_id = meal_id;
         this.mealName = mealName;
         this.dayOfWeek = dayOfWeek;
@@ -70,7 +69,7 @@ public class Meal {
         this.dinner = dinner;
         this.foods = foods;
         this.customer = customer;
-        this.mealPlan = mealPlan;
+        this.mealPlans = mealPlans;
     }
 
     public Meal() {
@@ -152,12 +151,12 @@ public class Meal {
         return dinner;
     }
 
-    public MealPlan getMealPlan() {
-        return mealPlan;
+    public List<MealPlan> getMealPlans() {
+        return mealPlans;
     }
 
-    public void setMealPlan(MealPlan mealPlan) {
-        this.mealPlan = mealPlan;
+    public void setMealPlans(List<MealPlan> mealPlans) {
+        this.mealPlans = mealPlans;
     }
 
     public void setDinner(List<String> dinner) {

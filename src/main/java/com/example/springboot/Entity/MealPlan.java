@@ -3,9 +3,6 @@ package com.example.springboot.Entity;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Entity
 @Table(name = "MealPlan")
 public class MealPlan {
@@ -21,17 +18,17 @@ public class MealPlan {
     private Customer customer;
 
 
-    @OneToMany(mappedBy = "mealPlan", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Meal> meals = new ArrayList<>();
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "mealId")
+    private Meal meal;
 
     public MealPlan() {
     }
 
-    public MealPlan(Long mealPlanId, Customer customer, List<Meal> meals) {
+    public MealPlan(Long mealPlanId, Customer customer, Meal meal) {
         this.mealPlanId = mealPlanId;
         this.customer = customer;
-        this.meals = meals;
+        this.meal = meal;
     }
 
     public Long getMealPlanId() {
@@ -50,11 +47,11 @@ public class MealPlan {
         this.customer = customer;
     }
 
-    public List<Meal> getMeals() {
-        return meals;
+    public Meal getMeal() {
+        return meal;
     }
 
-    public void setMeals(List<Meal> meals) {
-        this.meals = meals;
+    public void setMeal(Meal meal) {
+        this.meal = meal;
     }
 }

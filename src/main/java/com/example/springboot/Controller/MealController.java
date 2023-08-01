@@ -6,6 +6,7 @@ import com.example.springboot.Entity.Meal;
 import com.example.springboot.Entity.MealPlan;
 import com.example.springboot.Repository.CustomerRepository;
 import com.example.springboot.Repository.FoodRepository;
+import com.example.springboot.Repository.MealPlanRepository;
 import com.example.springboot.Repository.MealRepository;
 import com.example.springboot.Service.CustomerService;
 import com.example.springboot.Service.MealPlanService;
@@ -41,6 +42,8 @@ public class MealController {
     private FoodRepository foodRepository;
     @Autowired
     private MealPlanService mealPlanService;
+    @Autowired
+    private MealPlanRepository mealPlanRepository;
 
 
 
@@ -79,6 +82,7 @@ public class MealController {
     @PostMapping("/{customer_id}/saveMeal/foodIds")
     public String saveMeal(@PathVariable(value = "customer_id") Long customerId,
                            @RequestParam("foodIds") List<Long> foodIds,
+                           @RequestParam("foodIds") List<Long> mealPlanIds,
                            @RequestParam("dayOfWeek") List<String> daysOfWeek,
                            @ModelAttribute("mealName") String mealName,
                            @ModelAttribute("breakfast") String breakfast,
@@ -88,6 +92,7 @@ public class MealController {
                            @ModelAttribute("dinner") String dinner) {
         Customer customer = customerRepository.findById(customerId).get();
         List<Food> selectedFoods = foodRepository.findAllById(foodIds);
+        List<MealPlan> selectedMealPlans = mealPlanRepository.findAllById(foodIds);
 
         for (String dayOfWeek : daysOfWeek) {
             Meal meal = new Meal();
@@ -95,6 +100,7 @@ public class MealController {
             meal.setDayOfWeek(dayOfWeek);
             meal.setMealName(mealName);
             meal.setFoods(selectedFoods);
+            meal.setMealPlans(selectedMealPlans);
 
             switch (mealName) {
                 case "Breakfast":
@@ -131,12 +137,10 @@ public class MealController {
             MealPlan mealPlan = new MealPlan();
             mealPlan.setCustomer(customer);
             mealPlanService.save(mealPlan);
-            mealPlan.getMeals().add(meal);
-            meal.setMealPlan(mealPlan);
+            mealPlan.setMeal(meal);
             customer.getMeal().add(meal);
             mealService.saveMeal(meal);
         }
-
         return "redirect:/{customer_id}/mealtable";
     }
 

@@ -56,11 +56,11 @@ public class Customer {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Food> foods = new ArrayList<>();
 
-    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL,  orphanRemoval = true)
+    @OneToMany(mappedBy = "customer",fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Meal> meals = new ArrayList<>();
 
 
-    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL,  orphanRemoval = true)
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MealPlan> mealPlans = new ArrayList<>();
 
     public Customer(Long customer_id, String firstName, String lastName, String email, String address, String city, String phone, LocalDate birthday, String gender, List<CustomerInfo> customerInfos, List<Food> foods, List<Meal> meals, List<MealPlan> mealPlans) {

@@ -1,7 +1,7 @@
 package com.example.springboot.Service.Impl;
 
-import com.example.springboot.Entity.Food;
 import com.example.springboot.Entity.MealPlan;
+import com.example.springboot.Repository.CustomerRepository;
 import com.example.springboot.Repository.FoodRepository;
 import com.example.springboot.Repository.MealPlanRepository;
 import com.example.springboot.Service.MealPlanService;

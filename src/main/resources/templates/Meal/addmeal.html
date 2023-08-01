@@ -26,7 +26,7 @@
     }
     #mealOptionsTitle {
       position: relative;
-      left: 80px;
+      left: 70px;
     }
     select option:checked {
       background-color: blue;
@@ -39,12 +39,19 @@
       right: 60px;
       min-width: 120px;
     }
-    .hidden {
-      display: none;
+    #foodIdsTitle, #foodIds {
+      left: 80px;
     }
-    .button-container {
-      display: inline-block;
-      vertical-align: middle;
+    #inputFieldsContainer {
+      position: relative;
+      left: 170px;
+      bottom: 48px;
+    }
+    .input-group {
+      width: 150px; /* Adjust the width as needed */
+    }
+    .input-group label {
+      font-size: 12px; /* Adjust the font size as needed */
     }
   </style>
 
@@ -131,13 +138,20 @@
             </div>
           </div>
 
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-6 d-flex justify-content-end">
+                  <div>
+                  <label id="foodIdsTitle" for="foodIds" class="food-options-label">Food Options:</label><br>
+                  <select id="foodIds" name="foodIds" multiple class="form-select form-select-lg mb-3">
+                    <option th:each="food : ${foods}" th:value="${food.food_id}" th:text="${food.name}"></option>
+                  </select>
 
-
-            <label for="foodIds">Food Options:</label><br>
-            <select id="foodIds" name="foodIds" multiple>
-              <option th:each="food : ${foods}" th:value="${food.food_id}" th:text="${food.name}"></option>
-            </select>
-
+                  <div id="inputFieldsContainer" class="mt-2">
+                  </div>
+                </div>
+              </div>
+            </div>
 
 
             <input type="hidden" id="mealName" name="mealName" th:value="${meal.mealName}">
@@ -152,36 +166,35 @@
 
 
             <div class="mt-5 text-center">
-            <button type="submit" class="btn btn-primary profile-button">Submit</button>
-          </div>
-        </form>
 
+              <a th:href="@{/{customer_id}/saveMeal/foodIds (customer_id=${meal.customer.customer_id})}" th:object="${meal}" class="btn btn-primary profile-button"
+                 data-toggle="modal" th:data-target="'#saveCustomerModal-' + ${customer.customer_id}">Save</a>
 
-          <a th:href="@{/{customer_id}/saveMeal/foodIds (customer_id=${meal.customer.customer_id})}" th:object="${meal}" class="btn btn-primary profile-button"
-             data-toggle="modal" th:data-target="'#saveCustomerModal-' + ${customer.customer_id}">Save</a>
-
-          <div th:id="'saveCustomerModal-' + ${customer.customer_id}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="'saveCustomerModalLabel-' + ${customer.customer_id}" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" th:id="'saveCustomerModalLabel-' + ${customer.customer_id}">Save Program Confirmation</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <p>Do you want to save the program for  <b><span th:text="${customer.firstName + ' ' + customer.lastName}"/></b>?</p>
-                  <!-- Display additional information about the Customer item if needed -->
-                </div>
-                <div class="modal-footer">
-                  <form action="#" th:action="@{/{customer_id}/saveMeal/foodIds (customer_id=${meal.customer.customer_id})}" th:object="${meal}" method="POST">
-                    <button type="submit" class="btn btn-primary profile-button">Save</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Continue</button>
-                  </form>
+              <div th:id="'saveCustomerModal-' + ${customer.customer_id}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="'saveCustomerModalLabel-' + ${customer.customer_id}" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" th:id="'saveCustomerModalLabel-' + ${customer.customer_id}">Save Program Confirmation</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p>Do you want to save the program for  <b><span th:text="${customer.firstName + ' ' + customer.lastName}"/></b>?</p>
+                      <!-- Display additional information about the Customer item if needed -->
+                    </div>
+                    <div class="modal-footer">
+                      <!--<form action="#" th:action="@{/{customer_id}/saveMeal/foodIds (customer_id=${meal.customer.customer_id})}" th:object="${meal}" method="POST">-->
+                        <button type="submit" class="btn btn-primary profile-button">Save</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Continue</button>
+                      <!--</form>-->
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+            </div>
+          </form>
 
           <form action="#" th:action="@{/{customer_id}/mealtable  (customer_id=${meal.customer.customer_id})}" th:object="${meal}" class="user"  method="GET">
             <div class="mt-5 text-center">
@@ -220,9 +233,9 @@
       dropdownParent: $('#foodIds').parent()
     });
 
-    // Function to update the meal input fields whenever a meal option is selected
-    $('#foodIds').on('change', function () {
-      var selectedMeals = $(this).find(':selected').map(function () {
+    // Function to handle the change event of the food options select dropdown
+    function handleFoodOptionsChange() {
+      var selectedMeals = $('#foodIds').find(':selected').map(function () {
         return $(this).text(); // Get the text (food.name) of the selected options
       }).get();
 
@@ -232,18 +245,38 @@
       $('#lunch').val(selectedMeals.join(', '));
       $('#snack').val(selectedMeals.join(', '));
       $('#dinner').val(selectedMeals.join(', '));
-    });
 
-    // Fetch the selected meal options and set them as the initial values of the meal input fields
+      // Update the input fields for each selected meal type
+      updateInputFields(selectedMeals);
+    }
+
+    // Attach the handleFoodOptionsChange function to the change event of the food options select dropdown
+    $('#foodIds').on('change', handleFoodOptionsChange);
+
+    // Function to update the input fields for each selected meal type
+    function updateInputFields(selectedMeals) {
+      // Clear previous input fields
+      $('#inputFieldsContainer').empty();
+
+      // Add input fields for each selected meal type
+      selectedMeals.forEach(function (mealType) {
+        var inputField = '<div class="input-group mb-2 input-group">' +
+                '<label class="input-group-text" for="' + mealType.toLowerCase() + '">' + mealType + ':</label>' +
+                '<input type="text" class="form-control" id="' + mealType.toLowerCase() + '" name="' + mealType.toLowerCase() + '" placeholder="' + mealType + ' grams">' +
+                '</div>';
+        $('#inputFieldsContainer').append(inputField);
+      });
+    }
+
+    // Fetch the selected meal options and set them as the initial input fields
     var selectedMeals = $('#foodIds').find(':selected').map(function () {
       return $(this).text(); // Get the text (food.name) of the selected options
     }).get();
-    $('#breakfast').val(selectedMeals.join(', '));
-    $('#desert').val(selectedMeals.join(', '));
-    $('#lunch').val(selectedMeals.join(', '));
-    $('#snack').val(selectedMeals.join(', '));
-    $('#dinner').val(selectedMeals.join(', '));
+
+    // Set the initial input fields
+    updateInputFields(selectedMeals);
   });
+
 </script>
 </body>
 </html>
