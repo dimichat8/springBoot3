@@ -12,7 +12,7 @@ public class MealPlan {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "mealPlanId")
     private Long mealPlanId;
 

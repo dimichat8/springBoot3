@@ -1,7 +1,9 @@
 package com.example.springboot.Entity;
 
 import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,7 +61,13 @@ public class Meal {
     @JoinColumn(name = "mealPlan")
     private MealPlan mealPlan;
 
-    public Meal(Long meal_id, String mealName, String dayOfWeek, List<String> breakfast, List<String> desert, List<String> lunch, List<String> snack, List<String> dinner, List<Food> foods, Customer customer, MealPlan mealPlan) {
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate dateFrom;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate dateTo;
+
+    public Meal(Long meal_id, String mealName, String dayOfWeek, List<String> breakfast, List<String> desert, List<String> lunch, List<String> snack, List<String> dinner, List<Food> foods, Customer customer, MealPlan mealPlan, LocalDate dateFrom, LocalDate dateTo) {
         this.meal_id = meal_id;
         this.mealName = mealName;
         this.dayOfWeek = dayOfWeek;
@@ -71,6 +79,8 @@ public class Meal {
         this.foods = foods;
         this.customer = customer;
         this.mealPlan = mealPlan;
+        this.dateFrom = dateFrom;
+        this.dateTo = dateTo;
     }
 
     public Meal() {
@@ -162,7 +172,21 @@ public class Meal {
 
     public void setDinner(List<String> dinner) {
         this.dinner = dinner;
+    }
 
+    public LocalDate getDateFrom() {
+        return dateFrom;
+    }
 
+    public void setDateFrom(LocalDate dateFrom) {
+        this.dateFrom = dateFrom;
+    }
+
+    public LocalDate getDateTo() {
+        return dateTo;
+    }
+
+    public void setDateTo(LocalDate dateTo) {
+        this.dateTo = dateTo;
     }
 }

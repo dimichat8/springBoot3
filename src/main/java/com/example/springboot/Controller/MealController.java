@@ -191,6 +191,26 @@ public class MealController {
 
     }
 
+    @PostMapping("/{customer_id}/addMeal")
+    public String createMeal(@PathVariable(value = "customer_id") Long customerId,
+                             @ModelAttribute("meal") Meal meal) {
+        Customer customer = customerRepository.findById(customerId).orElse(null);
+        if (customer == null) {
+            // Handle the case where the customer is not found
+            // You may redirect or show an error page
+            return "error";
+        }
+
+        // Set the customer for the meal
+        meal.setCustomer(customer);
+
+        // Save the meal in the database
+        mealRepository.save(meal);
+
+        // Redirect to the addmeal page with dateFrom and dateTo as query parameters
+        return "redirect:/{customer_id}/addmeal?dateFrom=" + meal.getDateFrom() + "&dateTo=" + meal.getDateTo();
+    }
+
 }
 
 
