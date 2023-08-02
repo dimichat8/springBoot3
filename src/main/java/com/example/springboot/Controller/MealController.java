@@ -15,6 +15,7 @@ import com.example.springboot.pdf.UserPDFExporter;
 import com.itextpdf.text.DocumentException;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -82,7 +84,6 @@ public class MealController {
     @PostMapping("/{customer_id}/saveMeal/foodIds")
     public String saveMeal(@PathVariable(value = "customer_id") Long customerId,
                            @RequestParam("foodIds") List<Long> foodIds,
-                           @RequestParam("foodIds") List<Long> mealPlanIds,
                            @RequestParam("dayOfWeek") List<String> daysOfWeek,
                            @ModelAttribute("mealName") String mealName,
                            @ModelAttribute("breakfast") String breakfast,
@@ -92,7 +93,7 @@ public class MealController {
                            @ModelAttribute("dinner") String dinner) {
         Customer customer = customerRepository.findById(customerId).get();
         List<Food> selectedFoods = foodRepository.findAllById(foodIds);
-        List<MealPlan> selectedMealPlans = mealPlanRepository.findAllById(foodIds);
+
 
         for (String dayOfWeek : daysOfWeek) {
             Meal meal = new Meal();
@@ -100,7 +101,8 @@ public class MealController {
             meal.setDayOfWeek(dayOfWeek);
             meal.setMealName(mealName);
             meal.setFoods(selectedFoods);
-            meal.setMealPlans(selectedMealPlans);
+
+
 
             switch (mealName) {
                 case "Breakfast":
@@ -137,7 +139,8 @@ public class MealController {
             MealPlan mealPlan = new MealPlan();
             mealPlan.setCustomer(customer);
             mealPlanService.save(mealPlan);
-            mealPlan.setMeal(meal);
+            mealPlan.getMeals().add(meal);
+            meal.setMealPlan(mealPlan);
             customer.getMeal().add(meal);
             mealService.saveMeal(meal);
         }

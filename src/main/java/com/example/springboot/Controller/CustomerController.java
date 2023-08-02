@@ -40,13 +40,15 @@ public class CustomerController {
     }
     @GetMapping("/customertable")
     public String listOfCustomers(Model model) {
-        model.addAttribute("customers", customerService.getAllCustomers());
+        List<Customer> customers = customerService.getAllCustomers();
+        Meal meal = new Meal();
+        model.addAttribute("customers", customers);
+        model.addAttribute("meal", meal);
         return "Customer/table";
     }
 
     @GetMapping("/addcustomer")
     public String createCustomerForm(Model model) {
-
         Customer customer = new Customer();
         model.addAttribute("customer", customer);
         return "Customer/addcustomer";

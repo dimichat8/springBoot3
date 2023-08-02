@@ -3,13 +3,16 @@ package com.example.springboot.Entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "MealPlan")
 public class MealPlan {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "mealPlanId")
     private Long mealPlanId;
 
@@ -18,17 +21,16 @@ public class MealPlan {
     private Customer customer;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "mealId")
-    private Meal meal;
+    @OneToMany(mappedBy = "mealPlan",fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Meal> meals = new ArrayList<>();
 
     public MealPlan() {
     }
 
-    public MealPlan(Long mealPlanId, Customer customer, Meal meal) {
+    public MealPlan(Long mealPlanId, Customer customer, List<Meal> meals) {
         this.mealPlanId = mealPlanId;
         this.customer = customer;
-        this.meal = meal;
+        this.meals = meals;
     }
 
     public Long getMealPlanId() {
@@ -47,11 +49,11 @@ public class MealPlan {
         this.customer = customer;
     }
 
-    public Meal getMeal() {
-        return meal;
+    public List<Meal> getMeals() {
+        return meals;
     }
 
-    public void setMeal(Meal meal) {
-        this.meal = meal;
+    public void setMeals(List<Meal> meals) {
+        this.meals = meals;
     }
 }

@@ -51,14 +51,15 @@ public class Meal {
             joinColumns = @JoinColumn(name = "meal_id"),
             inverseJoinColumns = @JoinColumn(name = "food_id"))
     private List<Food> foods = new ArrayList<>();
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @OneToMany(mappedBy = "meal",  cascade = CascadeType.ALL,  orphanRemoval = true)
-    List<MealPlan> mealPlans = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "mealPlan")
+    private MealPlan mealPlan;
 
-    public Meal(Long meal_id, String mealName, String dayOfWeek, List<String> breakfast, List<String> desert, List<String> lunch, List<String> snack, List<String> dinner, List<Food> foods, Customer customer, List<MealPlan> mealPlans) {
+    public Meal(Long meal_id, String mealName, String dayOfWeek, List<String> breakfast, List<String> desert, List<String> lunch, List<String> snack, List<String> dinner, List<Food> foods, Customer customer, MealPlan mealPlan) {
         this.meal_id = meal_id;
         this.mealName = mealName;
         this.dayOfWeek = dayOfWeek;
@@ -69,7 +70,7 @@ public class Meal {
         this.dinner = dinner;
         this.foods = foods;
         this.customer = customer;
-        this.mealPlans = mealPlans;
+        this.mealPlan = mealPlan;
     }
 
     public Meal() {
@@ -151,12 +152,12 @@ public class Meal {
         return dinner;
     }
 
-    public List<MealPlan> getMealPlans() {
-        return mealPlans;
+    public MealPlan getMealPlan() {
+        return mealPlan;
     }
 
-    public void setMealPlans(List<MealPlan> mealPlans) {
-        this.mealPlans = mealPlans;
+    public void setMealPlan(MealPlan mealPlan) {
+        this.mealPlan = mealPlan;
     }
 
     public void setDinner(List<String> dinner) {
