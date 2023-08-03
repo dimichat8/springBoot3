@@ -2,7 +2,9 @@
 package com.example.springboot.Entity;
 
 import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,13 +26,21 @@ public class MealPlan {
     @OneToMany(mappedBy = "mealPlan",fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Meal> meals = new ArrayList<>();
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate dateFrom;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate dateTo;
+
     public MealPlan() {
     }
 
-    public MealPlan(Long mealPlanId, Customer customer, List<Meal> meals) {
+    public MealPlan(Long mealPlanId, Customer customer, List<Meal> meals, LocalDate dateFrom, LocalDate dateTo) {
         this.mealPlanId = mealPlanId;
         this.customer = customer;
         this.meals = meals;
+        this.dateFrom = dateFrom;
+        this.dateTo = dateTo;
     }
 
     public Long getMealPlanId() {
@@ -55,5 +65,21 @@ public class MealPlan {
 
     public void setMeals(List<Meal> meals) {
         this.meals = meals;
+    }
+
+    public LocalDate getDateFrom() {
+        return dateFrom;
+    }
+
+    public void setDateFrom(LocalDate dateFrom) {
+        this.dateFrom = dateFrom;
+    }
+
+    public LocalDate getDateTo() {
+        return dateTo;
+    }
+
+    public void setDateTo(LocalDate dateTo) {
+        this.dateTo = dateTo;
     }
 }

@@ -93,9 +93,40 @@ public class MealController {
                            @ModelAttribute("dinner") String dinner,
                            @RequestParam("dateFrom") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dateFrom,
                            @RequestParam("dateTo") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dateTo) {
-        Customer customer = customerRepository.findById(customerId).get();
+        Customer customer = customerRepository.findById(customerId).orElse(null);
+        if (customer == null) {
+            // Handle the case where the customer is not found
+            // You may redirect or show an error page
+            return "error";
+        }
         List<Food> selectedFoods = foodRepository.findAllById(foodIds);
 
+        List<Object[]> result = mealPlanRepository.findMealPlanByCustomerAndDateRange(customer, dateFrom, dateTo);
+
+        MealPlan mealPlan = null;
+        boolean foundMatch = false;
+        for (Object[] row : result) {
+            MealPlan tempMealPlan = (MealPlan) row[0];
+            LocalDate mealPlanDateFrom = (LocalDate) row[1];
+            LocalDate mealPlanDateTo = (LocalDate) row[2];
+            Long mealPlanCustomerId = (Long) row[3];
+
+            // Check if the retrieved meal plan's dates match the current request's dates and customer ID
+            if (mealPlanDateFrom.equals(dateFrom) && mealPlanDateTo.equals(dateTo) && mealPlanCustomerId.equals(customerId)) {
+                mealPlan = tempMealPlan; // Found matching meal plan
+                foundMatch = true;
+                break;
+            }
+        }
+
+        if (!foundMatch) {
+            // If a match is not found, create a new MealPlan
+            mealPlan = new MealPlan();
+            mealPlan.setCustomer(customer);
+            mealPlan.setDateFrom(dateFrom);
+            mealPlan.setDateTo(dateTo);
+            mealPlan = mealPlanService.save(mealPlan);
+        }
 
         for (String dayOfWeek : daysOfWeek) {
             Meal meal = new Meal();
@@ -105,8 +136,6 @@ public class MealController {
             meal.setFoods(selectedFoods);
             meal.setDateFrom(dateFrom);
             meal.setDateTo(dateTo);
-
-
 
             switch (mealName) {
                 case "Breakfast":
@@ -140,15 +169,13 @@ public class MealController {
                     break;
             }
 
-            MealPlan mealPlan = new MealPlan();
-            mealPlan.setCustomer(customer);
-            mealPlanService.save(mealPlan);
-            mealPlan.getMeals().add(meal);
             meal.setMealPlan(mealPlan);
+            meal = mealService.saveMeal(meal);
+            mealPlan.getMeals().add(meal);
             customer.getMeal().add(meal);
-            mealService.saveMeal(meal);
         }
-        return "redirect:/{customer_id}/mealtable?dateFrom=\" + meal.getDateFrom() + \"&dateTo=\" + meal.getDateTo()";
+
+        return "redirect:/{customer_id}/mealtable?dateFrom=" + dateFrom + "&dateTo=" + dateTo;
     }
 
     @GetMapping("/updateMealForm/{meal_id}")
@@ -195,25 +222,6 @@ public class MealController {
 
     }
 
-    @PostMapping("/{customer_id}/addMeal")
-    public String createMeal(@PathVariable(value = "customer_id") Long customerId,
-                             @ModelAttribute("meal") Meal meal) {
-        Customer customer = customerRepository.findById(customerId).orElse(null);
-        if (customer == null) {
-            // Handle the case where the customer is not found
-            // You may redirect or show an error page
-            return "error";
-        }
-
-        // Set the customer for the meal
-        meal.setCustomer(customer);
-
-        // Save the meal in the database
-        mealRepository.save(meal);
-
-        // Redirect to the addmeal page with dateFrom and dateTo as query parameters
-        return "redirect:/{customer_id}/addmeal?dateFrom=" + meal.getDateFrom() + "&dateTo=" + meal.getDateTo();
-    }
 
 }
 
