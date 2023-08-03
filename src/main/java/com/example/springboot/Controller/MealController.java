@@ -90,7 +90,9 @@ public class MealController {
                            @ModelAttribute("desert") String desert,
                            @ModelAttribute("lunch") String lunch,
                            @ModelAttribute("snack") String snack,
-                           @ModelAttribute("dinner") String dinner) {
+                           @ModelAttribute("dinner") String dinner,
+                           @RequestParam("dateFrom") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dateFrom,
+                           @RequestParam("dateTo") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dateTo) {
         Customer customer = customerRepository.findById(customerId).get();
         List<Food> selectedFoods = foodRepository.findAllById(foodIds);
 
@@ -101,6 +103,8 @@ public class MealController {
             meal.setDayOfWeek(dayOfWeek);
             meal.setMealName(mealName);
             meal.setFoods(selectedFoods);
+            meal.setDateFrom(dateFrom);
+            meal.setDateTo(dateTo);
 
 
 
@@ -144,7 +148,7 @@ public class MealController {
             customer.getMeal().add(meal);
             mealService.saveMeal(meal);
         }
-        return "redirect:/{customer_id}/mealtable";
+        return "redirect:/{customer_id}/mealtable?dateFrom=\" + meal.getDateFrom() + \"&dateTo=\" + meal.getDateTo()";
     }
 
     @GetMapping("/updateMealForm/{meal_id}")

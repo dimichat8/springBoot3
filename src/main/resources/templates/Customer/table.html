@@ -485,13 +485,9 @@
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
                                                             </div>
-                                                            <form th:action="@{/{customer_id}/addMeal (customer_id=${customer.customer_id})}" method="POST">
+                                                            <form th:action="@{/{customer_id}/addmeal (customer_id=${customer.customer_id})}" method="GET">
                                                                 <div class="modal-body">
-                                                                    <p>Choose days for the customer: <b><span th:text="${customer.firstName + ' ' + customer.lastName}"/></b></p>
-                                                                    <label for="dateFrom">Date From:</label>
-                                                                    <input type="date" id="dateFrom" name="dateFrom" class="form-control" th:value="${#dates.format(meal.dateFrom, 'yyyy-MM-dd')}">
-                                                                    <label for="dateTo">Date To:</label>
-                                                                    <input type="date" id="dateTo" name="dateTo" class="form-control" th:value="${#dates.format(meal.dateTo, 'yyyy-MM-dd')}">
+                                                                    <p>Create diet for: <b><span th:text="${customer.firstName + ' ' + customer.lastName}"/></b></p>
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="submit" class="btn btn-primary">Continue</button>
@@ -574,18 +570,6 @@
 <!-- Page level custom scripts -->
 <script src="/js/demo/datatables-demo.js"></script>
 <script src="/https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
-<script>function setMealDatesAndSubmit() {
-    // Get the selected dateFrom and dateTo values from the modal form
-    var dateFrom = document.getElementById('dateFrom').value;
-    var dateTo = document.getElementById('dateTo').value;
-
-    // Set the values in the hidden input fields of the mealForm
-    document.getElementById('dateFrom').setAttribute('value', dateFrom);
-    document.getElementById('dateTo').setAttribute('value', dateTo);
-
-    // Submit the mealForm
-    document.getElementById('mealForm').submit();</script>
-
 </body>
 
 </html>

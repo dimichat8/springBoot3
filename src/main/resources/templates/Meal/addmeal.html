@@ -179,15 +179,16 @@
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
-                    <div class="modal-body">
-                      <p>Do you want to save the program for  <b><span th:text="${customer.firstName + ' ' + customer.lastName}"/></b>?</p>
-                      <!-- Display additional information about the Customer item if needed -->
-                    </div>
+                    <<div class="modal-body">
+                    <p>Choose days for the customer: <b><span th:text="${customer.firstName + ' ' + customer.lastName}"/></b></p>
+                    <label for="dateFrom">Date From:</label>
+                    <input type="date" id="dateFrom" name="dateFrom" class="form-control" th:value="${#dates.format(meal.dateFrom, 'yyyy-MM-dd')}">
+                    <label for="dateTo">Date To:</label>
+                    <input type="date" id="dateTo" name="dateTo" class="form-control" th:value="${#dates.format(meal.dateTo, 'yyyy-MM-dd')}">
+                      </div>
                     <div class="modal-footer">
-                      <!--<form action="#" th:action="@{/{customer_id}/saveMeal/foodIds (customer_id=${meal.customer.customer_id})}" th:object="${meal}" method="POST">-->
-                        <button type="submit" class="btn btn-primary profile-button">Save</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Continue</button>
-                      <!--</form>-->
+                      <button type="submit" class="btn btn-primary">Continue</button>
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                     </div>
                   </div>
                 </div>
