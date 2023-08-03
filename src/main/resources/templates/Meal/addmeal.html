@@ -127,45 +127,95 @@
                 </div>
               </div>
             </fieldset>
-                <h4><b> <label id="mealOptionsTitle" for="mealOptions">Meal Types:</label></b></h4><br><br>
-                <select id="mealOptions" name="mealName" th:field="*{mealName}" size="5">
-                  <option value="Breakfast">Breakfast</option>
-                  <option value="Desert">Desert</option>
-                  <option value="Lunch">Lunch</option>
-                  <option value="Snack">Snack</option>
-                  <option value="Dinner">Dinner</option>
-                </select>
-            </div>
-          </div>
 
-            <div class="container">
-              <div class="row">
-                <div class="col-sm-6 d-flex justify-content-end">
-                  <div>
-                  <label id="foodIdsTitle" for="foodIds" class="food-options-label">Food Options:</label><br>
-                  <select id="foodIds" name="foodIds" multiple class="form-select form-select-lg mb-3">
-                    <option th:each="food : ${foods}" th:value="${food.food_id}" th:text="${food.name}"></option>
-                  </select>
+                <div class="container">
+                  <div class="row">
+                    <div class="col-sm-6 d-flex justify-content-end">
+                      <div>
+                        <label id="foodIdsBreakfast" for="foodIdsForBreakfast" class="food-options-label">Breakfast Options:</label><br>
+                        <select id="foodIdsForBreakfast" name="foodIds" multiple class="form-select form-select-lg mb-3">
+                          <option th:each="food : ${foods}" th:value="${food.food_id}" th:text="${food.name}"></option>
+                        </select>
 
-                  <div id="inputFieldsContainer" class="mt-2">
+                        <div id="inputFieldsContainerBreakfast" class="mt-2">
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
+                <div class="container">
+                  <div class="row">
+                    <div class="col-sm-6 d-flex justify-content-end">
 
+                      <div>
+                        <label id="foodIdsDesert" for="foodIdsForDesert" class="food-options-label">Desert Options:</label><br>
+                        <select id="foodIdsForDesert" name="foodIds" multiple class="form-select form-select-lg mb-3">
+                          <option th:each="food : ${foods}" th:value="${food.food_id}" th:text="${food.name}"></option>
+                        </select>
 
-            <input type="hidden" id="mealName" name="mealName" th:value="${meal.mealName}">
-            <input type="hidden" id="breakfast" name="breakfast" th:attr="value=*{breakfast}">
-            <input type="hidden" id="desert" name="desert" th:attr="value=*{desert}">
-            <input type="hidden" id="lunch" name="lunch" th:attr="value=*{lunch}">
-            <input type="hidden" id="snack" name="snack" th:attr="value=*{snack}">
-            <input type="hidden" id="dinner" name="dinner" th:attr="value=*{dinner}">
+                        <div id="inputFieldsContainerDesert" class="mt-2">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="container">
+                  <div class="row">
+                    <div class="col-sm-6 d-flex justify-content-end">
 
+                      <div>
+                        <label id="foodIdsLunch" for="foodIdsForLunch" class="food-options-label">Lunch Options:</label><br>
+                        <select id="foodIdsForLunch" name="foodIds" multiple class="form-select form-select-lg mb-3">
+                          <option th:each="food : ${foods}" th:value="${food.food_id}" th:text="${food.name}"></option>
+                        </select>
 
+                        <div id="inputFieldsContainerLunch" class="mt-2">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="container">
+                  <div class="row">
+                    <div class="col-sm-6 d-flex justify-content-end">
 
+                      <div>
+                        <label id="foodIdsSnack" for="foodIdsForSnack" class="food-options-label">Snack Options:</label><br>
+                        <select id="foodIdsForSnack" name="foodIds" multiple class="form-select form-select-lg mb-3">
+                          <option th:each="food : ${foods}" th:value="${food.food_id}" th:text="${food.name}"></option>
+                        </select>
 
+                        <div id="inputFieldsContainerSnack" class="mt-2">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="container">
+                  <div class="row">
+                    <div class="col-sm-6 d-flex justify-content-end">
 
-            <div class="mt-5 text-center">
+                      <div>
+                        <label id="foodIdsDinner" for="foodIdsForDinner" class="food-options-label">Dinner Options:</label><br>
+                        <select id="foodIdsForDinner" name="foodIds" multiple class="form-select form-select-lg mb-3">
+                          <option th:each="food : ${foods}" th:value="${food.food_id}" th:text="${food.name}"></option>
+                        </select>
+
+                        <div id="inputFieldsContainerDinner" class="mt-2">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <input type="hidden" id="mealName" name="mealName" th:value="${meal.mealName}">
+
+                <input type="hidden" id="breakfast" name="breakfast" th:attr="value=*{breakfast}">
+                <input type="hidden" id="desert" name="desert" th:attr="value=*{desert}">
+                <input type="hidden" id="lunch" name="lunch" th:attr="value=*{lunch}">
+                <input type="hidden" id="snack" name="snack" th:attr="value=*{snack}">
+                <input type="hidden" id="dinner" name="dinner" th:attr="value=*{dinner}">
+
 
               <a th:href="@{/{customer_id}/saveMeal/foodIds (customer_id=${meal.customer.customer_id})}" th:object="${meal}" class="btn btn-primary profile-button"
                  data-toggle="modal" th:data-target="'#saveCustomerModal-' + ${customer.customer_id}">Save</a>
@@ -228,56 +278,78 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <script>
   $(document).ready(function () {
-    // Initialize Select2 for the food options select dropdown
-    $('#foodIds').select2({
+    // Initialize Select2 for the food options select dropdowns
+    $('#foodIdsForBreakfast, #foodIdsForDesert, #foodIdsForLunch, #foodIdsForSnack, #foodIdsForDinner').select2({
       placeholder: 'Select Food options',
-      dropdownParent: $('#foodIds').parent()
+      dropdownParent: $('#foodIdsForBreakfast').parent()
     });
 
-    // Function to handle the change event of the food options select dropdown
-    function handleFoodOptionsChange() {
-      var selectedMeals = $('#foodIds').find(':selected').map(function () {
+    // Function to handle the change event of the food options select dropdown for Breakfast
+    $('#foodIdsForBreakfast').on('change', function() {
+      handleFoodOptionsChange('Breakfast');
+    });
+
+    // Function to handle the change event of the food options select dropdown for Desert
+    $('#foodIdsForDesert').on('change', function() {
+      handleFoodOptionsChange('Desert');
+    });
+
+    // Function to handle the change event of the food options select dropdown for Lunch
+    $('#foodIdsForLunch').on('change', function() {
+      handleFoodOptionsChange('Lunch');
+    });
+
+    // Function to handle the change event of the food options select dropdown for Snack
+    $('#foodIdsForSnack').on('change', function() {
+      handleFoodOptionsChange('Snack');
+    });
+
+    // Function to handle the change event of the food options select dropdown for Dinner
+    $('#foodIdsForDinner').on('change', function() {
+      handleFoodOptionsChange('Dinner');
+    });
+
+    // Function to handle the change event of the food options select dropdown for a specific meal type
+    function handleFoodOptionsChange(mealType) {
+      var selectedMeals = $('#foodIdsFor' + mealType).find(':selected').map(function () {
         return $(this).text(); // Get the text (food.name) of the selected options
       }).get();
 
-      // Set the selected meals as the value of each meal input field
-      $('#breakfast').val(selectedMeals.join(', '));
-      $('#desert').val(selectedMeals.join(', '));
-      $('#lunch').val(selectedMeals.join(', '));
-      $('#snack').val(selectedMeals.join(', '));
-      $('#dinner').val(selectedMeals.join(', '));
+      // Set the mealName hidden input field with the selected meal type (e.g., Breakfast, Desert, Lunch, Snack, or Dinner)
+      $('#mealName').val(mealType);
 
-      // Update the input fields for each selected meal type
-      updateInputFields(selectedMeals);
+      // Set the respective hidden input field with the selected food options for the meal type
+      $('#' + mealType.toLowerCase()).val(selectedMeals.join(', '));
+
+      // Update the input fields for the selected meal type
+      updateInputFields(mealType, selectedMeals);
     }
 
-    // Attach the handleFoodOptionsChange function to the change event of the food options select dropdown
-    $('#foodIds').on('change', handleFoodOptionsChange);
-
     // Function to update the input fields for each selected meal type
-    function updateInputFields(selectedMeals) {
+    function updateInputFields(mealType, selectedMeals) {
+      var inputFieldsContainerId = '#inputFieldsContainer' + mealType;
+
       // Clear previous input fields
-      $('#inputFieldsContainer').empty();
+      $(inputFieldsContainerId).empty();
 
       // Add input fields for each selected meal type
-      selectedMeals.forEach(function (mealType) {
+      selectedMeals.forEach(function (meal) {
         var inputField = '<div class="input-group mb-2 input-group">' +
-                '<label class="input-group-text" for="' + mealType.toLowerCase() + '">' + mealType + ':</label>' +
-                '<input type="text" class="form-control" id="' + mealType.toLowerCase() + '" name="' + mealType.toLowerCase() + '" placeholder="' + mealType + ' grams">' +
+                '<label class="input-group-text" for="' + meal.toLowerCase() + '">' + meal + ':</label>' +
+                '<input type="text" class="form-control" id="' + meal.toLowerCase() + '" name="' + meal.toLowerCase() + '" placeholder="' + meal + ' grams">' +
                 '</div>';
-        $('#inputFieldsContainer').append(inputField);
+        $(inputFieldsContainerId).append(inputField);
       });
     }
 
-    // Fetch the selected meal options and set them as the initial input fields
-    var selectedMeals = $('#foodIds').find(':selected').map(function () {
+    // Fetch the selected breakfast meal options and set them as the initial input fields
+    var selectedBreakfastMeals = $('#foodIdsForBreakfast').find(':selected').map(function () {
       return $(this).text(); // Get the text (food.name) of the selected options
     }).get();
 
-    // Set the initial input fields
-    updateInputFields(selectedMeals);
+    // Set the initial input fields for breakfast
+    updateInputFields('Breakfast', selectedBreakfastMeals);
   });
-
 </script>
 </body>
 </html>
