@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Add Food</title>
+  <title class="titleFood">Add Food</title>
 
   <!-- Custom fonts for this template-->
   <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -21,38 +21,92 @@
   <!-- Custom styles for this template-->
   <link href="/css/sb-admin-2.min.css" rel="stylesheet">
   <style>
-    .select2-container .select2-selection--multiple {
-      min-width: 140px;
-    }
-    #mealOptionsTitle {
+    .day {
       position: relative;
-      left: 70px;
+      left: 114px;
+    }
+    .form-check-inline {
+      display: inline; /* or inline-flex */
+      margin-right: 10px; /* Add spacing between the checkboxes */
+    }
+    .select2-container .select2-selection--multiple {
+      min-width: 325px;
+    }
+
+    .form-selectOption {
+      position: relative;
+      height: calc(1.5em * 5);
+      margin-left: 1px;
+      width: 150px;
+    }
+    .form-controlGrams {
+      position: relative;
+      height: 37px;
+      margin-left: 1px;
+      width: 80px;
     }
     select option:checked {
       background-color: blue;
       color: white;
     }
-    #mealOptions {
-      height: calc(1.5em * 5);
-      position: relative;
-      top: 90px;
-      right: 60px;
-      min-width: 120px;
-    }
-    #foodIdsTitle, #foodIds {
-      left: 80px;
-    }
-    #inputFieldsContainer {
-      position: relative;
-      left: 170px;
-      bottom: 48px;
-    }
     .input-group {
-      width: 150px; /* Adjust the width as needed */
+      position: relative;
+      justify-content: center;
+      align-items: center;
+      width: 200px;
     }
-    .input-group label {
-      font-size: 12px; /* Adjust the font size as needed */
+    /*#buttonSave {
+      position: relative;
+      top: 30px;
+      margin-left: 80px;
+    }*/
+    .profile-buttonBack {
+      position: relative;
+      margin-left: 80px;
+      bottom: 55px;
     }
+    #tuesdayOption {
+      position: relative;
+      left: 20px;
+    }
+    .form-check-labelTuesday {
+      position: relative;
+      left: 20px;;
+    }
+    #fridayOption {
+      position: relative;
+      left: 10px;
+    }
+    .form-check-labelFriday {
+      position: relative;
+      left: 10px;
+    }
+    #wednesdayOption {
+      position: relative;
+      left: 30px;
+    }
+    .form-check-labelWednesday {
+      position: relative;
+      left: 30px;
+    }
+    #saturdayOption {
+      position: relative;
+      left: 35px;
+    }
+    .form-check-labelSaturday {
+      position: relative;
+      left: 35px;
+    }
+
+    #sundayOption {
+      position: relative;
+      left: 114px;
+    }
+    .form-check-labelSunday {
+      position: relative;
+      left: 114px;
+    }
+
   </style>
 
   <script>
@@ -95,45 +149,47 @@
               <div class="row">
                 <fieldset class="row mb-3">
                   <div class="col-sm-10">
-                    <h4><b>Day</b></h4>
+                    <h4 class="day"><b>Day</b></h4>
                     <br>
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="gridCheck1" value="Monday" th:field="*{dayOfWeek}" />
-                      <label class="form-check-label">Monday</label>
+
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="gridCheck1" value="Monday" th:field="*{dayOfWeek}">
+                      <label class="form-check-labelMonday">Monday</label>
                     </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="gridCheck2" value="Tuesday" th:field="*{dayOfWeek}" />
-                      <label class="form-check-label">Tuesday</label>
+                    <div class="form-check form-check-inline">
+                      <input id="tuesdayOption" class="form-check-input" type="checkbox"  value="Tuesday" th:field="*{dayOfWeek}">
+                      <label class="form-check-labelTuesday">Tuesday</label>
                     </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="gridCheck3" value="Wednesday" th:field="*{dayOfWeek}">
-                  <label class="form-check-label">Wednesday</label>
+
+                    <div class="form-check form-check-inline">
+                      <input id="wednesdayOption" class="form-check-input" type="checkbox" value="Wednesday" th:field="*{dayOfWeek}"/>
+                      <label class="form-check-labelWednesday">Wednesday</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                  <input id="thursdayOption" class="form-check-input" type="checkbox"  value="Thursday" th:field="*{dayOfWeek}">
+                  <label class="form-check-labelThursday">Thursday</label>
                 </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="gridCheck4" value="Thursday" th:field="*{dayOfWeek}">
-                  <label class="form-check-label">Thursday</label>
+                    <div class="form-check form-check-inline">
+                  <input id="fridayOption" class="form-check-input" type="checkbox"  value="Friday" th:field="*{dayOfWeek}">
+                  <label class="form-check-labelFriday">Friday</label>
                 </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="gridCheck5" value="Friday" th:field="*{dayOfWeek}">
-                  <label class="form-check-label">Friday</label>
+                    <div class="form-check form-check-inline">
+                  <input id="saturdayOption" class="form-check-input" type="checkbox"  value="Saturday" th:field="*{dayOfWeek}">
+                  <label class="form-check-labelSaturday">Saturday</label>
                 </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="gridCheck6" value="Saturday" th:field="*{dayOfWeek}">
-                  <label class="form-check-label">Saturday</label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="gridCheck7" value="Sunday" th:field="*{dayOfWeek}">
-                  <label class="form-check-label">Sunday</label>
+                    <div class="form-check form-check-inline">
+                  <input id="sundayOption" class="form-check-input" type="checkbox" value="Sunday" th:field="*{dayOfWeek}">
+                  <label class="form-check-labelSunday">Sunday</label>
                 </div>
               </div>
             </fieldset>
 
-                <div class="container">
+                <div class="container optionContainer">
                   <div class="row">
                     <div class="col-sm-6 d-flex justify-content-end">
                       <div>
                         <label id="foodIdsBreakfast" for="foodIdsForBreakfast" class="food-options-label">Breakfast Options:</label><br>
-                        <select id="foodIdsForBreakfast" name="foodIds" multiple class="form-select form-select-lg mb-3">
+                        <select id="foodIdsForBreakfast" name="foodIds" multiple class="form-selectOption">
                           <option th:each="food : ${foods}" th:value="${food.food_id}" th:text="${food.name}"></option>
                         </select>
 
@@ -143,13 +199,13 @@
                     </div>
                   </div>
                 </div>
-                <div class="container">
+                <div class="container optionContainer">
                   <div class="row">
                     <div class="col-sm-6 d-flex justify-content-end">
 
                       <div>
                         <label id="foodIdsDesert" for="foodIdsForDesert" class="food-options-label">Desert Options:</label><br>
-                        <select id="foodIdsForDesert" name="foodIds" multiple class="form-select form-select-lg mb-3">
+                        <select id="foodIdsForDesert" name="foodIds" multiple class="form-selectOption">
                           <option th:each="food : ${foods}" th:value="${food.food_id}" th:text="${food.name}"></option>
                         </select>
 
@@ -159,13 +215,13 @@
                     </div>
                   </div>
                 </div>
-                <div class="container">
+                <div class="container optionContainer">
                   <div class="row">
                     <div class="col-sm-6 d-flex justify-content-end">
 
                       <div>
                         <label id="foodIdsLunch" for="foodIdsForLunch" class="food-options-label">Lunch Options:</label><br>
-                        <select id="foodIdsForLunch" name="foodIds" multiple class="form-select form-select-lg mb-3">
+                        <select id="foodIdsForLunch" name="foodIds" multiple class="form-selectOption">
                           <option th:each="food : ${foods}" th:value="${food.food_id}" th:text="${food.name}"></option>
                         </select>
 
@@ -175,13 +231,13 @@
                     </div>
                   </div>
                 </div>
-                <div class="container">
+                <div class="container optionContainer">
                   <div class="row">
                     <div class="col-sm-6 d-flex justify-content-end">
 
                       <div>
                         <label id="foodIdsSnack" for="foodIdsForSnack" class="food-options-label">Snack Options:</label><br>
-                        <select id="foodIdsForSnack" name="foodIds" multiple class="form-select form-select-lg mb-3">
+                        <select id="foodIdsForSnack" name="foodIds" multiple class="form-selectOption">
                           <option th:each="food : ${foods}" th:value="${food.food_id}" th:text="${food.name}"></option>
                         </select>
 
@@ -191,13 +247,13 @@
                     </div>
                   </div>
                 </div>
-                <div class="container">
+                <div class="container optionContainer">
                   <div class="row">
                     <div class="col-sm-6 d-flex justify-content-end">
 
                       <div>
                         <label id="foodIdsDinner" for="foodIdsForDinner" class="food-options-label">Dinner Options:</label><br>
-                        <select id="foodIdsForDinner" name="foodIds" multiple class="form-select form-select-lg mb-3">
+                        <select id="foodIdsForDinner" name="foodIds" multiple class="form-selectOption">
                           <option th:each="food : ${foods}" th:value="${food.food_id}" th:text="${food.name}"></option>
                         </select>
 
@@ -217,8 +273,7 @@
                 <input type="hidden" id="dinner" name="dinner" th:attr="value=*{dinner}">
 
 
-              <a th:href="@{/{customer_id}/saveMeal/foodIds (customer_id=${meal.customer.customer_id})}" th:object="${meal}" class="btn btn-primary profile-button"
-                 data-toggle="modal" th:data-target="'#saveCustomerModal-' + ${customer.customer_id}">Save</a>
+
 
               <div th:id="'saveCustomerModal-' + ${customer.customer_id}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="'saveCustomerModalLabel-' + ${customer.customer_id}" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -229,7 +284,7 @@
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
-                    <<div class="modal-body">
+                    <div class="modal-body">
                     <p>Choose days for the customer: <b><span th:text="${customer.firstName + ' ' + customer.lastName}"/></b></p>
                     <label for="dateFrom">Date From:</label>
                     <input type="date" id="dateFrom" name="dateFrom" class="form-control" th:value="${#dates.format(meal.dateFrom, 'yyyy-MM-dd')}">
@@ -245,10 +300,12 @@
               </div>
             </div>
             </div>
+            <a id="buttonSave" th:href="@{/{customer_id}/saveMeal/foodIds (customer_id=${meal.customer.customer_id})}" th:object="${meal}" class="btn btn-primary panel-buttonSave"
+               data-toggle="modal" th:data-target="'#saveCustomerModal-' + ${customer.customer_id}">Save</a>
           </form>
 
           <form action="#" th:action="@{/{customer_id}/mealtable  (customer_id=${meal.customer.customer_id})}" th:object="${meal}" class="user"  method="GET">
-            <div class="mt-5 text-center">
+            <div class="mt-5 text-center profile-buttonBack">
               <button type="submit" class="btn btn-danger profile-button">Back To Table</button>
             </div>
           </form>
@@ -336,7 +393,7 @@
       selectedMeals.forEach(function (meal) {
         var inputField = '<div class="input-group mb-2 input-group">' +
                 '<label class="input-group-text" for="' + meal.toLowerCase() + '">' + meal + ':</label>' +
-                '<input type="text" class="form-control" id="' + meal.toLowerCase() + '" name="' + meal.toLowerCase() + '" placeholder="' + meal + ' grams">' +
+                '<input type="text" class="form-controlGrams" id="' + meal.toLowerCase() + '" name="' + meal.toLowerCase() + '" placeholder="Grams">' +
                 '</div>';
         $(inputFieldsContainerId).append(inputField);
       });
