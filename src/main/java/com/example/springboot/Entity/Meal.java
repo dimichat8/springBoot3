@@ -67,7 +67,9 @@ public class Meal {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateTo;
 
-    public Meal(Long meal_id, String mealName, String dayOfWeek, List<String> breakfast, List<String> desert, List<String> lunch, List<String> snack, List<String> dinner, List<Food> foods, Customer customer, MealPlan mealPlan, LocalDate dateFrom, LocalDate dateTo) {
+    private Float mealGrams;
+
+    public Meal(Long meal_id, String mealName, String dayOfWeek, List<String> breakfast, List<String> desert, List<String> lunch, List<String> snack, List<String> dinner, List<Food> foods, Customer customer, MealPlan mealPlan, LocalDate dateFrom, LocalDate dateTo, Float mealGrams) {
         this.meal_id = meal_id;
         this.mealName = mealName;
         this.dayOfWeek = dayOfWeek;
@@ -81,6 +83,7 @@ public class Meal {
         this.mealPlan = mealPlan;
         this.dateFrom = dateFrom;
         this.dateTo = dateTo;
+        this.mealGrams = mealGrams;
     }
 
     public Meal() {
@@ -188,5 +191,13 @@ public class Meal {
 
     public void setDateTo(LocalDate dateTo) {
         this.dateTo = dateTo;
+    }
+
+    public Float getMealGrams() {
+        return mealGrams;
+    }
+
+    public void setMealGrams(Float mealGrams) {
+        this.mealGrams = mealGrams;
     }
 }

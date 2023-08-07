@@ -35,7 +35,9 @@ public class CustomerController {
     }
 
     @GetMapping("/index")
-    public String indexCustomer() {
+    public String getCustomerData(Model model) {
+        List<Customer> customers = customerService.getAllCustomers();
+        model.addAttribute("customer" , customers);
         return "/Customer/index";
     }
     @GetMapping("/customertable")
