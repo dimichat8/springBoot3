@@ -85,7 +85,7 @@ public class MealController {
     public String saveMeal(@PathVariable(value = "customer_id") Long customerId,
                            @RequestParam("foodIds") List<Long> foodIds,
                            @RequestParam("dayOfWeek") List<String> daysOfWeek,
-                           @ModelAttribute("mealName") String mealName,
+                           @RequestParam("mealName") List<String> mealNames,
                            @ModelAttribute("breakfast") String breakfast,
                            @ModelAttribute("desert") String desert,
                            @ModelAttribute("lunch") String lunch,
@@ -130,43 +130,45 @@ public class MealController {
 
         for (String dayOfWeek : daysOfWeek) {
             Meal meal = new Meal();
-            meal.setCustomer(customer);
-            meal.setDayOfWeek(dayOfWeek);
-            meal.setMealName(mealName);
-            meal.setFoods(selectedFoods);
-            meal.setDateFrom(dateFrom);
-            meal.setDateTo(dateTo);
+            for (String mealName: mealNames) {
+                meal.setCustomer(customer);
+                meal.setDayOfWeek(dayOfWeek);
+                meal.setMealName(mealName);
+                meal.setFoods(selectedFoods);
+                meal.setDateFrom(dateFrom);
+                meal.setDateTo(dateTo);
 
-            switch (mealName) {
-                case "Breakfast":
-                    List<String> breakfastList = new ArrayList<>();
-                    breakfastList.add(breakfast);
-                    meal.setBreakfast(breakfastList);
-                    break;
-                case "Desert":
-                    List<String> desertList = new ArrayList<>();
-                    desertList.add(desert);
-                    meal.setDesert(desertList);
-                    break;
-                case "Lunch":
-                    List<String> lunchList = new ArrayList<>();
-                    lunchList.add(lunch);
-                    meal.setLunch(lunchList);
-                    break;
-                case "Snack":
-                    List<String> snackList = new ArrayList<>();
-                    snackList.add(snack);
-                    meal.setSnack(snackList);
-                    break;
-                case "Dinner":
-                    List<String> dinnerList = new ArrayList<>();
-                    dinnerList.add(dinner);
-                    meal.setDinner(dinnerList);
-                    break;
-                default:
-                    // Handle the case when the mealName doesn't match any of the above cases
-                    // For example, you could throw an exception or log a warning.
-                    break;
+                switch (mealName) {
+                    case "Breakfast":
+                        List<String> breakfastList = new ArrayList<>();
+                        breakfastList.add(breakfast);
+                        meal.setBreakfast(breakfastList);
+                        break;
+                    case "Desert":
+                        List<String> desertList = new ArrayList<>();
+                        desertList.add(desert);
+                        meal.setDesert(desertList);
+                        break;
+                    case "Lunch":
+                        List<String> lunchList = new ArrayList<>();
+                        lunchList.add(lunch);
+                        meal.setLunch(lunchList);
+                        break;
+                    case "Snack":
+                        List<String> snackList = new ArrayList<>();
+                        snackList.add(snack);
+                        meal.setSnack(snackList);
+                        break;
+                    case "Dinner":
+                        List<String> dinnerList = new ArrayList<>();
+                        dinnerList.add(dinner);
+                        meal.setDinner(dinnerList);
+                        break;
+                    default:
+                        // Handle the case when the mealName doesn't match any of the above cases
+                        // For example, you could throw an exception or log a warning.
+                        break;
+                }
             }
 
             meal.setMealPlan(mealPlan);

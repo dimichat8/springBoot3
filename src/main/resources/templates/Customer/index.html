@@ -202,6 +202,9 @@
                      <h1>Customer Chart</h1>
                     <canvas id="customerPieChart"></canvas>
                     <div id="customerCounter">Total Customers: Loading...</div>
+
+                    <h1>Customer Weight Line Chart</h1>
+                    <canvas id="customerWeightChart" width="400" height="200"></canvas>
                 </div>
             </div>
             <!-- End of Main Content -->
@@ -265,8 +268,6 @@
 <script src="/js/demo/chart-area-demo.js"></script>
 <script src="/js/demo/chart-pie-demo.js"></script>
 
-<script src="/https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="/npm/chart.js"></script>
 <script>
     const data = [
         { firstName: 'John', lastName: 'Doe', customer_id: 1 },
@@ -318,6 +319,121 @@
 
     // Call the function to render customer data
     renderCustomerData();
+</script>
+
+<script>
+
+    const customerData = [
+        { customer_id: 1, customer_name: 'John Doe', weight: 70, month: 'February' },
+        { customer_id: 1, customer_name: 'John Doe', weight: 77, month: 'March' },
+        { customer_id: 1, customer_name: 'John Doe', weight: 68, month: 'June' },
+        // Other customer objects...
+    ];
+
+    function groupDataByMonths(customerData) {
+        const dataByMonths = {};
+        customerData.forEach(customer => {
+            const month = customer.month; // Assuming your customer data has a 'month' field
+            const weight = customer.weight;
+            const customer_id = customer.customer_id; // Assuming your customer data has a 'weight' field
+
+            if (!dataByMonths[month]) {
+                dataByMonths[month] = [];
+            }
+            dataByMonths[month].push(weight);
+        });
+        return dataByMonths;
+    }
+
+    // Function to get the unique weights
+    function getUniqueWeights(customerData) {
+        const uniqueWeights = [...new Set(customerData.map(customer => customer.weight))];
+        return uniqueWeights.sort((a, b) => a - b);
+    }
+
+    // Function to get the month names
+    function getMonthNames() {
+        const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+        // Find the unique months in the data
+        const uniqueMonths = [...new Set(customerData.map(customer => customer.month))];
+        const monthOrder = monthNames.filter(month => uniqueMonths.includes(month));
+
+        return monthOrder;
+    }
+
+    // Function to render the line chart
+    async function renderLineChart() {
+        const dataByMonths = groupDataByMonths(customerData);
+        const uniqueWeights = getUniqueWeights(customerData);
+
+        const monthNames = getMonthNames();
+        const labels = monthNames.map(month => month); // Use the actual month names
+        const weights = monthNames.map(month => {
+            const customer = customerData.find(cust => cust.month === month);
+            return customer ? customer.weight : null;
+        }).filter(weight => uniqueWeights.includes(weight)); // Filter out non-unique weights
+
+        const lineChartData = {
+            labels: labels,
+            datasets: [{
+                label: 'Customer Weight',
+                data: weights,
+                borderColor: 'blue',
+                fill: false,
+            }]
+        };
+
+        const lineChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Months',
+                    },
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Customer Weight',
+                    },
+                    ticks: {
+                        stepSize: 1,
+                        min: Math.min(...weights),
+                        max: Math.max(...weights),
+                        callback: function (value) {
+                            if (uniqueWeights.includes(value)) {
+                                return value;
+                            }
+                        }
+                    }
+                },
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function (context) {
+                            const dataIndex = context.dataIndex;
+                            const customer = customerData.find(cust => cust.month === monthNames[dataIndex]);
+                            return `Customer ID: ${customer.customer_id}, Customer Name: ${customer.customer_name}, Weight: ${customer.weight} kg, Month: ${customer.month}`;
+                        }
+                    }
+                }
+            }
+        };
+
+        const ctx = document.getElementById('customerWeightChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: lineChartData,
+            options: lineChartOptions,
+        });
+    }
+
+    // Call the function to render the line chart
+    renderLineChart();
 </script>
 </body>
 

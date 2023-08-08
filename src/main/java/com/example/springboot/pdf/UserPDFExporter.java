@@ -72,7 +72,7 @@ public class UserPDFExporter {
 
         // Populate the map with the meal values
         for (Meal meal : mealList) {
-            String dayOfWeek = meal.getDayOfWeek().toString();
+            String dayOfWeek = meal.getDayOfWeek();
             String mealName = meal.getMealName();
             List<String> mealValues = getMealValue(meal, mealName);
 
