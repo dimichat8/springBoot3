@@ -341,39 +341,34 @@
       dropdownParent: $('#foodIdsForBreakfast').parent()
     });
 
-    // Function to handle the change event of the food options select dropdown for Breakfast
-    $('#foodIdsForBreakfast').on('change', function() {
-      handleFoodOptionsChange('Breakfast');
-    });
+    // Initialize a Set to store selected meal names
+    var selectedMealNames = new Set();
 
-    // Function to handle the change event of the food options select dropdown for Desert
-    $('#foodIdsForDesert').on('change', function() {
-      handleFoodOptionsChange('Desert');
-    });
+    // Function to handle the change event of the food options select dropdown for each meal type
+    ['Breakfast', 'Desert', 'Lunch', 'Snack', 'Dinner'].forEach(function (mealType) {
+      $('#foodIdsFor' + mealType).on('change', function() {
+        handleFoodOptionsChange(mealType);
+      });
 
-    // Function to handle the change event of the food options select dropdown for Lunch
-    $('#foodIdsForLunch').on('change', function() {
-      handleFoodOptionsChange('Lunch');
-    });
+      // Fetch the selected meal options for each meal type and set them as the initial input fields
+      var selectedMeals = $('#foodIdsFor' + mealType).find(':selected').map(function () {
+        return $(this).text();
+      }).get();
 
-    // Function to handle the change event of the food options select dropdown for Snack
-    $('#foodIdsForSnack').on('change', function() {
-      handleFoodOptionsChange('Snack');
-    });
-
-    // Function to handle the change event of the food options select dropdown for Dinner
-    $('#foodIdsForDinner').on('change', function() {
-      handleFoodOptionsChange('Dinner');
+      updateInputFields(mealType, selectedMeals);
     });
 
     // Function to handle the change event of the food options select dropdown for a specific meal type
     function handleFoodOptionsChange(mealType) {
       var selectedMeals = $('#foodIdsFor' + mealType).find(':selected').map(function () {
-        return $(this).text(); // Get the text (food.name) of the selected options
+        return $(this).text();
       }).get();
 
-      // Set the mealName hidden input field with the selected meal type (e.g., Breakfast, Desert, Lunch, Snack, or Dinner)
-      $('#mealName').val(mealType);
+      // Add the new meal type to the Set
+      selectedMealNames.add(mealType);
+
+      // Update the hidden input field with the updated Set of selected meal names
+      $('#mealName').val(Array.from(selectedMealNames).join(', '));
 
       // Set the respective hidden input field with the selected food options for the meal type
       $('#' + mealType.toLowerCase()).val(selectedMeals.join(', '));
@@ -398,14 +393,6 @@
         $(inputFieldsContainerId).append(inputField);
       });
     }
-
-    // Fetch the selected breakfast meal options and set them as the initial input fields
-    var selectedBreakfastMeals = $('#foodIdsForBreakfast').find(':selected').map(function () {
-      return $(this).text(); // Get the text (food.name) of the selected options
-    }).get();
-
-    // Set the initial input fields for breakfast
-    updateInputFields('Breakfast', selectedBreakfastMeals);
   });
 </script>
 </body>

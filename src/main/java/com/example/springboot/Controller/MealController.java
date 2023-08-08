@@ -94,13 +94,7 @@ public class MealController {
                            @RequestParam("dateFrom") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dateFrom,
                            @RequestParam("dateTo") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dateTo) {
         Customer customer = customerRepository.findById(customerId).orElse(null);
-        if (customer == null) {
-            // Handle the case where the customer is not found
-            // You may redirect or show an error page
-            return "error";
-        }
         List<Food> selectedFoods = foodRepository.findAllById(foodIds);
-
         List<Object[]> result = mealPlanRepository.findMealPlanByCustomerAndDateRange(customer, dateFrom, dateTo);
 
         MealPlan mealPlan = null;
@@ -130,10 +124,12 @@ public class MealController {
 
         for (String dayOfWeek : daysOfWeek) {
             Meal meal = new Meal();
+            List<String> mealNameList = new ArrayList<>();
+
             for (String mealName: mealNames) {
                 meal.setCustomer(customer);
                 meal.setDayOfWeek(dayOfWeek);
-                meal.setMealName(mealName);
+                mealNameList.add(mealName);
                 meal.setFoods(selectedFoods);
                 meal.setDateFrom(dateFrom);
                 meal.setDateTo(dateTo);
@@ -164,13 +160,9 @@ public class MealController {
                         dinnerList.add(dinner);
                         meal.setDinner(dinnerList);
                         break;
-                    default:
-                        // Handle the case when the mealName doesn't match any of the above cases
-                        // For example, you could throw an exception or log a warning.
-                        break;
                 }
             }
-
+            meal.setMealName(String.join(", ", mealNameList));
             meal.setMealPlan(mealPlan);
             meal = mealService.saveMeal(meal);
             mealPlan.getMeals().add(meal);
@@ -183,10 +175,7 @@ public class MealController {
     @GetMapping("/updateMealForm/{meal_id}")
     public String updateMealForm(@PathVariable(value = "meal_id")Long meal_id, Model model) {
 
-        //Get meal from the service
         Meal meal = mealService.getMealById(meal_id);
-
-        //Set meal as a model attribute to pre-populate the form
         model.addAttribute("meal", meal);
         return "/Meal/updatemeal";
     }
