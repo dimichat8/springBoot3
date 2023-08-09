@@ -274,7 +274,7 @@
                       <th scope="row">Breakfast</th>
                       <td>
                         <th:block th:each="meal : ${meals}">
-                          <th:block th:if="${meal.dayOfWeek == 'Monday' and meal.mealName == 'Breakfast'}">
+                          <th:block th:if="${meal.dayOfWeek == 'Monday' and #lists.contains(mealCombinations, meal.mealName)}">
                             <ul>
                               <li th:each="item : ${meal.breakfast}">
                                 <span th:text="${item}"></span>
@@ -285,7 +285,7 @@
                       </td>
                       <td>
                         <th:block th:each="meal : ${meals}">
-                          <th:block th:if="${meal.dayOfWeek == 'Tuesday' and meal.mealName == 'Breakfast'}">
+                          <th:block th:if="${meal.dayOfWeek == 'Tuesday' and #lists.contains(mealCombinations, meal.mealName)}">
                             <ul>
                               <li th:each="item : ${meal.breakfast}">
                                 <span th:text="${item}"></span>
@@ -296,7 +296,7 @@
                       </td>
                       <td>
                         <th:block th:each="meal : ${meals}">
-                          <th:block th:if="${meal.dayOfWeek == 'Wednesday' and meal.mealName == 'Breakfast'}">
+                          <th:block th:if="${meal.dayOfWeek == 'Wednesday' and #lists.contains(mealCombinations, meal.mealName)}">
                             <ul>
                               <li th:each="item : ${meal.breakfast}">
                                 <span th:text="${item}"></span>
@@ -307,7 +307,7 @@
                       </td>
                       <td>
                         <th:block th:each="meal : ${meals}">
-                          <th:block th:if="${meal.dayOfWeek == 'Thursday' and meal.mealName == 'Breakfast'}">
+                          <th:block th:if="${meal.dayOfWeek == 'Thursday' and #lists.contains(mealCombinations, meal.mealName)}">
                             <ul>
                               <li th:each="item : ${meal.breakfast}">
                                 <span th:text="${item}"></span>
@@ -318,7 +318,7 @@
                       </td>
                       <td>
                         <th:block th:each="meal : ${meals}">
-                          <th:block th:if="${meal.dayOfWeek == 'Friday' and meal.mealName == 'Breakfast'}">
+                          <th:block th:if="${meal.dayOfWeek == 'Friday'  and #lists.contains(mealCombinations, meal.mealName)}">
                             <ul>
                               <li th:each="item : ${meal.breakfast}">
                                 <span th:text="${item}"></span>
@@ -329,7 +329,7 @@
                       </td>
                       <td>
                         <th:block th:each="meal : ${meals}">
-                          <th:block th:if="${meal.dayOfWeek == 'Saturday' and meal.mealName == 'Breakfast'}">
+                          <th:block th:if="${meal.dayOfWeek == 'Saturday' and #lists.contains(mealCombinations, meal.mealName)}">
                             <ul>
                               <li th:each="item : ${meal.breakfast}">
                                 <span th:text="${item}"></span>
@@ -340,7 +340,7 @@
                       </td>
                       <td>
                         <th:block th:each="meal : ${meals}">
-                          <th:block th:if="${meal.dayOfWeek == 'Sunday' and meal.mealName == 'Breakfast'}">
+                          <th:block th:if="${meal.dayOfWeek == 'Sunday' and #lists.contains(mealCombinations, meal.mealName)}">
                             <ul>
                               <li th:each="item : ${meal.breakfast}">
                                 <span th:text="${item}"></span>
@@ -354,7 +354,7 @@
                       <th scope="row">Desert</th>
                       <td>
                         <th:block th:each="meal : ${meals}">
-                          <th:block th:if="${meal.dayOfWeek == 'Monday' and meal.mealName == 'Desert'}">
+                          <th:block th:if="${meal.dayOfWeek == 'Monday' and  #lists.contains(mealCombinations, meal.mealName)}">
                             <ul>
                               <li th:each="item : ${meal.desert}">
                                 <span th:text="${item}"></span>
@@ -365,7 +365,7 @@
                       </td>
                       <td>
                         <th:block th:each="meal : ${meals}">
-                          <th:block th:if="${meal.dayOfWeek == 'Tuesday' and meal.mealName == 'Desert'}">
+                          <th:block th:if="${meal.dayOfWeek == 'Tuesday' and #lists.contains(mealCombinations, meal.mealName)}">
                             <ul>
                               <li th:each="item : ${meal.desert}">
                                 <span th:text="${item}"></span>
@@ -376,7 +376,7 @@
                       </td>
                       <td>
                         <th:block th:each="meal : ${meals}">
-                          <th:block th:if="${meal.dayOfWeek == 'Wednesday' and meal.mealName == 'Desert'}">
+                          <th:block th:if="${meal.dayOfWeek == 'Wednesday' and #lists.contains(mealCombinations, meal.mealName)}">
                             <ul>
                               <li th:each="item : ${meal.desert}">
                                 <span th:text="${item}"></span>
@@ -387,7 +387,7 @@
                       </td>
                       <td>
                         <th:block th:each="meal : ${meals}">
-                          <th:block th:if="${meal.dayOfWeek == 'Thursday' and meal.mealName == 'Desert'}">
+                          <th:block th:if="${meal.dayOfWeek == 'Thursday' and #lists.contains(mealCombinations, meal.mealName)}">
                             <ul>
                               <li th:each="item : ${meal.desert}">
                                 <span th:text="${item}"></span>
@@ -398,7 +398,7 @@
                       </td>
                       <td>
                         <th:block th:each="meal : ${meals}">
-                          <th:block th:if="${meal.dayOfWeek == 'Friday' and meal.mealName == 'Desert'}">
+                          <th:block th:if="${meal.dayOfWeek == 'Friday' and #lists.contains(mealCombinations, meal.mealName)}">
                             <ul>
                               <li th:each="item : ${meal.desert}">
                                 <span th:text="${item}"></span>
@@ -409,7 +409,7 @@
                       </td>
                       <td>
                         <th:block th:each="meal : ${meals}">
-                          <th:block th:if="${meal.dayOfWeek == 'Saturday' and meal.mealName == 'Desert'}">
+                          <th:block th:if="${meal.dayOfWeek == 'Saturday' and #lists.contains(mealCombinations, meal.mealName)}">
                             <ul>
                               <li th:each="item : ${meal.desert}">
                                 <span th:text="${item}"></span>
@@ -420,7 +420,7 @@
                       </td>
                       <td>
                         <th:block th:each="meal : ${meals}">
-                          <th:block th:if="${meal.dayOfWeek == 'Sunday' and meal.mealName == 'Desert'}">
+                          <th:block th:if="${meal.dayOfWeek == 'Sunday' and #lists.contains(mealCombinations, meal.mealName)}">
                             <ul>
                               <li th:each="item : ${meal.desert}">
                                 <span th:text="${item}"></span>
@@ -433,9 +433,9 @@
                     <tr>
                     <tr >
                       <th scope="row">Lunch</th>
-                      <td>
+                      <td >
                         <th:block th:each="meal : ${meals}">
-                          <th:block th:if="${meal.dayOfWeek == 'Monday' and meal.mealName == 'Lunch'}">
+                          <th:block th:if="${meal.dayOfWeek == 'Monday' and #lists.contains(mealCombinations, meal.mealName)}">
                             <ul>
                               <li th:each="item : ${meal.lunch}">
                                 <span th:text="${item}"></span>
@@ -446,7 +446,7 @@
                       </td>
                       <td>
                         <th:block th:each="meal : ${meals}">
-                          <th:block th:if="${meal.dayOfWeek == 'Tuesday' and meal.mealName == 'Lunch'}">
+                          <th:block th:if="${meal.dayOfWeek == 'Tuesday' and #lists.contains(mealCombinations, meal.mealName)}">
                             <ul>
                               <li th:each="item : ${meal.lunch}">
                                 <span th:text="${item}"></span>
@@ -457,7 +457,7 @@
                       </td>
                       <td>
                         <th:block th:each="meal : ${meals}">
-                          <th:block th:if="${meal.dayOfWeek == 'Wednesday' and meal.mealName == 'Lunch'}">
+                          <th:block th:if="${meal.dayOfWeek == 'Wednesday' and #lists.contains(mealCombinations, meal.mealName)}">
                             <ul>
                               <li th:each="item : ${meal.lunch}">
                                 <span th:text="${item}"></span>
@@ -468,7 +468,7 @@
                       </td>
                       <td>
                         <th:block th:each="meal : ${meals}">
-                          <th:block th:if="${meal.dayOfWeek == 'Thursday' and meal.mealName == 'Lunch'}">
+                          <th:block th:if="${meal.dayOfWeek == 'Thursday' and #lists.contains(mealCombinations, meal.mealName)}">
                             <ul>
                               <li th:each="item : ${meal.lunch}">
                                 <span th:text="${item}"></span>
@@ -479,7 +479,7 @@
                       </td>
                       <td>
                         <th:block th:each="meal : ${meals}">
-                          <th:block th:if="${meal.dayOfWeek == 'Friday' and meal.mealName == 'Lunch'}">
+                          <th:block th:if="${meal.dayOfWeek == 'Friday' and #lists.contains(mealCombinations, meal.mealName)}">
                             <ul>
                               <li th:each="item : ${meal.lunch}">
                                 <span th:text="${item}"></span>
@@ -490,7 +490,7 @@
                       </td>
                       <td>
                         <th:block th:each="meal : ${meals}">
-                          <th:block th:if="${meal.dayOfWeek == 'Saturday' and meal.mealName == 'Lunch'}">
+                          <th:block th:if="${meal.dayOfWeek == 'Saturday' and #lists.contains(mealCombinations, meal.mealName)}">
                             <ul>
                               <li th:each="item : ${meal.lunch}">
                                 <span th:text="${item}"></span>
@@ -501,7 +501,7 @@
                       </td>
                       <td>
                         <th:block th:each="meal : ${meals}">
-                          <th:block th:if="${meal.dayOfWeek == 'Sunday' and meal.mealName == 'Lunch'}">
+                          <th:block th:if="${meal.dayOfWeek == 'Sunday' and #lists.contains(mealCombinations, meal.mealName)}">
                             <ul>
                               <li th:each="item : ${meal.lunch}">
                                 <span th:text="${item}"></span>
@@ -516,7 +516,7 @@
                       <th scope="row">Snack</th>
                       <td>
                         <th:block th:each="meal : ${meals}">
-                          <th:block th:if="${meal.dayOfWeek == 'Monday' and meal.mealName == 'Snack'}">
+                          <th:block th:if="${meal.dayOfWeek == 'Monday' and #lists.contains(mealCombinations, meal.mealName)}">
                             <ul>
                               <li th:each="item : ${meal.snack}">
                                 <span th:text="${item}"></span>
@@ -527,7 +527,7 @@
                       </td>
                       <td>
                         <th:block th:each="meal : ${meals}">
-                          <th:block th:if="${meal.dayOfWeek == 'Tuesday' and meal.mealName == 'Snack'}">
+                          <th:block th:if="${meal.dayOfWeek == 'Tuesday' and #lists.contains(mealCombinations, meal.mealName)}">
                             <ul>
                               <li th:each="item : ${meal.snack}">
                                 <span th:text="${item}"></span>
@@ -538,7 +538,7 @@
                       </td>
                       <td>
                         <th:block th:each="meal : ${meals}">
-                          <th:block th:if="${meal.dayOfWeek == 'Wednesday' and meal.mealName == 'Snack'}">
+                          <th:block th:if="${meal.dayOfWeek == 'Wednesday' and #lists.contains(mealCombinations, meal.mealName)}">
                             <ul>
                               <li th:each="item : ${meal.snack}">
                                 <span th:text="${item}"></span>
@@ -549,7 +549,7 @@
                       </td>
                       <td>
                         <th:block th:each="meal : ${meals}">
-                          <th:block th:if="${meal.dayOfWeek == 'Thursday' and meal.mealName == 'Snack'}">
+                          <th:block th:if="${meal.dayOfWeek == 'Thursday' and #lists.contains(mealCombinations, meal.mealName)}">
                             <ul>
                               <li th:each="item : ${meal.snack}">
                                 <span th:text="${item}"></span>
@@ -560,7 +560,7 @@
                       </td>
                       <td>
                         <th:block th:each="meal : ${meals}">
-                          <th:block th:if="${meal.dayOfWeek == 'Friday' and meal.mealName == 'Snack'}">
+                          <th:block th:if="${meal.dayOfWeek == 'Friday' and #lists.contains(mealCombinations, meal.mealName)}">
                             <ul>
                               <li th:each="item : ${meal.snack}">
                                 <span th:text="${item}"></span>
@@ -571,7 +571,7 @@
                       </td>
                       <td>
                         <th:block th:each="meal : ${meals}">
-                          <th:block th:if="${meal.dayOfWeek == 'Saturday' and meal.mealName == 'Snack'}">
+                          <th:block th:if="${meal.dayOfWeek == 'Saturday' and #lists.contains(mealCombinations, meal.mealName)}">
                             <ul>
                               <li th:each="item : ${meal.snack}">
                                 <span th:text="${item}"></span>
@@ -582,7 +582,7 @@
                       </td>
                       <td>
                         <th:block th:each="meal : ${meals}">
-                          <th:block th:if="${meal.dayOfWeek == 'Sunday' and meal.mealName == 'Snack'}">
+                          <th:block th:if="${meal.dayOfWeek == 'Sunday' and #lists.contains(mealCombinations, meal.mealName)}">
                             <ul>
                               <li th:each="item : ${meal.snack}">
                                 <span th:text="${item}"></span>
@@ -597,7 +597,7 @@
                       <th scope="row">Dinner</th>
                       <td>
                         <th:block th:each="meal : ${meals}">
-                          <th:block th:if="${meal.dayOfWeek == 'Monday' and meal.mealName == 'Dinner'}">
+                          <th:block th:if="${meal.dayOfWeek == 'Monday' and #lists.contains(mealCombinations, meal.mealName)}">
                             <ul>
                               <li th:each="item : ${meal.dinner}">
                                 <span th:text="${item}"></span>
@@ -608,7 +608,7 @@
                       </td>
                       <td>
                         <th:block th:each="meal : ${meals}">
-                          <th:block th:if="${meal.dayOfWeek == 'Tuesday' and meal.mealName == 'Dinner'}">
+                          <th:block th:if="${meal.dayOfWeek == 'Tuesday' and #lists.contains(mealCombinations, meal.mealName)}">
                             <ul>
                               <li th:each="item : ${meal.dinner}">
                                 <span th:text="${item}"></span>
@@ -619,7 +619,7 @@
                       </td>
                       <td>
                         <th:block th:each="meal : ${meals}">
-                          <th:block th:if="${meal.dayOfWeek == 'Wednesday' and meal.mealName == 'Dinner'}">
+                          <th:block th:if="${meal.dayOfWeek == 'Wednesday' and #lists.contains(mealCombinations, meal.mealName)}">
                             <ul>
                               <li th:each="item : ${meal.dinner}">
                                 <span th:text="${item}"></span>
@@ -630,7 +630,7 @@
                       </td>
                       <td>
                         <th:block th:each="meal : ${meals}">
-                          <th:block th:if="${meal.dayOfWeek == 'Thursday' and meal.mealName == 'Dinner'}">
+                          <th:block th:if="${meal.dayOfWeek == 'Thursday' and #lists.contains(mealCombinations, meal.mealName)}">
                             <ul>
                               <li th:each="item : ${meal.dinner}">
                                 <span th:text="${item}"></span>
@@ -641,7 +641,7 @@
                       </td>
                       <td>
                         <th:block th:each="meal : ${meals}">
-                          <th:block th:if="${meal.dayOfWeek == 'Friday' and meal.mealName == 'Dinner'}">
+                          <th:block th:if="${meal.dayOfWeek == 'Friday' and #lists.contains(mealCombinations, meal.mealName)}">
                             <ul>
                               <li th:each="item : ${meal.dinner}">
                                 <span th:text="${item}"></span>
@@ -652,7 +652,7 @@
                       </td>
                       <td>
                         <th:block th:each="meal : ${meals}">
-                          <th:block th:if="${meal.dayOfWeek == 'Saturday' and meal.mealName == 'Dinner'}">
+                          <th:block th:if="${meal.dayOfWeek == 'Saturday' and #lists.contains(mealCombinations, meal.mealName)}">
                             <ul>
                               <li th:each="item : ${meal.dinner}">
                                 <span th:text="${item}"></span>
@@ -663,7 +663,7 @@
                       </td>
                       <td>
                         <th:block th:each="meal : ${meals}">
-                          <th:block th:if="${meal.dayOfWeek == 'Sunday' and meal.mealName == 'Dinner'}">
+                          <th:block th:if="${meal.dayOfWeek == 'Sunday' and #lists.contains(mealCombinations, meal.mealName)}">
                             <ul>
                               <li th:each="item : ${meal.dinner}">
                                 <span th:text="${item}"></span>

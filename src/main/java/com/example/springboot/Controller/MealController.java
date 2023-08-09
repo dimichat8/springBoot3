@@ -24,9 +24,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class MealController {
@@ -48,17 +46,15 @@ public class MealController {
     private MealPlanRepository mealPlanRepository;
 
 
-
     //Display all meal
 
     @GetMapping("/{customer_id}/mealtable")
     public String listOfMeals(@PathVariable("customer_id") Long customerId, Model model) {
         Customer customer = customerService.getCustomerById(customerId);
-        if (customer == null) {
-            // Handle the case where the customer with the specified ID is not found.
-            // You can return an error page or redirect to another page as needed.
-            return "redirect:/error-page";
-        }
+        String[] mealNames = {"Breakfast", "Desert", "Lunch", "Snack", "Dinner"};
+        List<String> combinations = mealService.generateCombinations(mealNames);
+
+        model.addAttribute("mealCombinations", combinations);
         Meal meal = new Meal();
         List<Meal> listOfMeals = customer.getMeals();
         model.addAttribute("meals", listOfMeals);
@@ -66,6 +62,11 @@ public class MealController {
         model.addAttribute("customer", customer);
         return "Meal/table";
     }
+
+
+
+
+
 
     @GetMapping("/{customer_id}/addmeal")
     public String createMealForm(@PathVariable(value = "customer_id") Customer customerId,

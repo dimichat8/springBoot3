@@ -6,6 +6,7 @@ import com.example.springboot.Service.MealService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,7 +44,7 @@ public class MealServiceImpl implements MealService {
         if (optional.isPresent()) {
             meal = optional.get();
         } else {
-            throw new RuntimeException("Meal not Found with id : " + meal_id );
+            throw new RuntimeException("Meal not Found with id : " + meal_id);
         }
         return meal;
     }
@@ -52,8 +53,30 @@ public class MealServiceImpl implements MealService {
     public Meal updateMeal(Meal meal) {
         return mealRepository.save(meal);
     }
+
     @Override
     public void deleteMealById(Long meal_id) {
         mealRepository.deleteById(meal_id);
+    }
+
+    @Override
+    public List<String> generateCombinations(String[] mealNames) {
+        List<String> combinations = new ArrayList<>();
+        int n = mealNames.length;
+
+        for (int i = 1; i < (1 << n); i++) {
+            StringBuilder combination = new StringBuilder();
+            for (int j = 0; j < n; j++) {
+                if ((i & (1 << j)) > 0) {
+                    if (combination.length() > 0) {
+                        combination.append(", ");
+                    }
+                    combination.append(mealNames[j]);
+                }
+            }
+            combinations.add(combination.toString());
+        }
+
+        return combinations;
     }
 }
