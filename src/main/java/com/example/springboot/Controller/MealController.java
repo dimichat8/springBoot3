@@ -16,7 +16,6 @@ import com.example.springboot.pdf.UserPDFExporter;
 import com.itextpdf.text.DocumentException;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,14 +47,11 @@ public class MealController {
     private MealPlanRepository mealPlanRepository;
 
 
-    //Display all meal
-
-
-    @GetMapping("/layout")
+    @GetMapping("/programForAllCustomers")
     public String layout(Model model) {
         List<MealDataDto> allMealData = mealService.getAllMealData();
         model.addAttribute("allMealData", allMealData);
-        return "/Customer/layout";
+        return "Customer/programForAllCustomers";
     }
 
 

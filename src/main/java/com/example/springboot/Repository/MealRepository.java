@@ -14,6 +14,6 @@ public interface MealRepository extends JpaRepository<Meal, Long> {
     @Query("SELECT m FROM Meal m WHERE m.customer.customer_id = :customerId")
     List<Meal> findMealDataByCustomerId(@Param("customerId") Long customerId);
 
-    @Query("SELECT NEW com.example.springboot.DTO.MealDataDto( c.customer_id, c.firstName, c.lastName, m.mealName, m.dayOfWeek, m.dateFrom, m.dateTo) FROM Meal m JOIN m.customer c")
+    @Query("SELECT DISTINCT NEW com.example.springboot.DTO.MealDataDto( c.customer_id, c.firstName, c.lastName, m.dateFrom, m.dateTo) FROM Meal m JOIN m.customer c")
     List<MealDataDto> getAllMealData();
 }

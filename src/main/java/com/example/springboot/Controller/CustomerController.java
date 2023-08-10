@@ -1,5 +1,6 @@
 package com.example.springboot.Controller;
 
+import com.example.springboot.DTO.MealDataDto;
 import com.example.springboot.Entity.CustomerInfo;
 import com.example.springboot.Entity.Food;
 import com.example.springboot.Entity.Meal;
@@ -25,9 +26,7 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
     @Autowired
-    private CustomerInfoService customerInfoService;
-    @Autowired
-    private FoodService foodService;
+    private MealService mealService;
 
 
     @GetMapping("/index")
@@ -94,6 +93,15 @@ public class CustomerController {
         //Call delete customer method
         customerService.deleteCustomerById(customer_id);
         return "redirect:/customertable";
+    }
+
+
+    @GetMapping("/{customer_id}/programForCustomer ")
+    public String layout(@PathVariable(value = "customer_id") Long customer_id, Model model) {
+        Customer customer = customerService.getCustomerById(customer_id);
+        List<MealDataDto> allMealData = mealService.getAllMealData();
+        model.addAttribute("allMealData", allMealData);
+        return "/Customer/programForCustomer";
     }
 
 }

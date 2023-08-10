@@ -113,7 +113,7 @@
                         <h6 class="collapse-header">About Customers:</h6>
                         <a class="collapse-item" th:href="@{/foodtable}">Food</a>
                         <a class="collapse-item" th:href="@{/addfood}">Add Food</a>
-                        <a class="collapse-item" th:href="@{/mealtable}">Meals</a>
+                        <a class="collapse-item" th:href="@{/programForAllCustomers}">Program For All</a>
                         <a class="collapse-item" th:href="@{/addmeal}">Add Meals</a>
                         <a class="collapse-item" th:href="@{/mealPlan}">Meal Plan</a>
                     </div>
@@ -452,6 +452,9 @@
 
                                                     <a th:href="@{/{customer_id}/mealtable  (customer_id=${customer.customer_id})}"
                                                        class="btn btn-secondary">Program</a>
+
+                                                    <a th:href="@{/{customer_id}/programForCustomer  (customer_id=${customer.customer_id})}"
+                                                       class="btn btn-secondary">Program For Customer</a>
                                                 </div>
 
                                                 <div th:id="'deleteCustomerModal-' + ${customer.customer_id}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="'deleteCustomerModalLabel-' + ${customer.customer_id}" aria-hidden="true">

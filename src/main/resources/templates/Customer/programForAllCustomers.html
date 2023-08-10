@@ -113,7 +113,7 @@
             <h6 class="collapse-header">About Customers:</h6>
             <a class="collapse-item" th:href="@{/foodtable}">Food</a>
             <a class="collapse-item" th:href="@{/addfood}">Add Food</a>
-            <a class="collapse-item" th:href="@{/mealtable}">Meals</a>
+            <a class="collapse-item" th:href="@{/programForAllCustomers}">Program For All</a>
             <a class="collapse-item" th:href="@{/addmeal}">Add Meals</a>
             <a class="collapse-item" th:href="@{/mealPlan}">Meal Plan</a>
           </div>
@@ -403,8 +403,6 @@
                     <th>ID</th>
                     <th>Name</th>
                     <th>Last Name</th>
-                    <th>Meal Type</th>
-                    <th>Day</th>
                     <th>Date From</th>
                     <th>Date To</th>
                     <th>Action</th>
@@ -420,8 +418,6 @@
                     <td th:text="${mealData.customerId}"></td>
                     <td th:text="${mealData.customerName}"></td>
                     <td th:text="${mealData.customerLastName}"></td>
-                    <td th:text="${mealData.mealTypes}"></td>
-                    <td th:text="${mealData.dayOfWeek}"></td>
                     <td th:text="${mealData.dateFrom}"></td>
                     <td th:text="${mealData.dateTo}"></td>
                     <td><a th:href="@{/{customer_id}/mealtable  (customer_id=${mealData.customerId})}"
