@@ -29,10 +29,6 @@ public class CustomerController {
     @Autowired
     private FoodService foodService;
 
-    @GetMapping("/layout")
-    public String layout() {
-        return "/Customer/layout";
-    }
 
     @GetMapping("/index")
     public String getCustomerData(Model model) {

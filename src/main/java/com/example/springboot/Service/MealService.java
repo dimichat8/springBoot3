@@ -1,5 +1,6 @@
 package com.example.springboot.Service;
 
+import com.example.springboot.DTO.MealDataDto;
 import com.example.springboot.Entity.Food;
 import com.example.springboot.Entity.Meal;
 
@@ -21,4 +22,6 @@ public interface MealService {
     void deleteMealById(Long recipe_id);
 
     List<String> generateCombinations(String[] mealNames);
+
+    List<MealDataDto> getAllMealData();
 }

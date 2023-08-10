@@ -1,5 +1,6 @@
 package com.example.springboot.Controller;
 
+import com.example.springboot.DTO.MealDataDto;
 import com.example.springboot.Entity.Customer;
 import com.example.springboot.Entity.Food;
 import com.example.springboot.Entity.Meal;
@@ -15,6 +16,7 @@ import com.example.springboot.pdf.UserPDFExporter;
 import com.itextpdf.text.DocumentException;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,6 +49,15 @@ public class MealController {
 
 
     //Display all meal
+
+
+    @GetMapping("/layout")
+    public String layout(Model model) {
+        List<MealDataDto> allMealData = mealService.getAllMealData();
+        model.addAttribute("allMealData", allMealData);
+        return "/Customer/layout";
+    }
+
 
     @GetMapping("/{customer_id}/mealtable")
     public String listOfMeals(@PathVariable("customer_id") Long customerId, Model model) {

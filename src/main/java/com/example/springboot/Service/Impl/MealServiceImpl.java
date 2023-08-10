@@ -1,5 +1,6 @@
 package com.example.springboot.Service.Impl;
 
+import com.example.springboot.DTO.MealDataDto;
 import com.example.springboot.Entity.Meal;
 import com.example.springboot.Repository.MealRepository;
 import com.example.springboot.Service.MealService;
@@ -78,5 +79,10 @@ public class MealServiceImpl implements MealService {
         }
 
         return combinations;
+    }
+
+    @Override
+    public List<MealDataDto> getAllMealData() {
+        return mealRepository.getAllMealData();
     }
 }
