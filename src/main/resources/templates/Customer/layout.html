@@ -407,6 +407,7 @@
                     <th>Day</th>
                     <th>Date From</th>
                     <th>Date To</th>
+                    <th>Action</th>
                   </tr>
                   </thead>
                   <tfoot>
@@ -423,6 +424,8 @@
                     <td th:text="${mealData.dayOfWeek}"></td>
                     <td th:text="${mealData.dateFrom}"></td>
                     <td th:text="${mealData.dateTo}"></td>
+                    <td><a th:href="@{/{customer_id}/mealtable  (customer_id=${mealData.customerId})}"
+                            class="btn btn-primary">Watch</a></td>
                   </tr>
                   </tbody>
                 </table>
