@@ -61,12 +61,13 @@ public class UserPDFExporter {
         String[] mealNames = { "Breakfast", "Desert", "Lunch", "Snack", "Dinner" };
 
         // Create a map to store the meal values for each day of the week and meal type
-        Map<String, List<String>> mealMap = new HashMap<>();
+        Map<String, Map<String, List<String>>> mealMap = new HashMap<>();
 
         // Initialize the map with empty lists for each combination of day of the week and meal type
         for (String day : daysOfWeek) {
+            mealMap.put(day, new HashMap<>());
             for (String mealName : mealNames) {
-                mealMap.put(day + "-" + mealName, new ArrayList<>());
+                mealMap.get(day).put(mealName, new ArrayList<>());
             }
         }
 
@@ -76,25 +77,26 @@ public class UserPDFExporter {
             String mealName = meal.getMealName();
             List<String> mealValues = getMealValue(meal, mealName);
 
-            // Update the meal values for the specific day and meal type in the map
-            String key = dayOfWeek + "-" + mealName;
-            mealMap.get(key).addAll(mealValues);
+            // Split the mealName into individual meal names
+            String[] individualMealNames = mealName.split(", ");
+
+            // Iterate through individual meal names and their corresponding values
+            for (int i = 0; i < individualMealNames.length; i++) {
+                String individualMealName = individualMealNames[i];
+                List<String> individualMealValues = getMealValue(meal, individualMealName);
+                mealMap.get(dayOfWeek).get(individualMealName).addAll(individualMealValues);
+            }
         }
 
         // Add the map values to the PDF table
         for (String mealName : mealNames) {
             table.addCell(mealName);
             for (String day : daysOfWeek) {
-                String key = day + "-" + mealName;
-                List<String> mealValues = mealMap.get(key);
+                List<String> mealValues = mealMap.get(day).get(mealName);
                 String mealValue = getValidCellValue(String.join(", ", mealValues));
                 table.addCell(mealValue);
             }
         }
-
-        /*for (Map.Entry<String, List<String>> entry : mealMap.entrySet()) {
-            System.out.println(entry.getKey() + ": " + entry.getValue());
-        }*/
     }
 
     private List<String> getMealValue(Meal meal, String mealName) {

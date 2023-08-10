@@ -63,11 +63,6 @@ public class MealController {
         return "Meal/table";
     }
 
-
-
-
-
-
     @GetMapping("/{customer_id}/addmeal")
     public String createMealForm(@PathVariable(value = "customer_id") Customer customerId,
                                  Model model) {
@@ -80,7 +75,6 @@ public class MealController {
         model.addAttribute("customer", customerId);
         return "/Meal/addmeal";
     }
-
 
     @PostMapping("/{customer_id}/saveMeal/foodIds")
     public String saveMeal(@PathVariable(value = "customer_id") Long customerId,

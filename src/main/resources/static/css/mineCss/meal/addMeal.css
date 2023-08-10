@@ -1,0 +1,32 @@
+.select2-container .select2-selection--multiple {
+    min-width: 140px;
+}
+#mealOptionsTitle {
+    position: relative;
+    left: 70px;
+}
+select option:checked {
+    background-color: blue;
+    color: white;
+}
+#mealOptions {
+    height: calc(1.5em * 5);
+    position: relative;
+    top: 90px;
+    right: 60px;
+    min-width: 120px;
+}
+#foodIdsTitle, #foodIds {
+    left: 80px;
+}
+#inputFieldsContainer {
+    position: relative;
+    left: 170px;
+    bottom: 48px;
+}
+.input-group {
+    width: 150px; /* Adjust the width as needed */
+}
+.input-group label {
+    font-size: 12px; /* Adjust the font size as needed */
+}

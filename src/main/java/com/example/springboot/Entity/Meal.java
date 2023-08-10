@@ -25,26 +25,26 @@ public class Meal {
     private String dayOfWeek;
 
     @ElementCollection
-    @CollectionTable(name = "Breakfast", joinColumns = @JoinColumn(name = "mealPlanId"))
+    @CollectionTable(name = "Breakfast", joinColumns = @JoinColumn(name = "mealId"))
     @Column(name = "breakfast")
     private List<String> breakfast;
 
     @ElementCollection
-    @CollectionTable(name = "Desert", joinColumns = @JoinColumn(name = "mealPlanId"))
+    @CollectionTable(name = "Desert", joinColumns = @JoinColumn(name = "mealId"))
     @Column(name = "desert")
     private List<String> desert;
 
     @ElementCollection
-    @CollectionTable(name = "Lunch", joinColumns = @JoinColumn(name = "mealPlanId"))
+    @CollectionTable(name = "Lunch", joinColumns = @JoinColumn(name = "mealId"))
     @Column(name = "lunch")
     private List<String> lunch;
 
     @ElementCollection
-    @CollectionTable(name = "Snack", joinColumns = @JoinColumn(name = "mealPlanId"))
+    @CollectionTable(name = "Snack", joinColumns = @JoinColumn(name = "mealId"))
     @Column(name = "snack")
     private List<String> snack;
     @ElementCollection
-    @CollectionTable(name = "Dinner", joinColumns = @JoinColumn(name = "mealPlanId"))
+    @CollectionTable(name = "Dinner", joinColumns = @JoinColumn(name = "mealId"))
     @Column(name = "dinner")
     private List<String> dinner;
 

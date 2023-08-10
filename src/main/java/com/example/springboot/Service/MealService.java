@@ -20,6 +20,5 @@ public interface MealService {
 
     void deleteMealById(Long recipe_id);
 
-
     List<String> generateCombinations(String[] mealNames);
 }
