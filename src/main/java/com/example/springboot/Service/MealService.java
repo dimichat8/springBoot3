@@ -4,6 +4,7 @@ import com.example.springboot.DTO.MealDataDto;
 import com.example.springboot.Entity.Food;
 import com.example.springboot.Entity.Meal;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,4 +25,6 @@ public interface MealService {
     List<String> generateCombinations(String[] mealNames);
 
     List<MealDataDto> getAllMealData();
+
+    List<MealDataDto> allMealDataForEachCustomer(Long customerId);
 }

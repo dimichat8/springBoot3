@@ -54,6 +54,13 @@ public class MealController {
         return "Customer/programForAllCustomers";
     }
 
+    @GetMapping("/{customer_id}/programForCustomer")
+    public String programForEachCustomer(@PathVariable("customer_id") Long customerId, Model model) {
+        Customer customer = customerService.getCustomerById(customerId);
+        List<MealDataDto> allMealDataForEachCustomer = mealService.allMealDataForEachCustomer(customerId);
+        model.addAttribute("allMealDataForEachCustomer", allMealDataForEachCustomer);
+        return "Customer/programForCustomer";
+    }
 
     @GetMapping("/{customer_id}/mealtable")
     public String listOfMeals(@PathVariable("customer_id") Long customerId, Model model) {

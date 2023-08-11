@@ -94,14 +94,4 @@ public class CustomerController {
         customerService.deleteCustomerById(customer_id);
         return "redirect:/customertable";
     }
-
-
-    @GetMapping("/{customer_id}/programForCustomer ")
-    public String layout(@PathVariable(value = "customer_id") Long customer_id, Model model) {
-        Customer customer = customerService.getCustomerById(customer_id);
-        List<MealDataDto> allMealData = mealService.getAllMealData();
-        model.addAttribute("allMealData", allMealData);
-        return "/Customer/programForCustomer";
-    }
-
 }
