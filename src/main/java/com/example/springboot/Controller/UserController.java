@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -20,9 +21,13 @@ public class UserController {
         return "/User/login";
     }
 
-    @GetMapping("registration")
+    @PostMapping("registration")
     public String viewRegistrationPage(Model model) {
         User user = new User();
+        user.setEmail(user.getEmail());
+        user.setPassword(user.getPassword());
+        user.setFirstName(user.getFirstName());
+        user.setLastName(user.getLastName());
         model.addAttribute("user", user);
         return "/User/registration";
     }

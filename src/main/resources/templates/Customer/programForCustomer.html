@@ -405,6 +405,7 @@
                     <th>Last Name</th>
                     <th>Date From</th>
                     <th>Date To</th>
+                    <th>Action</th>
 
                   </tr>
                   </thead>
@@ -419,7 +420,7 @@
                     <td th:text="${mealData.customerLastName}"></td>
                     <td th:text="${mealData.dateFrom}"></td>
                     <td th:text="${mealData.dateTo}"></td>
-                    <td><td><a th:href="@{/{customer_id}/mealtable  (customer_id=${mealData.customerId})}"
+                    <td><a th:href="@{'/' + ${customer_id} + '/tableAccordingToDates?dateFrom=' + ${mealData.dateFrom} + '&dateTo=' + ${mealData.dateTo}}"
                                class="btn btn-primary">Watch</a></td>
                   </tr>
                   </tbody>

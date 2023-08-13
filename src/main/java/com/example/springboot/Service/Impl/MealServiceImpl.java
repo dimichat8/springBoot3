@@ -91,4 +91,9 @@ public class MealServiceImpl implements MealService {
     public List<MealDataDto> allMealDataForEachCustomer(Long customerId) {
         return mealRepository.getAllMealDataForEachCustomer(customerId);
     }
+
+    @Override
+    public List<MealDataDto> allMealDataAccordingToDates(Long customerId, LocalDate dateFrom, LocalDate dateTo) {
+        return mealRepository.getAllMealDataAccordingToDates(customerId, dateFrom, dateTo);
+    }
 }

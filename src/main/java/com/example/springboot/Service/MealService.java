@@ -27,4 +27,6 @@ public interface MealService {
     List<MealDataDto> getAllMealData();
 
     List<MealDataDto> allMealDataForEachCustomer(Long customerId);
+
+    List<MealDataDto> allMealDataAccordingToDates(Long customerId, LocalDate dateFrom, LocalDate dateTo);
 }

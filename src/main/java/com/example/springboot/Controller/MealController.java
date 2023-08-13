@@ -62,6 +62,36 @@ public class MealController {
         return "Customer/programForCustomer";
     }
 
+    @GetMapping("/{customer_id}/tableAccordingToDates")
+    public String tableAccordingToDates(@PathVariable("customer_id") Long customerId,
+                                        @RequestParam("dateFrom") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dateFrom,
+                                        @RequestParam("dateTo") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dateTo,
+                                        @ModelAttribute("dayOfWeek") String dayOfWeek, @ModelAttribute("mealName") String type,
+                                        Model model) {
+        Customer customer = customerService.getCustomerById(customerId);
+        String[] mealNames = {"Breakfast", "Desert", "Lunch", "Snack", "Dinner"};
+        List<String> combinations = mealService.generateCombinations(mealNames);
+        List<MealDataDto> allMealDataAccordingToDates = mealService.allMealDataAccordingToDates(customerId, dateFrom, dateTo);
+        List<MealDataDto> filteredMealData = new ArrayList<>();
+        for (MealDataDto mealData : allMealDataAccordingToDates) {
+            LocalDate mealDateFrom = mealData.getDateFrom();
+            LocalDate mealDateTo = mealData.getDateTo();
+            /*String mealDayOfWeek = mealData.getDayOfWeek();
+            String mealType = mealData.getType();*/
+            if (mealDateFrom.isEqual(dateFrom) && mealDateTo.isEqual(dateTo) /*&& mealDayOfWeek.equals(dayOfWeek) && mealType.equals(type)*/) {
+                filteredMealData.add(mealData);
+            }
+        }
+        model.addAttribute("allMealDataAccordingToDates", allMealDataAccordingToDates);
+        model.addAttribute("filteredMealData", filteredMealData);
+        model.addAttribute("mealCombinations", combinations);
+        model.addAttribute("customer", customer);
+        model.addAttribute("dateFrom", dateFrom);
+        model.addAttribute("dateTo", dateTo);
+        return "Meal/tableAccordingToDates";
+    }
+
+
     @GetMapping("/{customer_id}/mealtable")
     public String listOfMeals(@PathVariable("customer_id") Long customerId, Model model) {
         Customer customer = customerService.getCustomerById(customerId);
@@ -95,6 +125,7 @@ public class MealController {
                            @RequestParam("foodIds") List<Long> foodIds,
                            @RequestParam("dayOfWeek") List<String> daysOfWeek,
                            @RequestParam("mealName") List<String> mealNames,
+                           @RequestParam(value = "grams", required = false) Integer grams,
                            @ModelAttribute("breakfast") String breakfast,
                            @ModelAttribute("desert") String desert,
                            @ModelAttribute("lunch") String lunch,
@@ -139,6 +170,7 @@ public class MealController {
                 meal.setCustomer(customer);
                 meal.setDayOfWeek(dayOfWeek);
                 mealNameList.add(mealName);
+                meal.setMealGrams(grams);
                 meal.setFoods(selectedFoods);
                 meal.setDateFrom(dateFrom);
                 meal.setDateTo(dateTo);

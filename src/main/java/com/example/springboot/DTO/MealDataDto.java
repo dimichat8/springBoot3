@@ -2,6 +2,7 @@ package com.example.springboot.DTO;
 import com.example.springboot.Entity.MealPlan;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class MealDataDto {
 
@@ -11,6 +12,14 @@ public class MealDataDto {
     private String customerLastName;
     private LocalDate dateFrom;
     private LocalDate dateTo;
+    private String dayOfWeek;
+    private String type;
+
+    private List<String> breakfast;
+    private List<String> desert;
+    private List<String> lunch;
+    private List<String> snack;
+    private List<String> dinner;
 
 
     public MealDataDto() {
@@ -72,5 +81,61 @@ public class MealDataDto {
 
     public void setDateTo(LocalDate dateTo) {
         this.dateTo = dateTo;
+    }
+
+    public String getDayOfWeek() {
+        return dayOfWeek;
+    }
+
+    public void setDayOfWeek(String dayOfWeek) {
+        this.dayOfWeek = dayOfWeek;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public List<String> getBreakfast() {
+        return breakfast;
+    }
+
+    public void setBreakfast(List<String> breakfast) {
+        this.breakfast = breakfast;
+    }
+
+    public List<String> getDesert() {
+        return desert;
+    }
+
+    public void setDesert(List<String> desert) {
+        this.desert = desert;
+    }
+
+    public List<String> getLunch() {
+        return lunch;
+    }
+
+    public void setLunch(List<String> lunch) {
+        this.lunch = lunch;
+    }
+
+    public List<String> getSnack() {
+        return snack;
+    }
+
+    public void setSnack(List<String> snack) {
+        this.snack = snack;
+    }
+
+    public List<String> getDinner() {
+        return dinner;
+    }
+
+    public void setDinner(List<String> dinner) {
+        this.dinner = dinner;
     }
 }
