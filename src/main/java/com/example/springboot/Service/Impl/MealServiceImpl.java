@@ -24,10 +24,6 @@ public class MealServiceImpl implements MealService {
         this.mealRepository = mealRepository;
     }
 
-    @Override
-    public List<Meal> getAllMeals() {
-        return mealRepository.findAll();
-    }
 
     @Override
     public List<Meal> getMealByCustomerId(Long customerId) {
@@ -93,7 +89,7 @@ public class MealServiceImpl implements MealService {
     }
 
     @Override
-    public List<MealDataDto> allMealDataAccordingToDates(Long customerId, LocalDate dateFrom, LocalDate dateTo) {
+    public List<Meal> allMealDataAccordingToDates(Long customerId, LocalDate dateFrom, LocalDate dateTo) {
         return mealRepository.getAllMealDataAccordingToDates(customerId, dateFrom, dateTo);
     }
 }

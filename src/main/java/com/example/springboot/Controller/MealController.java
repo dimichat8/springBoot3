@@ -26,6 +26,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 public class MealController {
@@ -71,19 +72,8 @@ public class MealController {
         Customer customer = customerService.getCustomerById(customerId);
         String[] mealNames = {"Breakfast", "Desert", "Lunch", "Snack", "Dinner"};
         List<String> combinations = mealService.generateCombinations(mealNames);
-        List<MealDataDto> allMealDataAccordingToDates = mealService.allMealDataAccordingToDates(customerId, dateFrom, dateTo);
-        List<MealDataDto> filteredMealData = new ArrayList<>();
-        for (MealDataDto mealData : allMealDataAccordingToDates) {
-            LocalDate mealDateFrom = mealData.getDateFrom();
-            LocalDate mealDateTo = mealData.getDateTo();
-            /*String mealDayOfWeek = mealData.getDayOfWeek();
-            String mealType = mealData.getType();*/
-            if (mealDateFrom.isEqual(dateFrom) && mealDateTo.isEqual(dateTo) /*&& mealDayOfWeek.equals(dayOfWeek) && mealType.equals(type)*/) {
-                filteredMealData.add(mealData);
-            }
-        }
-        model.addAttribute("allMealDataAccordingToDates", allMealDataAccordingToDates);
-        model.addAttribute("filteredMealData", filteredMealData);
+        List<Meal> listOfMeals = customer.getMeals();
+        model.addAttribute("meals", listOfMeals);
         model.addAttribute("mealCombinations", combinations);
         model.addAttribute("customer", customer);
         model.addAttribute("dateFrom", dateFrom);
@@ -97,7 +87,6 @@ public class MealController {
         Customer customer = customerService.getCustomerById(customerId);
         String[] mealNames = {"Breakfast", "Desert", "Lunch", "Snack", "Dinner"};
         List<String> combinations = mealService.generateCombinations(mealNames);
-
         model.addAttribute("mealCombinations", combinations);
         Meal meal = new Meal();
         List<Meal> listOfMeals = customer.getMeals();
@@ -145,7 +134,6 @@ public class MealController {
             LocalDate mealPlanDateTo = (LocalDate) row[2];
             Long mealPlanCustomerId = (Long) row[3];
 
-            // Check if the retrieved meal plan's dates match the current request's dates and customer ID
             if (mealPlanDateFrom.equals(dateFrom) && mealPlanDateTo.equals(dateTo) && mealPlanCustomerId.equals(customerId)) {
                 mealPlan = tempMealPlan; // Found matching meal plan
                 foundMatch = true;
@@ -239,22 +227,44 @@ public class MealController {
     }
 
     @GetMapping("/{customer_id}/dietProgram/export/pdf")
-    public void exportToPDF(@PathVariable(value = "customer_id") Long customerId, HttpServletResponse response) throws DocumentException, IOException {
+    public void exportToPDF(@PathVariable(value = "customer_id") Long customerId,
+                            @RequestParam("dateFrom") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dateFrom,
+                            @RequestParam("dateTo") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dateTo,
+                            HttpServletResponse response) throws DocumentException, IOException {
         response.setContentType("application/pdf");
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
         String currentDateTime = dateFormatter.format(new Date());
         Customer customer = customerService.getCustomerById(customerId);
-        String fullname = customer.getFirstName() + " " + customer.getLastName();
+        String fullΝame = customer.getFirstName() + " " + customer.getLastName();
         String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=diet_for_" + fullname + "_" + currentDateTime +  ".pdf";
+        String headerValue = "attachment; filename=diet_for_" + fullΝame + "_" + currentDateTime +  ".pdf";
         response.setHeader(headerKey, headerValue);
         List<Meal> mealList = mealService.getMealByCustomerId(customerId);
-        UserPDFExporter exporter = new UserPDFExporter(mealList, customerService);
-        exporter.export(response, customerId);
 
+        // Filter the mealList by the selected date range
+        List<Meal> filteredMealList = filterMealsByDateRange(mealList, dateFrom, dateTo);
+
+        // Create the PDF using the filtered meal data
+        UserPDFExporter exporter = new UserPDFExporter(filteredMealList, customerService);
+        exporter.export(response, customerId);
     }
 
+    private List<Meal> filterMealsByDateRange(List<Meal> allMeals, LocalDate dateFrom, LocalDate dateTo) {
+        return allMeals.stream()
+                .filter(meal -> isWithinDateRange(meal, dateFrom, dateTo))
+                .collect(Collectors.toList());
+    }
+
+    private boolean isWithinDateRange(Meal meal, LocalDate dateFrom, LocalDate dateTo) {
+        LocalDate mealDateFrom = meal.getDateFrom();
+        LocalDate mealDateTo = meal.getDateTo();
+        // Change this to the actual method to get the meal date
+
+        return !mealDateFrom.isBefore(dateFrom) && !mealDateTo.isAfter(dateTo);
+    }
 
 }
+
+
 
 

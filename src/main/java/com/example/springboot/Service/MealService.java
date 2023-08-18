@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public interface MealService {
 
-    List<Meal> getAllMeals();
+
 
     List<Meal> getMealByCustomerId(Long customerId);
 
@@ -28,5 +28,6 @@ public interface MealService {
 
     List<MealDataDto> allMealDataForEachCustomer(Long customerId);
 
-    List<MealDataDto> allMealDataAccordingToDates(Long customerId, LocalDate dateFrom, LocalDate dateTo);
+    List<Meal> allMealDataAccordingToDates(Long customerId, LocalDate dateFrom, LocalDate dateTo);
+
 }
