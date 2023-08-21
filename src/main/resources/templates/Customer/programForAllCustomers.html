@@ -420,8 +420,8 @@
                     <td th:text="${mealData.customerLastName}"></td>
                     <td th:text="${mealData.dateFrom}"></td>
                     <td th:text="${mealData.dateTo}"></td>
-                    <td><a th:href="@{/{customer_id}/mealtable  (customer_id=${mealData.customerId})}"
-                            class="btn btn-primary">Watch</a></td>
+                    <td><a th:href="@{'/' + ${mealData.customerId} + '/tableAccordingToDates?dateFrom=' + ${mealData.dateFrom} + '&dateTo=' + ${mealData.dateTo}}"
+                           class="btn btn-primary">Watch</a></td>
                   </tr>
                   </tbody>
                 </table>

@@ -36,6 +36,7 @@ public class Customer {
     @Column(name = "address")
     private String address;
 
+    @NotBlank(message = "Mobile Phone can not be empty")
     @Column(name = "phone")
     private String phone;
 

@@ -1,6 +1,9 @@
 package com.example.springboot.Entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +18,7 @@ public class Food {
     @Column(name = "food_id")
     private Long food_id;
 
+    @NotBlank(message = "Name of food can not be empty")
     @Column(name = "name")
     private String name;
     @Column(name = "grams")
@@ -29,7 +33,8 @@ public class Food {
     @ManyToMany(mappedBy = "foods")
     private List<Meal> meals = new ArrayList<>();
 
-
+    @NotNull(message = "Calories cannot be null")
+    @Min(value = 0, message = "Calories must be a positive number")
     @Column(name = "calories")
     private Float calories;
 

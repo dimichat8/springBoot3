@@ -5,9 +5,11 @@ import com.example.springboot.Entity.Meal;
 import com.example.springboot.Repository.FoodRepository;
 import com.example.springboot.Repository.MealRepository;
 import com.example.springboot.Service.FoodService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -43,9 +45,12 @@ public class FoodController {
     }
 
     @PostMapping("/saveFood")
-    public String saveFood(@ModelAttribute("food")Food food) {
-
-        //Save food to database
+    public String saveFood(@Valid @ModelAttribute("food")Food food, BindingResult bindingResult, Model model) {
+        boolean thereAreErrors = bindingResult.hasErrors();
+        if(thereAreErrors) {
+            model.addAttribute("food", food);
+            return "Food/addfood";
+        }
         foodService.saveFood(food);
         return "redirect:/foodtable";
     }
