@@ -12,7 +12,7 @@ public interface CustomerInfoService {
 
     List<CustomerInfo> readCustomerInfoByCustomer();
 
-    CustomerInfoService getCustomerInfoById (Long customerdietary_id);
+    CustomerInfo getCustomerInfoById (Long customerdietary_id);
 
     CustomerInfo updateCustomerInfo(CustomerInfo customerInfo);
 

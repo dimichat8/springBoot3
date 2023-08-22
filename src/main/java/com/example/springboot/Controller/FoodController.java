@@ -57,16 +57,12 @@ public class FoodController {
 
     @GetMapping("/updateFoodForm/{food_id}")
     public String updateFoodForm(@PathVariable(value = "food_id")Long food_id, Model model) {
-
-        //Get food from the service
         Food food = foodService.getFoodById(food_id);
-
-        //Set food as a model attribute to pre-populate the form
         model.addAttribute("food", food);
         return "/Food/updatefood";
     }
 
-    @GetMapping("/updateFood")
+    @PostMapping("/updateFood/{food_id}")
     public String updateFood(@PathVariable(value = "food_id") Long foodId,
                              @ModelAttribute("food") Food food) {
         Food existfood = foodService.getFoodById(foodId);

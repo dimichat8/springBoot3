@@ -36,7 +36,7 @@ public class CustomerInfoServiceImpl implements CustomerInfoService {
 
 
     @Override
-    public CustomerInfoService getCustomerInfoById(Long customerdietary_id) {
+    public CustomerInfo getCustomerInfoById(Long customerdietary_id) {
         Optional<CustomerInfo> optional = customerInfoRepository.findById(customerdietary_id);
             CustomerInfo customerInfo = null;
             if (optional.isPresent()){
@@ -44,7 +44,7 @@ public class CustomerInfoServiceImpl implements CustomerInfoService {
             }else {
                 throw new RuntimeException("CustomerDietaryInfo not found with id :" + customerdietary_id);
             }
-        return (CustomerInfoService) customerInfo;
+        return customerInfo;
     }
 
     @Override

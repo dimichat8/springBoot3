@@ -9,17 +9,18 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Update Customer Information</title>
+  <title>Update Customer</title>
 
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link
           href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
           rel="stylesheet">
 
-  <link href="css/sb-admin-2.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" rel="stylesheet">
+  <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+
+  <link href="/https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../../https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js" rel="stylesheet">
+  <link href="../../https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" rel="stylesheet">
   <link href="css/test" rel="stylesheet">
 
 </head>
@@ -32,8 +33,14 @@
   <div class="container rounded bg-white mt-5 mb-5">
     <div class="row">
       <div class="col-md-3 border-right">
-        <form th:action="@{/saveCustomer}" th:object="${customer}" class="user"  method="GET"></form>
-        <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><a class="font-weight-bold" ></a><span class="text-black-50">edogaru@mail.com.my</span><span> </span></div>
+        <form th:action="@{{customer_id}/saveCustomer  (customer_id=${customerinfo.customer.customer_id})}" th:object="${customerinfo}" class="user"  method="GET"></form>
+        <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+          <img class="rounded-circle mt-5" width="150px" th:if="${customerinfo.customer.gender == 'Male'}" src="https://cdn.pixabay.com/photo/2016/04/01/10/56/boy-1300112_960_720.png">
+          <img class="rounded-circle mt-5" width="150px" th:if="${customerinfo.customer.gender == 'Something other'}" src="https://st2.depositphotos.com/2101611/9885/v/600/depositphotos_98850500-stock-illustration-man-silhouette-icon-with-question.jpg">
+          <img class="rounded-circle mt-5" width="150px" th:if="${customerinfo.customer.gender == 'Female'}" src="https://cdn.pixabay.com/photo/2017/03/01/22/18/avatar-2109804_960_720.png">
+          <a class="font-weight-bold" ></a>
+          <span th:each="customer, iterate : ${customerinfo.customer}"></span>
+          <span th:text="${customerinfo.customer.firstName + ' ' + customerinfo.customer.lastName}"></span></div>
       </div>
       <div class="col-md-5 border-right">
         <div class="p-3 py-5">
@@ -92,7 +99,6 @@
       </div>
     </div>
   </div>
-</div>
 </div>
 </div>
 
