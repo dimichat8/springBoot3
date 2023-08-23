@@ -408,23 +408,23 @@
                                                    class="btn btn-primary">Update</a>
 
                                                 <a th:href="@{/deleteCustomerInfo/{id}(id=${customerinfo.customerInfo_id})}" class="btn btn-danger"
-                                                   data-toggle="modal" th:data-target="'#deleteFoodModal-' + ${customerinfo.customerInfo_id}">Delete</a>
+                                                   data-toggle="modal" th:data-target="'#deleteCustomerInfoModal-' + ${customerinfo.customerInfo_id}">Delete</a>
                                             </div>
-                                                <div th:id="'deleteFoodModal-' + ${customerinfo.customerInfo_id}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="'deleteFoodModalLabel-' + ${food.food_id}" aria-hidden="true">
+                                                <div th:id="'deleteCustomerInfoModal-' + ${customerinfo.customerInfo_id}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="'deleteCustomerInfoModalLabel-' + ${customerinfo.customerInfo_id}" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" th:id="'deleteFoodModalLabel-' + ${customerinfo.customerInfo_id}">Delete Food Confirmation</h5>
+                                                                <h5 class="modal-title" th:id="'deleteCustomerInfoModalLabel-' + ${customerinfo.customerInfo_id}">Delete Customer Information</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <p>Are you sure you want to delete the food  <b><span th:text="${customerinfo.customer.firstName + ' ' + customerinfo.customer.lastName}"/></b>?</p>
-                                                                <!-- Display additional information about the food item if needed -->
+                                                                <p>Are you sure you want to delete the customer information  <b><span th:text="${customerinfo.customer.firstName + ' ' + customerinfo.customer.lastName}"/></b>?</p>
+                                                                <!-- Display additional information about the Customer item if needed -->
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <form th:action="@{/deleteCustomerInfo/{id}(id=${customerinfo.customerInfo_id})}" method="POST">
+                                                                <form th:action="@{/deleteCustomer/{customer_id}(customer_id=${customerinfo.customerInfo_id})}" method="POST">
                                                                     <button type="submit" class="btn btn-danger">Delete</button>
                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                                                                 </form>

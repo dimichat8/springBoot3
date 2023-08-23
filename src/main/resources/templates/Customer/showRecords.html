@@ -73,7 +73,7 @@
           <span>Dashboard</span></a>
       </li>
 
-  >
+
       <hr class="sidebar-divider">
 
 
@@ -423,9 +423,31 @@
                       <a th:href="@{/updateCustomerInfoForm/{customerinfo_id}(customerinfo_id=${customerinfo.customerInfo_id})}"
                          class="btn btn-primary">Update</a>
 
-                      <a th:href="@{/deleteCustomerInfo/{customerinfo_id}(customerinfo_id=${customerinfo.customerInfo_id})}"
-                         class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?')">Delete</a>
+                      <a th:href="@{/deleteCustomerInfo/{customerinfo_id}(customerinfo_id=${customerinfo.customerInfo_id})}" class="btn btn-danger"
+                         data-toggle="modal" th:data-target="'#deleteCustomerInfoModal-' + ${customerinfo.customerInfo_id}">Delete</a>
                       </div>
+                        <div th:id="'deleteCustomerInfoModal-' + ${customerinfo.customerInfo_id}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="'deleteCustomerInfoModalLabel-' + ${customerinfo.customerInfo_id}" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" th:id="'deleteCustomerInfoModalLabel-' + ${customerinfo.customerInfo_id}">Delete Customer Information</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <p>Are you sure you want to delete the customer information for <b><span th:text="${customerinfo.customer.firstName + ' ' + customerinfo.customer.lastName}"/></b>?</p>
+                                <!-- Display additional information about the Customer item if needed -->
+                              </div>
+                              <div class="modal-footer">
+                                <form th:action="@{/deleteCustomerInfo/{customerinfo_id}(customerinfo_id=${customerinfo.customerInfo_id})}" method="POST">
+                                  <button type="submit" class="btn btn-danger">Delete</button>
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </center>
                     </td>
                   </tr>
