@@ -23,16 +23,16 @@
     .hidden {
       display: none;
     }
-    .button-container {
-      display: block;
+    .btn-outline-primary {
+      display: inline-block;
       vertical-align: middle;
     }
   </style>
   <script>
     var previousButtonsContainer = null;
 
-    function toggleButtons(customerId) {
-      var buttonsContainer = document.getElementById('buttons-' + customerId);
+    function toggleButtons(customerInfoId) {
+      var buttonsContainer = document.getElementById('buttons-' + customerInfoId);
 
       if (previousButtonsContainer !== null && previousButtonsContainer !== buttonsContainer) {
         previousButtonsContainer.classList.add('hidden');
@@ -416,10 +416,12 @@
                     <td th:text="${customerinfo.fat}"></td>
                     <td>
                       <center>
-                      <button th:attr="data-customer-id=${customer.customer_id}"
-                              onclick="toggleButtons(this.getAttribute('data-customer-id'))"
-                              class="btn btn-outline-primary">Display Options</button>
-                      <div th:id="'buttons-' + ${customer.customer_id}" class="hidden">
+                      <button th:attr="data-customerInfo-id=${customer.customer_id}"
+                              onclick="toggleButtons(this.getAttribute('data-customerInfo-id'))"
+                              class="btn btn-outline-primary">Display Options
+                      </button>
+                      <div th:id="'buttons-' + ${customerinfo.customer.customer_id}" class="hidden">
+                        <br>
                       <a th:href="@{/updateCustomerInfoForm/{customerinfo_id}(customerinfo_id=${customerinfo.customerInfo_id})}"
                          class="btn btn-primary">Update</a>
 
