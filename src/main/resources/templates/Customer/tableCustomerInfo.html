@@ -19,13 +19,13 @@
     <link href="/css/sb-admin-2.min.css" rel="stylesheet">
 
     <style>
-        .hidden {
-            display: none;
-        }
-        .button-container {
-            display: inline-block;
-            vertical-align: middle;
-        }
+    .hidden {
+    display: none;
+    }
+    .button-container {
+    display: inline-block;
+    vertical-align: middle;
+    }
     </style>
     <script>
         var previousButtonsContainer = null;
@@ -400,25 +400,48 @@
                                             <center>
                                             <button th:attr="data-customerinfo-id=${customerinfo.customerInfo_id}"
                                                     onclick="toggleButtons(this.getAttribute('data-customerinfo-id'))"
-                                                    class="btn btn-outline-primary">Display Options</button>
+                                                    class="btn btn-outline-primary">Display Options
+                                            </button>
                                             <div th:id="'buttons-' + ${customerinfo.customerInfo_id}" class="hidden">
 
                                                 <a th:href="@{/updateCustomerInfoForm/{id}(id=${customerinfo.customerInfo_id})}"
                                                    class="btn btn-primary">Update</a>
 
-                                                <a th:href="@{/deleteCustomerInfo/{id}(id=${customerinfo.customerInfo_id})}"
-                                                   class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?')">Delete</a>
+                                                <a th:href="@{/deleteCustomerInfo/{id}(id=${customerinfo.customerInfo_id})}" class="btn btn-danger"
+                                                   data-toggle="modal" th:data-target="'#deleteFoodModal-' + ${customerinfo.customerInfo_id}">Delete</a>
                                             </div>
+                                                <div th:id="'deleteFoodModal-' + ${customerinfo.customerInfo_id}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="'deleteFoodModalLabel-' + ${food.food_id}" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" th:id="'deleteFoodModalLabel-' + ${customerinfo.customerInfo_id}">Delete Food Confirmation</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <p>Are you sure you want to delete the food  <b><span th:text="${customerinfo.customer.firstName + ' ' + customerinfo.customer.lastName}"/></b>?</p>
+                                                                <!-- Display additional information about the food item if needed -->
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <form th:action="@{/deleteCustomerInfo/{id}(id=${customerinfo.customerInfo_id})}" method="POST">
+                                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </center>
                                         </td>
                                     </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">

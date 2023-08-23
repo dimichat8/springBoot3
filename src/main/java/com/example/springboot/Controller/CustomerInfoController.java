@@ -55,8 +55,6 @@ public class CustomerInfoController {
     @GetMapping("/{customer_id}/showRecords")
     public String showRecords(@PathVariable(value = "customer_id") Customer customerId, Model model) {
 
-
-        //Crate model attribute to bind from data
         model.addAttribute("customer", customerId);
         model.addAttribute("customerInfos", customerId.getCustomerInfos());
         return "/Customer/showRecords";
@@ -86,7 +84,7 @@ public class CustomerInfoController {
         return "redirect:/customertableinfo";
     }
 
-    @GetMapping("/deleteCustomerInfo/{customerinfo_id}")
+    @PostMapping("/deleteCustomerInfo/{customerinfo_id}")
     public String deleteCustomerInfo(@PathVariable(value = "customerinfo_id") Long customerinfoId){
         customerInfoService.deleteCustomerInfoById(customerinfoId);
         return "redirect:/customertableinfo";
