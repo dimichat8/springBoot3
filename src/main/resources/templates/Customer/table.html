@@ -381,6 +381,7 @@
                                                         class="btn btn-outline-primary">Display Options
                                                 </button>
                                                 <div th:id="'buttons-' + ${customer.customer_id}" class="hidden">
+                                                    <br>
                                                     <a th:href="@{/updateCustomerForm/{customer_id}(customer_id=${customer.customer_id})}"
                                                        class="btn btn-primary">Update</a>
 
@@ -396,12 +397,8 @@
                                                     <a th:href="@{/{customer_id}/addmeal (customer_id=${customer.customer_id})}"
                                                        data-toggle="modal" th:data-target="'#dayCustomerModal-' + ${customer.customer_id}" class="btn btn-info">Set Food</a>
 
-
-                                                    <a th:href="@{/{customer_id}/mealtable  (customer_id=${customer.customer_id})}"
-                                                       class="btn btn-secondary">Program</a>
-
                                                     <a th:href="@{/{customer_id}/programForCustomer  (customer_id=${customer.customer_id})}"
-                                                       class="btn btn-secondary">Program For Customer</a>
+                                                       class="btn btn-secondary">Program</a>
                                                 </div>
 
                                                 <div th:id="'deleteCustomerModal-' + ${customer.customer_id}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="'deleteCustomerModalLabel-' + ${customer.customer_id}" aria-hidden="true">

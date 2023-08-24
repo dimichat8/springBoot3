@@ -403,7 +403,7 @@
                                                     class="btn btn-outline-primary">Display Options
                                             </button>
                                             <div th:id="'buttons-' + ${customerinfo.customerInfo_id}" class="hidden">
-
+                                                <br>
                                                 <a th:href="@{/updateCustomerInfoForm/{id}(id=${customerinfo.customerInfo_id})}"
                                                    class="btn btn-primary">Update</a>
 
@@ -424,7 +424,7 @@
                                                                 <!-- Display additional information about the Customer item if needed -->
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <form th:action="@{/deleteCustomer/{customer_id}(customer_id=${customerinfo.customerInfo_id})}" method="POST">
+                                                                <form th:action="@{/deleteCustomerInfo/{id}(id=${customerinfo.customerInfo_id})}" method="POST">
                                                                     <button type="submit" class="btn btn-danger">Delete</button>
                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                                                                 </form>

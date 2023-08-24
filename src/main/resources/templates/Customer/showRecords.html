@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<!--Customer Table-->
-
 <head>
 
   <meta charset="utf-8">
@@ -11,10 +9,11 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Show Records</title>
+  <title>Customer Information</title>
 
   <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+  <link
+          href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
           rel="stylesheet">
 
   <link href="/css/sb-admin-2.min.css" rel="stylesheet">
@@ -23,7 +22,7 @@
     .hidden {
       display: none;
     }
-    .btn-outline-primary {
+    .button-container {
       display: inline-block;
       vertical-align: middle;
     }
@@ -47,12 +46,9 @@
 
 <body id="page-top">
 <section id="container" class="">
-
-
-  </section>
-
   <div id="wrapper">
 
+    <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
 
@@ -63,9 +59,7 @@
         <div class="sidebar-brand-text mx-3">Healthy Diet <sup></sup></div>
       </a>
 
-
       <hr class="sidebar-divider my-0">
-
 
       <li class="nav-item active">
         <a class="nav-link" th:href="@{/index}">
@@ -73,14 +67,11 @@
           <span>Dashboard</span></a>
       </li>
 
-
       <hr class="sidebar-divider">
-
 
       <div class="sidebar-heading">
         Interface
       </div>
-
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
@@ -97,7 +88,6 @@
           </div>
         </div>
       </li>
-
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
@@ -118,14 +108,11 @@
         </div>
       </li>
 
-
       <hr class="sidebar-divider">
-
 
       <div class="sidebar-heading">
         Addons
       </div>
-
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
@@ -147,13 +134,11 @@
         </div>
       </li>
 
-
       <li class="nav-item">
         <a class="nav-link" href="charts.html">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Charts</span></a>
       </li>
-
 
       <li class="nav-item">
         <a class="nav-link" href="table.html">
@@ -161,24 +146,19 @@
           <span>Tables</span></a>
       </li>
 
-
       <hr class="sidebar-divider d-none d-md-block">
+
       <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
       </div>
 
 
     </ul>
-
-
     <div id="content-wrapper" class="d-flex flex-column">
-
 
       <div id="content">
 
-
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
 
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
             <i class="fa fa-bars"></i>
@@ -197,9 +177,7 @@
             </div>
           </form>
 
-
           <ul class="navbar-nav ml-auto">
-
 
             <li class="nav-item dropdown no-arrow d-sm-none">
               <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
@@ -229,7 +207,7 @@
               <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-bell fa-fw"></i>
-
+                <!-- Counter - Alerts -->
                 <span class="badge badge-danger badge-counter">3+</span>
               </a>
 
@@ -280,7 +258,7 @@
               <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-envelope fa-fw"></i>
-
+                <!-- Counter - Messages -->
                 <span class="badge badge-danger badge-counter">7</span>
               </a>
 
@@ -343,7 +321,6 @@
 
             <div class="topbar-divider d-none d-sm-block"></div>
 
-
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -351,7 +328,7 @@
                 <img class="img-profile rounded-circle"
                      src="img/undraw_profile.svg">
               </a>
-
+              <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                    aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="#">
@@ -380,9 +357,7 @@
 
         <div class="container-fluid">
 
-
           <h1 class="h3 mb-2 text-gray-800">Customers Table</h1>
-
 
           <div class="card shadow mb-4">
             <div class="card-header py-3">
@@ -416,18 +391,18 @@
                     <td th:text="${customerinfo.fat}"></td>
                     <td>
                       <center>
-                      <button th:attr="data-customerInfo-id=${customer.customer_id}"
-                              onclick="toggleButtons(this.getAttribute('data-customerInfo-id'))"
-                              class="btn btn-outline-primary">Display Options
-                      </button>
-                      <div th:id="'buttons-' + ${customerinfo.customer.customer_id}" class="hidden">
-                        <br>
-                      <a th:href="@{/updateCustomerInfoForm/{customerinfo_id}(customerinfo_id=${customerinfo.customerInfo_id})}"
-                         class="btn btn-primary">Update</a>
+                        <button th:attr="data-customerinfo-id=${customerinfo.customerInfo_id}"
+                                onclick="toggleButtons(this.getAttribute('data-customerinfo-id'))"
+                                class="btn btn-outline-primary">Display Options
+                        </button>
+                        <div th:id="'buttons-' + ${customerinfo.customerInfo_id}" class="hidden">
+                          <br>
+                          <a th:href="@{/updateCustomerInfoForm/{id}(id=${customerinfo.customerInfo_id})}"
+                             class="btn btn-primary">Update</a>
 
-                      <a th:href="@{/deleteCustomerInfo/{customerinfo_id}(customerinfo_id=${customerinfo.customerInfo_id})}" class="btn btn-danger"
-                         data-toggle="modal" th:data-target="'#deleteCustomerInfoModal-' + ${customerinfo.customerInfo_id}">Delete</a>
-                      </div>
+                          <a th:href="@{/deleteCustomerInfo/{id}(id=${customerinfo.customerInfo_id})}" class="btn btn-danger"
+                             data-toggle="modal" th:data-target="'#deleteCustomerInfoModal-' + ${customerinfo.customerInfo_id}">Delete</a>
+                        </div>
                         <div th:id="'deleteCustomerInfoModal-' + ${customerinfo.customerInfo_id}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="'deleteCustomerInfoModalLabel-' + ${customerinfo.customerInfo_id}" aria-hidden="true">
                           <div class="modal-dialog" role="document">
                             <div class="modal-content">
@@ -455,39 +430,25 @@
                   </tr>
                   </tbody>
                 </table>
-                <a th:href="@{/customertable}" class="btn btn-danger">Back</a>
               </div>
             </div>
           </div>
         </div>
       </div>
-      </div>
 
-
-    </div>
-
-
-
-    <footer class="sticky-footer bg-white">
-      <div class="container my-auto">
-        <div class="copyright text-center my-auto">
-          <span>Copyright &copy; Your Website 2020</span>
+      <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy; Your Website 2020</span>
+          </div>
         </div>
-      </div>
-    </footer>
-
-
+      </footer>
+    </div>
   </div>
-
-
-  </div>
-
-
 
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
   </a>
-
 
   <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
        aria-hidden="true">
@@ -513,7 +474,7 @@
 <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 <script src="/js/sb-admin-2.min.js"></script>
-<script src=/"vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="/vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 <script src="/js/demo/datatables-demo.js"></script>
 
