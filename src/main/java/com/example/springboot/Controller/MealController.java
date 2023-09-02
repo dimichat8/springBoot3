@@ -163,11 +163,7 @@ public class MealController {
                 meal.setDateFrom(dateFrom);
                 meal.setDateTo(dateTo);
 
-                List<String> breakfastList = new ArrayList<>();
-                List<String> desertList = new ArrayList<>();
-                List<String> lunchList = new ArrayList<>();
-                List<String> snackList = new ArrayList<>();
-                List<String> dinnerList = new ArrayList<>();
+                List<String> mealItemGrams = new ArrayList<>();
 
                 switch (mealName) {
                         case "Breakfast":
@@ -177,8 +173,8 @@ public class MealController {
                                 String gramsAsStringForBreakfast = String.valueOf((mapFoodGrams.getOrDefault(lowercaseBreakfast, 0)));
                                 int breakfastGrams = Integer.parseInt(gramsAsStringForBreakfast);
                                 gramsList.add(breakfastGrams);
-                                breakfastList.add(item + ": " + breakfastGrams + " gr");
-                                meal.setBreakfast(breakfastList);
+                                mealItemGrams.add(item + ": " + breakfastGrams + " gr");
+                                meal.setBreakfast(mealItemGrams);
                             }
                             break;
                         case "Desert":
@@ -188,8 +184,8 @@ public class MealController {
                                 String gramsAsStringForDesert = String.valueOf((mapFoodGrams.getOrDefault(lowercaseDesert, 0)));
                                 int desertGrams = Integer.parseInt(gramsAsStringForDesert);
                                 gramsList.add(desertGrams);
-                                desertList.add(item + ": " + desertGrams + " gr");
-                                meal.setDesert(desertList);
+                                mealItemGrams.add(item + ": " + desertGrams + " gr");
+                                meal.setDesert(mealItemGrams);
                             }
                             break;
                         case "Lunch":
@@ -199,8 +195,8 @@ public class MealController {
                                 String gramsAsStringForLunch = String.valueOf((mapFoodGrams.getOrDefault(lowercaseLunch, 0)));
                                 int lunchGrams = Integer.parseInt(gramsAsStringForLunch);
                                 gramsList.add(lunchGrams);
-                                lunchList.add(item + ": " + lunchGrams + " gr");
-                                meal.setLunch(lunchList);
+                                mealItemGrams.add(item + ": " + lunchGrams + " gr");
+                                meal.setLunch(mealItemGrams);
                             }
                             break;
                         case "Snack":
@@ -210,8 +206,8 @@ public class MealController {
                                 String gramsAsStringForSnack = String.valueOf((mapFoodGrams.getOrDefault(lowercaseSnack, 0)));
                                 int snackGrams = Integer.parseInt(gramsAsStringForSnack);
                                 gramsList.add(snackGrams);
-                                snackList.add(item + ": " + snackGrams + " gr");
-                                meal.setSnack(snackList);
+                                mealItemGrams.add(item + ": " + snackGrams + " gr");
+                                meal.setSnack(mealItemGrams);
                             }
                             break;
                         case "Dinner":
@@ -222,8 +218,8 @@ public class MealController {
                                 String gramsAsStringForDinner = String.valueOf((mapFoodGrams.getOrDefault(lowercaseDinner, 0)));
                                 int dinnerGrams = Integer.parseInt(gramsAsStringForDinner);
                                 gramsList.add(dinnerGrams);
-                                dinnerList.add(item + ": " + dinnerGrams + " gr");
-                                meal.setDinner(dinnerList);
+                                mealItemGrams.add(item + ": " + dinnerGrams + " gr");
+                                meal.setDinner(mealItemGrams);
                             }
                             break;
                 }
