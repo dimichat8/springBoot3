@@ -67,10 +67,12 @@ public class Meal {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateTo;
 
-    @Column(name = "meal_grams")
-    private Integer mealGrams;
+    @ElementCollection
+    @CollectionTable(name = "MealGrams", joinColumns = @JoinColumn(name = "meal_id"))
+    @Column(name = "grams")
+    private List<Integer> mealGrams;
 
-    public Meal(Long meal_id, String mealName, String dayOfWeek, List<String> breakfast, List<String> desert, List<String> lunch, List<String> snack, List<String> dinner, List<Food> foods, Customer customer, MealPlan mealPlan, LocalDate dateFrom, LocalDate dateTo, Integer mealGrams) {
+    public Meal(Long meal_id, String mealName, String dayOfWeek, List<String> breakfast, List<String> desert, List<String> lunch, List<String> snack, List<String> dinner, List<Food> foods, Customer customer, MealPlan mealPlan, LocalDate dateFrom, LocalDate dateTo, List<Integer> mealGrams) {
         this.meal_id = meal_id;
         this.mealName = mealName;
         this.dayOfWeek = dayOfWeek;
@@ -194,11 +196,11 @@ public class Meal {
         this.dateTo = dateTo;
     }
 
-    public Integer getMealGrams() {
+    public List<Integer> getMealGrams() {
         return mealGrams;
     }
 
-    public void setMealGrams(Integer mealGrams) {
+    public void setMealGrams(List<Integer> mealGrams) {
         this.mealGrams = mealGrams;
     }
 }

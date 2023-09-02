@@ -114,7 +114,7 @@ public class MealController {
                            @RequestParam("foodIds") List<Long> foodIds,
                            @RequestParam("dayOfWeek") List<String> daysOfWeek,
                            @RequestParam("mealName") List<String> mealNames,
-                           @RequestParam(value = "grams", required = false) Integer grams,
+                           @RequestParam Map<String, Integer> mapFoodGrams,
                            @ModelAttribute("breakfast") String breakfast,
                            @ModelAttribute("desert") String desert,
                            @ModelAttribute("lunch") String lunch,
@@ -153,52 +153,63 @@ public class MealController {
         for (String dayOfWeek : daysOfWeek) {
             Meal meal = new Meal();
             List<String> mealNameList = new ArrayList<>();
-
+            List<Integer> gramsList = new ArrayList<>();
             for (String mealName: mealNames) {
                 meal.setCustomer(customer);
                 meal.setDayOfWeek(dayOfWeek);
                 mealNameList.add(mealName);
-                meal.setMealGrams(grams);
                 meal.setFoods(selectedFoods);
                 meal.setDateFrom(dateFrom);
                 meal.setDateTo(dateTo);
 
-                switch (mealName) {
-                    case "Breakfast":
-                        List<String> breakfastList = new ArrayList<>();
-                        breakfastList.add(breakfast);
-                        meal.setBreakfast(breakfastList);
-                        break;
-                    case "Desert":
-                        List<String> desertList = new ArrayList<>();
-                        desertList.add(desert);
-                        meal.setDesert(desertList);
-                        break;
-                    case "Lunch":
-                        List<String> lunchList = new ArrayList<>();
-                        lunchList.add(lunch);
-                        meal.setLunch(lunchList);
-                        break;
-                    case "Snack":
-                        List<String> snackList = new ArrayList<>();
-                        snackList.add(snack);
-                        meal.setSnack(snackList);
-                        break;
-                    case "Dinner":
-                        List<String> dinnerList = new ArrayList<>();
-                        dinnerList.add(dinner);
-                        meal.setDinner(dinnerList);
-                        break;
+                String[] items = breakfast.split(",");
+
+                for (String item : items) {
+                    String lowercaseBreakfast = item.trim().toLowerCase(); // Trim and make it lowercase
+
+
+                    switch (mealName) {
+                        case "Breakfast":
+                            List<String> breakfastList = new ArrayList<>();
+                            breakfastList.add(breakfast);
+                            meal.setBreakfast(breakfastList);
+                            String gramsAsString = String.valueOf(mapFoodGrams.getOrDefault(lowercaseBreakfast, 0));
+                            int breakfastGrams = Integer.parseInt(gramsAsString);
+                            gramsList.add(breakfastGrams);
+                            break;
+                        case "Desert":
+                            List<String> desertList = new ArrayList<>();
+                            desertList.add(desert);
+                            meal.setDesert(desertList);
+                            break;
+                        case "Lunch":
+                            List<String> lunchList = new ArrayList<>();
+                            lunchList.add(lunch);
+                            meal.setLunch(lunchList);
+                            break;
+                        case "Snack":
+                            List<String> snackList = new ArrayList<>();
+                            snackList.add(snack);
+                            meal.setSnack(snackList);
+                            break;
+                        case "Dinner":
+                            List<String> dinnerList = new ArrayList<>();
+                            dinnerList.add(dinner);
+                            meal.setDinner(dinnerList);
+                            break;
+                    }
                 }
             }
+
             meal.setMealName(String.join(", ", mealNameList));
+            meal.setMealGrams(gramsList);
             meal.setMealPlan(mealPlan);
             meal = mealService.saveMeal(meal);
             mealPlan.getMeals().add(meal);
             customer.getMeal().add(meal);
         }
 
-        return "redirect:/{customer_id}/mealtable?dateFrom=" + dateFrom + "&dateTo=" + dateTo;
+        return "redirect:/{customer_id}/tableAccordingToDates?dateFrom=" + dateFrom + "&dateTo=" + dateTo;
     }
 
     @GetMapping("/updateMealForm/{meal_id}")

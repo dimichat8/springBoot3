@@ -153,34 +153,37 @@
                     <br>
 
                     <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="checkbox" id="gridCheck1" value="Monday" th:field="*{dayOfWeek}">
+                      <input id="mondayOption" class="form-check-input" type="checkbox"  value="Monday" name="dayOfWeek" th:field="*{dayOfWeek}">
                       <label class="form-check-labelMonday">Monday</label>
                     </div>
                     <div class="form-check form-check-inline">
-                      <input id="tuesdayOption" class="form-check-input" type="checkbox"  value="Tuesday" th:field="*{dayOfWeek}">
+                      <input id="tuesdayOption" class="form-check-input" type="checkbox"  value="Tuesday" name="dayOfWeek" th:field="*{dayOfWeek}">
                       <label class="form-check-labelTuesday">Tuesday</label>
                     </div>
 
                     <div class="form-check form-check-inline">
-                      <input id="wednesdayOption" class="form-check-input" type="checkbox" value="Wednesday" th:field="*{dayOfWeek}"/>
+                      <input id="wednesdayOption" class="form-check-input" type="checkbox" value="Wednesday" name="dayOfWeek" th:field="*{dayOfWeek}"/>
                       <label class="form-check-labelWednesday">Wednesday</label>
                     </div>
                     <div class="form-check form-check-inline">
-                  <input id="thursdayOption" class="form-check-input" type="checkbox"  value="Thursday" th:field="*{dayOfWeek}">
+                  <input id="thursdayOption" class="form-check-input" type="checkbox"  value="Thursday" name="dayOfWeek" th:field="*{dayOfWeek}">
                   <label class="form-check-labelThursday">Thursday</label>
                 </div>
                     <div class="form-check form-check-inline">
-                  <input id="fridayOption" class="form-check-input" type="checkbox"  value="Friday" th:field="*{dayOfWeek}">
+                  <input id="fridayOption" class="form-check-input" type="checkbox"  value="Friday" name="dayOfWeek" th:field="*{dayOfWeek}">
                   <label class="form-check-labelFriday">Friday</label>
                 </div>
                     <div class="form-check form-check-inline">
-                  <input id="saturdayOption" class="form-check-input" type="checkbox"  value="Saturday" th:field="*{dayOfWeek}">
+                  <input id="saturdayOption" class="form-check-input" type="checkbox"  value="Saturday" name="dayOfWeek" th:field="*{dayOfWeek}">
                   <label class="form-check-labelSaturday">Saturday</label>
                 </div>
                     <div class="form-check form-check-inline">
-                  <input id="sundayOption" class="form-check-input" type="checkbox" value="Sunday" th:field="*{dayOfWeek}">
+                  <input id="sundayOption" class="form-check-input" type="checkbox" value="Sunday" name="dayOfWeek" th:field="*{dayOfWeek}">
                   <label class="form-check-labelSunday">Sunday</label>
                 </div>
+                    <center>
+                      <div class="alert-warning" style="font-size: small"  th:if="${#fields.hasErrors('dayOfWeek')}" th:errorclass="error" th:errors="*{dayOfWeek}"></div>
+                    </center>
               </div>
             </fieldset>
 
@@ -265,7 +268,7 @@
                 </div>
 
                 <input type="hidden" id="mealName" name="mealName" th:value="${meal.mealName}">
-
+                <input type="hidden" id="mealGrams" name="mealGrams" th:value="${meal.mealGrams}">
                 <input type="hidden" id="breakfast" name="breakfast" th:attr="value=*{breakfast}">
                 <input type="hidden" id="desert" name="desert" th:attr="value=*{desert}">
                 <input type="hidden" id="lunch" name="lunch" th:attr="value=*{lunch}">
@@ -304,7 +307,7 @@
                data-toggle="modal" th:data-target="'#saveCustomerModal-' + ${customer.customer_id}">Save</a>
           </form>
 
-          <form action="#" th:action="@{/{customer_id}/mealtable  (customer_id=${meal.customer.customer_id})}" th:object="${meal}" class="user"  method="GET">
+          <form action="#" th:action="@{/customertable}" th:object="${meal}" class="user"  method="GET">
             <div class="mt-5 text-center profile-buttonBack">
               <button type="submit" class="btn btn-danger profile-button">Back To Table</button>
             </div>
@@ -335,22 +338,18 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <script>
   $(document).ready(function () {
-    // Initialize Select2 for the food options select dropdowns
     $('#foodIdsForBreakfast, #foodIdsForDesert, #foodIdsForLunch, #foodIdsForSnack, #foodIdsForDinner').select2({
       placeholder: 'Select Food options',
       dropdownParent: $('#foodIdsForBreakfast').parent()
     });
 
-    // Initialize a Set to store selected meal names
     var selectedMealNames = new Set();
 
-    // Function to handle the change event of the food options select dropdown for each meal type
     ['Breakfast', 'Desert', 'Lunch', 'Snack', 'Dinner'].forEach(function (mealType) {
-      $('#foodIdsFor' + mealType).on('change', function() {
+      $('#foodIdsFor' + mealType).on('change', function () {
         handleFoodOptionsChange(mealType);
       });
 
-      // Fetch the selected meal options for each meal type and set them as the initial input fields
       var selectedMeals = $('#foodIdsFor' + mealType).find(':selected').map(function () {
         return $(this).text();
       }).get();
@@ -358,37 +357,34 @@
       updateInputFields(mealType, selectedMeals);
     });
 
-    // Function to handle the change event of the food options select dropdown for a specific meal type
     function handleFoodOptionsChange(mealType) {
       var selectedMeals = $('#foodIdsFor' + mealType).find(':selected').map(function () {
         return $(this).text();
       }).get();
 
-      // Add the new meal type to the Set
+      var gramsData = {};
+
+      selectedMeals.forEach(function (meal) {
+        var grams = $('#' + meal.toLowerCase() + 'Grams').val();
+        gramsData[meal] = grams;
+      });
+
+      console.log("gramsData:", gramsData);
+
       selectedMealNames.add(mealType);
-
-      // Update the hidden input field with the updated Set of selected meal names
       $('#mealName').val(Array.from(selectedMealNames).join(', '));
-
-      // Set the respective hidden input field with the selected food options for the meal type
       $('#' + mealType.toLowerCase()).val(selectedMeals.join(', '));
-
-      // Update the input fields for the selected meal type
       updateInputFields(mealType, selectedMeals);
     }
 
-    // Function to update the input fields for each selected meal type
     function updateInputFields(mealType, selectedMeals) {
       var inputFieldsContainerId = '#inputFieldsContainer' + mealType;
-
-      // Clear previous input fields
       $(inputFieldsContainerId).empty();
 
-      // Add input fields for each selected meal type
       selectedMeals.forEach(function (meal) {
         var inputField = '<div class="input-group mb-2 input-group">' +
                 '<label class="input-group-text" for="' + meal.toLowerCase() + '">' + meal + ':</label>' +
-                '<input type="text" class="form-controlGrams" id="' + meal.toLowerCase() + '" name="' + meal.toLowerCase() + '" placeholder="Grams">' +
+                '<input type="text" class="form-control form-controlGrams" id="' + meal.toLowerCase() + '" name="' + meal.toLowerCase() + '" placeholder="Grams">' +
                 '</div>';
         $(inputFieldsContainerId).append(inputField);
       });
