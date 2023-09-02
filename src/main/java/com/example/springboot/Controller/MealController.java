@@ -154,6 +154,7 @@ public class MealController {
             Meal meal = new Meal();
             List<String> mealNameList = new ArrayList<>();
             List<Integer> gramsList = new ArrayList<>();
+
             for (String mealName: mealNames) {
                 meal.setCustomer(customer);
                 meal.setDayOfWeek(dayOfWeek);
@@ -162,42 +163,69 @@ public class MealController {
                 meal.setDateFrom(dateFrom);
                 meal.setDateTo(dateTo);
 
-                String[] items = breakfast.split(",");
+                List<String> breakfastList = new ArrayList<>();
+                List<String> desertList = new ArrayList<>();
+                List<String> lunchList = new ArrayList<>();
+                List<String> snackList = new ArrayList<>();
+                List<String> dinnerList = new ArrayList<>();
 
-                for (String item : items) {
-                    String lowercaseBreakfast = item.trim().toLowerCase(); // Trim and make it lowercase
-
-
-                    switch (mealName) {
+                switch (mealName) {
                         case "Breakfast":
-                            List<String> breakfastList = new ArrayList<>();
-                            breakfastList.add(breakfast);
-                            meal.setBreakfast(breakfastList);
-                            String gramsAsString = String.valueOf(mapFoodGrams.getOrDefault(lowercaseBreakfast, 0));
-                            int breakfastGrams = Integer.parseInt(gramsAsString);
-                            gramsList.add(breakfastGrams);
+                            String[] itemsForBreakFast = breakfast.split(",");
+                            for (String item : itemsForBreakFast) {
+                                String lowercaseBreakfast = item.trim().toLowerCase();
+                                String gramsAsStringForBreakfast = String.valueOf((mapFoodGrams.getOrDefault(lowercaseBreakfast, 0)));
+                                int breakfastGrams = Integer.parseInt(gramsAsStringForBreakfast);
+                                gramsList.add(breakfastGrams);
+                                breakfastList.add(item + ": " + breakfastGrams + " gr");
+                                meal.setBreakfast(breakfastList);
+                            }
                             break;
                         case "Desert":
-                            List<String> desertList = new ArrayList<>();
-                            desertList.add(desert);
-                            meal.setDesert(desertList);
+                            String[] itemsForDesert = desert.split(",");
+                            for (String item : itemsForDesert) {
+                                String lowercaseDesert = item.trim().toLowerCase();
+                                String gramsAsStringForDesert = String.valueOf((mapFoodGrams.getOrDefault(lowercaseDesert, 0)));
+                                int desertGrams = Integer.parseInt(gramsAsStringForDesert);
+                                gramsList.add(desertGrams);
+                                desertList.add(item + ": " + desertGrams + " gr");
+                                meal.setDesert(desertList);
+                            }
                             break;
                         case "Lunch":
-                            List<String> lunchList = new ArrayList<>();
-                            lunchList.add(lunch);
-                            meal.setLunch(lunchList);
+                            String[] itemsForLunch = lunch.split(",");
+                            for (String item : itemsForLunch) {
+                                String lowercaseLunch = item.trim().toLowerCase();
+                                String gramsAsStringForLunch = String.valueOf((mapFoodGrams.getOrDefault(lowercaseLunch, 0)));
+                                int lunchGrams = Integer.parseInt(gramsAsStringForLunch);
+                                gramsList.add(lunchGrams);
+                                lunchList.add(item + ": " + lunchGrams + " gr");
+                                meal.setLunch(lunchList);
+                            }
                             break;
                         case "Snack":
-                            List<String> snackList = new ArrayList<>();
-                            snackList.add(snack);
-                            meal.setSnack(snackList);
+                            String[] itemsForSnack = snack.split(",");
+                            for (String item : itemsForSnack) {
+                                String lowercaseSnack = item.trim().toLowerCase();
+                                String gramsAsStringForSnack = String.valueOf((mapFoodGrams.getOrDefault(lowercaseSnack, 0)));
+                                int snackGrams = Integer.parseInt(gramsAsStringForSnack);
+                                gramsList.add(snackGrams);
+                                snackList.add(item + ": " + snackGrams + " gr");
+                                meal.setSnack(snackList);
+                            }
                             break;
                         case "Dinner":
-                            List<String> dinnerList = new ArrayList<>();
-                            dinnerList.add(dinner);
-                            meal.setDinner(dinnerList);
+
+                            String[] itemsForDinner = dinner.split(",");
+                            for (String item : itemsForDinner) {
+                                String lowercaseDinner = item.trim().toLowerCase();
+                                String gramsAsStringForDinner = String.valueOf((mapFoodGrams.getOrDefault(lowercaseDinner, 0)));
+                                int dinnerGrams = Integer.parseInt(gramsAsStringForDinner);
+                                gramsList.add(dinnerGrams);
+                                dinnerList.add(item + ": " + dinnerGrams + " gr");
+                                meal.setDinner(dinnerList);
+                            }
                             break;
-                    }
                 }
             }
 
