@@ -33,120 +33,120 @@
 <body class="bg-gradient-primary">
 
 
-<div class="container">
+    <div class="container">
 
-    <div class="container rounded bg-white mt-5 mb-5">
-        <div class="row">
-            <div class="col-md-3 border-right">
+        <div class="container rounded bg-white mt-5 mb-5">
+            <div class="row">
+                <div class="col-md-3 border-right">
 
-                <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                    <img class="rounded-circle mt-5" width="150px" src="https://st2.depositphotos.com/2777531/6975/v/450/depositphotos_69759195-stock-illustration-male-person-silhouette.jpg">
-                </div>
-            </div>
-            <div class="col-md-5 border-right">
-                <div class="p-3 py-5">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h4 class="text-right">Profile Settings</h4>
+                    <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                        <img class="rounded-circle mt-5" width="150px" src="https://st2.depositphotos.com/2777531/6975/v/450/depositphotos_69759195-stock-illustration-male-person-silhouette.jpg">
                     </div>
-                    <form th:action="@{/saveCustomer}" th:object="${customer}" class="user"  method="POST">
+                </div>
+                <div class="col-md-5 border-right">
+                    <div class="p-3 py-5">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="text-right">Profile Settings</h4>
+                        </div>
+                        <form th:action="@{/saveCustomer}" th:object="${customer}" class="user"  method="POST">
 
-                        <div class="row mt-2">
-                            <div class="col-md-6">
-                                <label class="labels">Name</label>
-                                <input type="text" class="form-control form-control-user" id="exampleFirstName"
-                                       th:field="*{firstName}" placeholder="First Name">
-                                <center>
-                                    <div class="alert-warning" style="font-size: small"  th:if="${#fields.hasErrors('firstName')}" th:errorclass="error" th:errors="*{firstName}"></div>
-                                </center>
+                            <div class="row mt-2">
+                                <div class="col-md-6">
+                                    <label class="labels">Name</label>
+                                    <input type="text" class="form-control form-control-user" id="exampleFirstName"
+                                           th:field="*{firstName}" placeholder="First Name">
+                                    <center>
+                                        <div class="alert-warning" style="font-size: small"  th:if="${#fields.hasErrors('firstName')}" th:errorclass="error" th:errors="*{firstName}"></div>
+                                    </center>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="labels">Surname</label>
+                                    <input type="text" class="form-control form-control-user" id="exampleLastName"
+                                           th:field="*{lastName}" placeholder="Last Name">
+                                    <center>
+                                        <div class="alert-warning" style="font-size: small"  th:if="${#fields.hasErrors('lastName')}" th:errorclass="error" th:errors="*{lastName}"></div>
+                                    </center>
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <label class="labels">Surname</label>
-                                <input type="text" class="form-control form-control-user" id="exampleLastName"
-                                       th:field="*{lastName}" placeholder="Last Name">
-                                <center>
-                                    <div class="alert-warning" style="font-size: small"  th:if="${#fields.hasErrors('lastName')}" th:errorclass="error" th:errors="*{lastName}"></div>
-                                </center>
-                            </div>
-                        </div>
-                        <div class="row mt-2">
-                            <div class="col-md-6">
-                                <label class="labels">Email</label>
-                                <input type="text" class="form-control form-control-user" id="exampleEmail"
-                                       th:field="*{email}" placeholder="Email Address">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="labels">Mobile Number</label>
-                                <input type="text" class="form-control form-control-user" id="exampleMobile"
-                                       th:field="*{phone}" placeholder="Mobile Number">
-                                <center>
-                                    <div class="alert-warning" style="font-size: small"  th:if="${#fields.hasErrors('phone')}" th:errorclass="error" th:errors="*{phone}"></div>
-                                </center>
-                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-6">
+                                    <label class="labels">Email</label>
+                                    <input type="text" class="form-control form-control-user" id="exampleEmail"
+                                           th:field="*{email}" placeholder="Email Address">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="labels">Mobile Number</label>
+                                    <input type="text" class="form-control form-control-user" id="exampleMobile"
+                                           th:field="*{phone}" placeholder="Mobile Number">
+                                    <center>
+                                        <div class="alert-warning" style="font-size: small"  th:if="${#fields.hasErrors('phone')}" th:errorclass="error" th:errors="*{phone}"></div>
+                                    </center>
+                                </div>
 
-                        </div>
-                        <div class="row mt-2">
-                            <div class="col-md-6">
-                                <label class="labels">City</label>
-                                <input type="text" class="form-control form-control-user" id="exampleCity"
-                                       th:field="*{city}" placeholder="City">
                             </div>
-                            <div class="col-md-6">
-                                <label class="labels">Address</label>
-                                <input type="text" class="form-control form-control-user" id="exampleAddress"
-                                       th:field="*{address}" placeholder="Address">
+                            <div class="row mt-2">
+                                <div class="col-md-6">
+                                    <label class="labels">City</label>
+                                    <input type="text" class="form-control form-control-user" id="exampleCity"
+                                           th:field="*{city}" placeholder="City">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="labels">Address</label>
+                                    <input type="text" class="form-control form-control-user" id="exampleAddress"
+                                           th:field="*{address}" placeholder="Address">
+                                </div>
                             </div>
-                        </div>
-                        <div class="row mt-2">
-                            <div class="col-md-6">
-                                <label class="labels">Date of Birthday</label>
-                                <input type="date" class="form-control form-control-user" id="exampleBirthday"
-                                       th:field="*{birthday}" placeholder="Date of Birthday">
-                                <center>
-                                    <div class="alert-warning" style="font-size: small"  th:if="${#fields.hasErrors('birthday')}" th:errorclass="error" th:errors="*{birthday}"></div>
-                                </center>
+                            <div class="row mt-2">
+                                <div class="col-md-6">
+                                    <label class="labels">Date of Birthday</label>
+                                    <input type="date" class="form-control form-control-user" id="exampleBirthday"
+                                           th:field="*{birthday}" placeholder="Date of Birthday">
+                                    <center>
+                                        <div class="alert-warning" style="font-size: small"  th:if="${#fields.hasErrors('birthday')}" th:errorclass="error" th:errors="*{birthday}"></div>
+                                    </center>
+                                </div>
+                                <legend class="col-form-label col-sm-2 pt-0">Gender
+                                    <fieldset class="row mb-3">
+                                        <div class="col-sm-10">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="Male"
+                                                       th:field="*{gender}" checked>
+                                                <label class="form-check-label" for="gridRadios1">
+                                                    Male
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="Female"
+                                                       th:field="*{gender}">
+                                                <label class="form-check-label" for="gridRadios2">
+                                                    Female
+                                                </label>
+                                            </div>
+                                            <div class="form-check disabled">
+                                                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="Other"
+                                                       th:field="*{gender}">
+                                                <label class="form-check-label" for="gridRadios3">
+                                                    Other
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </legend>
                             </div>
-                            <legend class="col-form-label col-sm-2 pt-0">Gender
-                                <fieldset class="row mb-3">
-                                    <div class="col-sm-10">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="Male"
-                                                   th:field="*{gender}" checked>
-                                            <label class="form-check-label" for="gridRadios1">
-                                                Male
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="Female"
-                                                   th:field="*{gender}">
-                                            <label class="form-check-label" for="gridRadios2">
-                                                Female
-                                            </label>
-                                        </div>
-                                        <div class="form-check disabled">
-                                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="Other"
-                                                   th:field="*{gender}">
-                                            <label class="form-check-label" for="gridRadios3">
-                                                Other
-                                            </label>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                            </legend>
-                        </div>
-                        <div class="mt-5 text-center">
-                            <button th:type="submit" class="btn btn-primary profile-button" type="button">Save Profile</button>
-                        </div>
-                    </form>
-                    <form th:action="@{/customertable}" th:object="${customer}" class="user"  method="GET">
-                        <div class="mt-5 text-center">
-                            <button th:type="submit" class="btn btn-danger profile-button" type="button">Back To Table</button>
-                        </div>
-                    </form>
+                            <div class="mt-5 text-center">
+                                <button th:type="submit" class="btn btn-primary profile-button" type="button">Save Profile</button>
+                            </div>
+                        </form>
+                        <form th:action="@{/customertable}" th:object="${customer}" class="user"  method="GET">
+                            <div class="mt-5 text-center">
+                                <button th:type="submit" class="btn btn-danger profile-button" type="button">Back To Table</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 <script src="/vendor/jquery/jquery.min.js"></script>
 <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

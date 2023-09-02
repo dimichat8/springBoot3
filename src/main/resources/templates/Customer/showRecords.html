@@ -48,10 +48,7 @@
 <section id="container" class="">
   <div id="wrapper">
 
-    <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
@@ -194,7 +191,6 @@
               <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-bell fa-fw"></i>
-                <!-- Counter - Alerts -->
                 <span class="badge badge-danger badge-counter">3+</span>
               </a>
 
@@ -245,7 +241,6 @@
               <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-envelope fa-fw"></i>
-                <!-- Counter - Messages -->
                 <span class="badge badge-danger badge-counter">7</span>
               </a>
 
@@ -315,7 +310,7 @@
                 <img class="img-profile rounded-circle"
                      src="/img/xDK.svg">
               </a>
-              <!-- Dropdown - User Information -->
+
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                    aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="#">
@@ -398,7 +393,6 @@
                               </div>
                               <div class="modal-body">
                                 <p>Are you sure you want to delete the customer information for <b><span th:text="${customerinfo.customer.firstName + ' ' + customerinfo.customer.lastName}"/></b>?</p>
-                                <!-- Display additional information about the Customer item if needed -->
                               </div>
                               <div class="modal-footer">
                                 <form th:action="@{/deleteCustomerInfo/{customerinfo_id}(customerinfo_id=${customerinfo.customerInfo_id})}" method="POST">

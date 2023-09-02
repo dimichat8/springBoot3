@@ -26,80 +26,80 @@
 <body class="bg-gradient-primary">
 
 
-<div class="container">
+    <div class="container">
 
-  <div class="container rounded bg-white mt-5 mb-5">
-    <div class="row">
-      <div class="col-md-3 border-right">
-      <form th:action="@{{customer_id}/saveCustomer  (customer_id=${customerinfo.customer.customer_id})}" th:object="${customerinfo}" class="user"  method="GET"></form>
-        <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-          <img class="rounded-circle mt-5" width="150px" th:if="${customer.gender == 'Male'}" src="https://cdn.pixabay.com/photo/2016/04/01/10/56/boy-1300112_960_720.png">
-          <img class="rounded-circle mt-5" width="150px" th:if="${customer.gender == 'Something other'}" src="https://st2.depositphotos.com/2101611/9885/v/600/depositphotos_98850500-stock-illustration-man-silhouette-icon-with-question.jpg">
-          <img class="rounded-circle mt-5" width="150px" th:if="${customer.gender == 'Female'}" src="https://cdn.pixabay.com/photo/2017/03/01/22/18/avatar-2109804_960_720.png">
+      <div class="container rounded bg-white mt-5 mb-5">
+        <div class="row">
+          <div class="col-md-3 border-right">
+          <form th:action="@{{customer_id}/saveCustomer  (customer_id=${customerinfo.customer.customer_id})}" th:object="${customerinfo}" class="user"  method="GET"></form>
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+              <img class="rounded-circle mt-5" width="150px" th:if="${customer.gender == 'Male'}" src="https://cdn.pixabay.com/photo/2016/04/01/10/56/boy-1300112_960_720.png">
+              <img class="rounded-circle mt-5" width="150px" th:if="${customer.gender == 'Something other'}" src="https://st2.depositphotos.com/2101611/9885/v/600/depositphotos_98850500-stock-illustration-man-silhouette-icon-with-question.jpg">
+              <img class="rounded-circle mt-5" width="150px" th:if="${customer.gender == 'Female'}" src="https://cdn.pixabay.com/photo/2017/03/01/22/18/avatar-2109804_960_720.png">
 
-          <a class="font-weight-bold" ></a>
-          <span th:each="customer, iterate : ${customer}"></span>
-          <span th:text="${customer.firstName + ' ' + customer.lastName}"></span></div>
-      </div>
-      <div class="col-md-5 border-right">
-        <div class="p-3 py-5">
-          <div class="d-flex justify-content-between align-items-center mb-3">
-            <h4 class="text-right">Measure</h4>
+              <a class="font-weight-bold" ></a>
+              <span th:each="customer, iterate : ${customer}"></span>
+              <span th:text="${customer.firstName + ' ' + customer.lastName}"></span></div>
           </div>
-          <form th:action="@{/{customer_id}/saveCustomerInfo (customer_id=${customerinfo.customer.customer_id})}" th:object="${customerinfo}" class="user"  method="POST">
+          <div class="col-md-5 border-right">
+            <div class="p-3 py-5">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4 class="text-right">Measure</h4>
+              </div>
+              <form th:action="@{/{customer_id}/saveCustomerInfo (customer_id=${customerinfo.customer.customer_id})}" th:object="${customerinfo}" class="user"  method="POST">
 
-            <div class="row mt-2">
-              <div class="col-md-6">
-                <label class="labels">Height</label>
-                <input type="text" class="form-control form-control-user" id="exampleHeight"
-                       th:field="*{height}" placeholder="Height">
-                <!--<div class="alert alert-warning" th:if="${#customerinfo.hasErrors('height')}" th:errors="*{height}"></div>-->
-              </div>
-              <div class="col-md-6">
-                <label class="labels">Water</label>
-                <input type="text" class="form-control form-control-user" id="exampleAge"
-                       th:field="*{water}" placeholder="Water">
-              </div>
-            </div>
-            <div class="row mt-2">
-              <div class="col-md-6">
-                <label class="labels">Weight</label>
-                <input type="text" class="form-control form-control-user" id="exampleWeight"
-                       th:field="*{weight}" placeholder="Weight">
-              </div>
-              <div class="col-md-6">
-                <label class="labels">Muscle Mass</label>
-                <input type="text" class="form-control form-control-user" id="exampleMuscle Mass"
-                       th:field="*{muscleMass}" placeholder="Muscle Mass">
-              </div>
-
-            </div>
-            <div class="row mt-2">
-              <div class="col-md-6">
-                <label class="labels">Body Fat Mass</label>
-                <input type="text" class="form-control form-control-user" id="exampleBody Fat Mass"
-                       th:field="*{bodyFatMass}" placeholder="Body Fat Mass">
-              </div>
-              <div class="col-md-6">
-                <label class="labels">Fat</label>
-                <input type="text" class="form-control form-control-user" id="exampleFat"
-                       th:field="*{fat}" placeholder="Fat">
-              </div>
-            </div>
-              <div class="mt-5 text-center">
-                <button th:type="submit" class="btn btn-primary profile-button" type="button">Save Profile</button>
-              </div>
-          </form>
-              <form th:action="@{/customertable}" th:object="${customerinfo}" class="user"  method="GET">
-                <div class="mt-5 text-center">
-                  <button th:type="submit" class="btn btn-danger profile-button" type="button">Back To Table</button>
+                <div class="row mt-2">
+                  <div class="col-md-6">
+                    <label class="labels">Height</label>
+                    <input type="text" class="form-control form-control-user" id="exampleHeight"
+                           th:field="*{height}" placeholder="Height">
+                    <!--<div class="alert alert-warning" th:if="${#customerinfo.hasErrors('height')}" th:errors="*{height}"></div>-->
+                  </div>
+                  <div class="col-md-6">
+                    <label class="labels">Water</label>
+                    <input type="text" class="form-control form-control-user" id="exampleAge"
+                           th:field="*{water}" placeholder="Water">
+                  </div>
                 </div>
-          </form>
-        </div>
+                <div class="row mt-2">
+                  <div class="col-md-6">
+                    <label class="labels">Weight</label>
+                    <input type="text" class="form-control form-control-user" id="exampleWeight"
+                           th:field="*{weight}" placeholder="Weight">
+                  </div>
+                  <div class="col-md-6">
+                    <label class="labels">Muscle Mass</label>
+                    <input type="text" class="form-control form-control-user" id="exampleMuscle Mass"
+                           th:field="*{muscleMass}" placeholder="Muscle Mass">
+                  </div>
+
+                </div>
+                <div class="row mt-2">
+                  <div class="col-md-6">
+                    <label class="labels">Body Fat Mass</label>
+                    <input type="text" class="form-control form-control-user" id="exampleBody Fat Mass"
+                           th:field="*{bodyFatMass}" placeholder="Body Fat Mass">
+                  </div>
+                  <div class="col-md-6">
+                    <label class="labels">Fat</label>
+                    <input type="text" class="form-control form-control-user" id="exampleFat"
+                           th:field="*{fat}" placeholder="Fat">
+                  </div>
+                </div>
+                  <div class="mt-5 text-center">
+                    <button th:type="submit" class="btn btn-primary profile-button" type="button">Save Profile</button>
+                  </div>
+              </form>
+                  <form th:action="@{/customertable}" th:object="${customerinfo}" class="user"  method="GET">
+                    <div class="mt-5 text-center">
+                      <button th:type="submit" class="btn btn-danger profile-button" type="button">Back To Table</button>
+                    </div>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
 <script src="/vendor/jquery/jquery.min.js"></script>
 <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

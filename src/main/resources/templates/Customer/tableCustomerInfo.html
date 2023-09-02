@@ -47,10 +47,7 @@
 <body id="page-top">
 <section id="container" class="">
     <div id="wrapper">
-
-        <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
 
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon rotate-n-15">
@@ -194,7 +191,6 @@
                             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
-                                <!-- Counter - Alerts -->
                                 <span class="badge badge-danger badge-counter">3+</span>
                             </a>
 
@@ -240,12 +236,10 @@
                             </div>
                         </li>
 
-
                         <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-envelope fa-fw"></i>
-                                <!-- Counter - Messages -->
                                 <span class="badge badge-danger badge-counter">7</span>
                             </a>
 
@@ -307,7 +301,6 @@
                         </li>
 
                         <div class="topbar-divider d-none d-sm-block"></div>
-
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -315,7 +308,6 @@
                                 <img class="img-profile rounded-circle"
                                      src="/img/xDK.svg">
                             </a>
-                            <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                  aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="#">
@@ -337,15 +329,11 @@
                                 </a>
                             </div>
                         </li>
-
                     </ul>
-
                 </nav>
 
                 <div class="container-fluid">
-
                     <h1 class="h3 mb-2 text-gray-800">Customers Table</h1>
-
                     <div class="card shadow mb-4">
                         <div class="card-body">
                             <div class="table-responsive">
@@ -371,7 +359,6 @@
                                     </tfoot>
                                     <tbody>
                                     <tr th:each="customerinfo, iterate : ${customerInfoList}">
-                                        <!--<td th:text="${customer.firstName + customer.lastName}"></td>-->
                                         <td th:text="${customerinfo.customer.firstName + ' ' + customerinfo.customer.lastName}"></td>
                                         <td th:text="${customerinfo.createDate}"></td>
                                         <td th:text="${customerinfo.height}"></td>
@@ -405,7 +392,6 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <p>Are you sure you want to delete the customer information  <b><span th:text="${customerinfo.customer.firstName + ' ' + customerinfo.customer.lastName}"/></b>?</p>
-                                                                <!-- Display additional information about the Customer item if needed -->
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <form th:action="@{/deleteCustomerInfo/{id}(id=${customerinfo.customerInfo_id})}" method="POST">

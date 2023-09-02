@@ -1,8 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
-<!--Customer Table-->
-
 <head>
 
     <meta charset="utf-8">
@@ -173,7 +170,6 @@
                         <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-bell fa-fw"></i>
-                            <!-- Counter - Alerts -->
                             <span class="badge badge-danger badge-counter">3+</span>
                         </a>
 
@@ -224,7 +220,6 @@
                         <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-envelope fa-fw"></i>
-                            <!-- Counter - Messages -->
                             <span class="badge badge-danger badge-counter">7</span>
                         </a>
                         <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -397,7 +392,6 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <p>Are you sure you want to delete the customer  <b><span th:text="${customer.firstName + ' ' + customer.lastName}"/></b>?</p>
-                                                                <!-- Display additional information about the Customer item if needed -->
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <form th:action="@{/deleteCustomer/{customer_id}(customer_id=${customer.customer_id})}" method="POST">
@@ -485,7 +479,6 @@
 <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 <script src="/js/demo/datatables-demo.js"></script>
-
 
 </body>
 </html>
