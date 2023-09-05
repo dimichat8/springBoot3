@@ -121,10 +121,22 @@ public class MealController {
                            @ModelAttribute("snack") String snack,
                            @ModelAttribute("dinner") String dinner,
                            @RequestParam("dateFrom") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dateFrom,
-                           @RequestParam("dateTo") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dateTo) {
+                           @RequestParam("dateTo") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dateTo, Model model) {
         Customer customer = customerRepository.findById(customerId).orElse(null);
         List<Food> selectedFoods = foodRepository.findAllById(foodIds);
         List<Object[]> result = mealPlanRepository.findMealPlanByCustomerAndDateRange(customer, dateFrom, dateTo);
+
+        double totalCalories = 0.0;
+        for (Food foodItem : selectedFoods) {
+            double grams = foodItem.getGrams();
+            float calories = foodItem.getCalories();
+            double caloriesPerGram = (calories * grams) / 100.0;
+            totalCalories += caloriesPerGram;
+        }
+
+        model.addAttribute("totalCalories", totalCalories);
+
+
 
         MealPlan mealPlan = null;
         boolean foundMatch = false;

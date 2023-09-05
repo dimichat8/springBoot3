@@ -7,6 +7,7 @@ import com.example.springboot.Repository.MealRepository;
 import com.example.springboot.Service.FoodService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class FoodController {
@@ -22,11 +24,19 @@ public class FoodController {
     private FoodService foodService;
     @Autowired
     private FoodRepository foodRepository;
-    @Autowired
-    private MealRepository mealRepository;
 
 
-    //Display all food
+    @GetMapping("/getCalories/{foodId}")
+    public ResponseEntity<Food> getCalories( @PathVariable Long foodId) {
+        Food food = foodRepository.findById(foodId).orElse(null);
+
+        if (food != null) {
+            Food response = new Food(food.getCalories());
+            return ResponseEntity.ok(response);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
     @GetMapping("/foodtable")
     public String listOfFoods(Model model){

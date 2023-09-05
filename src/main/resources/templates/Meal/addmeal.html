@@ -268,8 +268,6 @@
                       <input type="hidden" id="dinner" name="dinner" th:attr="value=*{dinner}">
 
 
-
-
                     <div th:id="'saveCustomerModal-' + ${customer.customer_id}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="'saveCustomerModalLabel-' + ${customer.customer_id}" aria-hidden="true">
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -345,15 +343,6 @@
         return $(this).text();
       }).get();
 
-      var gramsData = {};
-
-      selectedMeals.forEach(function (meal) {
-        var grams = $('#' + meal.toLowerCase() + 'Grams').val();
-        gramsData[meal] = grams;
-      });
-
-      console.log("gramsData:", gramsData);
-
       selectedMealNames.add(mealType);
       $('#mealName').val(Array.from(selectedMealNames).join(', '));
       $('#' + mealType.toLowerCase()).val(selectedMeals.join(', '));
@@ -367,10 +356,42 @@
       selectedMeals.forEach(function (meal) {
         var inputField = '<div class="input-group mb-2 input-group">' +
                 '<label class="input-group-text" for="' + meal.toLowerCase() + '">' + meal + ':</label>' +
-                '<input type="text" class="form-control form-controlGrams" id="' + meal.toLowerCase() + '" name="' + meal.toLowerCase() + '" placeholder="Grams">' +
-                '</div>';
+                '<input type="text" class="form-control form-controlGrams" id="' + meal.toLowerCase() + 'Grams" name="' + meal.toLowerCase() + 'Grams" placeholder="Grams">' +
+                '</div>' +
+                '<div class="calories-value" id="' + meal.toLowerCase() + 'CaloriesValue"></div>';
         $(inputFieldsContainerId).append(inputField);
+
+        // Add an input event listener to update the total value dynamically
+        $('#' + meal.toLowerCase() + 'Grams').on('input', function () {
+          var grams = $(this).val();
+          var totalValue = calculateTotalValue(grams);
+          $('#' + meal.toLowerCase() + 'CaloriesValue').text(totalValue);
+        });
       });
+    }
+
+    function calculateTotalValue(grams) {
+      var gramsValue = parseFloat(grams);
+      if (!isNaN(gramsValue)) {
+        const calories = 150;
+        const caloriesPerGram = (calories * grams) / 100;
+        return 'Calories: ' + caloriesPerGram;
+      } else {
+        return 'Invalid input';
+      }
+    }
+    function calculateSumOfCalories() {
+      var sum = 0;
+      selectedMeals.forEach(function (meal) {
+        var grams = $('#' + meal.toLowerCase() + 'Grams').val();
+        var gramsValue = parseFloat(grams);
+        if (!isNaN(gramsValue)) {
+          const calories = 150; // Change this to the actual calorie value
+          const caloriesPerGram = (calories * gramsValue) / 100;
+          sum += caloriesPerGram;
+        }
+      });
+      return sum.toFixed(2); // Display sum with 2 decimal places
     }
   });
 </script>

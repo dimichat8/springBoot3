@@ -54,6 +54,10 @@ public class Food {
 
     }
 
+    public Food(Float calories) {
+        this.calories = calories;
+    }
+
     public Long getFood_id() {
         return food_id;
     }
