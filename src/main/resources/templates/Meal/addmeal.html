@@ -52,10 +52,15 @@
       align-items: center;
       width: 200px;
     }
+    .profile-buttonSave {
+      position: relative;
+      margin-left: 70px;
+      bottom: 0px;
+    }
     .profile-buttonBack {
       position: relative;
-      margin-left: 80px;
-      bottom: 55px;
+      margin-left: 170px;
+      bottom: 84px;
     }
     #tuesdayOption {
       position: relative;
@@ -98,6 +103,11 @@
       position: relative;
       left: 114px;
     }
+    .total-calories {
+      font-weight: bold;
+      font-size: 18px;
+    }
+
 
   </style>
 
@@ -293,12 +303,14 @@
                     </div>
                   </div>
                   </div>
+                  <div class="mt-5 text profile-buttonSave">
                   <a id="buttonSave" th:href="@{/{customer_id}/saveMeal/foodIds (customer_id=${meal.customer.customer_id})}" th:object="${meal}" class="btn btn-primary panel-buttonSave"
                      data-toggle="modal" th:data-target="'#saveCustomerModal-' + ${customer.customer_id}">Save</a>
+                  </div>
                 </form>
 
                 <form action="#" th:action="@{/customertable}" th:object="${meal}" class="user"  method="GET">
-                  <div class="mt-5 text-center profile-buttonBack">
+                  <div class="mt-5 text profile-buttonBack">
                     <button type="submit" class="btn btn-danger profile-button">Back To Table</button>
                   </div>
                 </form>
@@ -366,8 +378,17 @@
           var grams = $(this).val();
           var totalValue = calculateTotalValue(grams);
           $('#' + meal.toLowerCase() + 'CaloriesValue').html(totalValue);
+
+          // Recalculate and display the total calories
+          updateTotalCalories();
         });
       });
+
+      // Create a field for total calories
+      if (mealType === 'Dinner') {
+        var totalCaloriesField = '<div class="total-calories" id="totalCalories">Total Calories: 0 kcal</div>';
+        $(inputFieldsContainerId).append(totalCaloriesField);
+      }
     }
 
     function calculateTotalValue(grams) {
@@ -375,10 +396,27 @@
       if (!isNaN(gramsValue)) {
         const caloriesPerGram = 2.5; // Replace this with your calorie calculation logic
         const totalCalories = caloriesPerGram * gramsValue;
-        return 'Calories: ' + totalCalories.toFixed(2) + ' kcal'; // Display calories with two decimal places and a unit
+        return 'Calories: ' + totalCalories.toFixed(2) + ' kcal';
       } else {
         return 'Invalid input';
       }
+    }
+
+    function updateTotalCalories() {
+      var totalCalories = 0;
+
+      // Loop through all input fields to calculate the total calories
+      $('.form-controlGrams').each(function () {
+        var grams = $(this).val();
+        var gramsValue = parseFloat(grams);
+        if (!isNaN(gramsValue)) {
+          const caloriesPerGram = 2.5; // Replace this with your calorie calculation logic
+          totalCalories += caloriesPerGram * gramsValue;
+        }
+      });
+
+      // Update the total calories field
+      $('#totalCalories').html('Total Calories: ' + totalCalories.toFixed(2) + ' kcal');
     }
   });
 </script>
