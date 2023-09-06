@@ -356,16 +356,16 @@
       selectedMeals.forEach(function (meal) {
         var inputField = '<div class="input-group mb-2 input-group">' +
                 '<label class="input-group-text" for="' + meal.toLowerCase() + '">' + meal + ':</label>' +
-                '<input type="text" class="form-control form-controlGrams" id="' + meal.toLowerCase() + 'Grams" name="' + meal.toLowerCase() + 'Grams" placeholder="Grams">' +
+                '<input type="text" class="form-control form-controlGrams" id="' + meal.toLowerCase() + '" name="' + meal.toLowerCase() + '" placeholder="Grams">' +
                 '</div>' +
                 '<div class="calories-value" id="' + meal.toLowerCase() + 'CaloriesValue"></div>';
         $(inputFieldsContainerId).append(inputField);
 
         // Add an input event listener to update the total value dynamically
-        $('#' + meal.toLowerCase() + 'Grams').on('input', function () {
+        $('#' + meal.toLowerCase()).on('input', function () {
           var grams = $(this).val();
           var totalValue = calculateTotalValue(grams);
-          $('#' + meal.toLowerCase() + 'CaloriesValue').text(totalValue);
+          $('#' + meal.toLowerCase() + 'CaloriesValue').html(totalValue);
         });
       });
     }
@@ -373,25 +373,12 @@
     function calculateTotalValue(grams) {
       var gramsValue = parseFloat(grams);
       if (!isNaN(gramsValue)) {
-        const calories = 150;
-        const caloriesPerGram = (calories * grams) / 100;
-        return 'Calories: ' + caloriesPerGram;
+        const caloriesPerGram = 2.5; // Replace this with your calorie calculation logic
+        const totalCalories = caloriesPerGram * gramsValue;
+        return 'Calories: ' + totalCalories.toFixed(2) + ' kcal'; // Display calories with two decimal places and a unit
       } else {
         return 'Invalid input';
       }
-    }
-    function calculateSumOfCalories() {
-      var sum = 0;
-      selectedMeals.forEach(function (meal) {
-        var grams = $('#' + meal.toLowerCase() + 'Grams').val();
-        var gramsValue = parseFloat(grams);
-        if (!isNaN(gramsValue)) {
-          const calories = 150; // Change this to the actual calorie value
-          const caloriesPerGram = (calories * gramsValue) / 100;
-          sum += caloriesPerGram;
-        }
-      });
-      return sum.toFixed(2); // Display sum with 2 decimal places
     }
   });
 </script>
