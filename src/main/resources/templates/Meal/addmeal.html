@@ -146,7 +146,7 @@
                 <div class="d-flex justify-content-between align-items-center mb-3">
                   <h1 class="h4 text-gray-900 mb-4">Add Food</h1>
                 </div>
-                <form action="#" th:action="@{/{customer_id}/saveMeal/foodIds (customer_id=${meal.customer.customer_id})}" th:object="${meal}" class="user" method="POST">
+                <form action="#" id="myForm" th:action="@{/{customer_id}/saveMeal/foodIds (customer_id=${meal.customer.customer_id})}" th:object="${meal}" class="user" method="POST">
                   <div class="container">
                     <div class="row">
                       <fieldset class="row mb-3">
@@ -295,7 +295,7 @@
                           <input type="date" id="dateTo" name="dateTo" class="form-control" th:value="${#dates.format(meal.dateTo, 'yyyy-MM-dd')}">
                             </div>
                           <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">Continue</button>
+                            <button type="submit" id="buttonSave" class="btn btn-primary">Save</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                           </div>
                         </div>
@@ -304,14 +304,14 @@
                   </div>
                   </div>
                   <div class="mt-5 text profile-buttonSave">
-                  <a id="buttonSave" th:href="@{/{customer_id}/saveMeal/foodIds (customer_id=${meal.customer.customer_id})}" th:object="${meal}" class="btn btn-primary panel-buttonSave"
-                     data-toggle="modal" th:data-target="'#saveCustomerModal-' + ${customer.customer_id}">Save</a>
+                  <a id="buttonContinue" th:href="@{/{customer_id}/saveMeal/foodIds (customer_id=${meal.customer.customer_id})}" th:object="${meal}" class="btn btn-primary panel-buttonSave"
+                     data-toggle="modal" th:data-target="'#saveCustomerModal-' + ${customer.customer_id}">Continue</a>
                   </div>
                 </form>
 
                 <form action="#" th:action="@{/customertable}" th:object="${meal}" class="user"  method="GET">
                   <div class="mt-5 text profile-buttonBack">
-                    <button type="submit" class="btn btn-danger profile-button">Back To Table</button>
+                    <button type="submit" class="btn btn-danger profile-button">Back</button>
                   </div>
                 </form>
               </div>
@@ -355,7 +355,14 @@
         return $(this).text();
       }).get();
 
-      selectedMealNames.add(mealType);
+      if (selectedMeals.length === 0) {
+
+        selectedMealNames.delete(mealType);
+      } else {
+
+        selectedMealNames.add(mealType);
+      }
+
       $('#mealName').val(Array.from(selectedMealNames).join(', '));
       $('#' + mealType.toLowerCase()).val(selectedMeals.join(', '));
       updateInputFields(mealType, selectedMeals);
@@ -391,16 +398,39 @@
       }
     }
 
-    function calculateTotalValue(grams) {
+    function calculateTotalValue(grams, foodId) {
+      if (grams === null || grams === "") {
+        return '0 gr';
+      }
       var gramsValue = parseFloat(grams);
       if (!isNaN(gramsValue)) {
-        const caloriesPerGram = 2.5; // Replace this with your calorie calculation logic
-        const totalCalories = caloriesPerGram * gramsValue;
-        return 'Calories: ' + totalCalories.toFixed(2) + ' kcal';
+        $.ajax({
+          // Correctly concatenate foodId in the URL
+          url: '/getCalories/' + foodId,
+          method: 'GET',
+          success: function (response) {
+            // Debugging: Log the response to the console
+            console.log('Response:', response);
+
+            if (response && !isNaN(response.calories)) {
+              var caloriesPerGram = (response.calories * gramsValue) / 100;
+              $('#caloriesValue').text('Calories: ' + caloriesPerGram.toFixed(2));
+            } else {
+              $('#caloriesValue').text('Calories information not available');
+            }
+          },
+          error: function (error) {
+            // Debugging: Log the error to the console
+            console.error('Error:', error);
+
+            $('#caloriesValue').text('Failed to fetch calories');
+          }
+        });
       } else {
-        return 'Invalid input';
+        $('#caloriesValue').text('Invalid input');
       }
     }
+
 
     function updateTotalCalories() {
       var totalCalories = 0;
@@ -418,6 +448,83 @@
       // Update the total calories field
       $('#totalCalories').html('Total Calories: ' + totalCalories.toFixed(2) + ' kcal');
     }
+  });
+
+  document.getElementById("myForm").addEventListener("submit", function (event) {
+    const checkboxes = document.querySelectorAll(".form-check-input");
+    let checkedCount = 0;
+
+    for (const checkbox of checkboxes) {
+      if (checkbox.checked) {
+        checkedCount++;
+      }
+    }
+
+    if (checkedCount === 0) {
+      alert("Please select at least one day.");
+      event.preventDefault(); // Prevent the form from submitting
+    }
+  });
+
+  document.getElementById("buttonSave").addEventListener("click", function (event) {
+    const dateFromInput = document.getElementById("dateFrom");
+    const dateToInput = document.getElementById("dateTo");
+
+    // Get the selected dates
+    const dateFrom = new Date(dateFromInput.value);
+    const dateTo = new Date(dateToInput.value);
+    const currentDate = new Date();
+
+    // Check if either date is null
+    if (!dateFrom || !dateTo || dateFromInput.value === "" || dateToInput.value === "") {
+      alert("Please select both date values.");
+      event.preventDefault(); // Prevent form submission
+      return;
+    }
+
+    // Check if dateTo is before dateFrom
+    if (dateTo < dateFrom) {
+      alert("Date To cannot be before Date From.");
+      event.preventDefault(); // Prevent form submission
+      return;
+    }
+
+    // Check if dates are before today
+    if (dateFrom < currentDate || dateTo < currentDate) {
+      alert("Dates cannot be before today's date.");
+      event.preventDefault(); // Prevent form submission
+      return;
+    }
+  });
+
+  function validateAndSubmitForm() {
+    const mealTypes = ["Breakfast", "Desert", "Lunch", "Snack", "Dinner"];
+    let isAnyValid = false;
+
+    mealTypes.forEach((mealType) => {
+      const selectElement = document.getElementById(`foodIdsFor${mealType}`);
+
+      if (!selectElement) {
+        return; // Skip if element not found
+      }
+
+      // Check if select element is not empty
+      if (selectElement.value.length > 0) {
+        isAnyValid = true;
+      }
+    });
+
+    if (!isAnyValid) {
+      alert('Please select at least one option for any meal type.');
+    } else {
+      // At least one meal type is selected, submit the form
+      document.getElementById("myForm").submit();
+    }
+  }
+
+  document.getElementById("myForm").addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevent the default form submission
+    validateAndSubmitForm(); // Call the validation function
   });
 </script>
 </body>

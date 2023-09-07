@@ -183,9 +183,14 @@ public class MealController {
                             for (String item : itemsForBreakFast) {
                                 String lowercaseBreakfast = item.trim().toLowerCase();
                                 String gramsAsStringForBreakfast = String.valueOf((mapFoodGrams.getOrDefault(lowercaseBreakfast, 0)));
-                                int breakfastGrams = Integer.parseInt(gramsAsStringForBreakfast);
-                                gramsList.add(breakfastGrams);
-                                mealItemGrams.add(item + ": " + breakfastGrams + " gr");
+                                if (gramsAsStringForBreakfast.isEmpty()) {
+                                    mealItemGrams.add(item + ": " + " 0 gr");
+
+                                } else {
+                                    int breakfastGrams = Integer.parseInt(gramsAsStringForBreakfast);
+                                    gramsList.add(breakfastGrams);
+                                    mealItemGrams.add(item + ": " + breakfastGrams + " gr");
+                                }
                                 meal.setBreakfast(mealItemGrams);
                             }
                             break;
@@ -194,9 +199,13 @@ public class MealController {
                             for (String item : itemsForDesert) {
                                 String lowercaseDesert = item.trim().toLowerCase();
                                 String gramsAsStringForDesert = String.valueOf((mapFoodGrams.getOrDefault(lowercaseDesert, 0)));
-                                int desertGrams = Integer.parseInt(gramsAsStringForDesert);
-                                gramsList.add(desertGrams);
-                                mealItemGrams.add(item + ": " + desertGrams + " gr");
+                                if (gramsAsStringForDesert.isEmpty()){
+                                    mealItemGrams.add(item + ": " + " 0 gr");
+                                }else {
+                                    int desertGrams = Integer.parseInt(gramsAsStringForDesert);
+                                    gramsList.add(desertGrams);
+                                    mealItemGrams.add(item + ": " + desertGrams + " gr");
+                                }
                                 meal.setDesert(mealItemGrams);
                             }
                             break;
@@ -205,9 +214,13 @@ public class MealController {
                             for (String item : itemsForLunch) {
                                 String lowercaseLunch = item.trim().toLowerCase();
                                 String gramsAsStringForLunch = String.valueOf((mapFoodGrams.getOrDefault(lowercaseLunch, 0)));
-                                int lunchGrams = Integer.parseInt(gramsAsStringForLunch);
-                                gramsList.add(lunchGrams);
-                                mealItemGrams.add(item + ": " + lunchGrams + " gr");
+                                if (gramsAsStringForLunch.isEmpty()) {
+                                    mealItemGrams.add(item + ": " + " 0 gr");
+                                }else {
+                                    int lunchGrams = Integer.parseInt(gramsAsStringForLunch);
+                                    gramsList.add(lunchGrams);
+                                    mealItemGrams.add(item + ": " + lunchGrams + " gr");
+                                }
                                 meal.setLunch(mealItemGrams);
                             }
                             break;
@@ -216,9 +229,13 @@ public class MealController {
                             for (String item : itemsForSnack) {
                                 String lowercaseSnack = item.trim().toLowerCase();
                                 String gramsAsStringForSnack = String.valueOf((mapFoodGrams.getOrDefault(lowercaseSnack, 0)));
-                                int snackGrams = Integer.parseInt(gramsAsStringForSnack);
-                                gramsList.add(snackGrams);
-                                mealItemGrams.add(item + ": " + snackGrams + " gr");
+                                if (gramsAsStringForSnack.isEmpty()) {
+                                    mealItemGrams.add(item + ": " + " 0 gr");
+                                } else {
+                                    int snackGrams = Integer.parseInt(gramsAsStringForSnack);
+                                    gramsList.add(snackGrams);
+                                    mealItemGrams.add(item + ": " + snackGrams + " gr");
+                                }
                                 meal.setSnack(mealItemGrams);
                             }
                             break;
@@ -228,10 +245,14 @@ public class MealController {
                             for (String item : itemsForDinner) {
                                 String lowercaseDinner = item.trim().toLowerCase();
                                 String gramsAsStringForDinner = String.valueOf((mapFoodGrams.getOrDefault(lowercaseDinner, 0)));
+                                if (gramsAsStringForDinner.isEmpty()) {
+                                    mealItemGrams.add(item + ": " + " 0 gr");
+                                } else {
                                 int dinnerGrams = Integer.parseInt(gramsAsStringForDinner);
                                 gramsList.add(dinnerGrams);
                                 mealItemGrams.add(item + ": " + dinnerGrams + " gr");
-                                meal.setDinner(mealItemGrams);
+                                }
+                            meal.setDinner(mealItemGrams);
                             }
                             break;
                 }

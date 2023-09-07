@@ -176,6 +176,8 @@
         <div class="container-fluid">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-2 text-gray-800">Plan</h1>
+            <a th:href="@{/{customer_id}/addmeal (customer_id=${customer.customer_id})}"
+                class="btn btn-info">Add</a>
             <form action="#" th:action="@{/{customer_id}/dietProgram/export/pdf (customer_id=${customer.customer_id})}" class="user" method="GET">
               <input type="hidden" th:name="dateFrom" th:value="${dateFrom}" />
               <input type="hidden" th:name="dateTo" th:value="${dateTo}" />
