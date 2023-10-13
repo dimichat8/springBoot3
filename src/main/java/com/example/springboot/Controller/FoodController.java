@@ -3,7 +3,6 @@ package com.example.springboot.Controller;
 import com.example.springboot.Entity.Food;
 import com.example.springboot.Entity.Meal;
 import com.example.springboot.Repository.FoodRepository;
-import com.example.springboot.Repository.MealRepository;
 import com.example.springboot.Service.FoodService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class FoodController {
@@ -48,7 +46,7 @@ public class FoodController {
     @GetMapping("/addfood")
     public String createFoodForm(Model model) {
 
-        //Crate model attribute to bind from data
+
         Food food = new Food();
         model.addAttribute("food", food);
         return "/Food/addfood";
@@ -89,20 +87,17 @@ public class FoodController {
 
     @PostMapping("/deleteFood/{food_id}")
     public String deleteFoods(@PathVariable(value = "food_id") Long food_id) {
-        // Retrieve the Food entity from the database
+
         Food food = foodRepository.findById(food_id).orElse(null);
 
         if (food != null) {
-            // Remove the Food entity from all associated meals
             for (Meal meal : food.getMeals()) {
                 meal.getFoods().remove(food);
             }
-            // Clear the meals list in the Food entity
             food.getMeals().clear();
-            // Save the Food entity to remove it from associated meals
+
             foodRepository.save(food);
 
-            // Now, you can safely delete the Food entity
             foodRepository.delete(food);
         }
         return "redirect:/foodtable";

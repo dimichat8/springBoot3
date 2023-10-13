@@ -30,7 +30,7 @@ public class Food {
     @Column(name = "phosphorus")
     private Float phosphorus;
 
-    @ManyToMany(mappedBy = "foods")
+    @ManyToMany(mappedBy = "foods", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Meal> meals = new ArrayList<>();
 
     @NotNull(message = "Calories cannot be null")

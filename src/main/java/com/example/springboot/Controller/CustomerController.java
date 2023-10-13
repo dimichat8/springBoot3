@@ -1,21 +1,17 @@
 package com.example.springboot.Controller;
 
-import com.example.springboot.DTO.MealDataDto;
-import com.example.springboot.Entity.CustomerInfo;
-import com.example.springboot.Entity.Food;
-import com.example.springboot.Entity.Meal;
-import com.example.springboot.Service.CustomerInfoService;
-import com.example.springboot.Service.CustomerService;
 import com.example.springboot.Entity.Customer;
-
-import com.example.springboot.Service.FoodService;
-import com.example.springboot.Service.MealService;
+import com.example.springboot.Entity.Meal;
+import com.example.springboot.Service.CustomerService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -33,7 +29,7 @@ public class CustomerController {
         model.addAttribute("customer" , customers);
         return "/Customer/index";
     }
-    @GetMapping("/customertable")
+    @GetMapping("/customerTable")
     public String listOfCustomers(Model model) {
         List<Customer> customers = customerService.getAllCustomers();
         Meal meal = new Meal();
@@ -42,11 +38,11 @@ public class CustomerController {
         return "Customer/table";
     }
 
-    @GetMapping("/addcustomer")
+    @GetMapping("/addCustomer")
     public String createCustomerForm(Model model) {
         Customer customer = new Customer();
         model.addAttribute("customer", customer);
-        return "Customer/addcustomer";
+        return "Customer/addCustomer";
     }
 
     @PostMapping("/saveCustomer")
@@ -55,18 +51,18 @@ public class CustomerController {
         boolean thereAreErrors = bindingResult.hasErrors();
         if(thereAreErrors) {
             model.addAttribute("customer", customer);
-            return "Customer/addcustomer";
+            return "Customer/addCustomer";
         }
         //Save customer to database
         customerService.saveCustomer(customer);
-        return "redirect:/customertable";
+        return "redirect:/customerTable";
     }
 
     @GetMapping("/updateCustomerForm/{customer_id}")
     public String updateCustomerForm(@PathVariable(value = "customer_id") Long customer_id, Model model) {
         Customer customer = customerService.getCustomerById(customer_id);
         model.addAttribute("customer", customer);
-        return "Customer/updatecustomer";
+        return "Customer/updateCustomer";
     }
 
     @PostMapping("/updateCustomer/{customer_id}")
@@ -82,7 +78,7 @@ public class CustomerController {
         existingCustomer.setBirthday(customer.getBirthday());
         existingCustomer.setGender(customer.getGender());
         customerService.updateCustomer(existingCustomer);
-        return "redirect:/customertable";
+        return "redirect:/customerTable";
     }
 
     @PostMapping("/deleteCustomer/{customer_id}")
@@ -90,6 +86,6 @@ public class CustomerController {
 
         //Call delete customer method
         customerService.deleteCustomerById(customer_id);
-        return "redirect:/customertable";
+        return "redirect:/customerTable";
     }
 }
